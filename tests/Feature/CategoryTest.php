@@ -17,7 +17,6 @@ class CategoryTest extends TestCase
 
         $response = $this->actingAs($user)->post(route('categories.store'), [
             'name' => 'Test Cat',
-            'slug' => 'test-cat',
         ]);
 
         $response->assertRedirect(route('categories.index'));

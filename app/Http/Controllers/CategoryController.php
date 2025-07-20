@@ -28,16 +28,11 @@ class CategoryController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        $request->merge([
-            'slug' => $this->generateUniqueSlug(
-                $request->input('slug') ?: $request->input('name')
-            ),
-        ]);
-
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name',
-            'slug' => 'required|string|unique:categories,slug',
         ]);
+
+        $data['slug'] = $this->generateUniqueSlug($request->input('name'));
 
         $request->user()->categories()->create($data);
 
@@ -53,17 +48,11 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category): RedirectResponse
     {
-        $request->merge([
-            'slug' => $this->generateUniqueSlug(
-                $request->input('slug') ?: $request->input('name'),
-                $category->id
-            ),
-        ]);
-
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name,' . $category->id,
-            'slug' => 'required|string|unique:categories,slug,' . $category->id,
         ]);
+
+        $data['slug'] = $this->generateUniqueSlug($request->input('name'), $category->id);
 
         $category->update($data);
 
