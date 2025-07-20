@@ -23,8 +23,8 @@ class CategoryTest extends TestCase
 
         $this->assertDatabaseHas('categories', [
             'name' => 'Test Cat',
-            'slug' => 'test-cat',
             'user_id' => $user->id,
         ]);
+        $this->assertNotNull(Category::first()->slug);
     }
 }

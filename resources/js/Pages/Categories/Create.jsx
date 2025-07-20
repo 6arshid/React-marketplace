@@ -3,16 +3,18 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
+        icon: null,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('categories.store'));
+        post(route('categories.store'), { forceFormData: true });
     };
 
     return (
@@ -31,6 +33,15 @@ export default function Create() {
                                     onChange={(e) => setData('name', e.target.value)}
                                 />
                                 <InputError message={errors.name} className="mt-2" />
+                            </div>
+                            <div>
+                                <InputLabel htmlFor="icon" value="Icon" />
+                                <FileDropzone
+                                    value={data.icon}
+                                    onChange={(file) => setData('icon', file)}
+                                    className="mt-1"
+                                />
+                                <InputError message={errors.icon} className="mt-2" />
                             </div>
                             <div className="flex items-center gap-4">
                                 <PrimaryButton disabled={processing}>Save</PrimaryButton>

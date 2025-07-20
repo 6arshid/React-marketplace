@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Category extends Model
 {
     use HasFactory;
-    protected $fillable = ['name', 'slug', 'user_id'];
+    protected $fillable = ['name', 'slug', 'user_id', 'icon'];
 
     public function user(): BelongsTo
     {
