@@ -29,7 +29,9 @@ class CategoryController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->merge([
-            'slug' => Str::slug($request->input('slug') ?: $request->input('name')),
+            'slug' => $this->generateUniqueSlug(
+                $request->input('slug') ?: $request->input('name')
+            ),
         ]);
 
         $data = $request->validate([
@@ -52,7 +54,10 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category): RedirectResponse
     {
         $request->merge([
-            'slug' => Str::slug($request->input('slug') ?: $request->input('name')),
+            'slug' => $this->generateUniqueSlug(
+                $request->input('slug') ?: $request->input('name'),
+                $category->id
+            ),
         ]);
 
         $data = $request->validate([
@@ -70,5 +75,21 @@ class CategoryController extends Controller
         $category->delete();
 
         return Redirect::route('categories.index');
+    }
+
+    private function generateUniqueSlug(string $value, int $ignoreId = 0): string
+    {
+        $base = Str::slug($value);
+        $slug = $base;
+
+        while (
+            Category::where('slug', $slug)
+                ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $slug = $base.'-'.uniqid();
+        }
+
+        return $slug;
     }
 }
