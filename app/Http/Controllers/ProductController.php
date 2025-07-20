@@ -103,22 +103,43 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|unique:products,slug,' . $product->id,
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'is_digital' => 'boolean',
             'shipping_cost' => 'nullable|numeric',
-            'demo_file' => 'nullable|string',
-            'main_file' => 'nullable|string',
+            'demo_file' => 'nullable',
+            'main_file' => 'nullable',
             'images' => 'nullable|array',
-            'images.*' => 'string',
+            'images.*' => 'sometimes',
             'attributes' => 'array',
             'attributes.*.id' => 'sometimes|exists:attributes,id',
             'attributes.*.title' => 'required|string',
             'attributes.*.option' => 'required|string',
             'attributes.*.price' => 'numeric',
         ]);
+
+        if ($request->hasFile('demo_file')) {
+            $data['demo_file'] = $request->file('demo_file')->store('demos', 'public');
+        } elseif ($request->input('demo_file') === null) {
+            $data['demo_file'] = null;
+        }
+
+        if ($request->hasFile('main_file')) {
+            $data['main_file'] = $request->file('main_file')->store('files', 'public');
+        } elseif ($request->input('main_file') === null) {
+            $data['main_file'] = null;
+        }
+
+        if ($request->hasFile('images')) {
+            $paths = [];
+            foreach ($request->file('images') as $img) {
+                $paths[] = $img->store('images', 'public');
+            }
+            $data['images'] = array_merge($request->input('images', []), $paths);
+        }
+
+        $data['slug'] = $product->slug;
 
         $product->update($data);
 
