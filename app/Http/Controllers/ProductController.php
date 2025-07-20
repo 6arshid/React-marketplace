@@ -17,6 +17,7 @@ class ProductController extends Controller
     {
         $products = Product::with('category')
             ->where('user_id', auth()->id())
+            ->latest()
             ->get();
 
         return Inertia::render('Products/Index', [

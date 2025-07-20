@@ -20,14 +20,32 @@ export default function Index({ products }) {
                                     <th className="px-4 py-2">Title</th>
                                     <th className="px-4 py-2">Category</th>
                                     <th className="px-4 py-2">Price</th>
+                                    <th className="px-4 py-2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {products.map((p) => (
                                     <tr key={p.id}>
-                                        <td className="border px-4 py-2">{p.title}</td>
+                                        <td className="border px-4 py-2">
+                                            <Link href={route('products.show', p.slug)} className="text-blue-600 hover:underline">
+                                                {p.title}
+                                            </Link>
+                                        </td>
                                         <td className="border px-4 py-2">{p.category?.name}</td>
                                         <td className="border px-4 py-2">${p.price}</td>
+                                        <td className="border px-4 py-2 whitespace-nowrap">
+                                            <Link href={route('products.edit', p.slug)} className="text-sm text-blue-500 me-2">
+                                                Edit
+                                            </Link>
+                                            <Link
+                                                href={route('products.destroy', p.slug)}
+                                                method="delete"
+                                                as="button"
+                                                className="text-sm text-red-500"
+                                            >
+                                                Delete
+                                            </Link>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
