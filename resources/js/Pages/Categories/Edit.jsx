@@ -3,16 +3,18 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 export default function Edit({ category }) {
     const { data, setData, put, processing, errors } = useForm({
         name: category.name,
+        icon: category.icon ?? '',
     });
 
     const submit = (e) => {
         e.preventDefault();
-        put(route('categories.update', category.slug));
+        put(route('categories.update', category.slug), { forceFormData: true });
     };
 
     return (
@@ -26,6 +28,15 @@ export default function Edit({ category }) {
                                 <InputLabel htmlFor="name" value="Name" />
                                 <TextInput id="name" value={data.name} className="mt-1 block w-full" onChange={(e) => setData('name', e.target.value)} />
                                 <InputError message={errors.name} className="mt-2" />
+                            </div>
+                            <div>
+                                <InputLabel htmlFor="icon" value="Icon" />
+                                <FileDropzone
+                                    value={data.icon}
+                                    onChange={(file) => setData('icon', file)}
+                                    className="mt-1"
+                                />
+                                <InputError message={errors.icon} className="mt-2" />
                             </div>
                             <div className="flex items-center gap-4">
                                 <PrimaryButton disabled={processing}>Save</PrimaryButton>

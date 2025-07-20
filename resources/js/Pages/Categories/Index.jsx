@@ -21,17 +21,16 @@ export default function Index({ categories }) {
                             <thead>
                                 <tr>
                                     <th className="px-4 py-2">Name</th>
-                                    <th className="px-4 py-2">Slug</th>
+                                    <th className="px-4 py-2">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {categories.map((cat) => (
                                     <tr key={cat.id}>
-                                        <td className="border px-4 py-2">
-                                            {cat.name}
-                                        </td>
-                                        <td className="border px-4 py-2">
-                                            {cat.slug}
+                                        <td className="border px-4 py-2">{cat.name}</td>
+                                        <td className="border px-4 py-2 whitespace-nowrap">
+                                            <Link href={route('categories.edit', cat.slug)} className="text-sm text-blue-500 me-2">Edit</Link>
+                                            <Link href={route('categories.destroy', cat.slug)} method="delete" as="button" className="text-sm text-red-500">Delete</Link>
                                         </td>
                                     </tr>
                                 ))}

@@ -6,7 +6,6 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -30,9 +29,14 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name',
+            'icon' => 'nullable|file',
         ]);
 
-        $data['slug'] = $this->generateUniqueSlug($request->input('name'));
+        $data['slug'] = $this->generateUniqueSlug();
+
+        if ($request->hasFile('icon')) {
+            $data['icon'] = $request->file('icon')->store('icons', 'public');
+        }
 
         $request->user()->categories()->create($data);
 
@@ -50,9 +54,16 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name,' . $category->id,
+            'icon' => 'nullable',
         ]);
 
-        $data['slug'] = $this->generateUniqueSlug($request->input('name'), $category->id);
+        if ($request->hasFile('icon')) {
+            $data['icon'] = $request->file('icon')->store('icons', 'public');
+        } elseif ($request->input('icon') === null) {
+            $data['icon'] = null;
+        }
+
+        $data['slug'] = $category->slug;
 
         $category->update($data);
 
@@ -66,18 +77,11 @@ class CategoryController extends Controller
         return Redirect::route('categories.index');
     }
 
-    private function generateUniqueSlug(string $value, int $ignoreId = 0): string
+    private function generateUniqueSlug(): string
     {
-        $base = Str::slug($value);
-        $slug = $base;
-
-        while (
-            Category::where('slug', $slug)
-                ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
-                ->exists()
-        ) {
-            $slug = $base.'-'.uniqid();
-        }
+        do {
+            $slug = uniqid();
+        } while (Category::where('slug', $slug)->exists());
 
         return $slug;
     }
