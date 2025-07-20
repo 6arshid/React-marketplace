@@ -1,11 +1,12 @@
 import {useDropzone} from 'react-dropzone';
 
-export default function FileDropzone({value, onChange, multiple = false, className = ''}) {
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+export default function FileDropzone({ value, onChange, multiple = false, className = '' }) {
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
         multiple,
         onDrop: (accepted) => {
             if (multiple) {
-                onChange(accepted);
+                const existing = Array.isArray(value) ? value : [];
+                onChange([...existing, ...accepted]);
             } else {
                 onChange(accepted[0]);
             }
@@ -13,6 +14,16 @@ export default function FileDropzone({value, onChange, multiple = false, classNa
     });
 
     const files = multiple ? value : value ? [value] : [];
+
+    const removeFile = (index) => {
+        if (multiple) {
+            const copy = [...files];
+            copy.splice(index, 1);
+            onChange(copy);
+        } else {
+            onChange(null);
+        }
+    };
 
     return (
         <div
@@ -23,7 +34,19 @@ export default function FileDropzone({value, onChange, multiple = false, classNa
             {files.length > 0 ? (
                 <ul className="list-disc text-left">
                     {files.map((file, idx) => (
-                        <li key={idx}>{file.name || file}</li>
+                        <li key={idx} className="flex items-center justify-between">
+                            <span>{file.name || file}</span>
+                            <button
+                                type="button"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    removeFile(idx);
+                                }}
+                                className="ml-2 text-red-500"
+                            >
+                                &times;
+                            </button>
+                        </li>
                     ))}
                 </ul>
             ) : (

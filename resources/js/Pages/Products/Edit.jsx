@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -30,7 +31,7 @@ export default function Edit({ product, categories }) {
     const submit = (e) => {
         e.preventDefault();
         setData('attributes', attributeInputs);
-        put(route('products.update', product.slug));
+        put(route('products.update', product.slug), { forceFormData: true });
     };
 
     const updateAttr = (index, field, value) => {
@@ -50,11 +51,6 @@ export default function Edit({ product, categories }) {
                                 <InputLabel htmlFor="title" value="Title" />
                                 <TextInput id="title" value={data.title} className="mt-1 block w-full" onChange={(e) => setData('title', e.target.value)} />
                                 <InputError message={errors.title} className="mt-2" />
-                            </div>
-                            <div>
-                                <InputLabel htmlFor="slug" value="Slug" />
-                                <TextInput id="slug" value={data.slug} className="mt-1 block w-full" onChange={(e) => setData('slug', e.target.value)} />
-                                <InputError message={errors.slug} className="mt-2" />
                             </div>
                             <div>
                                 <InputLabel htmlFor="description" value="Description" />
@@ -91,19 +87,33 @@ export default function Edit({ product, categories }) {
                                 <div className="space-y-2">
                                     <div>
                                         <InputLabel htmlFor="demo_file" value="Demo File" />
-                                        <TextInput id="demo_file" value={data.demo_file} className="mt-1 block w-full" onChange={(e) => setData('demo_file', e.target.value)} />
+                                        <FileDropzone
+                                            value={data.demo_file}
+                                            onChange={(file) => setData('demo_file', file)}
+                                            className="mt-1"
+                                        />
                                         <InputError message={errors.demo_file} className="mt-2" />
                                     </div>
                                     <div>
                                         <InputLabel htmlFor="main_file" value="Main File" />
-                                        <TextInput id="main_file" value={data.main_file} className="mt-1 block w-full" onChange={(e) => setData('main_file', e.target.value)} />
+                                        <FileDropzone
+                                            value={data.main_file}
+                                            onChange={(file) => setData('main_file', file)}
+                                            className="mt-1"
+                                        />
                                         <InputError message={errors.main_file} className="mt-2" />
                                     </div>
                                 </div>
                             )}
                             <div>
                                 <InputLabel htmlFor="images" value="Images" />
-                                <input multiple type="text" id="images" className="mt-1 block w-full" value={data.images.join(',')} onChange={(e) => setData('images', e.target.value.split(','))} />
+                                <FileDropzone
+                                    multiple
+                                    value={data.images}
+                                    onChange={(files) => setData('images', files)}
+                                    className="mt-1"
+                                />
+                                <InputError message={errors.images} className="mt-2" />
                             </div>
                             <div>
                                 <button type="button" onClick={addAttribute} className="text-sm text-blue-500">Add Attribute</button>
