@@ -5,6 +5,15 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, useForm } from '@inertiajs/react';
 
+function slugify(value) {
+    return value
+        .toString()
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+}
+
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
         name: '',
@@ -25,7 +34,15 @@ export default function Create() {
                         <form onSubmit={submit} className="space-y-4">
                             <div>
                                 <InputLabel htmlFor="name" value="Name" />
-                                <TextInput id="name" value={data.name} className="mt-1 block w-full" onChange={(e) => setData('name', e.target.value)} />
+                                <TextInput
+                                    id="name"
+                                    value={data.name}
+                                    className="mt-1 block w-full"
+                                    onChange={(e) => {
+                                        setData('name', e.target.value);
+                                        setData('slug', slugify(e.target.value));
+                                    }}
+                                />
                                 <InputError message={errors.name} className="mt-2" />
                             </div>
                             <div>
