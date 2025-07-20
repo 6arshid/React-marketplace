@@ -8,7 +8,6 @@ import { Head, Link, useForm } from '@inertiajs/react';
 export default function Edit({ category }) {
     const { data, setData, put, processing, errors } = useForm({
         name: category.name,
-        slug: category.slug,
     });
 
     const submit = (e) => {
@@ -27,11 +26,6 @@ export default function Edit({ category }) {
                                 <InputLabel htmlFor="name" value="Name" />
                                 <TextInput id="name" value={data.name} className="mt-1 block w-full" onChange={(e) => setData('name', e.target.value)} />
                                 <InputError message={errors.name} className="mt-2" />
-                            </div>
-                            <div>
-                                <InputLabel htmlFor="slug" value="Slug" />
-                                <TextInput id="slug" value={data.slug} className="mt-1 block w-full" onChange={(e) => setData('slug', e.target.value)} />
-                                <InputError message={errors.slug} className="mt-2" />
                             </div>
                             <div className="flex items-center gap-4">
                                 <PrimaryButton disabled={processing}>Save</PrimaryButton>
