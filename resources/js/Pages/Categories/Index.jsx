@@ -1,8 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 
 export default function Index({ categories }) {
+    const user = usePage().props.auth.user;
     return (
         <AuthenticatedLayout
             header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Categories</h2>}
@@ -25,9 +26,16 @@ export default function Index({ categories }) {
                                 </tr>
                             </thead>
                             <tbody>
-                                {categories.map((cat) => (
+                                {categories.slice().reverse().map((cat) => (
                                     <tr key={cat.id}>
-                                        <td className="border px-4 py-2">{cat.name}</td>
+                                        <td className="border px-4 py-2">
+                                            <Link
+                                                href={route('store.categories.show', [user.username, cat.slug])}
+                                                className="text-blue-600 hover:underline"
+                                            >
+                                                {cat.name}
+                                            </Link>
+                                        </td>
                                         <td className="border px-4 py-2 whitespace-nowrap">
                                             <Link href={route('categories.edit', cat.slug)} className="text-sm text-blue-500 me-2">Edit</Link>
                                             <Link href={route('categories.destroy', cat.slug)} method="delete" as="button" className="text-sm text-red-500">Delete</Link>

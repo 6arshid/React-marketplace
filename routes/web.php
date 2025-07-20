@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -28,5 +29,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
 });
+
+Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
+    ->name('store.categories.show');
 
 require __DIR__.'/auth.php';
