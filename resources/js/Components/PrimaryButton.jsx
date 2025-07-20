@@ -1,6 +1,6 @@
 export default function PrimaryButton({
     as: Component = 'button',
-    type = 'button',
+    type = 'submit',
     className = '',
     disabled,
     children,
