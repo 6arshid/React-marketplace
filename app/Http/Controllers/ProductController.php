@@ -35,25 +35,49 @@ class ProductController extends Controller
         ]);
     }
 
+    public function show(Product $product): Response
+    {
+        return Inertia::render('Products/Show', [
+            'product' => $product->load('category', 'attributes'),
+        ]);
+    }
+
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
-            'slug' => 'required|string|unique:products,slug',
             'description' => 'nullable|string',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'is_digital' => 'boolean',
             'shipping_cost' => 'nullable|numeric',
-            'demo_file' => 'nullable|string',
-            'main_file' => 'nullable|string',
+            'demo_file' => 'nullable|file',
+            'main_file' => 'nullable|file',
             'images' => 'nullable|array',
-            'images.*' => 'string',
+            'images.*' => 'file',
             'attributes' => 'array',
             'attributes.*.title' => 'required|string',
             'attributes.*.option' => 'required|string',
             'attributes.*.price' => 'numeric',
         ]);
+
+        $data['slug'] = $this->generateUniqueSlug();
+
+        if ($request->hasFile('demo_file')) {
+            $data['demo_file'] = $request->file('demo_file')->store('demos', 'public');
+        }
+
+        if ($request->hasFile('main_file')) {
+            $data['main_file'] = $request->file('main_file')->store('files', 'public');
+        }
+
+        if ($request->hasFile('images')) {
+            $paths = [];
+            foreach ($request->file('images') as $img) {
+                $paths[] = $img->store('images', 'public');
+            }
+            $data['images'] = $paths;
+        }
 
         $product = $request->user()->products()->create($data);
 
@@ -63,7 +87,7 @@ class ProductController extends Controller
             }
         }
 
-        return Redirect::route('products.index');
+        return Redirect::route('products.show', $product->slug);
     }
 
     public function edit(Product $product): Response
@@ -112,5 +136,14 @@ class ProductController extends Controller
         $product->delete();
 
         return Redirect::route('products.index');
+    }
+
+    private function generateUniqueSlug(): string
+    {
+        do {
+            $slug = uniqid();
+        } while (Product::where('slug', $slug)->exists());
+
+        return $slug;
     }
 }
