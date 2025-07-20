@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -27,6 +28,10 @@ class CategoryController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
+        $request->merge([
+            'slug' => Str::slug($request->input('slug') ?: $request->input('name')),
+        ]);
+
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name',
             'slug' => 'required|string|unique:categories,slug',
@@ -46,6 +51,10 @@ class CategoryController extends Controller
 
     public function update(Request $request, Category $category): RedirectResponse
     {
+        $request->merge([
+            'slug' => Str::slug($request->input('slug') ?: $request->input('name')),
+        ]);
+
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name,' . $category->id,
             'slug' => 'required|string|unique:categories,slug,' . $category->id,
