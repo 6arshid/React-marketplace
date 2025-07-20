@@ -23,15 +23,16 @@ export default function Edit({ category }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="bg-white p-4 shadow sm:rounded-lg">
-                        <form onSubmit={submit} className="space-y-4">
+                        <form onSubmit={submit} className="space-y-4" encType="multipart/form-data">
                             <div>
                                 <InputLabel htmlFor="name" value="Name" />
-                                <TextInput id="name" value={data.name} className="mt-1 block w-full" onChange={(e) => setData('name', e.target.value)} />
+                                <TextInput id="name" name="name" value={data.name} className="mt-1 block w-full" onChange={(e) => setData('name', e.target.value)} />
                                 <InputError message={errors.name} className="mt-2" />
                             </div>
                             <div>
                                 <InputLabel htmlFor="icon" value="Icon" />
                                 <FileDropzone
+                                    name="icon"
                                     value={data.icon}
                                     onChange={(file) => setData('icon', file)}
                                     className="mt-1"

@@ -38,7 +38,7 @@ export default function Create({ categories }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="bg-white p-4 shadow sm:rounded-lg">
-                        <form onSubmit={submit} className="space-y-4">
+                        <form onSubmit={submit} className="space-y-4" encType="multipart/form-data">
                             <div>
                                 <InputLabel htmlFor="title" value="Title" />
                                 <TextInput id="title" value={data.title} className="mt-1 block w-full" onChange={(e) => setData('title', e.target.value)} />
@@ -80,6 +80,7 @@ export default function Create({ categories }) {
                                     <div>
                                         <InputLabel htmlFor="demo_file" value="Demo File" />
                                         <FileDropzone
+                                            name="demo_file"
                                             value={data.demo_file}
                                             onChange={(file) => setData('demo_file', file)}
                                             className="mt-1"
@@ -89,6 +90,7 @@ export default function Create({ categories }) {
                                     <div>
                                         <InputLabel htmlFor="main_file" value="Main File" />
                                         <FileDropzone
+                                            name="main_file"
                                             value={data.main_file}
                                             onChange={(file) => setData('main_file', file)}
                                             className="mt-1"
@@ -100,6 +102,7 @@ export default function Create({ categories }) {
                             <div>
                                 <InputLabel htmlFor="images" value="Images" />
                                 <FileDropzone
+                                    name="images"
                                     multiple
                                     value={data.images}
                                     onChange={(files) => setData('images', files)}
