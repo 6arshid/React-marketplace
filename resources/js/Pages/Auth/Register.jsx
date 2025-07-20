@@ -4,14 +4,33 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export default function Register() {
     const { data, setData, post, processing, errors, reset } = useForm({
+        username: '',
         name: '',
         email: '',
+        trc20_usdt_wallet: '',
         password: '',
         password_confirmation: '',
     });
+
+    const [usernameStatus, setUsernameStatus] = useState(null);
+
+    useEffect(() => {
+        if (data.username && data.username.length >= 5) {
+            setUsernameStatus('checking');
+            fetch(route('username.check', { username: data.username }))
+                .then((res) => res.json())
+                .then((res) => {
+                    setUsernameStatus(res.available ? 'available' : 'taken');
+                })
+                .catch(() => setUsernameStatus(null));
+        } else {
+            setUsernameStatus(null);
+        }
+    }, [data.username]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -27,6 +46,32 @@ export default function Register() {
 
             <form onSubmit={submit}>
                 <div>
+                    <InputLabel htmlFor="username" value="Username" />
+
+                    <TextInput
+                        id="username"
+                        name="username"
+                        value={data.username}
+                        className="mt-1 block w-full"
+                        autoComplete="username"
+                        onChange={(e) => setData('username', e.target.value)}
+                        required
+                    />
+
+                    {usernameStatus === 'checking' && (
+                        <p className="mt-2 text-sm text-gray-500">Checking...</p>
+                    )}
+                    {usernameStatus === 'available' && (
+                        <p className="mt-2 text-sm text-green-600">Username available</p>
+                    )}
+                    {usernameStatus === 'taken' && (
+                        <p className="mt-2 text-sm text-red-600">Username already taken</p>
+                    )}
+
+                    <InputError message={errors.username} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
                     <InputLabel htmlFor="name" value="Name" />
 
                     <TextInput
@@ -58,6 +103,22 @@ export default function Register() {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="trc20_usdt_wallet" value="TRC20 USDT Wallet" />
+
+                    <TextInput
+                        id="trc20_usdt_wallet"
+                        name="trc20_usdt_wallet"
+                        value={data.trc20_usdt_wallet}
+                        className="mt-1 block w-full"
+                        autoComplete="off"
+                        onChange={(e) => setData('trc20_usdt_wallet', e.target.value)}
+                        required
+                    />
+
+                    <InputError message={errors.trc20_usdt_wallet} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
