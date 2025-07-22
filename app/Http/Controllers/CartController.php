@@ -41,7 +41,8 @@ class CartController extends Controller
 
         session(['cart' => $cart]);
 
-        return Redirect::back()->with('success', 'Added to cart');
+        // return Redirect::back()->with('success', 'Added to cart');
+          return Redirect::back();
     }
 
     public function show()
