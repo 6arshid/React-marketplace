@@ -73,6 +73,7 @@ export default function ProPanel({ config, proUsers }) {
                             <thead>
                                 <tr>
                                     <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">User</th>
+                                    <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">Email</th>
                                     <th className="px-3 py-2 text-sm font-semibold text-gray-700">Expires At</th>
                                 </tr>
                             </thead>
@@ -80,6 +81,7 @@ export default function ProPanel({ config, proUsers }) {
                                 {proUsers.data.map((u) => (
                                     <tr key={u.id}>
                                         <td className="px-3 py-2 text-sm text-gray-900">{u.name}</td>
+                                        <td className="px-3 py-2 text-sm text-gray-900">{u.email}</td>
                                         <td className="px-3 py-2 text-sm text-gray-900">{u.pro_panel_expires_at}</td>
                                     </tr>
                                 ))}
