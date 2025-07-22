@@ -41,12 +41,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
     Route::post('/cart/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout');
+    Route::get('/cart/success/{order}', [\App\Http\Controllers\CartController::class, 'success'])->name('cart.success');
 
     Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/downloads', [\App\Http\Controllers\OrderController::class, 'downloads'])->name('orders.downloads');
     Route::patch('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'update'])->name('orders.update');
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+
+    Route::get('/sales', [\App\Http\Controllers\SalesController::class, 'index'])->name('sales.index');
 
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
     Route::post('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');

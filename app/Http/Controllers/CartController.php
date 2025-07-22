@@ -123,18 +123,6 @@ class CartController extends Controller
         }
 
         $stripe = new StripeClient($secret);
-        $intent = $stripe->paymentIntents->create([
-            'amount' => (int) ($total * 100),
-            'currency' => 'usd',
-            'payment_method_types' => ['card'],
-        ]);
-
-        Transaction::create([
-            'user_id' => $seller->id,
-            'amount' => (int) ($total - $commission),
-            'status' => 'pending',
-            'reference' => $intent->id,
-        ]);
 
         $order = Order::create([
             'buyer_id' => $request->user()->id,
@@ -147,11 +135,61 @@ class CartController extends Controller
             'tracking_code' => (string) \Illuminate\Support\Str::uuid(),
         ]);
 
+        $session = $stripe->checkout->sessions->create([
+            'mode' => 'payment',
+            'customer_email' => $request->user()->email,
+            'line_items' => [
+                [
+                    'price_data' => [
+                        'currency' => 'usd',
+                        'product_data' => ['name' => 'Marketplace Order'],
+                        'unit_amount' => (int) ($total * 100),
+                    ],
+                    'quantity' => 1,
+                ],
+            ],
+            'success_url' => route('cart.success', $order) . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('cart.show'),
+        ]);
+
         session()->forget('cart');
 
         return response()->json([
-            'client_secret' => $intent->client_secret,
-            'tracking_code' => $order->tracking_code,
+            'url' => $session->url,
         ]);
+    }
+
+    public function success(Request $request, Order $order)
+    {
+        $sessionId = $request->get('session_id');
+
+        if (! $sessionId) {
+            return Redirect::route('orders.track', $order->tracking_code);
+        }
+
+        if ($order->seller->pro_panel && $order->seller->stripe_secret_key) {
+            $secret = $order->seller->stripe_secret_key;
+            $commission = 0;
+        } else {
+            $config = StripeConfig::firstOrFail();
+            $secret = $config->secret_key;
+            $commission = $order->amount * (($config->commission_percent ?? 2) / 100);
+        }
+
+        $stripe = new StripeClient($secret);
+        $session = $stripe->checkout->sessions->retrieve($sessionId);
+
+        Transaction::create([
+            'user_id' => $order->seller_id,
+            'amount' => (int) ($order->amount - $commission),
+            'status' => $session->payment_status === 'paid' ? 'success' : 'failed',
+            'reference' => $session->payment_intent,
+        ]);
+
+        $order->update([
+            'status' => $session->payment_status === 'paid' ? 'paid' : 'failed',
+        ]);
+
+        return Redirect::route('orders.track', $order->tracking_code);
     }
 }
