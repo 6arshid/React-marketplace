@@ -34,6 +34,18 @@ class HandleInertiaRequests extends Middleware
             'auth' => [
                 'user' => $request->user(),
             ],
+            'stripe' => function () {
+                try {
+                    $config = \App\Models\StripeConfig::first();
+                } catch (\Throwable $e) {
+                    $config = null;
+                }
+
+                return [
+                    'public_key' => $config?->api_key,
+                    'price' => $config?->price,
+                ];
+            },
         ];
     }
 }
