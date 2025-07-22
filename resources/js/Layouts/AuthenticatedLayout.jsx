@@ -75,58 +75,61 @@ export default function AuthenticatedLayout({ header, children }) {
             </aside>
 
             <div className="flex min-h-screen flex-1 flex-col">
-                <div className="flex items-center justify-between border-b bg-white p-2">
+          <div className="flex items-center justify-between border-b bg-white p-2">
+    <button
+        onClick={() => setSidebarOpen(true)}
+        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none sm:hidden"
+    >
+        <svg
+            className="h-6 w-6"
+            stroke="currentColor"
+            fill="none"
+            viewBox="0 0 24 24"
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"
+            />
+        </svg>
+    </button>
+
+    <div className="ml-auto flex items-center space-x-4">
+        <Dropdown>
+            <Dropdown.Trigger>
+                <span className="inline-flex rounded-md">
                     <button
-                        onClick={() => setSidebarOpen(true)}
-                        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none sm:hidden"
+                        type="button"
+                        className="flex items-center rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                     >
+                        {user.name}
                         <svg
-                            className="h-6 w-6"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 24 24"
+                            className="ms-2 h-4 w-4"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
                         >
                             <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h16M4 18h16"
+                                fillRule="evenodd"
+                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                clipRule="evenodd"
                             />
                         </svg>
                     </button>
+                </span>
+            </Dropdown.Trigger>
 
-                    <Dropdown>
-                        <Dropdown.Trigger>
-                            <span className="inline-flex rounded-md">
-                                <button
-                                    type="button"
-                                    className="flex w-full items-center justify-between rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
-                                >
-                                    {user.name}
-                                    <svg
-                                        className="-me-0.5 ms-2 h-4 w-4"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 20 20"
-                                        fill="currentColor"
-                                    >
-                                        <path
-                                            fillRule="evenodd"
-                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                            clipRule="evenodd"
-                                        />
-                                    </svg>
-                                </button>
-                            </span>
-                        </Dropdown.Trigger>
+            <Dropdown.Content align="right">
+                <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                <Dropdown.Link href={route('logout')} method="post" as="button">
+                    Log Out
+                </Dropdown.Link>
+            </Dropdown.Content>
+        </Dropdown>
+    </div>
+</div>
 
-                        <Dropdown.Content>
-                            <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
-                            <Dropdown.Link href={route('logout')} method="post" as="button">
-                                Log Out
-                            </Dropdown.Link>
-                        </Dropdown.Content>
-                    </Dropdown>
-                </div>
 
                 {flash.success && (
                     <div className="bg-green-100 p-2 text-center text-sm text-green-800">
