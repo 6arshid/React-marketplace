@@ -14,11 +14,6 @@ export default function Index() {
                             </Link>
                         </div>
                         <div>
-                            <Link href={route('admin.users.index')} className="text-blue-500 hover:underline">
-                                Manage Users
-                            </Link>
-                        </div>
-                        <div>
                             <Link href={route('admin.transactions.index')} className="text-blue-500 hover:underline">
                                 Transactions
                             </Link>
