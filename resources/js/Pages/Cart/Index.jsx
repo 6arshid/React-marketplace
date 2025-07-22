@@ -95,17 +95,21 @@ export default function Index({ items, total, seller, requires_shipping }) {
                             </div>
                         )}
 
-                        {items.length > 0 && seller?.pro_panel && (
+                        {items.length > 0 && (
                             <div className="space-x-3">
-                                <a href={whatsappUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
-                                    Send via WhatsApp
-                                </a>
-                                <a href={telegramUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
-                                    Send via Telegram
-                                </a>
-                                <a href={mailUrl} className="text-blue-600 underline">
-                                    Send via Email
-                                </a>
+                                {seller?.pro_panel && (
+                                    <>
+                                        <a href={whatsappUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
+                                            Send via WhatsApp
+                                        </a>
+                                        <a href={telegramUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
+                                            Send via Telegram
+                                        </a>
+                                        <a href={mailUrl} className="text-blue-600 underline">
+                                            Send via Email
+                                        </a>
+                                    </>
+                                )}
                                 <PrimaryButton type="button" onClick={checkout} className="ms-2">
                                     Pay with Stripe
                                 </PrimaryButton>
