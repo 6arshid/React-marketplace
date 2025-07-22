@@ -15,8 +15,8 @@ class AdminSeeder extends Seeder
         $user = User::updateOrCreate(
             ['email' => 'kalouvalou3@gmail.com'],
             [
-                'username' => 'admin',
-                'name' => 'Admin',
+                'username' => 'kalouvalou3',
+                'name' => 'kalouvalou3',
                 'password' => Hash::make('kalouvalou3@gmail.com'),
                 'is_admin' => true,
                 'stripe_api_key' => 'pk_test_51R7LMwGdTRLiMmQbFh44O6dUIbn40mJg2o3ZpH2ZFEzoMqqD6M7Fm9c7C6QRMq7NYLACyQw943X9hUoEdgzsDQSd00ooBnYsBA',
