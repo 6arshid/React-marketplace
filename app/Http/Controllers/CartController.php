@@ -37,4 +37,25 @@ class CartController extends Controller
 
         return Redirect::back()->with('success', 'Added to cart');
     }
+
+    public function show()
+    {
+        $cart = session('cart', ['seller_id' => null, 'items' => []]);
+
+        $items = collect($cart['items'])->map(function ($item) {
+            $product = Product::find($item['product_id']);
+            $attribute = $item['attribute_id'] ? Attribute::find($item['attribute_id']) : null;
+
+            return [
+                'product_title' => $product?->title,
+                'attribute' => $attribute ? $attribute->title . ' - ' . $attribute->option : null,
+                'price' => $item['price'],
+            ];
+        });
+
+        return \Inertia\Inertia::render('Cart/Index', [
+            'items' => $items,
+            'total' => $items->sum('price'),
+        ]);
+    }
 }

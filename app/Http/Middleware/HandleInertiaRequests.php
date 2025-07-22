@@ -38,6 +38,14 @@ class HandleInertiaRequests extends Middleware
                 'success' => session('success'),
                 'error' => session('error'),
             ],
+            'cart' => function () {
+                $cart = session('cart', ['seller_id' => null, 'items' => []]);
+
+                return [
+                    'count' => count($cart['items']),
+                    'total' => collect($cart['items'])->sum('price'),
+                ];
+            },
             'stripe' => function () {
                 try {
                     $config = \App\Models\StripeConfig::first();
