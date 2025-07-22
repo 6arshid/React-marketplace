@@ -24,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'trc20_usdt_wallet',
+        'iban',
+        'swift_code',
         'password',
     ];
 

@@ -11,7 +11,6 @@ export default function Register() {
         username: '',
         name: '',
         email: '',
-        trc20_usdt_wallet: '',
         password: '',
         password_confirmation: '',
     });
@@ -105,21 +104,6 @@ export default function Register() {
                     <InputError message={errors.email} className="mt-2" />
                 </div>
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="trc20_usdt_wallet" value="TRC20 USDT Wallet" />
-
-                    <TextInput
-                        id="trc20_usdt_wallet"
-                        name="trc20_usdt_wallet"
-                        value={data.trc20_usdt_wallet}
-                        className="mt-1 block w-full"
-                        autoComplete="off"
-                        onChange={(e) => setData('trc20_usdt_wallet', e.target.value)}
-                        required
-                    />
-
-                    <InputError message={errors.trc20_usdt_wallet} className="mt-2" />
-                </div>
 
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />

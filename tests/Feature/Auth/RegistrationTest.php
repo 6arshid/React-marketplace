@@ -22,7 +22,6 @@ class RegistrationTest extends TestCase
             'username' => 'testuser',
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'trc20_usdt_wallet' => 'TTestWallet123',
             'password' => 'password',
             'password_confirmation' => 'password',
         ]);

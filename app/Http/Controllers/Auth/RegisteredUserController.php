@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'username' => 'required|string|min:5|unique:' . User::class,
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:' . User::class,
-            'trc20_usdt_wallet' => 'required|string',
+            'trc20_usdt_wallet' => 'nullable|string',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
