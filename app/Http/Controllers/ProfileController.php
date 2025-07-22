@@ -67,14 +67,14 @@ class ProfileController extends Controller
             'public_email' => ['nullable', 'string', 'email'],
         ];
 
-        if ($request->user()->pro_panel) {
+        if ($request->user()->pro_panel && ! $request->user()->is_admin) {
             $rules['stripe_api_key'] = ['nullable', 'string'];
             $rules['stripe_secret_key'] = ['nullable', 'string'];
         }
 
         $validated = $request->validate($rules);
 
-        if (! $request->user()->pro_panel) {
+        if (! $request->user()->pro_panel || $request->user()->is_admin) {
             unset($validated['stripe_api_key'], $validated['stripe_secret_key']);
         }
 
