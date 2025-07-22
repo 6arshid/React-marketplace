@@ -1,8 +1,24 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function Show({ product }) {
+    const [selected, setSelected] = useState(null);
+
+    const addAttributeToCart = (id) => {
+        router.post(route('cart.add', product.id), { attribute_id: id }, {
+            onSuccess: () => alert('Added to cart'),
+        });
+        setSelected(id);
+    };
+
+    const addToCart = () => {
+        router.post(route('cart.add', product.id), {}, {
+            onSuccess: () => alert('Added to cart'),
+        });
+    };
+
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">{product.title}</h2>}>
             <Head title={product.title} />
@@ -10,7 +26,12 @@ export default function Show({ product }) {
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="space-y-2 bg-white p-4 shadow sm:rounded-lg">
                         <p><strong>Category:</strong> {product.category?.name}</p>
-                        <p><strong>Price:</strong> ${product.price}</p>
+                        <p>
+                            <strong>Price:</strong>{' '}
+                            <span className={selected ? 'line-through text-gray-400' : ''}>
+                                ${product.price}
+                            </span>
+                        </p>
                         {product.description && <p><strong>Description:</strong> {product.description}</p>}
                         {product.images && product.images.length > 0 && (
                             <div>
@@ -48,11 +69,22 @@ export default function Show({ product }) {
                                 <ul className="list-disc ml-6">
                                     {product.attributes.map((a) => (
                                         <li key={a.id}>
-                                            {a.title} - {a.option} (${a.price})
+                                            <button
+                                                type="button"
+                                                onClick={() => addAttributeToCart(a.id)}
+                                                className="text-blue-600 hover:underline"
+                                            >
+                                                {a.title} - {a.option} (${a.price})
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>
                             </div>
+                        )}
+                        {!product.attributes?.length && (
+                            <PrimaryButton type="button" onClick={addToCart} className="mt-2">
+                                Add to Cart
+                            </PrimaryButton>
                         )}
                         <PrimaryButton as={Link} href={route('products.index')} type="button" className="mt-4">
                             Back
