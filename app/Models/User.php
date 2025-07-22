@@ -23,6 +23,7 @@ class User extends Authenticatable
         'username',
         'name',
         'email',
+        'is_admin',
         'trc20_usdt_wallet',
         'iban',
         'swift_code',
@@ -52,6 +53,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 

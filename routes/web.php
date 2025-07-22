@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StripeConfigController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,5 +36,11 @@ Route::middleware('auth')->group(function () {
 
 Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
     ->name('store.categories.show');
+
+Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/stripe-config', [StripeConfigController::class, 'edit'])->name('admin.stripe.edit');
+    Route::post('/stripe-config', [StripeConfigController::class, 'update'])->name('admin.stripe.update');
+});
 
 require __DIR__.'/auth.php';
