@@ -1,8 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Head } from '@inertiajs/react';
+import { Head, router } from '@inertiajs/react';
 
-export default function Index({ items, total }) {
+export default function Index({ items, total, seller }) {
     const message = encodeURIComponent(
         items
             .map((i) => `${i.product_title}${i.attribute ? ` (${i.attribute})` : ''} - $${i.price}`)
@@ -12,6 +12,10 @@ export default function Index({ items, total }) {
     const whatsappUrl = `https://wa.me/?text=${message}`;
     const telegramUrl = `https://t.me/share/url?url=&text=${message}`;
     const mailUrl = `mailto:?subject=Order&body=${message}`;
+
+    const checkout = () => {
+        router.post(route('cart.checkout'));
+    };
 
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Cart</h2>}>
@@ -33,6 +37,14 @@ export default function Index({ items, total }) {
                             <p>Your cart is empty.</p>
                         )}
                         <p className="font-semibold">Total: ${total}</p>
+                        {seller?.pro_panel && (
+                            <div className="space-y-1 text-sm">
+                                {seller.whatsapp_number && <p>WhatsApp: {seller.whatsapp_number}</p>}
+                                {seller.telegram_username && <p>Telegram: {seller.telegram_username}</p>}
+                                {seller.public_email && <p>Email: {seller.public_email}</p>}
+                                {seller.stripe_api_key && <p>Stripe Key: {seller.stripe_api_key}</p>}
+                            </div>
+                        )}
                         {items.length > 0 && (
                             <div className="space-x-3">
                                 <a href={whatsappUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
@@ -44,7 +56,7 @@ export default function Index({ items, total }) {
                                 <a href={mailUrl} className="text-blue-600 underline">
                                     Send via Email
                                 </a>
-                                <PrimaryButton type="button" disabled className="ms-2">
+                                <PrimaryButton type="button" onClick={checkout} className="ms-2">
                                     Pay with Stripe
                                 </PrimaryButton>
                             </div>

@@ -50,6 +50,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Cart ({cart.count})
                                 </NavLink>
+                                <NavLink
+                                    href={route('transactions.index')}
+                                    active={route().current('transactions.index')}
+                                >
+                                    Transactions
+                                </NavLink>
                                 {user.is_admin && (
                                     <NavLink
                                         href={route('admin.index')}
@@ -179,6 +185,12 @@ export default function AuthenticatedLayout({ header, children }) {
                             active={route().current('cart.show')}
                         >
                             Cart ({cart.count})
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('transactions.index')}
+                            active={route().current('transactions.index')}
+                        >
+                            Transactions
                         </ResponsiveNavLink>
                         {user.is_admin && (
                             <ResponsiveNavLink

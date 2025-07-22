@@ -10,6 +10,7 @@ use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StripeConfigController;
 use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('products', ProductController::class);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
+    Route::post('/cart/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout');
+
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
     Route::post('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
