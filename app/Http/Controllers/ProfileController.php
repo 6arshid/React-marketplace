@@ -61,11 +61,22 @@ class ProfileController extends Controller
      */
     public function updateContact(Request $request): RedirectResponse
     {
-        $validated = $request->validate([
+        $rules = [
             'whatsapp_number' => ['nullable', 'string'],
             'telegram_username' => ['nullable', 'string'],
             'public_email' => ['nullable', 'string', 'email'],
-        ]);
+        ];
+
+        if ($request->user()->pro_panel) {
+            $rules['stripe_api_key'] = ['nullable', 'string'];
+            $rules['stripe_secret_key'] = ['nullable', 'string'];
+        }
+
+        $validated = $request->validate($rules);
+
+        if (! $request->user()->pro_panel) {
+            unset($validated['stripe_api_key'], $validated['stripe_secret_key']);
+        }
 
         $request->user()->update($validated);
 
