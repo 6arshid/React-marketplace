@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Attribute;
+use App\Models\User;
+use App\Models\StripeConfig;
+use App\Models\Transaction;
+use Stripe\StripeClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
@@ -53,9 +57,65 @@ class CartController extends Controller
             ];
         });
 
+        $seller = null;
+        if ($cart['seller_id']) {
+            $user = User::find($cart['seller_id']);
+            if ($user) {
+                $seller = [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                    'whatsapp_number' => $user->whatsapp_number,
+                    'telegram_username' => $user->telegram_username,
+                    'public_email' => $user->public_email,
+                    'stripe_api_key' => $user->stripe_api_key,
+                    'pro_panel' => $user->pro_panel,
+                ];
+            }
+        }
+
         return \Inertia\Inertia::render('Cart/Index', [
             'items' => $items,
             'total' => $items->sum('price'),
+            'seller' => $seller,
         ]);
+    }
+
+    public function checkout(Request $request)
+    {
+        $cart = session('cart', ['seller_id' => null, 'items' => []]);
+
+        if (! $cart['seller_id'] || count($cart['items']) === 0) {
+            return Redirect::route('cart.show')->with('error', 'Cart is empty');
+        }
+
+        $seller = User::findOrFail($cart['seller_id']);
+        $total = collect($cart['items'])->sum('price');
+
+        if ($seller->pro_panel && $seller->stripe_secret_key) {
+            $secret = $seller->stripe_secret_key;
+            $commission = 0;
+        } else {
+            $config = StripeConfig::firstOrFail();
+            $secret = $config->secret_key;
+            $commission = $total * 0.02;
+        }
+
+        $stripe = new StripeClient($secret);
+        $intent = $stripe->paymentIntents->create([
+            'amount' => (int) ($total * 100),
+            'currency' => 'usd',
+            'payment_method_types' => ['card'],
+        ]);
+
+        Transaction::create([
+            'user_id' => $seller->id,
+            'amount' => (int) ($total - $commission),
+            'status' => 'pending',
+            'reference' => $intent->id,
+        ]);
+
+        session()->forget('cart');
+
+        return response()->json(['client_secret' => $intent->client_secret]);
     }
 }
