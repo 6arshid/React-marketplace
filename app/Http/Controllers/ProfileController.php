@@ -62,6 +62,8 @@ class ProfileController extends Controller
     public function updateContact(Request $request): RedirectResponse
     {
         $rules = [
+            'trc20_usdt_wallet' => ['nullable', 'string'],
+            'bitcoin_wallet' => ['nullable', 'string'],
             'whatsapp_number' => ['nullable', 'string'],
             'telegram_username' => ['nullable', 'string'],
             'public_email' => ['nullable', 'string', 'email'],
