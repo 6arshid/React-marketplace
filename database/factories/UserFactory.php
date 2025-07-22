@@ -31,6 +31,9 @@ class UserFactory extends Factory
             'trc20_usdt_wallet' => null,
             'iban' => null,
             'swift_code' => null,
+            'whatsapp_number' => null,
+            'telegram_username' => null,
+            'public_email' => null,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

@@ -57,6 +57,22 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update the user's contact information.
+     */
+    public function updateContact(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'whatsapp_number' => ['nullable', 'string'],
+            'telegram_username' => ['nullable', 'string'],
+            'public_email' => ['nullable', 'string', 'email'],
+        ]);
+
+        $request->user()->update($validated);
+
+        return Redirect::back();
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse
