@@ -8,6 +8,7 @@ import { useState } from 'react';
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const flash = usePage().props.flash;
+    const cart = usePage().props.cart;
 
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
@@ -42,6 +43,12 @@ export default function AuthenticatedLayout({ header, children }) {
                                     active={route().current('categories.index')}
                                 >
                                     Categories
+                                </NavLink>
+                                <NavLink
+                                    href={route('cart.show')}
+                                    active={route().current('cart.show')}
+                                >
+                                    Cart ({cart.count})
                                 </NavLink>
                                 {user.is_admin && (
                                     <NavLink
@@ -166,6 +173,12 @@ export default function AuthenticatedLayout({ header, children }) {
                             active={route().current('categories.index')}
                         >
                             Categories
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('cart.show')}
+                            active={route().current('cart.show')}
+                        >
+                            Cart ({cart.count})
                         </ResponsiveNavLink>
                         {user.is_admin && (
                             <ResponsiveNavLink
