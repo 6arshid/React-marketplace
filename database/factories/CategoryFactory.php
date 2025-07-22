@@ -16,7 +16,7 @@ class CategoryFactory extends Factory
     {
         return [
             'user_id' => User::factory(),
-            'name' => $this->faker->word(),
+            'name' => $this->faker->unique()->words(2, true),
             'slug' => uniqid(),
             'icon' => null,
         ];
