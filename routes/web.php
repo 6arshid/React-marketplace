@@ -42,6 +42,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
     Route::post('/cart/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout');
 
+    Route::get('/orders', [\App\Http\Controllers\OrderController::class, 'index'])->name('orders.index');
+    Route::get('/orders/downloads', [\App\Http\Controllers\OrderController::class, 'downloads'])->name('orders.downloads');
+    Route::patch('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'update'])->name('orders.update');
+
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
 
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
@@ -68,5 +72,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
+
+Route::get('/track/{code}', [\App\Http\Controllers\OrderController::class, 'track'])->name('orders.track');
 
 require __DIR__.'/auth.php';
