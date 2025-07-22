@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\ReservedUsername;
 use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -22,6 +23,7 @@ class ProfileUpdateRequest extends FormRequest
                 'string',
                 'min:5',
                 Rule::unique(User::class, 'username')->ignore($this->user()->id),
+                Rule::notIn(ReservedUsername::pluck('username')),
             ],
             'name' => ['required', 'string', 'max:255'],
             'email' => [

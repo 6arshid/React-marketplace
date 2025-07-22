@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\ReservedUsername;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,8 @@ class UsernameAvailabilityController extends Controller
             'username' => 'required|string|min:5',
         ]);
 
-        $available = !User::where('username', $request->username)->exists();
+        $reserved = ReservedUsername::where('username', $request->username)->exists();
+        $available = ! User::where('username', $request->username)->exists() && ! $reserved;
 
         return response()->json(['available' => $available]);
     }

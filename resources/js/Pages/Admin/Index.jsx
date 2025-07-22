@@ -23,6 +23,11 @@ export default function Index() {
                                 Transactions
                             </Link>
                         </div>
+                        <div>
+                            <Link href={route('admin.reserved-usernames.index')} className="text-blue-500 hover:underline">
+                                Reserved Usernames
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
