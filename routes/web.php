@@ -52,6 +52,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::post('/stripe-config', [StripeConfigController::class, 'update'])->name('admin.stripe.update');
     Route::get('/pro-panel', [AdminProPanelController::class, 'index'])->name('admin.pro-panel.index');
     Route::post('/pro-panel', [AdminProPanelController::class, 'update'])->name('admin.pro-panel.update');
+    Route::post('/pro-panel/user', [AdminProPanelController::class, 'saveUser'])->name('admin.pro-panel.user');
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');

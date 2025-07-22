@@ -5,13 +5,39 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, useForm, Link } from '@inertiajs/react';
 
 export default function ProPanel({ config, proUsers }) {
-    const { data, setData, post, processing, errors } = useForm({
+    const {
+        data: priceData,
+        setData: setPriceData,
+        post: postPrice,
+        processing: priceProcessing,
+        errors: priceErrors,
+    } = useForm({
         price: config?.price || 10,
     });
 
-    const submit = (e) => {
+    const {
+        data: userData,
+        setData: setUserData,
+        post: postUser,
+        processing: userProcessing,
+        errors: userErrors,
+        reset: resetUser,
+    } = useForm({
+        email: '',
+        expires_at: '',
+    });
+
+    const submitPrice = (e) => {
         e.preventDefault();
-        post(route('admin.pro-panel.update'));
+        postPrice(route('admin.pro-panel.update'));
+    };
+
+    const submitUser = (e) => {
+        e.preventDefault();
+        postUser(route('admin.pro-panel.user'), {
+            preserveScroll: true,
+            onSuccess: () => resetUser('email', 'expires_at'),
+        });
     };
 
     return (
@@ -19,12 +45,27 @@ export default function ProPanel({ config, proUsers }) {
             <Head title="Pro Panel" />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl space-y-4 sm:px-6 lg:px-8">
-                    <form onSubmit={submit} className="bg-white p-4 shadow sm:rounded-lg space-y-2">
+                    <form onSubmit={submitPrice} className="bg-white p-4 shadow sm:rounded-lg space-y-2">
                         <div>
                             <InputLabel htmlFor="price" value="Monthly Price ($)" />
-                            <TextInput id="price" value={data.price} className="mt-1 block w-full" onChange={(e) => setData('price', e.target.value)} />
+                            <TextInput id="price" value={priceData.price} className="mt-1 block w-full" onChange={(e) => setPriceData('price', e.target.value)} />
+                            {priceErrors.price && <p className="text-sm text-red-600 mt-2">{priceErrors.price}</p>}
                         </div>
-                        <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                        <PrimaryButton disabled={priceProcessing}>Save</PrimaryButton>
+                    </form>
+
+                    <form onSubmit={submitUser} className="bg-white p-4 shadow sm:rounded-lg space-y-2">
+                        <div>
+                            <InputLabel htmlFor="email" value="User Email" />
+                            <TextInput id="email" type="email" value={userData.email} className="mt-1 block w-full" onChange={(e) => setUserData('email', e.target.value)} required />
+                            {userErrors.email && <p className="text-sm text-red-600 mt-2">{userErrors.email}</p>}
+                        </div>
+                        <div>
+                            <InputLabel htmlFor="expires_at" value="Expires At" />
+                            <TextInput id="expires_at" type="date" value={userData.expires_at} className="mt-1 block w-full" onChange={(e) => setUserData('expires_at', e.target.value)} required />
+                            {userErrors.expires_at && <p className="text-sm text-red-600 mt-2">{userErrors.expires_at}</p>}
+                        </div>
+                        <PrimaryButton disabled={userProcessing}>Add / Update User</PrimaryButton>
                     </form>
 
                     <div className="bg-white p-4 shadow sm:rounded-lg">
