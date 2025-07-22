@@ -44,15 +44,7 @@ export default function Index({ items, total, seller }) {
                         ) : (
                             <p>Your cart is empty.</p>
                         )}
-                        <p className="font-semibold">Total: ${total}</p>
-                        {seller?.pro_panel && (
-                            <div className="space-y-1 text-sm">
-                                {seller.whatsapp_number && <p>WhatsApp: {seller.whatsapp_number}</p>}
-                                {seller.telegram_username && <p>Telegram: {seller.telegram_username}</p>}
-                                {seller.public_email && <p>Email: {seller.public_email}</p>}
-                                {seller.stripe_api_key && <p>Stripe Key: {seller.stripe_api_key}</p>}
-                            </div>
-                        )}
+                       
                         {items.length > 0 && seller?.pro_panel && (
                             <div className="space-x-3">
                                 <a href={whatsappUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
