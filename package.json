@@ -23,6 +23,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
-        "react-dropzone": "^14.3.8"
+        "react-dropzone": "^14.3.8",
+        "@stripe/stripe-js": "^2.4.0"
     }
 }

@@ -37,7 +37,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
     const checkout = async () => {
         const payload = requires_shipping ? data : {};
         const res = await axios.post(route('cart.checkout'), payload);
-        alert('Tracking Code: ' + res.data.tracking_code);
+        window.location.href = res.data.url;
     };
 
     return (
