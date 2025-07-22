@@ -72,13 +72,35 @@ export default function AuthenticatedLayout({ header, children }) {
                     )}
                 </div>
 
-                <div className="mt-auto border-t p-4">
+            </aside>
+
+            <div className="flex min-h-screen flex-1 flex-col">
+                <div className="flex items-center justify-between border-b bg-white p-2">
+                    <button
+                        onClick={() => setSidebarOpen(true)}
+                        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none sm:hidden"
+                    >
+                        <svg
+                            className="h-6 w-6"
+                            stroke="currentColor"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h16M4 18h16"
+                            />
+                        </svg>
+                    </button>
+
                     <Dropdown>
                         <Dropdown.Trigger>
-                            <span className="inline-flex w-full rounded-md">
+                            <span className="inline-flex rounded-md">
                                 <button
                                     type="button"
-                                    className="flex w-full items-center justify-between rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
+                                    className="flex items-center rounded-md border border-transparent px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out hover:text-gray-700 focus:outline-none"
                                 >
                                     {user.name}
                                     <svg
@@ -104,29 +126,6 @@ export default function AuthenticatedLayout({ header, children }) {
                             </Dropdown.Link>
                         </Dropdown.Content>
                     </Dropdown>
-                </div>
-            </aside>
-
-            <div className="flex min-h-screen flex-1 flex-col">
-                <div className="border-b bg-white p-2 sm:hidden">
-                    <button
-                        onClick={() => setSidebarOpen(true)}
-                        className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 transition duration-150 ease-in-out hover:bg-gray-100 hover:text-gray-500 focus:bg-gray-100 focus:text-gray-500 focus:outline-none"
-                    >
-                        <svg
-                            className="h-6 w-6"
-                            stroke="currentColor"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h16M4 18h16"
-                            />
-                        </svg>
-                    </button>
                 </div>
 
                 {flash.success && (
