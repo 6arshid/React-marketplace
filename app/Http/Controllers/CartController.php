@@ -97,7 +97,7 @@ class CartController extends Controller
         } else {
             $config = StripeConfig::firstOrFail();
             $secret = $config->secret_key;
-            $commission = $total * 0.02;
+            $commission = $total * (($config->commission_percent ?? 2) / 100);
         }
 
         $stripe = new StripeClient($secret);

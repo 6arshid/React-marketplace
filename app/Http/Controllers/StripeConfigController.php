@@ -25,6 +25,7 @@ class StripeConfigController extends Controller
         $data = $request->validate([
             'api_key' => 'required|string',
             'secret_key' => 'required|string',
+            'commission_percent' => 'required|integer|min:0|max:100',
         ]);
 
         StripeConfig::updateOrCreate(['id' => 1], $data);

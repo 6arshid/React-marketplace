@@ -12,5 +12,6 @@ class StripeConfig extends Model
         'api_key',
         'secret_key',
         'price',
+        'commission_percent',
     ];
 }
