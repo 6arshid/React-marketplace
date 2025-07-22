@@ -23,7 +23,8 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
-        "react-dropzone": "^14.3.8",
-        "@stripe/stripe-js": "^2.4.0"
+        "@stripe/stripe-js": "^2.4.0",
+        "qrcode.react": "^1.0.1",
+        "react-dropzone": "^14.3.8"
     }
 }

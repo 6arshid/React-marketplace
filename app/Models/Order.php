@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $amount
  * @property array|null $shipping_info
  * @property bool $is_digital
+ * @property string|null $buyer_wallet
  * @property string $status
  * @property string $tracking_code
  * @property string|null $postal_tracking_code
@@ -35,6 +36,7 @@ class Order extends Model
         'status',
         'tracking_code',
         'postal_tracking_code',
+        'buyer_wallet',
     ];
 
     public function buyer(): BelongsTo
