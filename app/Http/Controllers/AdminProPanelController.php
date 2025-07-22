@@ -36,4 +36,20 @@ class AdminProPanelController extends Controller
 
         return Redirect::route('admin.pro-panel.index');
     }
+
+    public function saveUser(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
+            'expires_at' => ['required', 'date'],
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+        $user->update([
+            'pro_panel' => true,
+            'pro_panel_expires_at' => $validated['expires_at'],
+        ]);
+
+        return Redirect::route('admin.pro-panel.index');
+    }
 }
