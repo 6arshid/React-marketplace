@@ -9,9 +9,17 @@ export default function Index({ items, total, seller }) {
             .join('\n') + `\nTotal: $${total}`,
     );
 
-    const whatsappUrl = `https://wa.me/?text=${message}`;
-    const telegramUrl = `https://t.me/share/url?url=&text=${message}`;
-    const mailUrl = `mailto:?subject=Order&body=${message}`;
+    const whatsappUrl = seller?.pro_panel && seller.whatsapp_number
+        ? `https://wa.me/${seller.whatsapp_number}?text=${message}`
+        : `https://wa.me/?text=${message}`;
+
+    const telegramUrl = seller?.pro_panel && seller.telegram_username
+        ? `https://t.me/${seller.telegram_username}?text=${message}`
+        : `https://t.me/share/url?url=&text=${message}`;
+
+    const mailUrl = seller?.pro_panel && seller.public_email
+        ? `mailto:${seller.public_email}?subject=Order&body=${message}`
+        : `mailto:?subject=Order&body=${message}`;
 
     const checkout = () => {
         router.post(route('cart.checkout'));
@@ -45,7 +53,7 @@ export default function Index({ items, total, seller }) {
                                 {seller.stripe_api_key && <p>Stripe Key: {seller.stripe_api_key}</p>}
                             </div>
                         )}
-                        {items.length > 0 && (
+                        {items.length > 0 && seller?.pro_panel && (
                             <div className="space-x-3">
                                 <a href={whatsappUrl} target="_blank" rel="noopener" className="text-blue-600 underline">
                                     Send via WhatsApp
