@@ -48,8 +48,9 @@ class SubscriptionController extends Controller
                     'quantity' => 1,
                 ],
             ],
-            'success_url' => route('subscription.success', [], false) . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('profile.edit', [], false),
+            // Stripe requires fully qualified URLs
+            'success_url' => route('subscription.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('profile.edit'),
         ]);
 
         return response()->json(['url' => $session->url]);
