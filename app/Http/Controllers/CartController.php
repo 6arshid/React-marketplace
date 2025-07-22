@@ -7,6 +7,8 @@ use App\Models\Attribute;
 use App\Models\User;
 use App\Models\StripeConfig;
 use App\Models\Transaction;
+use App\Models\Order;
+use Illuminate\Support\Str;
 use Stripe\StripeClient;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -54,8 +56,10 @@ class CartController extends Controller
                 'product_title' => $product?->title,
                 'attribute' => $attribute ? $attribute->title . ' - ' . $attribute->option : null,
                 'price' => $item['price'],
+                'is_digital' => $product?->is_digital,
             ];
         });
+        $requiresShipping = $items->contains(fn ($i) => ! $i['is_digital']);
 
         $seller = null;
         if ($cart['seller_id']) {
@@ -77,6 +81,7 @@ class CartController extends Controller
             'items' => $items,
             'total' => $items->sum('price'),
             'seller' => $seller,
+            'requires_shipping' => $requiresShipping,
         ]);
     }
 
@@ -90,6 +95,23 @@ class CartController extends Controller
 
         $seller = User::findOrFail($cart['seller_id']);
         $total = collect($cart['items'])->sum('price');
+
+        $requiresShipping = collect($cart['items'])->contains(function ($item) {
+            $product = Product::find($item['product_id']);
+            return $product && ! $product->is_digital;
+        });
+
+        $shipping = null;
+        if ($requiresShipping) {
+            $shipping = $request->validate([
+                'first_name' => 'required|string',
+                'last_name' => 'required|string',
+                'email' => 'required|email',
+                'address' => 'required|string',
+                'postal_code' => 'required|string',
+                'phone' => 'required|string',
+            ]);
+        }
 
         if ($seller->pro_panel && $seller->stripe_secret_key) {
             $secret = $seller->stripe_secret_key;
@@ -114,8 +136,22 @@ class CartController extends Controller
             'reference' => $intent->id,
         ]);
 
+        $order = Order::create([
+            'buyer_id' => $request->user()->id,
+            'seller_id' => $seller->id,
+            'items' => $cart['items'],
+            'amount' => (int) $total,
+            'shipping_info' => $shipping,
+            'is_digital' => ! $requiresShipping,
+            'status' => 'pending',
+            'tracking_code' => (string) \Illuminate\Support\Str::uuid(),
+        ]);
+
         session()->forget('cart');
 
-        return response()->json(['client_secret' => $intent->client_secret]);
+        return response()->json([
+            'client_secret' => $intent->client_secret,
+            'tracking_code' => $order->tracking_code,
+        ]);
     }
 }

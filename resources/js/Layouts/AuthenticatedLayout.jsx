@@ -56,6 +56,18 @@ export default function AuthenticatedLayout({ header, children }) {
                                 >
                                     Transactions
                                 </NavLink>
+                                <NavLink
+                                    href={route('orders.index')}
+                                    active={route().current('orders.index')}
+                                >
+                                    Orders
+                                </NavLink>
+                                <NavLink
+                                    href={route('orders.downloads')}
+                                    active={route().current('orders.downloads')}
+                                >
+                                    Downloads
+                                </NavLink>
                                 {user.is_admin && (
                                     <NavLink
                                         href={route('admin.index')}
@@ -191,6 +203,18 @@ export default function AuthenticatedLayout({ header, children }) {
                             active={route().current('transactions.index')}
                         >
                             Transactions
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('orders.index')}
+                            active={route().current('orders.index')}
+                        >
+                            Orders
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink
+                            href={route('orders.downloads')}
+                            active={route().current('orders.downloads')}
+                        >
+                            Downloads
                         </ResponsiveNavLink>
                         {user.is_admin && (
                             <ResponsiveNavLink

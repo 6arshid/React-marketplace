@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Transaction;
+use App\Models\Order;
 
 class User extends Authenticatable
 {
@@ -80,5 +81,15 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'buyer_id');
+    }
+
+    public function sales()
+    {
+        return $this->hasMany(Order::class, 'seller_id');
     }
 }
