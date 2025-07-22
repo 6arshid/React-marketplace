@@ -11,7 +11,7 @@ export default function ContactInfoForm({ className = '' }) {
     const stripe = usePage().props.stripe;
 
     const isPro = user.pro_panel;
-    const showStripeFields = isPro && !user.is_admin;
+    const showStripeFields = !user.is_admin;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -94,7 +94,6 @@ export default function ContactInfoForm({ className = '' }) {
                                 className="mt-1 block w-full"
                                 value={data.stripe_api_key}
                                 onChange={(e) => setData('stripe_api_key', e.target.value)}
-                                disabled={!isPro}
                                 autoComplete="off"
                             />
                             <InputError message={errors.stripe_api_key} className="mt-2" />
@@ -107,7 +106,6 @@ export default function ContactInfoForm({ className = '' }) {
                                 className="mt-1 block w-full"
                                 value={data.stripe_secret_key}
                                 onChange={(e) => setData('stripe_secret_key', e.target.value)}
-                                disabled={!isPro}
                                 autoComplete="off"
                             />
                             <InputError message={errors.stripe_secret_key} className="mt-2" />
@@ -125,7 +123,7 @@ export default function ContactInfoForm({ className = '' }) {
                         </>
                     ) : (
                         <PrimaryButton type="button" onClick={upgrade} disabled={processing}>
-                            Upgrade to Pro (${stripe.price} mahane)
+                            Upgrade to Pro (${stripe.price} monthly)
                         </PrimaryButton>
                     )}
                     {isPro && (
