@@ -7,14 +7,14 @@ export default function Show({ product }) {
     const [selected, setSelected] = useState(null);
 
     const addAttributeToCart = (id) => {
-        router.post(route('cart.add', product.id), { attribute_id: id }, {
+        router.post(route('cart.add', product.slug), { attribute_id: id }, {
             onSuccess: () => alert('Added to cart'),
         });
         setSelected(id);
     };
 
     const addToCart = () => {
-        router.post(route('cart.add', product.id), {}, {
+        router.post(route('cart.add', product.slug), {}, {
             onSuccess: () => alert('Added to cart'),
         });
     };
