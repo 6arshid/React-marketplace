@@ -119,16 +119,7 @@ class CartController extends Controller
             'buyer_wallet' => 'nullable|string',
         ])['buyer_wallet'] ?? null;
 
-        if ($seller->pro_panel && $seller->stripe_secret_key) {
-            $secret = $seller->stripe_secret_key;
-            $commission = 0;
-        } else {
-            $config = StripeConfig::firstOrFail();
-            $secret = $config->secret_key;
-            $commission = $total * (($config->commission_percent ?? 2) / 100);
-        }
-
-        $stripe = new StripeClient($secret);
+        $paymentMethod = $request->input('payment_method', 'crypto');
 
         $order = Order::create([
             'buyer_id' => $request->user()->id,
@@ -141,6 +132,25 @@ class CartController extends Controller
             'status' => 'pending',
             'tracking_code' => (string) \Illuminate\Support\Str::uuid(),
         ]);
+
+        if ($paymentMethod === 'crypto') {
+            session()->forget('cart');
+
+            return response()->json([
+                'url' => route('orders.track', $order->tracking_code),
+            ]);
+        }
+
+        if ($seller->pro_panel && $seller->stripe_secret_key) {
+            $secret = $seller->stripe_secret_key;
+            $commission = 0;
+        } else {
+            $config = StripeConfig::firstOrFail();
+            $secret = $config->secret_key;
+            $commission = $total * (($config->commission_percent ?? 2) / 100);
+        }
+
+        $stripe = new StripeClient($secret);
 
         $session = $stripe->checkout->sessions->create([
             'mode' => 'payment',
