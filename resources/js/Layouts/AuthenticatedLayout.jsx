@@ -415,13 +415,13 @@ export default function AuthenticatedLayout({ header, children }) {
                 )}
 
                 {/* Page Header */}
-                {header && (
+                {/* {header && (
                     <header className="backdrop-blur-lg bg-white/80 shadow-lg border-b border-white/20 relative z-10">
                         <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
                             {header}
                         </div>
                     </header>
-                )}
+                )} */}
 
                 {/* Main Content */}
                 <main className="flex-1">{children}</main>
