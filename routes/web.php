@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StripeConfigController;
+use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\StripeWebhookController;
 use Illuminate\Foundation\Application;
@@ -49,6 +50,8 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/stripe-config', [StripeConfigController::class, 'edit'])->name('admin.stripe.edit');
     Route::post('/stripe-config', [StripeConfigController::class, 'update'])->name('admin.stripe.update');
+    Route::get('/pro-panel', [AdminProPanelController::class, 'index'])->name('admin.pro-panel.index');
+    Route::post('/pro-panel', [AdminProPanelController::class, 'update'])->name('admin.pro-panel.update');
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');

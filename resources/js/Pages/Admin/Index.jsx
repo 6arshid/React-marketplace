@@ -19,6 +19,11 @@ export default function Index() {
                             </Link>
                         </div>
                         <div>
+                            <Link href={route('admin.pro-panel.index')} className="text-blue-500 hover:underline">
+                                Pro Panel
+                            </Link>
+                        </div>
+                        <div>
                             <Link href={route('admin.reserved-usernames.index')} className="text-blue-500 hover:underline">
                                 Reserved Usernames
                             </Link>
