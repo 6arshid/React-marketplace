@@ -41,6 +41,22 @@ class ProfileController extends Controller
     }
 
     /**
+     * Update the user's settlement information.
+     */
+    public function updateSettlement(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'trc20_usdt_wallet' => ['nullable', 'string'],
+            'iban' => ['nullable', 'string'],
+            'swift_code' => ['nullable', 'string'],
+        ]);
+
+        $request->user()->update($validated);
+
+        return Redirect::back();
+    }
+
+    /**
      * Delete the user's account.
      */
     public function destroy(Request $request): RedirectResponse

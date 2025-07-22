@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('trc20_usdt_wallet');
+            $table->string('trc20_usdt_wallet')->nullable();
+            $table->string('iban')->nullable();
+            $table->string('swift_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

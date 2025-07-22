@@ -28,7 +28,9 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
-            'trc20_usdt_wallet' => 'T' . Str::random(20),
+            'trc20_usdt_wallet' => null,
+            'iban' => null,
+            'swift_code' => null,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
