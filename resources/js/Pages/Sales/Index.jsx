@@ -16,6 +16,7 @@ export default function Index({ orders, commission_percent }) {
                                     <th className="px-4 py-2">Amount</th>
                                     <th className="px-4 py-2">Status</th>
                                     <th className="px-4 py-2">Buyer</th>
+                                    <th className="px-4 py-2">Buyer Wallet</th>
                                     <th className="px-4 py-2">Shipping</th>
                                 </tr>
                             </thead>
@@ -28,6 +29,7 @@ export default function Index({ orders, commission_percent }) {
                                             <UpdateStatusForm order={o} />
                                         </td>
                                         <td className="border px-4 py-2">{o.buyer.name}</td>
+                                        <td className="border px-4 py-2">{o.buyer_wallet || '-'}</td>
                                         <td className="border px-4 py-2">
                                             {o.shipping_info
                                                 ? `${o.shipping_info.first_name} ${o.shipping_info.last_name}, ${o.shipping_info.address}`

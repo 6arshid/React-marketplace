@@ -73,6 +73,8 @@ class CartController extends Controller
                     'public_email' => $user->public_email,
                     'stripe_api_key' => $user->stripe_api_key,
                     'pro_panel' => $user->pro_panel,
+                    'trc20_usdt_wallet' => $user->trc20_usdt_wallet,
+                    'bitcoin_wallet' => $user->bitcoin_wallet,
                 ];
             }
         }
@@ -112,6 +114,9 @@ class CartController extends Controller
                 'phone' => 'required|string',
             ]);
         }
+        $buyerWallet = $request->validate([
+            'buyer_wallet' => 'nullable|string',
+        ])['buyer_wallet'] ?? null;
 
         if ($seller->pro_panel && $seller->stripe_secret_key) {
             $secret = $seller->stripe_secret_key;
@@ -130,6 +135,7 @@ class CartController extends Controller
             'items' => $cart['items'],
             'amount' => (int) $total,
             'shipping_info' => $shipping,
+            'buyer_wallet' => $buyerWallet,
             'is_digital' => ! $requiresShipping,
             'status' => 'pending',
             'tracking_code' => (string) \Illuminate\Support\Str::uuid(),
