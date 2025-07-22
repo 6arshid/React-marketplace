@@ -147,9 +147,17 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                             <p className="break-all">{seller.bitcoin_wallet}</p>
                                         </div>
                                     )}
-                                    <div>
-                                        <InputLabel htmlFor="buyer_wallet" value="Your Wallet" />
-                                        <TextInput id="buyer_wallet" className="mt-1 block w-full" value={data.buyer_wallet} onChange={(e) => setData('buyer_wallet', e.target.value)} />
+                                    <div className="flex items-center space-x-2">
+                                        <TextInput
+                                            id="buyer_wallet"
+                                            placeholder="Your Wallet"
+                                            className="mt-1 block w-full flex-1"
+                                            value={data.buyer_wallet}
+                                            onChange={(e) => setData('buyer_wallet', e.target.value)}
+                                        />
+                                        <PrimaryButton type="button" onClick={checkout}>
+                                            Submit
+                                        </PrimaryButton>
                                     </div>
                                     <div className="space-x-3">
                                         {seller?.pro_panel && (
