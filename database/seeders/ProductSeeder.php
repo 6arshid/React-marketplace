@@ -4,11 +4,22 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\User;
 
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        Product::factory(50)->create();
+        $user = User::where('email', 'kalouvalou3@gmail.com')->first();
+        if ($user) {
+            $category = Category::where('user_id', $user->id)->first() ?? Category::factory()->create(['user_id' => $user->id]);
+            Product::factory(50)->create([
+                'user_id' => $user->id,
+                'category_id' => $category->id,
+            ]);
+        } else {
+            Product::factory(50)->create();
+        }
     }
 }

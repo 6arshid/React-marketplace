@@ -4,11 +4,17 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use App\Models\User;
 
 class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        Category::factory(50)->create();
+        $user = User::where('email', 'kalouvalou3@gmail.com')->first();
+        if ($user) {
+            Category::factory(50)->create(['user_id' => $user->id]);
+        } else {
+            Category::factory(50)->create();
+        }
     }
 }
