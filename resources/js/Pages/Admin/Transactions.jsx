@@ -1,7 +1,14 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import Modal from '@/Components/Modal';
+import SecondaryButton from '@/Components/SecondaryButton';
+import { useState } from 'react';
 
 export default function Transactions({ transactions }) {
+    const [selectedUser, setSelectedUser] = useState(null);
+
+    const closeModal = () => setSelectedUser(null);
+
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Transactions</h2>}>
             <Head title="Transactions" />
@@ -24,7 +31,14 @@ export default function Transactions({ transactions }) {
                                         <td className="border px-4 py-2">{t.user?.name}</td>
                                         <td className="border px-4 py-2">${t.amount}</td>
                                         <td className="border px-4 py-2">{t.status}</td>
-                                        <td className="border px-4 py-2">{t.reference}</td>
+                                        <td className="border px-4 py-2">
+                                            <button
+                                                onClick={() => setSelectedUser(t.user)}
+                                                className="text-blue-600 hover:underline"
+                                            >
+                                                {t.reference}
+                                            </button>
+                                        </td>
                                         <td className="border px-4 py-2">{t.created_at}</td>
                                     </tr>
                                 ))}
@@ -33,6 +47,41 @@ export default function Transactions({ transactions }) {
                     </div>
                 </div>
             </div>
+            <Modal show={Boolean(selectedUser)} onClose={closeModal}>
+                <div className="p-6">
+                    <h2 className="mb-4 text-lg font-medium text-gray-900">Buyer Details</h2>
+                    {selectedUser && (
+                        <div className="space-y-1">
+                            <p>
+                                <strong>Name:</strong> {selectedUser.name}
+                            </p>
+                            {selectedUser.username && (
+                                <p>
+                                    <strong>Username:</strong> {selectedUser.username}
+                                </p>
+                            )}
+                            {selectedUser.public_email && (
+                                <p>
+                                    <strong>Email:</strong> {selectedUser.public_email}
+                                </p>
+                            )}
+                            {selectedUser.whatsapp_number && (
+                                <p>
+                                    <strong>WhatsApp:</strong> {selectedUser.whatsapp_number}
+                                </p>
+                            )}
+                            {selectedUser.telegram_username && (
+                                <p>
+                                    <strong>Telegram:</strong> {selectedUser.telegram_username}
+                                </p>
+                            )}
+                        </div>
+                    )}
+                    <div className="mt-6 flex justify-end">
+                        <SecondaryButton onClick={closeModal}>Close</SecondaryButton>
+                    </div>
+                </div>
+            </Modal>
         </AuthenticatedLayout>
     );
 }
