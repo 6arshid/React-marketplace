@@ -1,0 +1,83 @@
+import InputError from '@/Components/InputError';
+import InputLabel from '@/Components/InputLabel';
+import PrimaryButton from '@/Components/PrimaryButton';
+import TextInput from '@/Components/TextInput';
+import { Transition } from '@headlessui/react';
+import { useForm, usePage } from '@inertiajs/react';
+
+export default function ContactInfoForm({ className = '' }) {
+    const user = usePage().props.auth.user;
+
+    const { data, setData, patch, errors, processing, recentlySuccessful } =
+        useForm({
+            whatsapp_number: user.whatsapp_number || '',
+            telegram_username: user.telegram_username || '',
+            public_email: user.public_email || '',
+        });
+
+    const submit = (e) => {
+        e.preventDefault();
+        patch(route('profile.contact.update'), { preserveScroll: true });
+    };
+
+    return (
+        <section className={className}>
+            <header>
+                <h2 className="text-lg font-medium text-gray-900">Contact Information</h2>
+                <p className="mt-1 text-sm text-gray-600">Update your public contact details.</p>
+            </header>
+
+            <form onSubmit={submit} className="mt-6 space-y-6">
+                <div>
+                    <InputLabel htmlFor="whatsapp_number" value="WhatsApp Number" />
+                    <TextInput
+                        id="whatsapp_number"
+                        className="mt-1 block w-full"
+                        value={data.whatsapp_number}
+                        onChange={(e) => setData('whatsapp_number', e.target.value)}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.whatsapp_number} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="telegram_username" value="Telegram Username" />
+                    <TextInput
+                        id="telegram_username"
+                        className="mt-1 block w-full"
+                        value={data.telegram_username}
+                        onChange={(e) => setData('telegram_username', e.target.value)}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.telegram_username} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="public_email" value="Public Email" />
+                    <TextInput
+                        id="public_email"
+                        type="email"
+                        className="mt-1 block w-full"
+                        value={data.public_email}
+                        onChange={(e) => setData('public_email', e.target.value)}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.public_email} className="mt-2" />
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Transition
+                        show={recentlySuccessful}
+                        enter="transition ease-in-out"
+                        enterFrom="opacity-0"
+                        leave="transition ease-in-out"
+                        leaveTo="opacity-0"
+                    >
+                        <p className="text-sm text-gray-600">Saved.</p>
+                    </Transition>
+                </div>
+            </form>
+        </section>
+    );
+}

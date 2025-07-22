@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useEffect, useState } from 'react';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -14,9 +15,28 @@ export default function UpdateProfileInformation({
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
+            username: user.username,
             name: user.name,
             email: user.email,
         });
+
+    const [usernameStatus, setUsernameStatus] = useState(null);
+
+    useEffect(() => {
+        if (data.username === user.username) {
+            setUsernameStatus('self');
+        } else if (data.username && data.username.length >= 5) {
+            setUsernameStatus('checking');
+            fetch(route('username.check', { username: data.username }))
+                .then((res) => res.json())
+                .then((res) => {
+                    setUsernameStatus(res.available ? 'available' : 'taken');
+                })
+                .catch(() => setUsernameStatus(null));
+        } else {
+            setUsernameStatus(null);
+        }
+    }, [data.username, user.username]);
 
     const submit = (e) => {
         e.preventDefault();
@@ -37,6 +57,34 @@ export default function UpdateProfileInformation({
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
+                <div>
+                    <InputLabel htmlFor="username" value="Username" />
+
+                    <TextInput
+                        id="username"
+                        className="mt-1 block w-full"
+                        value={data.username}
+                        onChange={(e) => setData('username', e.target.value)}
+                        required
+                        autoComplete="off"
+                    />
+
+                    {usernameStatus === 'checking' && (
+                        <p className="mt-2 text-sm text-gray-500">Checking...</p>
+                    )}
+                    {usernameStatus === 'available' && (
+                        <p className="mt-2 text-sm text-green-600">Username available</p>
+                    )}
+                    {usernameStatus === 'taken' && (
+                        <p className="mt-2 text-sm text-red-600">Username already taken</p>
+                    )}
+                    {usernameStatus === 'self' && (
+                        <p className="mt-2 text-sm text-green-600">You own this username</p>
+                    )}
+
+                    <InputError className="mt-2" message={errors.username} />
+                </div>
+
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
