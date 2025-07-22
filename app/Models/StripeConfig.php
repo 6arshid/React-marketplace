@@ -11,5 +11,6 @@ class StripeConfig extends Model
     protected $fillable = [
         'api_key',
         'secret_key',
+        'price',
     ];
 }

@@ -6,6 +6,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StripeConfigController;
+use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\AdminTransactionController;
+use App\Http\Controllers\SubscriptionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -32,6 +35,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+
+    Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
+    Route::post('/subscription', [SubscriptionController::class, 'subscribe'])->name('subscription.subscribe');
 });
 
 Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
@@ -41,6 +47,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/stripe-config', [StripeConfigController::class, 'edit'])->name('admin.stripe.edit');
     Route::post('/stripe-config', [StripeConfigController::class, 'update'])->name('admin.stripe.update');
+    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::put('/users/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
+    Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
 });
 
 require __DIR__.'/auth.php';

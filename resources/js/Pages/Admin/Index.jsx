@@ -7,10 +7,22 @@ export default function Index() {
             <Head title="Admin Dashboard" />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div className="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg">
-                        <Link href={route('admin.stripe.edit')} className="text-blue-500 hover:underline">
-                            Configure Stripe
-                        </Link>
+                    <div className="overflow-hidden bg-white p-6 shadow-sm sm:rounded-lg space-y-2">
+                        <div>
+                            <Link href={route('admin.stripe.edit')} className="text-blue-500 hover:underline">
+                                Configure Stripe
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href={route('admin.users.index')} className="text-blue-500 hover:underline">
+                                Manage Users
+                            </Link>
+                        </div>
+                        <div>
+                            <Link href={route('admin.transactions.index')} className="text-blue-500 hover:underline">
+                                Transactions
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
