@@ -110,7 +110,7 @@ export default function ContactInfoForm({ className = '' }) {
                         <PrimaryButton disabled={processing}>Save</PrimaryButton>
                     ) : (
                         <PrimaryButton type="button" onClick={upgrade} disabled={processing}>
-                            Upgrade to Pro
+                            Upgrade to Pro (${stripe.price})
                         </PrimaryButton>
                     )}
                     {isPro && (
