@@ -10,6 +10,7 @@ import axios from 'axios';
 
 export default function Index({ items, total, seller, requires_shipping }) {
     const [step, setStep] = useState(1);
+    const [errors, setErrors] = useState({});
 
     const { data, setData } = useForm({
         first_name: '',
@@ -45,12 +46,21 @@ export default function Index({ items, total, seller, requires_shipping }) {
         : `mailto:?subject=Order&body=${message}`;
 
     const checkout = async (paymentMethod = 'crypto') => {
+        setErrors({});
         const payload = requires_shipping ? data : { buyer_wallet: data.buyer_wallet };
-        const res = await axios.post(route('cart.checkout'), {
-            ...payload,
-            payment_method: paymentMethod,
-        });
-        window.location.href = res.data.url;
+        try {
+            const res = await axios.post(route('cart.checkout'), {
+                ...payload,
+                payment_method: paymentMethod,
+            });
+            window.location.href = res.data.url;
+        } catch (err) {
+            if (err.response && err.response.status === 422) {
+                setErrors(err.response.data.errors || {});
+            } else {
+                console.error(err);
+            }
+        }
     };
 
     const StepIndicator = () => (
@@ -182,29 +192,31 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                             <div className="grid gap-6">
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                     <div className="space-y-2">
-                                                        <InputLabel htmlFor="first_name" value="First Name" className="text-gray-700 font-medium" />
-                                                        <TextInput
-                                                            id="first_name"
-                                                            className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                            value={data.first_name}
-                                                            onChange={(e) => setData('first_name', e.target.value)}
-                                                            placeholder="Enter your first name"
-                                                        />
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        <InputLabel htmlFor="last_name" value="Last Name" className="text-gray-700 font-medium" />
-                                                        <TextInput
-                                                            id="last_name"
-                                                            className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                            value={data.last_name}
-                                                            onChange={(e) => setData('last_name', e.target.value)}
-                                                            placeholder="Enter your last name"
-                                                        />
-                                                    </div>
+                                                    <InputLabel htmlFor="first_name" value="First Name" className="text-gray-700 font-medium" />
+                                                    <TextInput
+                                                        id="first_name"
+                                                        className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
+                                                        value={data.first_name}
+                                                        onChange={(e) => setData('first_name', e.target.value)}
+                                                        placeholder="Enter your first name"
+                                                    />
+                                                    <InputError message={errors.first_name} className="mt-2" />
                                                 </div>
-                                                
                                                 <div className="space-y-2">
-                                                    <InputLabel htmlFor="email" value="Email Address" className="text-gray-700 font-medium" />
+                                                    <InputLabel htmlFor="last_name" value="Last Name" className="text-gray-700 font-medium" />
+                                                    <TextInput
+                                                        id="last_name"
+                                                        className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
+                                                        value={data.last_name}
+                                                        onChange={(e) => setData('last_name', e.target.value)}
+                                                        placeholder="Enter your last name"
+                                                    />
+                                                    <InputError message={errors.last_name} className="mt-2" />
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <InputLabel htmlFor="email" value="Email Address" className="text-gray-700 font-medium" />
                                                     <TextInput
                                                         id="email"
                                                         type="email"
@@ -213,41 +225,45 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                         onChange={(e) => setData('email', e.target.value)}
                                                         placeholder="your.email@example.com"
                                                     />
-                                                </div>
-                                                
+                                                <InputError message={errors.email} className="mt-2" />
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <InputLabel htmlFor="address" value="Full Address" className="text-gray-700 font-medium" />
+                                                <TextInput
+                                                    id="address"
+                                                    className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
+                                                    value={data.address}
+                                                    onChange={(e) => setData('address', e.target.value)}
+                                                    placeholder="Street address, city, state"
+                                                />
+                                                <InputError message={errors.address} className="mt-2" />
+                                            </div>
+
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <InputLabel htmlFor="address" value="Full Address" className="text-gray-700 font-medium" />
-                                                    <TextInput
-                                                        id="address"
-                                                        className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                        value={data.address}
-                                                        onChange={(e) => setData('address', e.target.value)}
-                                                        placeholder="Street address, city, state"
-                                                    />
-                                                </div>
-                                                
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                    <div className="space-y-2">
-                                                        <InputLabel htmlFor="postal_code" value="Postal Code" className="text-gray-700 font-medium" />
+                                                    <InputLabel htmlFor="postal_code" value="Postal Code" className="text-gray-700 font-medium" />
                                                         <TextInput
                                                             id="postal_code"
                                                             className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                            value={data.postal_code}
-                                                            onChange={(e) => setData('postal_code', e.target.value)}
-                                                            placeholder="12345"
-                                                        />
-                                                    </div>
-                                                    <div className="space-y-2">
-                                                        <InputLabel htmlFor="phone" value="Phone Number" className="text-gray-700 font-medium" />
-                                                        <TextInput
-                                                            id="phone"
-                                                            className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                            value={data.phone}
-                                                            onChange={(e) => setData('phone', e.target.value)}
-                                                            placeholder="+1 (555) 123-4567"
-                                                        />
-                                                    </div>
+                                                        value={data.postal_code}
+                                                        onChange={(e) => setData('postal_code', e.target.value)}
+                                                        placeholder="12345"
+                                                    />
+                                                    <InputError message={errors.postal_code} className="mt-2" />
                                                 </div>
+                                                <div className="space-y-2">
+                                                    <InputLabel htmlFor="phone" value="Phone Number" className="text-gray-700 font-medium" />
+                                                    <TextInput
+                                                        id="phone"
+                                                        className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
+                                                        value={data.phone}
+                                                        onChange={(e) => setData('phone', e.target.value)}
+                                                        placeholder="+1 (555) 123-4567"
+                                                    />
+                                                    <InputError message={errors.phone} className="mt-2" />
+                                                </div>
+                                            </div>
                                             </div>
                                         </div>
                                     ) : (
@@ -338,13 +354,16 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                     <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
                                         <h4 className="font-semibold text-gray-800 mb-4 text-center">Your Transaction Details</h4>
                                         <div className="flex gap-3">
-                                            <TextInput
-                                                id="buyer_wallet"
-                                                placeholder="Enter your wallet address for confirmation"
-                                                className="flex-1 rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                value={data.buyer_wallet}
-                                                onChange={(e) => setData('buyer_wallet', e.target.value)}
-                                            />
+                                            <div className="flex-1">
+                                                <TextInput
+                                                    id="buyer_wallet"
+                                                    placeholder="Enter your wallet address for confirmation"
+                                                    className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
+                                                    value={data.buyer_wallet}
+                                                    onChange={(e) => setData('buyer_wallet', e.target.value)}
+                                                />
+                                                <InputError message={errors.buyer_wallet} className="mt-2" />
+                                            </div>
                                             <button
                                                 onClick={() => checkout('crypto')}
                                                 className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300"
