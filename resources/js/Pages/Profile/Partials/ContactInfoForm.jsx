@@ -11,14 +11,15 @@ export default function ContactInfoForm({ className = '' }) {
     const stripe = usePage().props.stripe;
 
     const isPro = user.pro_panel;
+    const showStripeFields = isPro && !user.is_admin;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             whatsapp_number: user.whatsapp_number || '',
             telegram_username: user.telegram_username || '',
             public_email: user.public_email || '',
-            stripe_api_key: isPro ? user.stripe_api_key || '' : '',
-            stripe_secret_key: isPro ? user.stripe_secret_key || '' : '',
+            stripe_api_key: showStripeFields ? user.stripe_api_key || '' : '',
+            stripe_secret_key: showStripeFields ? user.stripe_secret_key || '' : '',
         });
 
     const submit = (e) => {
@@ -84,33 +85,35 @@ export default function ContactInfoForm({ className = '' }) {
                     <InputError message={errors.public_email} className="mt-2" />
                 </div>
 
-                <>
-                    <div>
-                        <InputLabel htmlFor="stripe_api_key" value="Stripe API Key" />
-                        <TextInput
-                            id="stripe_api_key"
-                            className="mt-1 block w-full"
-                            value={data.stripe_api_key}
-                            onChange={(e) => setData('stripe_api_key', e.target.value)}
-                            disabled={!isPro}
-                            autoComplete="off"
-                        />
-                        <InputError message={errors.stripe_api_key} className="mt-2" />
-                    </div>
+                {showStripeFields && (
+                    <>
+                        <div>
+                            <InputLabel htmlFor="stripe_api_key" value="Stripe API Key" />
+                            <TextInput
+                                id="stripe_api_key"
+                                className="mt-1 block w-full"
+                                value={data.stripe_api_key}
+                                onChange={(e) => setData('stripe_api_key', e.target.value)}
+                                disabled={!isPro}
+                                autoComplete="off"
+                            />
+                            <InputError message={errors.stripe_api_key} className="mt-2" />
+                        </div>
 
-                    <div>
-                        <InputLabel htmlFor="stripe_secret_key" value="Stripe Secret Key" />
-                        <TextInput
-                            id="stripe_secret_key"
-                            className="mt-1 block w-full"
-                            value={data.stripe_secret_key}
-                            onChange={(e) => setData('stripe_secret_key', e.target.value)}
-                            disabled={!isPro}
-                            autoComplete="off"
-                        />
-                        <InputError message={errors.stripe_secret_key} className="mt-2" />
-                    </div>
-                </>
+                        <div>
+                            <InputLabel htmlFor="stripe_secret_key" value="Stripe Secret Key" />
+                            <TextInput
+                                id="stripe_secret_key"
+                                className="mt-1 block w-full"
+                                value={data.stripe_secret_key}
+                                onChange={(e) => setData('stripe_secret_key', e.target.value)}
+                                disabled={!isPro}
+                                autoComplete="off"
+                            />
+                            <InputError message={errors.stripe_secret_key} className="mt-2" />
+                        </div>
+                    </>
+                )}
 
                 <div className="flex items-center gap-4">
                     {isPro ? (
