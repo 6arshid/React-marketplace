@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Transaction;
 
 class User extends Authenticatable
 {
@@ -30,6 +31,10 @@ class User extends Authenticatable
         'whatsapp_number',
         'telegram_username',
         'public_email',
+        'stripe_api_key',
+        'stripe_secret_key',
+        'pro_panel',
+        'pro_panel_expires_at',
         'password',
     ];
 
@@ -54,6 +59,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_admin' => 'boolean',
+            'pro_panel' => 'boolean',
+            'pro_panel_expires_at' => 'datetime',
+            'stripe_api_key' => 'encrypted',
+            'stripe_secret_key' => 'encrypted',
         ];
     }
 
@@ -65,5 +74,10 @@ class User extends Authenticatable
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
     }
 }
