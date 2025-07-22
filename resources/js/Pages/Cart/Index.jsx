@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import { Head, useForm } from '@inertiajs/react';
 import { useState } from 'react';
-import QRCode from 'qrcode.react';
+import { QRCodeSVG } from 'qrcode.react';
 import axios from 'axios';
 
 export default function Index({ items, total, seller, requires_shipping }) {
@@ -136,14 +136,14 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                     {seller?.trc20_usdt_wallet && (
                                         <div className="flex flex-col items-center">
                                             <p>USDT Wallet ({total})</p>
-                                            <QRCode value={`${seller.trc20_usdt_wallet}-${total}`} />
+                                            <QRCodeSVG value={`${seller.trc20_usdt_wallet}-${total}`} />
                                             <p className="break-all">{seller.trc20_usdt_wallet}</p>
                                         </div>
                                     )}
                                     {seller?.bitcoin_wallet && (
                                         <div className="flex flex-col items-center">
                                             <p>Bitcoin Wallet ({total})</p>
-                                            <QRCode value={`${seller.bitcoin_wallet}-${total}`} />
+                                            <QRCodeSVG value={`${seller.bitcoin_wallet}-${total}`} />
                                             <p className="break-all">{seller.bitcoin_wallet}</p>
                                         </div>
                                     )}
