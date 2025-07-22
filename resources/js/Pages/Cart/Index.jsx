@@ -44,9 +44,12 @@ export default function Index({ items, total, seller, requires_shipping }) {
         ? `mailto:${seller.public_email}?subject=Order&body=${message}`
         : `mailto:?subject=Order&body=${message}`;
 
-    const checkout = async () => {
+    const checkout = async (paymentMethod = 'crypto') => {
         const payload = requires_shipping ? data : { buyer_wallet: data.buyer_wallet };
-        const res = await axios.post(route('cart.checkout'), payload);
+        const res = await axios.post(route('cart.checkout'), {
+            ...payload,
+            payment_method: paymentMethod,
+        });
         window.location.href = res.data.url;
     };
 
@@ -343,7 +346,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                 onChange={(e) => setData('buyer_wallet', e.target.value)}
                                             />
                                             <button
-                                                onClick={checkout}
+                                                onClick={() => checkout('crypto')}
                                                 className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300"
                                             >
                                                 Submit Order
@@ -394,7 +397,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                     {/* Stripe Payment */}
                                     <div className="text-center">
                                         <button
-                                            onClick={checkout}
+                                            onClick={() => checkout('stripe')}
                                             className="px-16 py-4 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg"
                                         >
                                             <svg className="w-6 h-6 mr-3 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
