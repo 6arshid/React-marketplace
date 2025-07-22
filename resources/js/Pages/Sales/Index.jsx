@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import UpdateStatusForm from './Partials/UpdateStatusForm';
 
 export default function Index({ orders }) {
     return (
@@ -23,7 +24,9 @@ export default function Index({ orders }) {
                                     <tr key={o.id}>
                                         <td className="border px-4 py-2">{o.tracking_code}</td>
                                         <td className="border px-4 py-2">${o.amount}</td>
-                                        <td className="border px-4 py-2">{o.status}</td>
+                                        <td className="border px-4 py-2">
+                                            <UpdateStatusForm order={o} />
+                                        </td>
                                         <td className="border px-4 py-2">{o.buyer.name}</td>
                                         <td className="border px-4 py-2">
                                             {o.shipping_info
