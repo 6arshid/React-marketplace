@@ -86,4 +86,16 @@ class SubscriptionController extends Controller
 
         return Redirect::route('profile.edit');
     }
+
+    public function cancel(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        $user->update([
+            'pro_panel' => false,
+            'pro_panel_expires_at' => null,
+        ]);
+
+        return Redirect::back();
+    }
 }

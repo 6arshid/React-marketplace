@@ -17,10 +17,8 @@ export default function ContactInfoForm({ className = '' }) {
             whatsapp_number: user.whatsapp_number || '',
             telegram_username: user.telegram_username || '',
             public_email: user.public_email || '',
-            stripe_api_key:
-                isPro && !user.is_admin ? user.stripe_api_key || '' : '',
-            stripe_secret_key:
-                isPro && !user.is_admin ? user.stripe_secret_key || '' : '',
+            stripe_api_key: isPro ? user.stripe_api_key || '' : '',
+            stripe_secret_key: isPro ? user.stripe_secret_key || '' : '',
         });
 
     const submit = (e) => {
@@ -31,6 +29,11 @@ export default function ContactInfoForm({ className = '' }) {
     const upgrade = async () => {
         const res = await axios.post(route('subscription.checkout'));
         window.location.href = res.data.url;
+    };
+
+    const cancelSubscription = async () => {
+        await axios.post(route('subscription.cancel'));
+        window.location.reload();
     };
 
     return (
@@ -81,39 +84,42 @@ export default function ContactInfoForm({ className = '' }) {
                     <InputError message={errors.public_email} className="mt-2" />
                 </div>
 
-                {!user.is_admin && (
-                    <>
-                        <div>
-                            <InputLabel htmlFor="stripe_api_key" value="Stripe API Key" />
-                            <TextInput
-                                id="stripe_api_key"
-                                className="mt-1 block w-full"
-                                value={data.stripe_api_key}
-                                onChange={(e) => setData('stripe_api_key', e.target.value)}
-                                disabled={!isPro}
-                                autoComplete="off"
-                            />
-                            <InputError message={errors.stripe_api_key} className="mt-2" />
-                        </div>
+                <>
+                    <div>
+                        <InputLabel htmlFor="stripe_api_key" value="Stripe API Key" />
+                        <TextInput
+                            id="stripe_api_key"
+                            className="mt-1 block w-full"
+                            value={data.stripe_api_key}
+                            onChange={(e) => setData('stripe_api_key', e.target.value)}
+                            disabled={!isPro}
+                            autoComplete="off"
+                        />
+                        <InputError message={errors.stripe_api_key} className="mt-2" />
+                    </div>
 
-                        <div>
-                            <InputLabel htmlFor="stripe_secret_key" value="Stripe Secret Key" />
-                            <TextInput
-                                id="stripe_secret_key"
-                                className="mt-1 block w-full"
-                                value={data.stripe_secret_key}
-                                onChange={(e) => setData('stripe_secret_key', e.target.value)}
-                                disabled={!isPro}
-                                autoComplete="off"
-                            />
-                            <InputError message={errors.stripe_secret_key} className="mt-2" />
-                        </div>
-                    </>
-                )}
+                    <div>
+                        <InputLabel htmlFor="stripe_secret_key" value="Stripe Secret Key" />
+                        <TextInput
+                            id="stripe_secret_key"
+                            className="mt-1 block w-full"
+                            value={data.stripe_secret_key}
+                            onChange={(e) => setData('stripe_secret_key', e.target.value)}
+                            disabled={!isPro}
+                            autoComplete="off"
+                        />
+                        <InputError message={errors.stripe_secret_key} className="mt-2" />
+                    </div>
+                </>
 
                 <div className="flex items-center gap-4">
                     {isPro ? (
-                        <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                        <>
+                            <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                            <button type="button" onClick={cancelSubscription} className="ml-2 text-red-600 hover:underline">
+                                Cancel Plan
+                            </button>
+                        </>
                     ) : (
                         <PrimaryButton type="button" onClick={upgrade} disabled={processing}>
                             Upgrade to Pro (${stripe.price} mahane)

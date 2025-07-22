@@ -22,6 +22,7 @@ export default function ProPanel({ config, proUsers }) {
         processing: userProcessing,
         errors: userErrors,
         reset: resetUser,
+        delete: destroyUser,
     } = useForm({
         email: '',
         expires_at: '',
@@ -37,6 +38,12 @@ export default function ProPanel({ config, proUsers }) {
         postUser(route('admin.pro-panel.user'), {
             preserveScroll: true,
             onSuccess: () => resetUser('email', 'expires_at'),
+        });
+    };
+
+    const disableUser = (id) => {
+        destroyUser(route('admin.pro-panel.disable', id), {
+            preserveScroll: true,
         });
     };
 
@@ -75,6 +82,7 @@ export default function ProPanel({ config, proUsers }) {
                                     <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">User</th>
                                     <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">Email</th>
                                     <th className="px-3 py-2 text-sm font-semibold text-gray-700">Expires At</th>
+                                    <th className="px-3 py-2" />
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200">
@@ -83,6 +91,9 @@ export default function ProPanel({ config, proUsers }) {
                                         <td className="px-3 py-2 text-sm text-gray-900">{u.name}</td>
                                         <td className="px-3 py-2 text-sm text-gray-900">{u.email}</td>
                                         <td className="px-3 py-2 text-sm text-gray-900">{u.pro_panel_expires_at}</td>
+                                        <td className="px-3 py-2 text-right">
+                                            <button onClick={() => disableUser(u.id)} className="text-red-600 hover:underline">Disable</button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>

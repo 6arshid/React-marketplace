@@ -52,4 +52,14 @@ class AdminProPanelController extends Controller
 
         return Redirect::route('admin.pro-panel.index');
     }
+
+    public function disable(User $user): RedirectResponse
+    {
+        $user->update([
+            'pro_panel' => false,
+            'pro_panel_expires_at' => null,
+        ]);
+
+        return Redirect::back();
+    }
 }

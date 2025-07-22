@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/subscription', [SubscriptionController::class, 'index'])->name('subscription.index');
     Route::post('/subscription/checkout', [SubscriptionController::class, 'checkout'])->name('subscription.checkout');
     Route::get('/subscription/success', [SubscriptionController::class, 'success'])->name('subscription.success');
+    Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 });
 
 Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
@@ -53,6 +54,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/pro-panel', [AdminProPanelController::class, 'index'])->name('admin.pro-panel.index');
     Route::post('/pro-panel', [AdminProPanelController::class, 'update'])->name('admin.pro-panel.update');
     Route::post('/pro-panel/user', [AdminProPanelController::class, 'saveUser'])->name('admin.pro-panel.user');
+    Route::delete('/pro-panel/{user}', [AdminProPanelController::class, 'disable'])->name('admin.pro-panel.disable');
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
