@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Support\Facades\Redirect;
+use App\Notifications\OrderStatusUpdated;
 
 class OrderController extends Controller
 {
@@ -28,6 +29,8 @@ class OrderController extends Controller
         ]);
 
         $order->update($data);
+
+        $order->buyer->notify(new OrderStatusUpdated($order));
 
         return Redirect::back();
     }

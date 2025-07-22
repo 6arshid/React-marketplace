@@ -7,6 +7,8 @@ export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const flash = usePage().props.flash;
     const cart = usePage().props.cart;
+    const notifications = usePage().props.notifications || [];
+    const notificationsCount = usePage().props.notifications_count || 0;
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [notificationOpen, setNotificationOpen] = useState(false);
@@ -178,49 +180,31 @@ export default function AuthenticatedLayout({ header, children }) {
                             <h3 className="font-semibold text-gray-800">Notifications</h3>
                         </div>
                         <div className="py-2 max-h-64 overflow-y-auto">
-                            <div className="px-4 py-3 hover:bg-gray-50 transition-colors">
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M8 21h8a2 2 0 002-2v-1a2 2 0 00-2-2H8a2 2 0 00-2 2v1a2 2 0 002 2z" />
-                                        </svg>
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm text-gray-800">New order received</p>
-                                        <p className="text-xs text-gray-500">2 minutes ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="px-4 py-3 hover:bg-gray-50 transition-colors">
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                                        </svg>
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm text-gray-800">Payment confirmed</p>
-                                        <p className="text-xs text-gray-500">1 hour ago</p>
+                            {notifications.length === 0 && (
+                                <div className="px-4 py-3 text-sm text-gray-500">No new notifications</div>
+                            )}
+                            {notifications.map((n) => (
+                                <div key={n.id} className="px-4 py-3 hover:bg-gray-50 transition-colors">
+                                    <div className="flex items-start space-x-3">
+                                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.403-3.403A1 1 0 0116 13V9a4 4 0 00-8 0v4a1 1 0 01-.293.707L5 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                            </svg>
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-sm text-gray-800">{n.data.message}</p>
+                                            <p className="text-xs text-gray-500">{n.created_at}</p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="px-4 py-3 hover:bg-gray-50 transition-colors">
-                                <div className="flex items-start space-x-3">
-                                    <div className="w-8 h-8 bg-purple-100 rounded-full flex items-center justify-center">
-                                        <svg className="w-4 h-4 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                                        </svg>
-                                    </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm text-gray-800">New product added</p>
-                                        <p className="text-xs text-gray-500">3 hours ago</p>
-                                    </div>
-                                </div>
-                            </div>
+                            ))}
                         </div>
-                        <div className="border-t border-gray-100 px-4 py-3">
-                            <button className="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                                View all notifications
+                        <div className="border-t border-gray-100 px-4 py-3 flex justify-between items-center">
+                            <Link as="button" method="post" href={route('notifications.read-all')} className="text-sm text-gray-500 hover:text-gray-700 mr-2">
+                                Mark all as read
+                            </Link>
+                            <button className="text-sm text-blue-600 hover:text-blue-800 font-medium" onClick={() => setNotificationOpen(false)}>
+                                Close
                             </button>
                         </div>
                     </div>
@@ -354,9 +338,11 @@ export default function AuthenticatedLayout({ header, children }) {
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.403-3.403A1 1 0 0116 13V9a4 4 0 00-8 0v4a1 1 0 01-.293.707L5 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H9" />
                                 </svg>
-                                <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center">
-                                    <span className="text-white text-xs font-bold">3</span>
-                                </div>
+                                {notificationsCount > 0 && (
+                                    <div className="absolute -top-1 -right-1 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-600 rounded-full flex items-center justify-center">
+                                        <span className="text-white text-xs font-bold">{notificationsCount}</span>
+                                    </div>
+                                )}
                             </button>
                         </div>
 

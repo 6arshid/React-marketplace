@@ -8,6 +8,8 @@ use App\Models\User;
 use App\Models\StripeConfig;
 use App\Models\Transaction;
 use App\Models\Order;
+use App\Notifications\OrderPlaced;
+use App\Notifications\OrderStatusUpdated;
 use Illuminate\Support\Str;
 use Stripe\StripeClient;
 use Illuminate\Http\Request;
@@ -133,6 +135,8 @@ class CartController extends Controller
             'tracking_code' => (string) \Illuminate\Support\Str::uuid(),
         ]);
 
+        $seller->notify(new OrderPlaced($order));
+
         if ($paymentMethod === 'crypto') {
             session()->forget('cart');
 
@@ -206,6 +210,8 @@ class CartController extends Controller
         $order->update([
             'status' => $session->payment_status === 'paid' ? 'paid' : 'failed',
         ]);
+
+        $order->buyer->notify(new OrderStatusUpdated($order));
 
         return Redirect::route('orders.track', $order->tracking_code);
     }

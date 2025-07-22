@@ -46,6 +46,24 @@ class HandleInertiaRequests extends Middleware
                     'total' => collect($cart['items'])->sum('price'),
                 ];
             },
+            'notifications' => function () use ($request) {
+                if (! $request->user()) {
+                    return [];
+                }
+
+                return $request->user()->unreadNotifications()
+                    ->latest()
+                    ->take(5)
+                    ->get()
+                    ->map(fn ($n) => [
+                        'id' => $n->id,
+                        'data' => $n->data,
+                        'created_at' => $n->created_at->diffForHumans(),
+                    ]);
+            },
+            'notifications_count' => function () use ($request) {
+                return $request->user()?->unreadNotifications()->count() ?? 0;
+            },
             'stripe' => function () {
                 try {
                     $config = \App\Models\StripeConfig::first();
