@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminReservedUsernameController;
 use App\Http\Controllers\AdminTransactionController;
-use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -50,8 +49,6 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
     Route::get('/stripe-config', [StripeConfigController::class, 'edit'])->name('admin.stripe.edit');
     Route::post('/stripe-config', [StripeConfigController::class, 'update'])->name('admin.stripe.update');
-    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
-    Route::put('/users/{user}', [AdminUserController::class, 'update'])->name('admin.users.update');
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
