@@ -37,6 +37,7 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'trc20_usdt_wallet' => 'nullable|string',
+            'bitcoin_wallet' => 'nullable|string',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -45,6 +46,7 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'trc20_usdt_wallet' => $request->trc20_usdt_wallet,
+            'bitcoin_wallet' => $request->bitcoin_wallet,
             'password' => Hash::make($request->password),
         ]);
 

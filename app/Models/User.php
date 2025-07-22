@@ -29,6 +29,7 @@ class User extends Authenticatable
         'trc20_usdt_wallet',
         'iban',
         'swift_code',
+        'bitcoin_wallet',
         'whatsapp_number',
         'telegram_username',
         'public_email',

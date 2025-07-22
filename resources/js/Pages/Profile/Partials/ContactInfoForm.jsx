@@ -15,6 +15,8 @@ export default function ContactInfoForm({ className = '' }) {
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
+            trc20_usdt_wallet: user.trc20_usdt_wallet || '',
+            bitcoin_wallet: user.bitcoin_wallet || '',
             whatsapp_number: user.whatsapp_number || '',
             telegram_username: user.telegram_username || '',
             public_email: user.public_email || '',
@@ -40,8 +42,8 @@ export default function ContactInfoForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">Contact Information</h2>
-                <p className="mt-1 text-sm text-gray-600">Update your public contact details.</p>
+                <h2 className="text-lg font-medium text-gray-900">Bank details and contact information</h2>
+                <p className="mt-1 text-sm text-gray-600">Update your public contact details and payment wallets.</p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
@@ -83,6 +85,32 @@ export default function ContactInfoForm({ className = '' }) {
                         autoComplete="off"
                     />
                     <InputError message={errors.public_email} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="trc20_usdt_wallet" value="USDT Wallet" />
+                    <TextInput
+                        id="trc20_usdt_wallet"
+                        className="mt-1 block w-full"
+                        value={data.trc20_usdt_wallet}
+                        onChange={(e) => setData('trc20_usdt_wallet', e.target.value)}
+                        disabled={!isPro}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.trc20_usdt_wallet} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="bitcoin_wallet" value="Bitcoin Wallet" />
+                    <TextInput
+                        id="bitcoin_wallet"
+                        className="mt-1 block w-full"
+                        value={data.bitcoin_wallet}
+                        onChange={(e) => setData('bitcoin_wallet', e.target.value)}
+                        disabled={!isPro}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.bitcoin_wallet} className="mt-2" />
                 </div>
 
                 {showStripeFields && (

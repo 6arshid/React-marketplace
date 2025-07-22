@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'trc20_usdt_wallet' => null,
             'iban' => null,
             'swift_code' => null,
+            'bitcoin_wallet' => null,
             'whatsapp_number' => null,
             'telegram_username' => null,
             'public_email' => null,
