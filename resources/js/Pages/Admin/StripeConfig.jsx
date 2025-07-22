@@ -9,6 +9,7 @@ export default function StripeConfig({ config }) {
     const { data, setData, post, processing, errors } = useForm({
         api_key: config?.api_key || '',
         secret_key: config?.secret_key || '',
+        commission_percent: config?.commission_percent ?? 2,
     });
 
     const submit = (e) => {
@@ -42,6 +43,17 @@ export default function StripeConfig({ config }) {
                                     onChange={(e) => setData('secret_key', e.target.value)}
                                 />
                                 <InputError message={errors.secret_key} className="mt-2" />
+                            </div>
+                            <div>
+                                <InputLabel htmlFor="commission_percent" value="Non-Pro Commission %" />
+                                <TextInput
+                                    id="commission_percent"
+                                    type="number"
+                                    className="mt-1 block w-full"
+                                    value={data.commission_percent}
+                                    onChange={(e) => setData('commission_percent', e.target.value)}
+                                />
+                                <InputError message={errors.commission_percent} className="mt-2" />
                             </div>
                             <div className="flex items-center gap-4">
                                 <PrimaryButton disabled={processing}>Save</PrimaryButton>
