@@ -19,6 +19,7 @@ class AdminSeeder extends Seeder
                 'name' => 'kalouvalou3',
                 'password' => Hash::make('kalouvalou3@gmail.com'),
                 'is_admin' => true,
+                'is_seller' => true,
                 'stripe_api_key' => 'pk_test_51R7LMwGdTRLiMmQbFh44O6dUIbn40mJg2o3ZpH2ZFEzoMqqD6M7Fm9c7C6QRMq7NYLACyQw943X9hUoEdgzsDQSd00ooBnYsBA',
                 'stripe_secret_key' => 'sk_test_51R7LMwGdTRLiMmQbN2N9ah04zKaVTJVfwKOo6CMpWnX7m4y4VA0sRPe4rSp04vPADxU5egIjLvLEEmlcQS8O6LFa00y965GlmC',
             ]
