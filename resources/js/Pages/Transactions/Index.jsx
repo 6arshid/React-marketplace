@@ -117,7 +117,11 @@ export default function Index({ transactions }) {
         return () => clearInterval(interval);
     }, []);
 
-    const filteredTransactions = transactionList.filter((t) =>
+    const sortedTransactions = [...transactionList].sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+
+    const filteredTransactions = sortedTransactions.filter((t) =>
         `${t.reference} ${t.status}`.toLowerCase().includes(search.toLowerCase())
     );
     const totalPages = Math.ceil(filteredTransactions.length / 10);
