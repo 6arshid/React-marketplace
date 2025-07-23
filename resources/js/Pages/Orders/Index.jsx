@@ -216,13 +216,13 @@ export default function Index({ orders }) {
                                     <tr>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
-                                                <TrackingIcon className="text-gray-400" />
+                                                <TrackingIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                                                 <span>Tracking</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
-                                                <CurrencyIcon className="text-gray-400" />
+                                                <CurrencyIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                                                 <span>Amount</span>
                                             </div>
                                         </th>
@@ -236,19 +236,19 @@ export default function Index({ orders }) {
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
-                                                <SellerIcon className="text-gray-400" />
+                                                <SellerIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                                                 <span>Seller</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
-                                                <ShippingIcon className="text-gray-400" />
+                                                <ShippingIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                                                 <span>Shipping</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
-                                                <ViewIcon className="text-gray-400" />
+                                                <ViewIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
                                                 <span>Action</span>
                                             </div>
                                         </th>
@@ -294,14 +294,14 @@ export default function Index({ orders }) {
                                                 <div className="flex items-center space-x-2">
                                                     {order.is_digital ? (
                                                         <>
-                                                            <DigitalIcon className="text-green-500" />
+                                                            <DigitalIcon className="w-4 h-4 md:w-5 md:h-5 text-green-500" />
                                                             <span className="text-sm text-green-600 font-medium">
                                                                 Download Available
                                                             </span>
                                                         </>
                                                     ) : order.postal_tracking_code ? (
                                                         <>
-                                                            <ShippingIcon className="text-blue-500" />
+                                                              <ShippingIcon className="w-4 h-4 md:w-5 md:h-5 text-blue-500" />
                                                             <span className="text-sm font-mono text-gray-900 bg-blue-50 px-2 py-1 rounded">
                                                                 {order.postal_tracking_code}
                                                             </span>
