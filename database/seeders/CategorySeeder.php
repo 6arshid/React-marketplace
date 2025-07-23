@@ -12,9 +12,9 @@ class CategorySeeder extends Seeder
     {
         $user = User::where('email', 'kalouvalou3@gmail.com')->first();
         if ($user) {
-            Category::factory(50)->create(['user_id' => $user->id]);
+            Category::factory(10)->create(['user_id' => $user->id]);
         } else {
-            Category::factory(50)->create();
+            Category::factory(10)->create();
         }
     }
 }
