@@ -202,10 +202,12 @@ class CartController extends Controller
         $stripe = new StripeClient($secret);
         $session = $stripe->checkout->sessions->retrieve($sessionId);
 
+        $status = $session->payment_status === 'paid' ? ($order->seller->pro_panel ? 'paid' : 'success') : 'failed';
+
         Transaction::create([
             'user_id' => $order->seller_id,
             'amount' => (int) ($order->amount - $commission),
-            'status' => $session->payment_status === 'paid' ? 'success' : 'failed',
+            'status' => $status,
             'reference' => $session->payment_intent,
         ]);
 
