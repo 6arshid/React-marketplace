@@ -407,9 +407,16 @@ export default function Profile({ user, categories, products, isOwner, socialLin
                                 <Link
                                     key={c.id}
                                     href={route('store.categories.show', [user.username, c.slug])}
-                                    className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-full font-medium transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg"
+                                    className="px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-full font-medium transition-all duration-200 hover:scale-105 shadow-md hover:shadow-lg flex items-center gap-2"
                                 >
-                                    {c.name}
+                                    {c.icon && (
+                                        <img
+                                            src={`/storage/${c.icon}`}
+                                            alt={c.name}
+                                            className="w-5 h-5"
+                                        />
+                                    )}
+                                    <span>{c.name}</span>
                                 </Link>
                             ))}
                         </div>
