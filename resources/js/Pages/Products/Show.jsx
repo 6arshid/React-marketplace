@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
@@ -31,7 +31,7 @@ export default function Show({ product }) {
     const currentPrice = selected ? selectedAttribute?.price : product.price;
 
     return (
-        <AuthenticatedLayout 
+        <GuestLayout 
             header={
                 <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-8">
                     <h2 className="text-3xl font-bold text-center text-white">
@@ -307,6 +307,6 @@ export default function Show({ product }) {
                     animation: slide-in 0.3s ease-out;
                 }
             `}</style>
-        </AuthenticatedLayout>
+        </GuestLayout>
     );
 }

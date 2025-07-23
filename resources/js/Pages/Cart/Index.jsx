@@ -1,4 +1,4 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
+import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
@@ -89,7 +89,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
     );
 
     return (
-        <AuthenticatedLayout 
+        <GuestLayout 
             header={
                 <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-8">
                     <h2 className="text-3xl font-bold text-center text-white">
@@ -454,6 +454,6 @@ export default function Index({ items, total, seller, requires_shipping }) {
                     animation: fade-in 0.5s ease-out;
                 }
             `}</style>
-        </AuthenticatedLayout>
+        </GuestLayout>
     );
 }
