@@ -35,6 +35,7 @@ class UserFactory extends Factory
             'whatsapp_number' => null,
             'telegram_username' => null,
             'public_email' => null,
+            'is_seller' => false,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];

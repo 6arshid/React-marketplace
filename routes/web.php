@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/logo', [ProfileController::class, 'deleteLogo'])->name('profile.logo.delete');
     Route::post('/profile/cover', [ProfileController::class, 'updateCover'])->name('profile.cover');
     Route::delete('/profile/cover', [ProfileController::class, 'deleteCover'])->name('profile.cover.delete');
+    Route::get('/profile/become-seller', [ProfileController::class, 'becomeSeller'])->name('profile.become-seller');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class);

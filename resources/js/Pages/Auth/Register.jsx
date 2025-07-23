@@ -11,6 +11,7 @@ export default function Register() {
         username: '',
         name: '',
         email: '',
+        is_seller: false,
         password: '',
         password_confirmation: '',
     });
@@ -102,6 +103,35 @@ export default function Register() {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel value="Account Type" />
+                    <div className="flex items-center mt-1 space-x-4">
+                        <label className="flex items-center">
+                            <input
+                                type="radio"
+                                name="is_seller"
+                                value="0"
+                                checked={!data.is_seller}
+                                onChange={() => setData('is_seller', false)}
+                                className="mr-2"
+                            />
+                            Buyer
+                        </label>
+                        <label className="flex items-center">
+                            <input
+                                type="radio"
+                                name="is_seller"
+                                value="1"
+                                checked={data.is_seller}
+                                onChange={() => setData('is_seller', true)}
+                                className="mr-2"
+                            />
+                            Seller
+                        </label>
+                    </div>
+                    <InputError message={errors.is_seller} className="mt-2" />
                 </div>
 
 
