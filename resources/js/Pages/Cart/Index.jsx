@@ -25,7 +25,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
 
     const baseMessage =
         items
-            .map((i) => `${i.product_title}${i.attribute ? ` (${i.attribute})` : ''} - $${i.price}`)
+            .map((i) => `${i.product_title}${i.attribute ? ` (${i.attribute})` : ''} - $${i.price + i.shipping_cost}`)
             .join('\n') + `\nTotal: $${total}`;
 
     const shippingMessage = requires_shipping
@@ -137,8 +137,11 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                         </div>
                                                         <div className="text-right">
                                                             <p className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-                                                                ${item.price}
+                                                                ${item.price + item.shipping_cost}
                                                             </p>
+                                                            {item.shipping_cost > 0 && (
+                                                                <p className="text-xs text-gray-500">Shipping: ${item.shipping_cost}</p>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
