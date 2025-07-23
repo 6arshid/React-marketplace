@@ -156,13 +156,20 @@ export default function Profile({ user, categories, products, isOwner }) {
                     {products.slice(0, visible).map(p => (
                         <div key={p.id} className="bg-white rounded-xl shadow p-4 flex flex-col">
                             {p.images && p.images.length > 0 && (
-                                <img
-                                    src={`/storage/${p.images[0]}`}
-                                    alt={p.title}
-                                    className="h-40 w-full object-cover rounded-md mb-2"
-                                />
+                                <Link href={route('products.show', p.slug)}>
+                                    <img
+                                        src={`/storage/${p.images[0]}`}
+                                        alt={p.title}
+                                        className="h-40 w-full object-cover rounded-md mb-2"
+                                    />
+                                </Link>
                             )}
-                            <div className="font-semibold">{p.title}</div>
+                            <Link
+                                href={route('products.show', p.slug)}
+                                className="font-semibold hover:text-blue-600"
+                            >
+                                {p.title}
+                            </Link>
                             <div className="text-sm text-gray-600 mb-4">${p.price}</div>
                             <button
                                 onClick={() => addToCart(p.slug)}
