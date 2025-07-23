@@ -36,7 +36,13 @@ class TransactionController extends Controller
         $commissionPercent = optional(StripeConfig::first())->commission_percent ?? 2;
         $net = (int) ($data['amount'] - ($data['amount'] * $commissionPercent / 100));
 
-        $request->user()->transactions()->create([
+        $user = $request->user();
+
+        $user->transactions()
+            ->where('status', 'success')
+            ->update(['status' => 'completed']);
+
+        $user->transactions()->create([
             'amount' => $net,
             'status' => 'success',
             'reference' => (string) Str::uuid(),
