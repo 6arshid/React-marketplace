@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import Editor from 'react-simple-wysiwyg';
 
 // Custom SVG Icons
 const EditIcon = () => (
@@ -150,13 +151,15 @@ export default function Edit({ product, categories }) {
 
                                             <div className="md:col-span-2">
                                                 <InputLabel htmlFor="description" value="Description" className="text-sm font-medium text-gray-700" />
-                                                <textarea 
-                                                    id="description" 
-                                                    value={data.description} 
-                                                    rows={4}
-                                                    className="mt-2 block w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200" 
+                                                <Editor
+                                                    id="description"
+                                                    value={data.description}
                                                     onChange={(e) => setData('description', e.target.value)}
                                                     placeholder="Describe your product..."
+                                                    containerProps={{
+                                                        className:
+                                                            'mt-2 w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 min-h-[120px]'
+                                                    }}
                                                 />
                                                 <InputError message={errors.description} className="mt-2" />
                                             </div>
