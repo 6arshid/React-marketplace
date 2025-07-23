@@ -13,7 +13,9 @@ class CategoryController extends Controller
 {
     public function index(): Response
     {
-        $categories = Category::where('user_id', auth()->id())->get();
+        $categories = Category::where('user_id', auth()->id())
+            ->latest()
+            ->get();
 
         return Inertia::render('Categories/Index', [
             'categories' => $categories,
