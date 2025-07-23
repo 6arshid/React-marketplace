@@ -19,6 +19,8 @@ export default function AuthenticatedLayout({ header, children }) {
     
     const notificationRef = useRef(null);
     const userDropdownRef = useRef(null);
+    const notificationDropdownRef = useRef(null);
+    const userDropdownMenuRef = useRef(null);
     const notificationButtonRef = useRef(null);
     const userButtonRef = useRef(null);
     const notificationScrollRef = useRef(null);
@@ -43,10 +45,22 @@ export default function AuthenticatedLayout({ header, children }) {
     // Close dropdowns when clicking outside
     useEffect(() => {
         function handleClickOutside(event) {
-            if (notificationRef.current && !notificationRef.current.contains(event.target)) {
+            if (
+                notificationOpen &&
+                notificationRef.current &&
+                !notificationRef.current.contains(event.target) &&
+                notificationDropdownRef.current &&
+                !notificationDropdownRef.current.contains(event.target)
+            ) {
                 setNotificationOpen(false);
             }
-            if (userDropdownRef.current && !userDropdownRef.current.contains(event.target)) {
+            if (
+                userDropdownOpen &&
+                userDropdownRef.current &&
+                !userDropdownRef.current.contains(event.target) &&
+                userDropdownMenuRef.current &&
+                !userDropdownMenuRef.current.contains(event.target)
+            ) {
                 setUserDropdownOpen(false);
             }
         }
@@ -208,7 +222,8 @@ export default function AuthenticatedLayout({ header, children }) {
                         onClick={() => setNotificationOpen(false)}
                         style={{ backgroundColor: 'transparent' }}
                     ></div>
-                    <div 
+                    <div
+                        ref={notificationDropdownRef}
                         className="fixed z-[9999999] w-80 bg-white rounded-2xl shadow-2xl border border-gray-200 max-h-96 overflow-hidden"
                         style={{
                             top: notificationRect.bottom + 8,
@@ -288,7 +303,8 @@ export default function AuthenticatedLayout({ header, children }) {
                         onClick={() => setUserDropdownOpen(false)}
                         style={{ backgroundColor: 'transparent' }}
                     ></div>
-                    <div 
+                    <div
+                        ref={userDropdownMenuRef}
                         className="fixed z-[9999999] w-48 bg-white rounded-2xl shadow-2xl border border-gray-200 overflow-hidden"
                         style={{
                             top: userDropdownRect.bottom + 8,
