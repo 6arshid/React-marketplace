@@ -3,7 +3,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import axios from 'axios';
@@ -122,9 +122,12 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                 >
                                                     <div className="flex justify-between items-center">
                                                         <div>
-                                                            <h4 className="font-semibold text-gray-800 text-lg">
+                                                            <Link
+                                                                href={route('products.show', item.product_slug)}
+                                                                className="font-semibold text-gray-800 text-lg hover:text-blue-600"
+                                                            >
                                                                 {item.product_title}
-                                                            </h4>
+                                                            </Link>
                                                             {item.attribute && (
                                                                 <p className="text-gray-600 mt-1">
                                                                     Variant: {item.attribute}

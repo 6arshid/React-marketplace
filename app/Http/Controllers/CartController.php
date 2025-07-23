@@ -57,6 +57,7 @@ class CartController extends Controller
 
             return [
                 'product_title' => $product?->title,
+                'product_slug'  => $product?->slug,
                 'attribute' => $attribute ? $attribute->title . ' - ' . $attribute->option : null,
                 'price' => $item['price'],
                 'is_digital' => $product?->is_digital,
@@ -71,6 +72,7 @@ class CartController extends Controller
                 $seller = [
                     'id' => $user->id,
                     'name' => $user->name,
+                    'username' => $user->username,
                     'whatsapp_number' => $user->whatsapp_number,
                     'telegram_username' => $user->telegram_username,
                     'public_email' => $user->public_email,
