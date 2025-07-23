@@ -11,7 +11,12 @@ export default function Index({ pages }) {
     useEffect(() => setCurrentPage(1), [search]);
 
     const user = usePage().props.auth.user;
-    const filtered = pages.filter((p) => p.title.toLowerCase().includes(search.toLowerCase()));
+    const sortedPages = [...pages].sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+    const filtered = sortedPages.filter((p) =>
+        p.title.toLowerCase().includes(search.toLowerCase())
+    );
     const totalPages = Math.ceil(filtered.length / 10);
     const paginated = filtered.slice((currentPage - 1) * 10, currentPage * 10);
 

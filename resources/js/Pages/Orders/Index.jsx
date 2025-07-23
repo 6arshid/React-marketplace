@@ -114,7 +114,11 @@ export default function Index({ orders }) {
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => setCurrentPage(1), [search]);
 
-    const filteredOrders = orders.filter(o =>
+    const sortedOrders = [...orders].sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+
+    const filteredOrders = sortedOrders.filter(o =>
         `${o.tracking_code} ${o.seller.name} ${o.status}`
             .toLowerCase()
             .includes(search.toLowerCase())

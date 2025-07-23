@@ -10,7 +10,11 @@ export default function Index({ products }) {
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => setCurrentPage(1), [search]);
 
-    const filteredProducts = products.filter((p) =>
+    const sortedProducts = [...products].sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+
+    const filteredProducts = sortedProducts.filter((p) =>
         `${p.title} ${p.category?.name}`.toLowerCase().includes(search.toLowerCase())
     );
     const totalPages = Math.ceil(filteredProducts.length / 10);

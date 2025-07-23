@@ -85,6 +85,8 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
     const filesCount = typeof totalFiles === 'number' ? totalFiles : orders.data.reduce((sum, order) => sum + order.files.length, 0);
     const ordersCount = typeof totalOrders === 'number' ? totalOrders : orders.total;
 
+    const sortedData = [...orders.data].sort((a, b) => b.id - a.id);
+
     return (
         <AuthenticatedLayout 
             header={
@@ -150,7 +152,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
 
                     {/* Orders List */}
                     <div className="space-y-6">
-                        {orders.data.map((order) => (
+                        {sortedData.map((order) => (
                             <div key={order.id} className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
                                 {/* Order Header */}
                                 <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
