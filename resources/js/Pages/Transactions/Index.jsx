@@ -84,7 +84,14 @@ export default function Index({ transactions }) {
     const [transactionList, setTransactionList] = useState(transactions);
     const [search, setSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const { data, setData, post, processing, errors, reset } = useForm({ amount: '' });
+    const successAmount = transactionList
+        .filter((t) => t.status === 'success')
+        .reduce((sum, t) => sum + parseFloat(t.amount), 0);
+    const { data, setData, post, processing, errors, reset } = useForm({ amount: successAmount });
+
+    useEffect(() => {
+        setData('amount', successAmount);
+    }, [successAmount]);
 
     useEffect(() => {
         setCurrentPage(1);
@@ -198,14 +205,9 @@ export default function Index({ transactions }) {
                     <form onSubmit={submitRequest} className="mb-8 flex items-end space-x-2">
                         <div className="flex-1">
                             <InputLabel htmlFor="amount" value="Amount" />
-                            <TextInput
-                                id="amount"
-                                type="number"
-                                min="1"
-                                className="mt-1 block w-full"
-                                value={data.amount}
-                                onChange={(e) => setData('amount', e.target.value)}
-                            />
+                            <div className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 bg-gray-100">
+                                {formatAmount(successAmount)}
+                            </div>
                             <InputError message={errors.amount} className="mt-2" />
                         </div>
                         <PrimaryButton disabled={processing}>Request Payout</PrimaryButton>
