@@ -10,7 +10,7 @@ export default function GuestLayout({ children }) {
     const isCartPage = url === '/cart';
     const isCategoryPage = url.includes('/store/categories/');
 
-    const hideLogo = isProfilePage || isProductPage || isCartPage || isCategoryPage;
+    const hideLogo = isProductPage || isCartPage || isCategoryPage;
 
     const user = props?.auth?.user;
     const userInitial = user?.name?.charAt(0)?.toUpperCase();
@@ -35,7 +35,13 @@ export default function GuestLayout({ children }) {
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <header className="mb-4 flex justify-between items-center">
-                {!hideLogo ? (
+                {isProfilePage ? (
+                    <Link href="/" className="text-gray-600 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75M4.5 10.5v10.125c0 .621.504 1.125 1.125 1.125h3.75c.621 0 1.125-.504 1.125-1.125V15.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v4.875c0 .621.504 1.125 1.125 1.125h3.75c.621 0 1.125-.504 1.125-1.125V10.5" />
+                        </svg>
+                    </Link>
+                ) : !hideLogo ? (
                     <Link href="/">
                         <ApplicationLogo className="h-12 w-12 fill-current text-gray-500" />
                     </Link>
@@ -53,9 +59,14 @@ export default function GuestLayout({ children }) {
                     </Link>
                 ) : null}
 
-                <Link href="/cart" className="text-blue-600 hover:underline">
-                    Cart
-                </Link>
+                <div className="flex items-center gap-4">
+                    <Link href="/track/" className="text-blue-600 hover:underline">
+                        Track Order
+                    </Link>
+                    <Link href="/cart" className="text-blue-600 hover:underline">
+                        Cart
+                    </Link>
+                </div>
             </header>
             <main>
                 {children}
