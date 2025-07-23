@@ -16,6 +16,7 @@ export default function GuestLayout({ children }) {
     const user = props?.auth?.user;
     const userInitial = user?.name?.charAt(0)?.toUpperCase();
     const profileUrl = user ? `/${user.username}` : '/profile';
+    const homeUrl = user?.pro_panel ? `/${user.username}` : '/';
 
     if (isAuthPage) {
         return (
@@ -23,7 +24,7 @@ export default function GuestLayout({ children }) {
                 <div className="max-w-md w-full space-y-8">
                     {/* Logo Section */}
                     <div className="text-center">
-                        <Link href="/" className="inline-block">
+                        <Link href={homeUrl} className="inline-block">
                             <div className="mx-auto w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
                                 <ApplicationLogo className="h-12 w-12 text-white" />
                             </div>
@@ -61,8 +62,8 @@ export default function GuestLayout({ children }) {
                         {/* Left Side - Logo/Navigation */}
                         <div className="flex items-center">
                             {isProfilePage ? (
-                                <Link 
-                                    href="/" 
+                                <Link
+                                    href={homeUrl}
                                     className="flex items-center justify-center w-10 h-10 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-600 hover:text-gray-800 transition-all duration-200 hover:scale-105"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-5 w-5">
@@ -98,7 +99,7 @@ export default function GuestLayout({ children }) {
                                     </div>
                                 </Link>
                             ) : (
-                                <Link href="/" className="flex items-center space-x-2 group">
+                                <Link href={homeUrl} className="flex items-center space-x-2 group">
                                     <div className="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-200 group-hover:scale-105">
                                         <ApplicationLogo className="h-6 w-6 text-white" />
                                     </div>
@@ -163,32 +164,36 @@ export default function GuestLayout({ children }) {
                             </div>
 
                             {/* Quick Links */}
-                            <div>
-                                <h3 className="font-semibold text-gray-900 mb-4 text-sm sm:text-base">Quick Links</h3>
-                                <div className="space-y-2">
-                                    <Link href="/" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                        Home
-                                    </Link>
-                                    <Link href="/track/" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                        Track Order
-                                    </Link>
-                                    <Link href="/cart" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                        Shopping Cart
-                                    </Link>
+                            {user?.pro_panel && (
+                                <div>
+                                    <h3 className="font-semibold text-gray-900 mb-4 text-sm sm:text-base">Quick Links</h3>
+                                    <div className="space-y-2">
+                                        <Link href={homeUrl} className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
+                                            Home
+                                        </Link>
+                                        <Link href="/track/" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
+                                            Track Order
+                                        </Link>
+                                        <Link href="/cart" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
+                                            Shopping Cart
+                                        </Link>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
                             {/* Support */}
-                            <div>
-                                <h3 className="font-semibold text-gray-900 mb-4 text-sm sm:text-base">Support</h3>
-                                <div className="space-y-2">
-                                    {props.pages?.map((p) => (
-                                        <Link key={p.slug} href={route('pages.show', p.slug)} className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                            {p.title}
-                                        </Link>
-                                    ))}
+                            {user?.pro_panel && (
+                                <div>
+                                    <h3 className="font-semibold text-gray-900 mb-4 text-sm sm:text-base">Support</h3>
+                                    <div className="space-y-2">
+                                        {props.pages?.map((p) => (
+                                            <Link key={p.slug} href={route('pages.show', p.slug)} className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
+                                                {p.title}
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
 
                         <div className="border-t border-gray-200 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
