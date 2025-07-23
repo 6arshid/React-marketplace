@@ -150,7 +150,11 @@ export default function Index({ transactions }) {
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600">Total Amount</p>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        {formatAmount(transactionList.reduce((sum, t) => sum + parseFloat(t.amount), 0))}
+                                        {formatAmount(
+                                            transactionList
+                                                .filter((t) => t.status === 'success')
+                                                .reduce((sum, t) => sum + parseFloat(t.amount), 0)
+                                        )}
                                     </p>
                                 </div>
                             </div>
