@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
 // Custom SVG Icons
 const DownloadIcon = ({ className = "w-5 h-5" }) => (
@@ -81,9 +81,9 @@ const getFileTypeLabel = (filename) => {
     return ext.toUpperCase();
 };
 
-export default function Downloads({ orders }) {
-    const totalFiles = orders.reduce((sum, order) => sum + order.files.length, 0);
-    const totalOrders = orders.length;
+export default function Downloads({ orders, totalOrders, totalFiles }) {
+    const filesCount = typeof totalFiles === 'number' ? totalFiles : orders.data.reduce((sum, order) => sum + order.files.length, 0);
+    const ordersCount = typeof totalOrders === 'number' ? totalOrders : orders.total;
 
     return (
         <AuthenticatedLayout 
@@ -114,7 +114,7 @@ export default function Downloads({ orders }) {
                                 </div>
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600">Total Orders</p>
-                                    <p className="text-2xl font-bold text-gray-900">{totalOrders}</p>
+                                    <p className="text-2xl font-bold text-gray-900">{ordersCount}</p>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@ export default function Downloads({ orders }) {
                                 </div>
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600">Available Files</p>
-                                    <p className="text-2xl font-bold text-gray-900">{totalFiles}</p>
+                                    <p className="text-2xl font-bold text-gray-900">{filesCount}</p>
                                 </div>
                             </div>
                         </div>
@@ -150,7 +150,7 @@ export default function Downloads({ orders }) {
 
                     {/* Orders List */}
                     <div className="space-y-6">
-                        {orders.map((order) => (
+                        {orders.data.map((order) => (
                             <div key={order.id} className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
                                 {/* Order Header */}
                                 <div className="bg-gradient-to-r from-gray-50 to-gray-100 px-6 py-4 border-b border-gray-200">
@@ -235,8 +235,14 @@ export default function Downloads({ orders }) {
                         ))}
                     </div>
 
+                    <div className="mt-6 flex gap-2">
+                        {orders.links.map((l, idx) => (
+                            <Link key={idx} href={l.url || '#'} className={l.active ? 'font-bold' : ''} dangerouslySetInnerHTML={{ __html: l.label }} />
+                        ))}
+                    </div>
+
                     {/* Empty State */}
-                    {orders.length === 0 && (
+                    {orders.data.length === 0 && (
                         <div className="text-center py-16">
                             <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                                 <DownloadIcon className="w-12 h-12 text-gray-400" />

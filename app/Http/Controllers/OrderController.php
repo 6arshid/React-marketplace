@@ -37,12 +37,14 @@ class OrderController extends Controller
 
     public function downloads(Request $request): Response
     {
-        $orders = $request->user()
+        $ordersQuery = $request->user()
             ->orders()
             ->where('is_digital', true)
-            ->latest()
-            ->get()
-            ->map(function (Order $order) {
+            ->latest();
+
+        $orders = $ordersQuery
+            ->paginate(10)
+            ->through(function (Order $order) {
                 $files = collect($order->items)->map(function ($item) {
                     $product = Product::find($item['product_id']);
                     return $product && $product->main_file ? [
@@ -56,10 +58,25 @@ class OrderController extends Controller
                     'tracking_code' => $order->tracking_code,
                     'files' => $files,
                 ];
-            });
+            })
+            ->withQueryString();
+
+        $totalOrders = $ordersQuery->count();
+
+        $totalFiles = 0;
+        $ordersQuery->clone()->get()->each(function (Order $order) use (&$totalFiles) {
+            foreach ($order->items as $item) {
+                $product = Product::find($item['product_id']);
+                if ($product && $product->main_file) {
+                    $totalFiles++;
+                }
+            }
+        });
 
         return Inertia::render('Orders/Downloads', [
             'orders' => $orders,
+            'totalOrders' => $totalOrders,
+            'totalFiles' => $totalFiles,
         ]);
     }
 
