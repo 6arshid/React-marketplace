@@ -44,8 +44,10 @@ class ProductController extends Controller
 
     public function show(Product $product): Response
     {
+        $product->increment('views');
+
         return Inertia::render('Products/Show', [
-            'product' => $product->load('category', 'attributes'),
+            'product' => $product->fresh()->load('category', 'attributes'),
         ]);
     }
 

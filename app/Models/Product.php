@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property string|null $main_file
  * @property int $category_id
  * @property int $user_id
+ * @property int $views
  */
 class Product extends Model
 {
@@ -36,6 +37,7 @@ class Product extends Model
         'main_file',
         'category_id',
         'user_id',
+        'views',
     ];
 
     protected function casts(): array
@@ -45,6 +47,7 @@ class Product extends Model
             'is_digital' => 'boolean',
             'price' => 'float',
             'shipping_cost' => 'float',
+            'views' => 'integer',
         ];
     }
 

@@ -54,4 +54,24 @@ class ProductTest extends TestCase
         $response->assertRedirect(route('profile.edit'));
         $response->assertSessionHas('error');
     }
+
+    public function test_product_views_increment_when_viewed(): void
+    {
+        $user = User::factory()->create();
+        $category = Category::factory()->create(['user_id' => $user->id]);
+
+        $product = $user->products()->create([
+            'title' => 'View Test',
+            'slug' => 'view-test',
+            'price' => 5,
+            'category_id' => $category->id,
+        ]);
+
+        $this->actingAs($user)->get(route('products.show', $product->slug));
+
+        $this->assertDatabaseHas('products', [
+            'id' => $product->id,
+            'views' => 1,
+        ]);
+    }
 }
