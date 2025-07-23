@@ -195,7 +195,7 @@ export default function Index({ categories }) {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes slideInUp {
                     from {
                         opacity: 0;
