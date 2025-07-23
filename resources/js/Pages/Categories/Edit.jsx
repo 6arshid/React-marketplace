@@ -106,8 +106,8 @@ export default function Edit({ category }) {
                         <div className="flex items-center space-x-4">
                             <div className="p-3 bg-white rounded-xl shadow-sm">
                                 {category.icon ? (
-                                    <img 
-                                        src={category.icon} 
+                                    <img
+                                        src={`/storage/${category.icon}`}
                                         alt={category.name}
                                         className="w-8 h-8 object-cover rounded-lg"
                                     />
@@ -193,8 +193,8 @@ export default function Edit({ category }) {
                                 {category.icon && (
                                     <div className="mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
                                         <p className="text-sm font-medium text-gray-700 mb-2">Current Icon:</p>
-                                        <img 
-                                            src={category.icon} 
+                                        <img
+                                            src={`/storage/${category.icon}`}
                                             alt="Current category icon"
                                             className="w-16 h-16 object-cover rounded-lg border border-gray-300"
                                         />
