@@ -42,4 +42,16 @@ class TransactionTest extends TestCase
             'status' => 'success',
         ]);
     }
+
+    public function test_admin_can_mark_all_transactions_paid(): void
+    {
+        $admin = User::factory()->create(['is_admin' => true]);
+        Transaction::factory()->count(3)->create(['status' => 'success']);
+
+        $response = $this->actingAs($admin)->post(route('admin.transactions.pay-all'));
+
+        $response->assertRedirect();
+
+        $this->assertSame(3, Transaction::where('status', 'paid')->count());
+    }
 }
