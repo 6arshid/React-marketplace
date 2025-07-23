@@ -6,6 +6,7 @@ import { createPortal } from 'react-dom';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
+    const homeUrl = user?.pro_panel ? `/${user.username}` : '/';
     const flash = usePage().props.flash;
     const cart = usePage().props.cart;
     const notifications = usePage().props.notifications || [];
@@ -217,7 +218,7 @@ export default function AuthenticatedLayout({ header, children }) {
             >
                 {/* Logo Section */}
                 <div className="flex h-20 items-center justify-between border-b border-white/20 px-6 bg-gradient-to-r from-blue-600 to-purple-600">
-                    <Link href="/" className="group">
+                    <Link href={homeUrl} className="group">
                         <div className="flex items-center space-x-3">
                             <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                                 <ApplicationLogo className="block h-6 w-auto fill-current text-white" />
