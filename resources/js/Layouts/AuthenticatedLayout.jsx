@@ -482,7 +482,7 @@ export default function AuthenticatedLayout({ header, children }) {
                 <main className="flex-1">{children}</main>
             </div>
 
-            <style jsx>{`
+            <style>{`
                 @keyframes slide-down {
                     from { opacity: 0; transform: translateY(-20px); }
                     to { opacity: 1; transform: translateY(0); }
