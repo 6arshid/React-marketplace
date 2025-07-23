@@ -3,7 +3,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
-import { Head, useForm, Link } from '@inertiajs/react';
+import { Head, useForm, Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import axios from 'axios';
@@ -11,6 +11,7 @@ import axios from 'axios';
 export default function Index({ items, total, seller, requires_shipping }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
+    const user = usePage().props.auth.user;
 
     const { data, setData } = useForm({
         first_name: '',
@@ -354,27 +355,29 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                     )}
 
                                     {/* Wallet Input */}
-                                    <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
-                                        <h4 className="font-semibold text-gray-800 mb-4 text-center">Your Transaction Details</h4>
-                                        <div className="flex gap-3">
-                                            <div className="flex-1">
-                                                <TextInput
-                                                    id="buyer_wallet"
-                                                    placeholder="Enter your wallet address for confirmation"
-                                                    className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
-                                                    value={data.buyer_wallet}
-                                                    onChange={(e) => setData('buyer_wallet', e.target.value)}
-                                                />
-                                                <InputError message={errors.buyer_wallet} className="mt-2" />
+                                    {(user?.trc20_usdt_wallet || user?.bitcoin_wallet) && (
+                                        <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
+                                            <h4 className="font-semibold text-gray-800 mb-4 text-center">Your Transaction Details</h4>
+                                            <div className="flex gap-3">
+                                                <div className="flex-1">
+                                                    <TextInput
+                                                        id="buyer_wallet"
+                                                        placeholder="Enter your wallet address for confirmation"
+                                                        className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
+                                                        value={data.buyer_wallet}
+                                                        onChange={(e) => setData('buyer_wallet', e.target.value)}
+                                                    />
+                                                    <InputError message={errors.buyer_wallet} className="mt-2" />
+                                                </div>
+                                                <button
+                                                    onClick={() => checkout('crypto')}
+                                                    className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300"
+                                                >
+                                                    Submit Order
+                                                </button>
                                             </div>
-                                            <button
-                                                onClick={() => checkout('crypto')}
-                                                className="px-8 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-300"
-                                            >
-                                                Submit Order
-                                            </button>
                                         </div>
-                                    </div>
+                                    )}
 
                                     {/* Contact Options */}
                                     {seller?.pro_panel && (
