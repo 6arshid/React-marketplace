@@ -8,7 +8,7 @@ import { Head, Link, router } from '@inertiajs/react';
 import Cropper from 'react-easy-crop';
 import { useEffect, useRef, useState } from 'react';
 
-export default function Profile({ user, categories, products, isOwner, socialLinks = [] }) {
+export default function Profile({ user, pages = [], categories, products, isOwner, socialLinks = [] }) {
     const [visible, setVisible] = useState(10);
     const loadMoreRef = useRef(null);
     const fileInputRef = useRef();
@@ -394,6 +394,24 @@ export default function Profile({ user, categories, products, isOwner, socialLin
                                     )}
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* Pages Section */}
+                {pages.length > 0 && (
+                    <div className="mb-12">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Pages</h2>
+                        <div className="flex flex-wrap gap-3">
+                            {pages.map(p => (
+                                <Link
+                                    key={p.id}
+                                    href={route('store.pages.show', [user.username, p.slug])}
+                                    className="px-6 py-3 bg-gray-100 hover:bg-gray-200 rounded-full font-medium"
+                                >
+                                    {p.title}
+                                </Link>
+                            ))}
                         </div>
                     </div>
                 )}

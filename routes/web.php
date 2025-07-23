@@ -14,6 +14,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\SellerPageController;
 use App\Http\Controllers\PageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('pages', SellerPageController::class)->names('seller.pages');
     Route::resource('social-links', SocialLinkController::class)->except(['create', 'edit', 'show']);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
@@ -72,6 +74,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
     ->name('store.categories.show');
+Route::get('{user:username}/pages/{page:slug}', [StoreController::class, 'page'])->name('store.pages.show');
 
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');

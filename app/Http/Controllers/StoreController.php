@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Category;
+use App\Models\Page;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -11,6 +12,7 @@ class StoreController extends Controller
 {
     public function profile(User $user): Response
     {
+        $pages = $user->pages()->get(['id', 'title', 'slug']);
         $categories = $user->categories()->get(['id', 'name', 'slug', 'icon']);
         $products = $user->products()->latest()->get(['id', 'title', 'slug', 'price', 'images']);
 
@@ -18,6 +20,7 @@ class StoreController extends Controller
 
         return Inertia::render('Store/Profile', [
             'user' => $user->only('name', 'username', 'logo', 'cover', 'about', 'whatsapp_number', 'telegram_username', 'instagram_username', 'facebook_username', 'public_email'),
+            'pages' => $pages,
             'categories' => $categories,
             'products' => $products,
             'socialLinks' => $socialLinks,
@@ -33,6 +36,17 @@ class StoreController extends Controller
             'user' => $user->only('name', 'username'),
             'category' => $category,
             'products' => $products,
+        ]);
+    }
+
+    public function page(User $user, Page $page): Response
+    {
+        if ($page->user_id !== $user->id) {
+            abort(404);
+        }
+        return Inertia::render('Pages/View', [
+            'page' => $page,
+            'user' => $user->only('username'),
         ]);
     }
 }

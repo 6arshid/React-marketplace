@@ -9,7 +9,7 @@ class Page extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'description', 'images'];
+    protected $fillable = ['title', 'slug', 'description', 'images', 'user_id'];
 
     protected $casts = [
         'images' => 'array',
@@ -18,5 +18,10 @@ class Page extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
