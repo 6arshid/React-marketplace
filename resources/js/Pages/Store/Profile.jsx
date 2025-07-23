@@ -22,6 +22,17 @@ export default function Profile({ user, categories, products, isOwner, socialLin
     const [linkData, setLinkData] = useState({ id: null, label: '', url: '', icon: null });
     const iconInputRef = useRef();
 
+    const deleteField = (field) => {
+        if (!confirm('Delete this information?')) return;
+        router.post(
+            route('profile.contact.update'),
+            { _method: 'patch', [field]: '' },
+            {
+                onSuccess: () => router.reload({ only: ['user'] }),
+            }
+        );
+    };
+
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
             if (entries[0].isIntersecting) {
@@ -233,27 +244,81 @@ export default function Profile({ user, categories, products, isOwner, socialLin
                             </svg>
                         </a>
                     )}
-                    {socialLinks.map(link => (
-                        <span key={link.id} className="flex items-center">
-                            <a href={link.url} target="_blank">
-                                {link.icon ? (
-                                    <img src={`/storage/${link.icon}`} alt={link.label} className="w-5 h-5" />
-                                ) : (
-                                    <span className="text-sm">{link.label}</span>
-                                )}
-                            </a>
-                            {isOwner && (
-                                <button onClick={() => deleteLink(link.id)} className="ml-1 text-red-500 text-xs">&times;</button>
+                {socialLinks.map(link => (
+                    <span key={link.id} className="flex items-center">
+                        <a href={link.url} target="_blank">
+                            {link.icon ? (
+                                <img src={`/storage/${link.icon}`} alt={link.label} className="w-5 h-5" />
+                            ) : (
+                                <span className="text-sm">{link.label}</span>
                             )}
-                        </span>
-                    ))}
-                    {isOwner && (
-                        <button onClick={openNewLink} className="px-2 py-1 bg-gray-200 text-sm rounded">Add Link</button>
-                    )}
+                        </a>
+                        {isOwner && (
+                            <button onClick={() => deleteLink(link.id)} className="ml-1 text-red-500 text-xs">&times;</button>
+                        )}
+                    </span>
+                ))}
+                {isOwner && (
+                    <button onClick={openNewLink} className="px-2 py-1 bg-gray-200 text-sm rounded">Add Link</button>
+                )}
+            </div>
+            {isOwner && (
+                <div className="mb-4 space-y-1 text-sm">
+                    <div>
+                        {user.about ? (
+                            <>
+                                <Link href={route('profile.edit')} className="text-blue-600">Edit About</Link>
+                                <button onClick={() => deleteField('about')} className="ml-2 text-red-600">Delete</button>
+                            </>
+                        ) : (
+                            <Link href={route('profile.edit')} className="text-blue-600">Add About</Link>
+                        )}
+                    </div>
+                    <div>
+                        {user.whatsapp_number ? (
+                            <>
+                                <Link href={route('profile.edit')} className="text-blue-600">Edit WhatsApp</Link>
+                                <button onClick={() => deleteField('whatsapp_number')} className="ml-2 text-red-600">Delete</button>
+                            </>
+                        ) : (
+                            <Link href={route('profile.edit')} className="text-blue-600">Add WhatsApp</Link>
+                        )}
+                    </div>
+                    <div>
+                        {user.telegram_username ? (
+                            <>
+                                <Link href={route('profile.edit')} className="text-blue-600">Edit Telegram</Link>
+                                <button onClick={() => deleteField('telegram_username')} className="ml-2 text-red-600">Delete</button>
+                            </>
+                        ) : (
+                            <Link href={route('profile.edit')} className="text-blue-600">Add Telegram</Link>
+                        )}
+                    </div>
+                    <div>
+                        {user.instagram_username ? (
+                            <>
+                                <Link href={route('profile.edit')} className="text-blue-600">Edit Instagram</Link>
+                                <button onClick={() => deleteField('instagram_username')} className="ml-2 text-red-600">Delete</button>
+                            </>
+                        ) : (
+                            <Link href={route('profile.edit')} className="text-blue-600">Add Instagram</Link>
+                        )}
+                    </div>
+                    <div>
+                        {user.public_email ? (
+                            <>
+                                <Link href={route('profile.edit')} className="text-blue-600">Edit Email</Link>
+                                <button onClick={() => deleteField('public_email')} className="ml-2 text-red-600">Delete</button>
+                            </>
+                        ) : (
+                            <Link href={route('profile.edit')} className="text-blue-600">Add Email</Link>
+                        )}
+                    </div>
                 </div>
-                <div className="mb-6">
-                    <h3 className="font-semibold mb-2">Categories</h3>
-                    <div className="flex flex-wrap gap-2">
+            )}
+            <div className="mb-6">
+                <h3 className="font-semibold mb-2">Categories</h3>
+                <div className="flex flex-wrap gap-2">
                         {categories.map(c => (
                             <Link
                                 key={c.id}
