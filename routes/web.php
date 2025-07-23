@@ -36,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile/settlement', [ProfileController::class, 'updateSettlement'])->name('profile.settlement.update');
     Route::patch('/profile/contact', [ProfileController::class, 'updateContact'])->name('profile.contact.update');
     Route::post('/profile/logo', [ProfileController::class, 'updateLogo'])->name('profile.logo');
+    Route::delete('/profile/logo', [ProfileController::class, 'deleteLogo'])->name('profile.logo.delete');
     Route::post('/profile/cover', [ProfileController::class, 'updateCover'])->name('profile.cover');
+    Route::delete('/profile/cover', [ProfileController::class, 'deleteCover'])->name('profile.cover.delete');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class);
