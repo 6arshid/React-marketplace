@@ -2,10 +2,28 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import Modal from '@/Components/Modal';
 import SecondaryButton from '@/Components/SecondaryButton';
-import { useState } from 'react';
+import PrimaryButton from '@/Components/PrimaryButton';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 export default function Transactions({ transactions }) {
     const [selectedUser, setSelectedUser] = useState(null);
+    const [transactionList, setTransactionList] = useState(transactions);
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const res = await axios.get(route('admin.transactions.money'));
+            setTransactionList(res.data);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const pay = async (id) => {
+        await axios.post(route('admin.transactions.pay', id));
+        const res = await axios.get(route('admin.transactions.money'));
+        setTransactionList(res.data);
+    };
 
     const closeModal = () => setSelectedUser(null);
 
@@ -23,10 +41,11 @@ export default function Transactions({ transactions }) {
                                     <th className="px-4 py-2">Status</th>
                                     <th className="px-4 py-2">Reference</th>
                                     <th className="px-4 py-2">Date</th>
+                                    <th className="px-4 py-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {transactions.map((t) => (
+                                {transactionList.map((t) => (
                                     <tr key={t.id}>
                                         <td className="border px-4 py-2">{t.user?.name}</td>
                                         <td className="border px-4 py-2">${t.amount}</td>
@@ -40,6 +59,15 @@ export default function Transactions({ transactions }) {
                                             </button>
                                         </td>
                                         <td className="border px-4 py-2">{t.created_at}</td>
+                                        <td className="border px-4 py-2 text-center">
+                                            {t.status === 'success' || t.status === 'completed' ? (
+                                                <PrimaryButton onClick={() => pay(t.id)}>
+                                                    Pay ${((t.amount * 0.98)).toFixed(2)}
+                                                </PrimaryButton>
+                                            ) : t.status === 'paid' ? (
+                                                <span className="text-green-600">Paid</span>
+                                            ) : null}
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
@@ -73,6 +101,16 @@ export default function Transactions({ transactions }) {
                             {selectedUser.telegram_username && (
                                 <p>
                                     <strong>Telegram:</strong> {selectedUser.telegram_username}
+                                </p>
+                            )}
+                            {selectedUser.iban && (
+                                <p>
+                                    <strong>IBAN:</strong> {selectedUser.iban}
+                                </p>
+                            )}
+                            {selectedUser.swift_code && (
+                                <p>
+                                    <strong>SWIFT Code:</strong> {selectedUser.swift_code}
                                 </p>
                             )}
                         </div>
