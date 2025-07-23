@@ -1,21 +1,21 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\AdminReservedUsernameController;
 use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SellerPageController;
 use App\Http\Controllers\SocialLinkController;
+use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StripeConfigController;
-use App\Http\Controllers\AdminProPanelController;
+use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
-use App\Http\Controllers\StripeWebhookController;
-use App\Http\Controllers\AdminPageController;
-use App\Http\Controllers\SellerPageController;
-use App\Http\Controllers\PageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -48,6 +48,12 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+    Route::get('/products/{product}/reviews', [\App\Http\Controllers\ReviewController::class, 'index'])->name('reviews.index');
+    Route::post('/products/{product}/reviews', [\App\Http\Controllers\ReviewController::class, 'store'])->name('reviews.store');
+    Route::post('/reviews/{review}/replies', [\App\Http\Controllers\ReviewController::class, 'reply'])->name('reviews.reply');
+    Route::delete('/reviews/{review}', [\App\Http\Controllers\ReviewController::class, 'destroy'])->name('reviews.destroy');
+    Route::post('/reviews/{review}/like', [\App\Http\Controllers\ReviewController::class, 'like'])->name('reviews.like');
+    Route::post('/reviews/{review}/dislike', [\App\Http\Controllers\ReviewController::class, 'dislike'])->name('reviews.dislike');
     Route::resource('pages', SellerPageController::class)->names('seller.pages');
     Route::resource('social-links', SocialLinkController::class)->except(['create', 'edit', 'show']);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
