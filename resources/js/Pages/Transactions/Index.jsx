@@ -1,9 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, useForm } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
+import InputLabel from '@/Components/InputLabel';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
+import PrimaryButton from '@/Components/PrimaryButton';
 
 // Custom SVG Icons
 const StatusIcon = ({ status }) => {
@@ -80,10 +84,21 @@ export default function Index({ transactions }) {
     const [transactionList, setTransactionList] = useState(transactions);
     const [search, setSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const { data, setData, post, processing, errors, reset } = useForm({ amount: '' });
 
     useEffect(() => {
         setCurrentPage(1);
     }, [search]);
+
+    const submitRequest = (e) => {
+        e.preventDefault();
+        post(route('transactions.request'), {
+            preserveScroll: true,
+            onSuccess: () => {
+                reset();
+            },
+        });
+    };
 
     useEffect(() => {
         const interval = setInterval(async () => {
@@ -175,6 +190,22 @@ export default function Index({ transactions }) {
                             </div>
                         </div>
                     </div>
+
+                    <form onSubmit={submitRequest} className="mb-8 flex items-end space-x-2">
+                        <div className="flex-1">
+                            <InputLabel htmlFor="amount" value="Amount" />
+                            <TextInput
+                                id="amount"
+                                type="number"
+                                min="1"
+                                className="mt-1 block w-full"
+                                value={data.amount}
+                                onChange={(e) => setData('amount', e.target.value)}
+                            />
+                            <InputError message={errors.amount} className="mt-2" />
+                        </div>
+                        <PrimaryButton disabled={processing}>Request Payout</PrimaryButton>
+                    </form>
 
                     {/* Main Table */}
                     <div className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
