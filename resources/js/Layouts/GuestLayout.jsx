@@ -13,6 +13,7 @@ export default function GuestLayout({ children }) {
     const hideLogo = isProductPage || isCartPage || isCategoryPage;
 
     const user = props?.auth?.user;
+    const seller = props?.seller;
     const userInitial = user?.name?.charAt(0)?.toUpperCase();
     const profileUrl = user ? `/${user.username}` : '/profile';
 
@@ -35,7 +36,13 @@ export default function GuestLayout({ children }) {
     return (
         <div className="min-h-screen bg-gray-100 p-6">
             <header className="mb-4 flex justify-between items-center">
-                {isProfilePage ? (
+                {isCartPage && seller ? (
+                    <Link href={route('profile.show', seller.username)} className="text-gray-600 hover:text-gray-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75M4.5 10.5v10.125c0 .621.504 1.125 1.125 1.125h3.75c.621 0 1.125-.504 1.125-1.125V15.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v4.875c0 .621.504 1.125 1.125 1.125h3.75c.621 0 1.125-.504 1.125-1.125V10.5" />
+                        </svg>
+                    </Link>
+                ) : isProfilePage ? (
                     <Link href="/" className="text-gray-600 hover:text-gray-800">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="h-6 w-6">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M3 9.75L12 3l9 6.75M4.5 10.5v10.125c0 .621.504 1.125 1.125 1.125h3.75c.621 0 1.125-.504 1.125-1.125V15.75c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v4.875c0 .621.504 1.125 1.125 1.125h3.75c.621 0 1.125-.504 1.125-1.125V10.5" />
