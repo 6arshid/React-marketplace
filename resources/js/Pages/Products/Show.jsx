@@ -1,6 +1,8 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import AddToCartPrompt from '@/Components/AddToCartPrompt';
+import ReviewForm from '@/Components/ReviewForm';
+import ReviewList from '@/Components/ReviewList';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -9,6 +11,7 @@ export default function Show({ product }) {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showCartPrompt, setShowCartPrompt] = useState(false);
+    const [reviews, setReviews] = useState([]);
 
     const addAttributeToCart = (id) => {
         router.post(route('cart.add', product.slug), { attribute_id: id }, {
@@ -296,6 +299,12 @@ export default function Show({ product }) {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="max-w-2xl mx-auto mt-10">
+                <h3 className="text-lg font-semibold mb-4">Reviews</h3>
+                <ReviewForm productId={product.id} onCreated={(r) => setReviews([r, ...reviews])} />
+                <ReviewList productId={product.id} />
             </div>
 
             <style>{`
