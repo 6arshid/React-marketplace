@@ -35,7 +35,7 @@ export default function Show({ product }) {
     const currentPrice = selected ? selectedAttribute?.price : product.price;
 
     return (
-        <GuestLayout
+        <GuestLayout 
             header={
                 <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-8">
                     <h2 className="text-3xl font-bold text-center text-white">
@@ -63,8 +63,8 @@ export default function Show({ product }) {
                                 <span className="font-semibold">Added to cart successfully!</span>
                             </div>
                         </div>
-
                     )}
+
                     <div className="grid lg:grid-cols-2 gap-12">
                         {/* Left Column - Images */}
                         <div className="space-y-6">
@@ -101,6 +101,7 @@ export default function Show({ product }) {
                                                     </button>
                                                 ))}
                                             </div>
+                                        )}
                                     </div>
                                 ) : (
                                     <div className="aspect-square flex items-center justify-center bg-gray-100 m-6 rounded-2xl">
@@ -111,6 +112,7 @@ export default function Show({ product }) {
                                             <p className="text-gray-500 text-lg">No images available</p>
                                         </div>
                                     </div>
+                                )}
                             </div>
 
                             {/* Digital Files Section */}
@@ -160,6 +162,7 @@ export default function Show({ product }) {
                                         )}
                                     </div>
                                 </div>
+                            )}
                         </div>
 
                         {/* Right Column - Product Details */}
@@ -178,12 +181,14 @@ export default function Show({ product }) {
                                             <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 animate-fade-in">
                                                 ${selectedAttribute?.price}
                                             </span>
+                                        )}
                                     </div>
                                     {product.is_digital && (
                                         <div className="flex items-center mt-3">
                                             <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
                                             <span className="text-green-600 font-medium">Digital Product - Instant Download</span>
                                         </div>
+                                    )}
                                 </div>
 
                                 {/* Description */}
@@ -194,17 +199,7 @@ export default function Show({ product }) {
                                             <p className="text-gray-600 leading-relaxed">{product.description}</p>
                                         </div>
                                     </div>
-
-                                {/* Add to Cart Button */}
-                                <button
-                                    onClick={addToCart}
-                                    className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg mb-6 flex items-center justify-center"
-                                >
-                                    <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5M7 13l-1.1 5m0 0h9.1M16 18a2 2 0 11-4 0 2 2 0 014 0zM9 18a2 2 0 11-4 0 2 2 0 014 0z" />
-                                    </svg>
-                                    Add to Cart - ${product.price}
-                                </button>
+                                )}
 
                                 {/* Attributes */}
                                 {product.attributes && product.attributes.length > 0 && (
@@ -234,13 +229,27 @@ export default function Show({ product }) {
                                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                                     </svg>
                                                                 </div>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </button>
                                             ))}
                                         </div>
                                     </div>
+                                )}
 
+                                {/* Add to Cart Button */}
+                                {!product.attributes?.length && (
+                                    <button
+                                        onClick={addToCart}
+                                        className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg mb-6 flex items-center justify-center"
+                                    >
+                                        <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5M7 13l-1.1 5m0 0h9.1M16 18a2 2 0 11-4 0 2 2 0 014 0zM9 18a2 2 0 11-4 0 2 2 0 014 0z" />
+                                        </svg>
+                                        Add to Cart - ${product.price}
+                                    </button>
+                                )}
 
                                 {/* Back Button */}
                                 <Link
@@ -271,6 +280,7 @@ export default function Show({ product }) {
                                             <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
                                             <span className="text-gray-600">Instant Download</span>
                                         </div>
+                                    )}
                                     <div className="flex items-center">
                                         <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
                                         <span className="text-gray-600">24/7 Support</span>
