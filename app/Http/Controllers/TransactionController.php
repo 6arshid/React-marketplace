@@ -42,6 +42,6 @@ class TransactionController extends Controller
             'reference' => (string) Str::uuid(),
         ]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', 'Payout request submitted successfully');
     }
 }
