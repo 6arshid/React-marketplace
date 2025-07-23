@@ -25,4 +25,21 @@ class TransactionTest extends TestCase
 
         $response->assertOk();
     }
+
+    public function test_user_can_request_payout(): void
+    {
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->post(route('transactions.request'), [
+            'amount' => 50,
+        ]);
+
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('transactions', [
+            'user_id' => $user->id,
+            'amount' => 49,
+            'status' => 'success',
+        ]);
+    }
 }

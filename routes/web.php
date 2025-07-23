@@ -55,6 +55,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
     Route::get('/transactions/money', [TransactionController::class, 'money'])->name('transactions.money');
+    Route::post('/transactions/request', [TransactionController::class, 'request'])->name('transactions.request');
 
     Route::get('/sales', [\App\Http\Controllers\SalesController::class, 'index'])->name('sales.index');
 
