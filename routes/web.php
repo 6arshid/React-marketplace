@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/cover', [ProfileController::class, 'updateCover'])->name('profile.cover');
     Route::delete('/profile/cover', [ProfileController::class, 'deleteCover'])->name('profile.cover.delete');
     Route::get('/profile/become-seller', [ProfileController::class, 'becomeSeller'])->name('profile.become-seller');
+    Route::get('/profile/become-buyer', [ProfileController::class, 'becomeBuyer'])->name('profile.become-buyer');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class);
