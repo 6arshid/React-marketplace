@@ -11,7 +11,7 @@ class StoreController extends Controller
 {
     public function profile(User $user): Response
     {
-        $categories = $user->categories()->get(['id', 'name', 'slug']);
+        $categories = $user->categories()->get(['id', 'name', 'slug', 'icon']);
         $products = $user->products()->latest()->get(['id', 'title', 'slug', 'price', 'images']);
 
         $socialLinks = $user->socialLinks()->get(['id', 'label', 'url', 'icon']);
