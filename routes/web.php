@@ -85,6 +85,10 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
 
+Route::get('/track', function () {
+    return Inertia::render('Orders/TrackForm');
+})->name('orders.track-form');
+
 Route::get('/track/{code}', [\App\Http\Controllers\OrderController::class, 'track'])->name('orders.track');
 
 require __DIR__.'/auth.php';
