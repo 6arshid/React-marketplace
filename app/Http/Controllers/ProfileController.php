@@ -123,6 +123,26 @@ class ProfileController extends Controller
         return Redirect::back();
     }
 
+    public function deleteLogo(Request $request): RedirectResponse
+    {
+        if ($request->user()->logo) {
+            Storage::disk('public')->delete($request->user()->logo);
+            $request->user()->update(['logo' => null]);
+        }
+
+        return Redirect::back();
+    }
+
+    public function deleteCover(Request $request): RedirectResponse
+    {
+        if ($request->user()->cover) {
+            Storage::disk('public')->delete($request->user()->cover);
+            $request->user()->update(['cover' => null]);
+        }
+
+        return Redirect::back();
+    }
+
     /**
      * Delete the user's account.
      */
