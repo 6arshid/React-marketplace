@@ -67,7 +67,10 @@ class ProfileController extends Controller
             'bitcoin_wallet' => ['nullable', 'string'],
             'whatsapp_number' => ['nullable', 'string'],
             'telegram_username' => ['nullable', 'string'],
+            'instagram_username' => ['nullable', 'string'],
+            'facebook_username' => ['nullable', 'string'],
             'public_email' => ['nullable', 'string', 'email'],
+            'about' => ['nullable', 'string'],
         ];
 
         if (! $request->user()->is_admin) {

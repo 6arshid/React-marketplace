@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\SocialLinkController;
 use App\Http\Controllers\StripeConfigController;
 use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\SubscriptionController;
@@ -40,6 +41,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('social-links', SocialLinkController::class)->except(['create', 'edit', 'show']);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
     Route::post('/cart/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout');
