@@ -182,15 +182,11 @@ export default function GuestLayout({ children }) {
                             <div>
                                 <h3 className="font-semibold text-gray-900 mb-4 text-sm sm:text-base">Support</h3>
                                 <div className="space-y-2">
-                                    <a href="#" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                        Help Center
-                                    </a>
-                                    <a href="#" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                        Contact Us
-                                    </a>
-                                    <a href="#" className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
-                                        Privacy Policy
-                                    </a>
+                                    {props.pages?.map((p) => (
+                                        <Link key={p.slug} href={route('pages.show', p.slug)} className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
+                                            {p.title}
+                                        </Link>
+                                    ))}
                                 </div>
                             </div>
                         </div>

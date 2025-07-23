@@ -13,6 +13,8 @@ use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\AdminPageController;
+use App\Http\Controllers\PageController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -86,6 +88,8 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
+
+    Route::resource('pages', AdminPageController::class)->except(['show']);
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
@@ -95,6 +99,8 @@ Route::get('/track', function () {
 })->name('orders.track-form');
 
 Route::get('/track/{code}', [\App\Http\Controllers\OrderController::class, 'track'])->name('orders.track');
+
+Route::get('/pages/{page:slug}', [PageController::class, 'show'])->name('pages.show');
 
 require __DIR__.'/auth.php';
 
