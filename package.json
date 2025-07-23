@@ -26,6 +26,7 @@
         "@stripe/stripe-js": "^2.4.0",
         "qrcode.react": "^4.2.0",
         "react-dropzone": "^14.3.8",
+        "react-easy-crop": "^5.5.0",
         "react-simple-wysiwyg": "^3.4.0"
     }
 }
