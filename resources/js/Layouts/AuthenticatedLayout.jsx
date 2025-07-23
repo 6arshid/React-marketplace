@@ -202,7 +202,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
             {/* Sidebar */}
             <aside
-                className={`fixed inset-y-0 left-0 z-50 w-72 transform backdrop-blur-lg bg-white/90 border-r border-white/20 shadow-2xl transition-transform duration-300 ease-in-out sm:relative sm:translate-x-0 ${
+                className={`fixed inset-y-0 left-0 z-50 w-72 transform backdrop-blur-lg bg-white/90 border-r border-white/20 shadow-2xl transition-transform duration-300 ease-in-out ${
                     sidebarOpen ? 'translate-x-0' : '-translate-x-full sm:translate-x-0'
                 }`}
             >
@@ -407,7 +407,7 @@ export default function AuthenticatedLayout({ header, children }) {
             </aside>
 
             {/* Main Content */}
-            <div className="flex min-h-screen flex-1 flex-col">
+            <div className="flex min-h-screen flex-1 flex-col sm:ml-72">
                 {/* Top Navigation Bar */}
                 <div className="flex items-center justify-between backdrop-blur-lg bg-white/80 border-b border-white/20 shadow-lg px-6 py-4">
                     <button
