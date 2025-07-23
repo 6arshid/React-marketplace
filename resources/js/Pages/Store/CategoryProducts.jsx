@@ -1,9 +1,14 @@
 import GuestLayout from '@/Layouts/GuestLayout';
+import AddToCartPrompt from '@/Components/AddToCartPrompt';
 import { Head, Link, router } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function CategoryProducts({ user, category, products }) {
+    const [showCartPrompt, setShowCartPrompt] = useState(false);
     const addToCart = (slug) => {
-        router.post(route('cart.add', slug));
+        router.post(route('cart.add', slug), {}, {
+            onSuccess: () => setShowCartPrompt(true),
+        });
     };
 
     return (
@@ -38,6 +43,11 @@ export default function CategoryProducts({ user, category, products }) {
                     </div>
                 ))}
             </div>
+            <AddToCartPrompt
+                show={showCartPrompt}
+                onClose={() => setShowCartPrompt(false)}
+                onGoToCart={() => router.visit(route('cart.show'))}
+            />
         </GuestLayout>
     );
 }

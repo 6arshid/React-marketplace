@@ -1,6 +1,7 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import Modal from '@/Components/Modal';
 import PrimaryButton from '@/Components/PrimaryButton';
+import AddToCartPrompt from '@/Components/AddToCartPrompt';
 import { Head, Link, router } from '@inertiajs/react';
 import Cropper from 'react-easy-crop';
 import { useEffect, useRef, useState } from 'react';
@@ -14,6 +15,7 @@ export default function Profile({ user, categories, products, isOwner }) {
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+    const [showCartPrompt, setShowCartPrompt] = useState(false);
 
     useEffect(() => {
         const observer = new IntersectionObserver(entries => {
@@ -83,7 +85,9 @@ export default function Profile({ user, categories, products, isOwner }) {
     };
 
     const addToCart = (slug) => {
-        router.post(route('cart.add', slug));
+        router.post(route('cart.add', slug), {}, {
+            onSuccess: () => setShowCartPrompt(true),
+        });
     };
 
     return (
@@ -209,6 +213,11 @@ export default function Profile({ user, categories, products, isOwner }) {
                     </div>
                 )}
             </Modal>
+            <AddToCartPrompt
+                show={showCartPrompt}
+                onClose={() => setShowCartPrompt(false)}
+                onGoToCart={() => router.visit(route('cart.show'))}
+            />
         </GuestLayout>
     );
 }
