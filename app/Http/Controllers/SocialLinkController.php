@@ -27,7 +27,7 @@ class SocialLinkController extends Controller
 
         $link = $request->user()->socialLinks()->create($data);
 
-        return response()->json($link);
+        return back()->with('success', 'Social link created successfully')->withJson($link);
     }
 
     public function update(Request $request, SocialLink $socialLink)
@@ -56,7 +56,8 @@ class SocialLinkController extends Controller
 
         $socialLink->update($data);
 
-        return response()->json($socialLink);
+        // return response()->json($socialLink);
+        return back()->with('success', 'Social link updated successfully')->withJson($socialLink);
     }
 
     public function destroy(Request $request, SocialLink $socialLink)
@@ -71,6 +72,7 @@ class SocialLinkController extends Controller
 
         $socialLink->delete();
 
-        return response()->json(['success' => true]);
+        // return response()->json(['success' => true]);
+        return back()->with('success', 'Social link deleted successfully');
     }
 }
