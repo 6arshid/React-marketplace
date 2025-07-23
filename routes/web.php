@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::patch('/profile/settlement', [ProfileController::class, 'updateSettlement'])->name('profile.settlement.update');
     Route::patch('/profile/contact', [ProfileController::class, 'updateContact'])->name('profile.contact.update');
+    Route::post('/profile/logo', [ProfileController::class, 'updateLogo'])->name('profile.logo');
+    Route::post('/profile/cover', [ProfileController::class, 'updateCover'])->name('profile.cover');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class);
@@ -82,3 +84,5 @@ Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.web
 Route::get('/track/{code}', [\App\Http\Controllers\OrderController::class, 'track'])->name('orders.track');
 
 require __DIR__.'/auth.php';
+
+Route::get('/{user:username}', [StoreController::class, 'profile'])->name('profile.show');

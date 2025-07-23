@@ -38,6 +38,8 @@ class User extends Authenticatable
         'stripe_customer_id',
         'pro_panel',
         'pro_panel_expires_at',
+        'logo',
+        'cover',
         'password',
     ];
 

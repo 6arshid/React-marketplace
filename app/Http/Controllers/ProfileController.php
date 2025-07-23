@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -81,6 +82,40 @@ class ProfileController extends Controller
         }
 
         $request->user()->update($validated);
+
+        return Redirect::back();
+    }
+
+    public function updateLogo(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'logo' => ['required', 'file', 'image'],
+        ]);
+
+        $path = $data['logo']->store('logos', 'public');
+
+        if ($request->user()->logo) {
+            Storage::disk('public')->delete($request->user()->logo);
+        }
+
+        $request->user()->update(['logo' => $path]);
+
+        return Redirect::back();
+    }
+
+    public function updateCover(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'cover' => ['required', 'file', 'image'],
+        ]);
+
+        $path = $data['cover']->store('covers', 'public');
+
+        if ($request->user()->cover) {
+            Storage::disk('public')->delete($request->user()->cover);
+        }
+
+        $request->user()->update(['cover' => $path]);
 
         return Redirect::back();
     }
