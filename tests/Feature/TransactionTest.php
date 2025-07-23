@@ -59,4 +59,20 @@ class TransactionTest extends TestCase
 
         $this->assertSame(3, Transaction::where('status', 'paid')->count());
     }
+
+    public function test_pro_user_cannot_request_payout(): void
+    {
+        $user = User::factory()->create(['pro_panel' => true]);
+        Transaction::factory()->create(['user_id' => $user->id, 'amount' => 20, 'status' => 'success']);
+
+        $response = $this->actingAs($user)->post(route('transactions.request'), [
+            'amount' => 20,
+        ]);
+
+        $response->assertRedirect();
+        $response->assertSessionHas('error');
+
+        $this->assertSame(1, Transaction::where('user_id', $user->id)->where('status', 'success')->count());
+        $this->assertSame(0, Transaction::where('user_id', $user->id)->where('status', 'completed')->count());
+    }
 }

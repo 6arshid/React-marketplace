@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SearchBar from '@/Components/SearchBar';
@@ -51,6 +51,7 @@ const ReferenceIcon = () => (
 );
 
 export default function Index({ transactions }) {
+    const user = usePage().props.auth.user;
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
             year: 'numeric',
@@ -202,16 +203,18 @@ export default function Index({ transactions }) {
                         </div>
                     </div>
 
-                    <form onSubmit={submitRequest} className="mb-8 flex items-end space-x-2">
-                        <div className="flex-1">
-                            <InputLabel htmlFor="amount" value="Amount" />
-                            <div className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 bg-gray-100">
-                                {formatAmount(successAmount)}
+                    {!user.pro_panel && (
+                        <form onSubmit={submitRequest} className="mb-8 flex items-end space-x-2">
+                            <div className="flex-1">
+                                <InputLabel htmlFor="amount" value="Amount" />
+                                <div className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 bg-gray-100">
+                                    {formatAmount(successAmount)}
+                                </div>
+                                <InputError message={errors.amount} className="mt-2" />
                             </div>
-                            <InputError message={errors.amount} className="mt-2" />
-                        </div>
-                        <PrimaryButton disabled={processing}>Request Payout</PrimaryButton>
-                    </form>
+                            <PrimaryButton disabled={processing}>Request Payout</PrimaryButton>
+                        </form>
+                    )}
 
                     {/* Main Table */}
                     <div className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">

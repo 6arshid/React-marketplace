@@ -38,6 +38,10 @@ class TransactionController extends Controller
 
         $user = $request->user();
 
+        if ($user->pro_panel) {
+            return Redirect::back()->with('error', 'Pro users are paid automatically.');
+        }
+
         $user->transactions()
             ->where('status', 'success')
             ->update(['status' => 'completed']);
