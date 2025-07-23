@@ -28,6 +28,12 @@ export default function Transactions({ transactions }) {
         setTransactionList(res.data);
     };
 
+    const payAll = async () => {
+        await axios.post(route('admin.transactions.pay-all'));
+        const res = await axios.get(route('admin.transactions.money'));
+        setTransactionList(res.data);
+    };
+
     const closeModal = () => setSelectedUser(null);
 
     return (
@@ -36,6 +42,9 @@ export default function Transactions({ transactions }) {
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                        <div className="flex justify-end p-4 border-b">
+                            <PrimaryButton onClick={payAll}>Pay All</PrimaryButton>
+                        </div>
                         <table className="min-w-full">
                             <thead>
                                 <tr>

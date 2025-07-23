@@ -41,4 +41,12 @@ class AdminTransactionController extends Controller
 
         return Redirect::back();
     }
+
+    public function payAll(): RedirectResponse
+    {
+        Transaction::whereIn('status', ['success', 'completed'])
+            ->update(['status' => 'paid']);
+
+        return Redirect::back();
+    }
 }

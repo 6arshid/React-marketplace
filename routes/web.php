@@ -82,6 +82,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
     Route::get('/transactions/money', [AdminTransactionController::class, 'money'])->name('admin.transactions.money');
     Route::post('/transactions/{transaction}/pay', [AdminTransactionController::class, 'pay'])->name('admin.transactions.pay');
+    Route::post('/transactions/pay-all', [AdminTransactionController::class, 'payAll'])->name('admin.transactions.pay-all');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
