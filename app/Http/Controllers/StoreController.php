@@ -14,10 +14,13 @@ class StoreController extends Controller
         $categories = $user->categories()->get(['id', 'name', 'slug']);
         $products = $user->products()->latest()->get(['id', 'title', 'slug', 'price', 'images']);
 
+        $socialLinks = $user->socialLinks()->get(['id', 'label', 'url', 'icon']);
+
         return Inertia::render('Store/Profile', [
-            'user' => $user->only('name', 'username', 'logo', 'cover'),
+            'user' => $user->only('name', 'username', 'logo', 'cover', 'about', 'whatsapp_number', 'telegram_username', 'instagram_username', 'facebook_username', 'public_email'),
             'categories' => $categories,
             'products' => $products,
+            'socialLinks' => $socialLinks,
             'isOwner' => auth()->check() && auth()->id() === $user->id,
         ]);
     }
