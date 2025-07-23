@@ -1,6 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, usePage } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import SearchBar from '@/Components/SearchBar';
+import Pagination from '@/Components/Pagination';
 
 // Custom SVG Icons
 const PlusIcon = () => (
@@ -41,6 +44,19 @@ const EmptyStateIcon = () => (
 
 export default function Index({ categories }) {
     const user = usePage().props.auth.user;
+
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => setCurrentPage(1), [search]);
+
+    const filteredCategories = categories.filter((c) =>
+        `${c.name} ${c.slug}`.toLowerCase().includes(search.toLowerCase())
+    );
+    const totalPages = Math.ceil(filteredCategories.length / 10);
+    const paginatedCategories = filteredCategories.slice(
+        (currentPage - 1) * 10,
+        currentPage * 10
+    );
     
     return (
         <AuthenticatedLayout
@@ -62,35 +78,39 @@ export default function Index({ categories }) {
                     {/* Action Bar */}
                     <div className="mb-8">
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                 <div className="flex items-center space-x-4">
                                     <div className="p-2 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl">
                                         <FolderIcon />
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900">
-                                            {categories.length} {categories.length === 1 ? 'Category' : 'Categories'}
+                                            {filteredCategories.length} {filteredCategories.length === 1 ? 'Category' : 'Categories'}
                                         </h3>
                                         <p className="text-sm text-gray-500">
                                             Organize your content effectively
                                         </p>
                                     </div>
                                 </div>
-                                <Link
-                                    href={route('categories.create')}
-                                    className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105"
-                                >
-                                    <PlusIcon />
-                                    New Category
-                                </Link>
+                                <div className="flex items-center gap-4">
+                                    <SearchBar value={search} onChange={setSearch} placeholder="Search categories" />
+                                    <Link
+                                        href={route('categories.create')}
+                                        className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105"
+                                    >
+                                        <PlusIcon />
+                                        New Category
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                     {/* Categories Grid */}
-                    {categories.length > 0 ? (
+                    {filteredCategories.length > 0 ? (
+                        <>
                         <div className="grid gap-4">
-                            {categories.slice().reverse().map((cat, index) => (
+                            {paginatedCategories.slice().reverse().map((cat, index) => (
                                 <div
                                     key={cat.id}
                                     className="group bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg hover:border-gray-200 transition-all duration-300 overflow-hidden"
@@ -149,6 +169,8 @@ export default function Index({ categories }) {
                                 </div>
                             ))}
                         </div>
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                        </>
                     ) : (
                         /* Empty State */
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">

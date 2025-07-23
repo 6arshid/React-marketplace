@@ -1,8 +1,24 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import SearchBar from '@/Components/SearchBar';
+import Pagination from '@/Components/Pagination';
 
 export default function Index({ products }) {
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => setCurrentPage(1), [search]);
+
+    const filteredProducts = products.filter((p) =>
+        `${p.title} ${p.category?.name}`.toLowerCase().includes(search.toLowerCase())
+    );
+    const totalPages = Math.ceil(filteredProducts.length / 10);
+    const paginatedProducts = filteredProducts.slice(
+        (currentPage - 1) * 10,
+        currentPage * 10
+    );
+
     return (
         <AuthenticatedLayout 
             header={
@@ -11,7 +27,7 @@ export default function Index({ products }) {
                         Products
                     </h2>
                     <div className="text-sm text-gray-500 font-medium">
-                        {products.length} items
+                        {filteredProducts.length} items
                     </div>
                 </div>
             }
@@ -27,7 +43,8 @@ export default function Index({ products }) {
                             <p className="mt-2 text-gray-600">Manage and organize your product catalog</p>
                         </div>
                         
-                        <div className="flex items-center gap-3">
+                        <div className="flex flex-col sm:flex-row items-center gap-3">
+                            <SearchBar value={search} onChange={setSearch} placeholder="Search products" />
                             <button className="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md">
                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
@@ -50,7 +67,7 @@ export default function Index({ products }) {
 
                     {/* Products Grid/Table */}
                     <div className="bg-white/70 backdrop-blur-sm rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
-                        {products.length === 0 ? (
+                        {filteredProducts.length === 0 ? (
                             <div className="text-center py-16">
                                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
                                     <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +115,7 @@ export default function Index({ products }) {
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-50">
-                                        {products.map((p, index) => (
+                                        {paginatedProducts.map((p, index) => (
                                             <tr 
                                                 key={p.id} 
                                                 className="hover:bg-gradient-to-r hover:from-blue-50/50 hover:to-indigo-50/30 transition-all duration-300 group"
@@ -172,25 +189,26 @@ export default function Index({ products }) {
                                 </table>
                             </div>
                         )}
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                     </div>
 
                     {/* Statistics Footer */}
-                    {products.length > 0 && (
+                    {filteredProducts.length > 0 && (
                         <div className="mt-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div className="text-center">
-                                    <div className="text-2xl font-bold text-gray-900">{products.length}</div>
+                                    <div className="text-2xl font-bold text-gray-900">{filteredProducts.length}</div>
                                     <div className="text-sm text-gray-600 font-medium">Total Products</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-green-600">
-                                        ${products.reduce((sum, p) => sum + parseFloat(p.price || 0), 0).toLocaleString()}
+                                        ${filteredProducts.reduce((sum, p) => sum + parseFloat(p.price || 0), 0).toLocaleString()}
                                     </div>
                                     <div className="text-sm text-gray-600 font-medium">Total Value</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-600">
-                                        {new Set(products.map(p => p.category?.name).filter(Boolean)).size}
+                                        {new Set(filteredProducts.map(p => p.category?.name).filter(Boolean)).size}
                                     </div>
                                     <div className="text-sm text-gray-600 font-medium">Categories</div>
                                 </div>

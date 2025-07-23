@@ -1,5 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import SearchBar from '@/Components/SearchBar';
+import Pagination from '@/Components/Pagination';
 
 // Custom SVG Icons
 const StatusIcon = ({ status }) => {
@@ -72,6 +75,19 @@ export default function Index({ transactions }) {
                 return 'bg-gray-100 text-gray-800 border-gray-200';
         }
     };
+
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => setCurrentPage(1), [search]);
+
+    const filteredTransactions = transactions.filter((t) =>
+        `${t.reference} ${t.status}`.toLowerCase().includes(search.toLowerCase())
+    );
+    const totalPages = Math.ceil(filteredTransactions.length / 10);
+    const paginatedTransactions = filteredTransactions.slice(
+        (currentPage - 1) * 10,
+        currentPage * 10
+    );
 
     return (
         <AuthenticatedLayout 
@@ -149,7 +165,10 @@ export default function Index({ transactions }) {
                     {/* Main Table */}
                     <div className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
                         <div className="px-6 py-4 border-b border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
+                                <SearchBar value={search} onChange={setSearch} placeholder="Search transactions" />
+                            </div>
                         </div>
                         
                         <div className="overflow-x-auto">
@@ -185,7 +204,7 @@ export default function Index({ transactions }) {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {transactions.map((transaction, index) => (
+                                    {paginatedTransactions.map((transaction, index) => (
                                         <tr 
                                             key={transaction.id} 
                                             className="hover:bg-gray-50 transition-colors duration-200"
@@ -225,7 +244,9 @@ export default function Index({ transactions }) {
                             </table>
                         </div>
 
-                        {transactions.length === 0 && (
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+
+                        {filteredTransactions.length === 0 && (
                             <div className="text-center py-12">
                                 <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
