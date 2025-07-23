@@ -1,5 +1,6 @@
 import GuestLayout from '@/Layouts/GuestLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
+import AddToCartPrompt from '@/Components/AddToCartPrompt';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
 
@@ -7,12 +8,14 @@ export default function Show({ product }) {
     const [selected, setSelected] = useState(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showCartPrompt, setShowCartPrompt] = useState(false);
 
     const addAttributeToCart = (id) => {
         router.post(route('cart.add', product.slug), { attribute_id: id }, {
             onSuccess: () => {
                 setShowSuccessModal(true);
                 setTimeout(() => setShowSuccessModal(false), 3000);
+                setShowCartPrompt(true);
             },
         });
         setSelected(id);
@@ -23,6 +26,7 @@ export default function Show({ product }) {
             onSuccess: () => {
                 setShowSuccessModal(true);
                 setTimeout(() => setShowSuccessModal(false), 3000);
+                setShowCartPrompt(true);
             },
         });
     };
@@ -307,6 +311,11 @@ export default function Show({ product }) {
                     animation: slide-in 0.3s ease-out;
                 }
             `}</style>
+            <AddToCartPrompt
+                show={showCartPrompt}
+                onClose={() => setShowCartPrompt(false)}
+                onGoToCart={() => router.visit(route('cart.show'))}
+            />
         </GuestLayout>
     );
 }
