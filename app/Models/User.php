@@ -104,4 +104,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(SocialLink::class);
     }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
 }
