@@ -89,7 +89,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
 
-    Route::resource('pages', AdminPageController::class)->except(['show']);
+    Route::resource('pages', AdminPageController::class)
+        ->except(['show'])
+        ->names('admin.pages');
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
