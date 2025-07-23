@@ -1,6 +1,7 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link, usePage } from '@inertiajs/react';
 import { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
 import { createPortal } from 'react-dom';
 
 export default function AuthenticatedLayout({ header, children }) {
@@ -20,6 +21,12 @@ export default function AuthenticatedLayout({ header, children }) {
     const userDropdownRef = useRef(null);
     const notificationButtonRef = useRef(null);
     const userButtonRef = useRef(null);
+    const notificationScrollRef = useRef(null);
+
+    const [notificationList, setNotificationList] = useState([]);
+    const [notificationsPage, setNotificationsPage] = useState(1);
+    const [hasMoreNotifications, setHasMoreNotifications] = useState(true);
+    const [loadingNotifications, setLoadingNotifications] = useState(false);
 
     // Update position when dropdown opens
     useEffect(() => {
@@ -46,6 +53,38 @@ export default function AuthenticatedLayout({ header, children }) {
         document.addEventListener('mousedown', handleClickOutside);
         return () => document.removeEventListener('mousedown', handleClickOutside);
     }, []);
+
+    const fetchNotifications = async (page = 1) => {
+        setLoadingNotifications(true);
+        try {
+            const res = await axios.get(route('notifications.index', { page }));
+            if (page === 1) {
+                setNotificationList(res.data.data);
+            } else {
+                setNotificationList(prev => [...prev, ...res.data.data]);
+            }
+            setHasMoreNotifications(res.data.next_page_url !== null);
+            setNotificationsPage(page);
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setLoadingNotifications(false);
+        }
+    };
+
+    useEffect(() => {
+        if (notificationOpen) {
+            fetchNotifications(1);
+        }
+    }, [notificationOpen]);
+
+    const handleNotificationScroll = () => {
+        const el = notificationScrollRef.current;
+        if (!el || loadingNotifications || !hasMoreNotifications) return;
+        if (el.scrollTop + el.clientHeight >= el.scrollHeight - 50) {
+            fetchNotifications(notificationsPage + 1);
+        }
+    };
 
     const navigationItems = [
         {
@@ -179,25 +218,55 @@ export default function AuthenticatedLayout({ header, children }) {
                         <div className="px-4 py-3 border-b border-gray-100">
                             <h3 className="font-semibold text-gray-800">Notifications</h3>
                         </div>
-                        <div className="py-2 max-h-64 overflow-y-auto">
-                            {notifications.length === 0 && (
-                                <div className="px-4 py-3 text-sm text-gray-500">No new notifications</div>
+                        <div
+                            className="py-2 max-h-64 overflow-y-auto"
+                            ref={notificationScrollRef}
+                            onScroll={handleNotificationScroll}
+                        >
+                            {notificationList.length === 0 && !loadingNotifications && (
+                                <div className="px-4 py-3 text-sm text-gray-500">No notifications</div>
                             )}
-                            {notifications.map((n) => (
-                                <div key={n.id} className="px-4 py-3 hover:bg-gray-50 transition-colors">
-                                    <div className="flex items-start space-x-3">
-                                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.403-3.403A1 1 0 0116 13V9a4 4 0 00-8 0v4a1 1 0 01-.293.707L5 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                                            </svg>
+                            {notificationList.map((n) => (
+                                n.data.tracking_code ? (
+                                    <Link
+                                        key={n.id}
+                                        href={route('orders.track', n.data.tracking_code)}
+                                        className="block px-4 py-3 hover:bg-gray-50 transition-colors"
+                                    >
+                                        <div className="flex items-start space-x-3">
+                                            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.403-3.403A1 1 0 0116 13V9a4 4 0 00-8 0v4a1 1 0 01-.293.707L5 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                                </svg>
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-sm text-gray-800">{n.data.message}</p>
+                                                <p className="text-xs text-gray-500">{n.created_at}</p>
+                                            </div>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-sm text-gray-800">{n.data.message}</p>
-                                            <p className="text-xs text-gray-500">{n.created_at}</p>
+                                    </Link>
+                                ) : (
+                                    <div key={n.id} className="px-4 py-3 hover:bg-gray-50 transition-colors">
+                                        <div className="flex items-start space-x-3">
+                                            <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+                                                <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.403-3.403A1 1 0 0116 13V9a4 4 0 00-8 0v4a1 1 0 01-.293.707L5 17h5m5 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                                </svg>
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-sm text-gray-800">{n.data.message}</p>
+                                                <p className="text-xs text-gray-500">{n.created_at}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                )
                             ))}
+                            {loadingNotifications && (
+                                <div className="px-4 py-3 text-sm text-gray-500">Loading...</div>
+                            )}
+                            {!hasMoreNotifications && notificationList.length > 0 && (
+                                <div className="px-4 py-3 text-sm text-gray-500 text-center">No more notifications</div>
+                            )}
                         </div>
                         <div className="border-t border-gray-100 px-4 py-3 flex justify-between items-center">
                             <Link as="button" method="post" href={route('notifications.read-all')} className="text-sm text-gray-500 hover:text-gray-700 mr-2">
