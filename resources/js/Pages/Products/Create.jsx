@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import Editor from 'react-simple-wysiwyg';
 
 // Custom SVG Icons
 const Icons = {
@@ -187,12 +188,15 @@ export default function Create({ categories }) {
                                         value="Description" 
                                         className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                     />
-                                    <textarea 
-                                        id="description" 
-                                        value={data.description} 
-                                        className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white min-h-[120px] resize-none" 
+                                    <Editor
+                                        id="description"
+                                        value={data.description}
                                         onChange={(e) => setData('description', e.target.value)}
                                         placeholder="Describe your product..."
+                                        containerProps={{
+                                            className:
+                                                'w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white min-h-[120px]'
+                                        }}
                                     />
                                     <InputError message={errors.description} className="mt-2 text-red-500" />
                                 </div>
