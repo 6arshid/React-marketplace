@@ -150,6 +150,13 @@ class ProfileController extends Controller
         return Redirect::back();
     }
 
+    public function becomeBuyer(Request $request): RedirectResponse
+    {
+        $request->user()->update(['is_seller' => false]);
+
+        return Redirect::back();
+    }
+
     /**
      * Delete the user's account.
      */

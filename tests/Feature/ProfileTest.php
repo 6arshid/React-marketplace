@@ -96,4 +96,24 @@ class ProfileTest extends TestCase
 
         $this->assertNotNull($user->fresh());
     }
+
+    public function test_user_can_become_seller(): void
+    {
+        $user = User::factory()->create(['is_seller' => false]);
+
+        $response = $this->actingAs($user)->get('/profile/become-seller');
+
+        $response->assertRedirect();
+        $this->assertTrue($user->fresh()->is_seller);
+    }
+
+    public function test_user_can_become_buyer(): void
+    {
+        $user = User::factory()->create(['is_seller' => true]);
+
+        $response = $this->actingAs($user)->get('/profile/become-buyer');
+
+        $response->assertRedirect();
+        $this->assertFalse($user->fresh()->is_seller);
+    }
 }
