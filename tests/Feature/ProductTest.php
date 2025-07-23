@@ -38,4 +38,20 @@ class ProductTest extends TestCase
             'user_id' => $user->id,
         ]);
     }
+
+    public function test_pro_user_needs_contact_info_before_creating_product(): void
+    {
+        $user = User::factory()->create([
+            'pro_panel' => true,
+            'whatsapp_number' => null,
+            'telegram_username' => null,
+            'public_email' => null,
+        ]);
+        $category = Category::factory()->create(['user_id' => $user->id]);
+
+        $response = $this->actingAs($user)->get(route('products.create'));
+
+        $response->assertRedirect(route('profile.edit'));
+        $response->assertSessionHas('error');
+    }
 }

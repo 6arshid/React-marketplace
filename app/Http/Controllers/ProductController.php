@@ -31,6 +31,12 @@ class ProductController extends Controller
             return Redirect::route('categories.create');
         }
 
+        $user = $request->user();
+        if ($user->pro_panel && (! $user->whatsapp_number || ! $user->telegram_username || ! $user->public_email)) {
+            return Redirect::route('profile.edit')
+                ->with('error', 'Please complete your WhatsApp Number, Telegram Username and Public Email before creating a product.');
+        }
+
         return Inertia::render('Products/Create', [
             'categories' => Category::where('user_id', $request->user()->id)->get(),
         ]);
