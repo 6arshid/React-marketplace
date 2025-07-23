@@ -2,31 +2,31 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import { Head } from '@inertiajs/react';
 
 // Custom SVG Icons
-const TrackingIcon = ({ className = "w-6 h-6" }) => (
+const TrackingIcon = ({ className = "w-6 h-6 md:w-8 md:h-8" }) => (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
         <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M11,14L6.5,9.5L7.91,8.09L11,11.18L16.59,5.59L18,7V14H11Z"/>
     </svg>
 );
 
-const ShippingIcon = ({ className = "w-5 h-5" }) => (
+const ShippingIcon = ({ className = "w-5 h-5 md:w-6 md:h-6" }) => (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
         <path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4M17,6H19.5L21.5,9H17M6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5M18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5Z"/>
     </svg>
 );
 
-const DownloadIcon = ({ className = "w-5 h-5" }) => (
+const DownloadIcon = ({ className = "w-5 h-5 md:w-6 md:h-6" }) => (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
         <path d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z"/>
     </svg>
 );
 
-const FileIcon = ({ className = "w-5 h-5" }) => (
+const FileIcon = ({ className = "w-5 h-5 md:w-6 md:h-6" }) => (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
         <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
     </svg>
 );
 
-const ExternalLinkIcon = ({ className = "w-4 h-4" }) => (
+const ExternalLinkIcon = ({ className = "w-4 h-4 md:w-5 md:h-5" }) => (
     <svg className={className} fill="currentColor" viewBox="0 0 24 24">
         <path d="M14,3V5H17.59L7.76,14.83L9.17,16.24L19,6.41V10H21V3M19,19H5V5H12V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19Z"/>
     </svg>
@@ -204,7 +204,7 @@ export default function Track({ order, files }) {
                             <div className="bg-gradient-to-r from-blue-50 to-indigo-50 px-6 py-4">
                                 <div className="flex items-center space-x-3">
                                     <div className="rounded-lg bg-blue-100 p-2">
-                                        <ShippingIcon className="text-blue-600" />
+                                        <ShippingIcon className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
                                     </div>
                                     <h3 className="text-lg font-semibold text-gray-900">Shipping Information</h3>
                                 </div>
