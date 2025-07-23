@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
 
@@ -76,11 +77,24 @@ export default function Index({ transactions }) {
         }
     };
 
+    const [transactionList, setTransactionList] = useState(transactions);
     const [search, setSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    useEffect(() => setCurrentPage(1), [search]);
 
-    const filteredTransactions = transactions.filter((t) =>
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search]);
+
+    useEffect(() => {
+        const interval = setInterval(async () => {
+            const res = await axios.get(route('transactions.money'));
+            setTransactionList(res.data);
+        }, 5000);
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const filteredTransactions = transactionList.filter((t) =>
         `${t.reference} ${t.status}`.toLowerCase().includes(search.toLowerCase())
     );
     const totalPages = Math.ceil(filteredTransactions.length / 10);
@@ -121,7 +135,7 @@ export default function Index({ transactions }) {
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600">Total Amount</p>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        {formatAmount(transactions.reduce((sum, t) => sum + parseFloat(t.amount), 0))}
+                                        {formatAmount(transactionList.reduce((sum, t) => sum + parseFloat(t.amount), 0))}
                                     </p>
                                 </div>
                             </div>
@@ -138,7 +152,7 @@ export default function Index({ transactions }) {
                                 </div>
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600">Total Transactions</p>
-                                    <p className="text-2xl font-bold text-gray-900">{transactions.length}</p>
+                                    <p className="text-2xl font-bold text-gray-900">{transactionList.length}</p>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +169,7 @@ export default function Index({ transactions }) {
                                 <div className="ml-4">
                                     <p className="text-sm font-medium text-gray-600">Success Rate</p>
                                     <p className="text-2xl font-bold text-gray-900">
-                                        {Math.round((transactions.filter(t => t.status === 'completed').length / transactions.length) * 100)}%
+                                        {Math.round((transactionList.filter(t => t.status === 'completed').length / transactionList.length) * 100)}%
                                     </p>
                                 </div>
                             </div>

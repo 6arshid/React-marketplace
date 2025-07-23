@@ -54,6 +54,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/orders/{order}', [\App\Http\Controllers\OrderController::class, 'update'])->name('orders.update');
 
     Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::get('/transactions/money', [TransactionController::class, 'money'])->name('transactions.money');
 
     Route::get('/sales', [\App\Http\Controllers\SalesController::class, 'index'])->name('sales.index');
 
@@ -78,6 +79,8 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::post('/pro-panel/user', [AdminProPanelController::class, 'saveUser'])->name('admin.pro-panel.user');
     Route::delete('/pro-panel/{user}', [AdminProPanelController::class, 'disable'])->name('admin.pro-panel.disable');
     Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('admin.transactions.index');
+    Route::get('/transactions/money', [AdminTransactionController::class, 'money'])->name('admin.transactions.money');
+    Route::post('/transactions/{transaction}/pay', [AdminTransactionController::class, 'pay'])->name('admin.transactions.pay');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
