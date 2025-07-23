@@ -21,6 +21,9 @@ export default function Transactions({ transactions }) {
 
     const pay = async (id) => {
         await axios.post(route('admin.transactions.pay', id));
+        setTransactionList((prev) =>
+            prev.map((t) => (t.id === id ? { ...t, status: 'paid' } : t))
+        );
         const res = await axios.get(route('admin.transactions.money'));
         setTransactionList(res.data);
     };
@@ -47,10 +50,10 @@ export default function Transactions({ transactions }) {
                             <tbody>
                                 {transactionList.map((t) => (
                                     <tr key={t.id}>
-                                        <td className="border px-4 py-2">{t.user?.name}</td>
-                                        <td className="border px-4 py-2">${t.amount}</td>
-                                        <td className="border px-4 py-2">{t.status}</td>
-                                        <td className="border px-4 py-2">
+                                        <td className={`border px-4 py-2 ${t.status === 'paid' ? 'line-through text-gray-400' : ''}`}>{t.user?.name}</td>
+                                        <td className={`border px-4 py-2 ${t.status === 'paid' ? 'line-through text-gray-400' : ''}`}>${t.amount}</td>
+                                        <td className={`border px-4 py-2 ${t.status === 'paid' ? 'line-through text-gray-400' : ''}`}>{t.status}</td>
+                                        <td className={`border px-4 py-2 ${t.status === 'paid' ? 'line-through text-gray-400' : ''}`}>
                                             <button
                                                 onClick={() => setSelectedUser(t.user)}
                                                 className="text-blue-600 hover:underline"
@@ -58,14 +61,14 @@ export default function Transactions({ transactions }) {
                                                 {t.reference}
                                             </button>
                                         </td>
-                                        <td className="border px-4 py-2">{t.created_at}</td>
+                                        <td className={`border px-4 py-2 ${t.status === 'paid' ? 'line-through text-gray-400' : ''}`}>{t.created_at}</td>
                                         <td className="border px-4 py-2 text-center">
                                             {t.status === 'success' || t.status === 'completed' ? (
                                                 <PrimaryButton onClick={() => pay(t.id)}>
                                                     Pay ${((t.amount * 0.98)).toFixed(2)}
                                                 </PrimaryButton>
                                             ) : t.status === 'paid' ? (
-                                                <span className="text-green-600">Paid</span>
+                                                <PrimaryButton disabled>Paid</PrimaryButton>
                                             ) : null}
                                         </td>
                                     </tr>

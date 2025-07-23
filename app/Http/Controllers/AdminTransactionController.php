@@ -15,9 +15,9 @@ class AdminTransactionController extends Controller
     public function index(): Response
     {
         return Inertia::render('Admin/Transactions', [
-            // Only show withdraw requests that are awaiting payment
+            // Show pending and paid withdraw requests
             'transactions' => Transaction::with('user')
-                ->where('status', 'success')
+                ->whereIn('status', ['success', 'completed', 'paid'])
                 ->latest()
                 ->get(),
         ]);
@@ -26,10 +26,10 @@ class AdminTransactionController extends Controller
     public function money(): JsonResponse
     {
         return response()->json(
-            // Keep list in sync with index view by returning only pending
+            // Keep list in sync with index view by returning pending and paid
             // withdraw requests
             Transaction::with('user')
-                ->where('status', 'success')
+                ->whereIn('status', ['success', 'completed', 'paid'])
                 ->latest()
                 ->get()
         );
