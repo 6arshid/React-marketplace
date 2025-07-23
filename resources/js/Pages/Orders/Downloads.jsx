@@ -235,9 +235,18 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                         ))}
                     </div>
 
-                    <div className="mt-6 flex gap-2">
+                    <div className="mt-6 flex justify-center space-x-2 py-4">
                         {orders.links.map((l, idx) => (
-                            <Link key={idx} href={l.url || '#'} className={l.active ? 'font-bold' : ''} dangerouslySetInnerHTML={{ __html: l.label }} />
+                            <Link
+                                key={idx}
+                                href={l.url || '#'}
+                                className={`px-3 py-1.5 text-sm font-medium rounded-lg border transition-colors duration-200 ${
+                                    l.active
+                                        ? 'bg-blue-600 border-blue-600 text-white'
+                                        : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                                }`}
+                                dangerouslySetInnerHTML={{ __html: l.label }}
+                            />
                         ))}
                     </div>
 
