@@ -1,6 +1,9 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
 import UpdateStatusForm from './Partials/UpdateStatusForm';
+import SearchBar from '@/Components/SearchBar';
+import Pagination from '@/Components/Pagination';
 
 export default function Index({ orders, commission_percent }) {
     const formatAmount = (amount) => {
@@ -20,6 +23,19 @@ export default function Index({ orders, commission_percent }) {
         };
         return colors[status?.toLowerCase()] || 'bg-gray-100 text-gray-800 border-gray-200';
     };
+
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => setCurrentPage(1), [search]);
+
+    const filteredOrders = orders.filter((o) =>
+        `${o.tracking_code} ${o.buyer.name} ${o.status}`
+            .toLowerCase()
+            .includes(search.toLowerCase())
+    );
+    const totalPages = Math.ceil(filteredOrders.length / 10);
+    const paginatedOrders = filteredOrders.slice((currentPage - 1) * 10, currentPage * 10);
 
     return (
         <AuthenticatedLayout 
@@ -107,9 +123,9 @@ export default function Index({ orders, commission_percent }) {
                     {/* Main Table */}
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="px-6 py-4 border-b border-gray-100">
-                            <div className="flex items-center justify-between">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                 <h3 className="text-lg font-semibold text-gray-900">Recent Orders</h3>
-
+                                <SearchBar value={search} onChange={setSearch} placeholder="Search orders" />
                             </div>
                         </div>
 
@@ -143,12 +159,12 @@ export default function Index({ orders, commission_percent }) {
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-100">
-                                    {orders.map((order, index) => (
+                                    {paginatedOrders.map((order, index) => (
                                         <tr key={order.id} className="hover:bg-gray-50/50 transition-colors duration-150">
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
                                                     <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold mr-3">
-                                                        #{index + 1}
+                                                        #{(currentPage - 1) * 10 + index + 1}
                                                     </div>
                                                     <div>
                                                         <div className="text-sm font-semibold text-gray-900">
@@ -229,8 +245,8 @@ export default function Index({ orders, commission_percent }) {
                         {/* Footer */}
                         <div className="bg-gray-50/50 px-6 py-4 border-t border-gray-200">
                             <div className="flex items-center justify-between">
-                                <div className="flex items-center text-sm text-gray-600">
-                                    <span>Showing {orders.length} orders</span>
+                                <div className="flex items-center text-sm text-gray-600 flex-wrap gap-2">
+                                    <span>Showing {filteredOrders.length} orders</span>
                                     {commission_percent > 0 && (
                                         <div className="ml-6 flex items-center">
                                             <svg className="w-4 h-4 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -242,14 +258,7 @@ export default function Index({ orders, commission_percent }) {
                                         </div>
                                     )}
                                 </div>
-                                <div className="flex items-center space-x-2">
-                                    <button className="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200">
-                                        Previous
-                                    </button>
-                                    <button className="px-3 py-1.5 text-sm font-medium text-white bg-blue-600 border border-blue-600 rounded-lg hover:bg-blue-700 transition-colors duration-200">
-                                        Next
-                                    </button>
-                                </div>
+                                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import { useState, useEffect } from 'react';
+import SearchBar from '@/Components/SearchBar';
+import Pagination from '@/Components/Pagination';
 
 // Custom SVG Icons
 const OrderIcon = ({ className = "w-5 h-5" }) => (
@@ -106,6 +109,18 @@ export default function Index({ orders }) {
     const completedOrders = orders.filter(order => order.status.toLowerCase() === 'delivered' || order.status.toLowerCase() === 'completed').length;
     const digitalOrders = orders.filter(order => order.is_digital).length;
 
+    const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(1);
+    useEffect(() => setCurrentPage(1), [search]);
+
+    const filteredOrders = orders.filter(o =>
+        `${o.tracking_code} ${o.seller.name} ${o.status}`
+            .toLowerCase()
+            .includes(search.toLowerCase())
+    );
+    const totalPages = Math.ceil(filteredOrders.length / 10);
+    const paginatedOrders = filteredOrders.slice((currentPage - 1) * 10, currentPage * 10);
+
     return (
         <AuthenticatedLayout 
             header={
@@ -188,7 +203,10 @@ export default function Index({ orders }) {
                     {/* Main Table */}
                     <div className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
                         <div className="px-6 py-4 border-b border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900">Order History</h3>
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                                <h3 className="text-lg font-semibold text-gray-900">Order History</h3>
+                                <SearchBar value={search} onChange={setSearch} placeholder="Search orders" />
+                            </div>
                         </div>
                         
                         <div className="overflow-x-auto">
@@ -236,7 +254,7 @@ export default function Index({ orders }) {
                                     </tr>
                                 </thead>
                                 <tbody className="bg-white divide-y divide-gray-200">
-                                    {orders.map((order) => (
+                                    {paginatedOrders.map((order) => (
                                         <tr 
                                             key={order.id} 
                                             className="hover:bg-gray-50 transition-colors duration-200"
@@ -307,7 +325,9 @@ export default function Index({ orders }) {
                             </table>
                         </div>
 
-                        {orders.length === 0 && (
+                        <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+
+                        {filteredOrders.length === 0 && (
                             <div className="text-center py-16">
                                 <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                                     <OrderIcon className="w-12 h-12 text-gray-400" />
