@@ -39,6 +39,8 @@ class CartController extends Controller
             'product_id' => $product->id,
             'attribute_id' => $attribute?->id,
             'price' => $attribute?->price ?? $product->price,
+            'shipping_cost' => $product->is_digital ? 0 : ($product->shipping_cost ?? 0),
+            'is_digital' => $product->is_digital,
         ];
 
         session(['cart' => $cart]);
@@ -55,15 +57,19 @@ class CartController extends Controller
             $product = Product::find($item['product_id']);
             $attribute = $item['attribute_id'] ? Attribute::find($item['attribute_id']) : null;
 
+            $shippingCost = $item['shipping_cost'] ?? ($product && ! $product->is_digital ? ($product->shipping_cost ?? 0) : 0);
+
             return [
                 'product_title' => $product?->title,
                 'product_slug'  => $product?->slug,
                 'attribute' => $attribute ? $attribute->title . ' - ' . $attribute->option : null,
                 'price' => $item['price'],
+                'shipping_cost' => $shippingCost,
                 'is_digital' => $product?->is_digital,
             ];
         });
         $requiresShipping = $items->contains(fn ($i) => ! $i['is_digital']);
+        $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
 
         $seller = null;
         if ($cart['seller_id']) {
@@ -86,7 +92,7 @@ class CartController extends Controller
 
         return \Inertia\Inertia::render('Cart/Index', [
             'items' => $items,
-            'total' => $items->sum('price'),
+            'total' => $total,
             'seller' => $seller,
             'requires_shipping' => $requiresShipping,
         ]);
@@ -101,12 +107,22 @@ class CartController extends Controller
         }
 
         $seller = User::findOrFail($cart['seller_id']);
-        $total = collect($cart['items'])->sum('price');
 
-        $requiresShipping = collect($cart['items'])->contains(function ($item) {
+        $items = collect($cart['items'])->map(function ($item) {
             $product = Product::find($item['product_id']);
-            return $product && ! $product->is_digital;
+            $shippingCost = $item['shipping_cost'] ?? ($product && ! $product->is_digital ? ($product->shipping_cost ?? 0) : 0);
+
+            return [
+                'product_id' => $item['product_id'],
+                'attribute_id' => $item['attribute_id'],
+                'price' => $item['price'],
+                'shipping_cost' => $shippingCost,
+                'is_digital' => $product?->is_digital,
+            ];
         });
+        $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
+
+        $requiresShipping = $items->contains(fn ($i) => ! $i['is_digital']);
 
         $shipping = null;
         if ($requiresShipping) {
@@ -128,7 +144,12 @@ class CartController extends Controller
         $order = Order::create([
             'buyer_id' => $request->user()->id,
             'seller_id' => $seller->id,
-            'items' => $cart['items'],
+            'items' => $items->map(fn ($i) => [
+                'product_id' => $i['product_id'],
+                'attribute_id' => $i['attribute_id'],
+                'price' => $i['price'],
+                'shipping_cost' => $i['shipping_cost'],
+            ])->toArray(),
             'amount' => (int) $total,
             'shipping_info' => $shipping,
             'buyer_wallet' => $buyerWallet,
