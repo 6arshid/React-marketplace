@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/subscription/cancel', [SubscriptionController::class, 'cancel'])->name('subscription.cancel');
 
     Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllRead'])->name('notifications.read-all');
+    Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
 });
 
 Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
