@@ -52,7 +52,7 @@ export default function Show({ product }) {
             <Head title={product.title} />
             
             <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-12">
-                <div className="mx-auto max-w-6xl px-6 lg:px-8">
+                <div className="mx-auto max-w-7xl px-6 lg:px-8">
                     {/* Success Modal */}
                     {showSuccessModal && (
                         <div className="fixed top-4 right-4 z-50 animate-slide-in">
