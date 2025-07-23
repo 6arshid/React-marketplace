@@ -191,6 +191,17 @@ export default function Show({ product }) {
                                     )}
                                 </div>
 
+                                {/* Add to Cart Button */}
+                                <button
+                                    onClick={addToCart}
+                                    className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg mb-6 flex items-center justify-center"
+                                >
+                                    <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.15M7 13l-1.1 5m0 0h9.1M16 18a2 2 0 11-4 0 2 2 0 014 0zM9 18a2 2 0 11-4 0 2 2 0 014 0z" />
+                                    </svg>
+                                    Add to Cart - ${product.price}
+                                </button>
+
                                 {/* Description */}
                                 {product.description && (
                                     <div className="mb-8">
@@ -238,18 +249,6 @@ export default function Show({ product }) {
                                     </div>
                                 )}
 
-                                {/* Add to Cart Button */}
-                                {!product.attributes?.length && (
-                                    <button
-                                        onClick={addToCart}
-                                        className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg mb-6 flex items-center justify-center"
-                                    >
-                                        <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5M7 13l-1.1 5m0 0h9.1M16 18a2 2 0 11-4 0 2 2 0 014 0zM9 18a2 2 0 11-4 0 2 2 0 014 0z" />
-                                        </svg>
-                                        Add to Cart - ${product.price}
-                                    </button>
-                                )}
 
                                 {/* Back Button */}
                                 <Link
