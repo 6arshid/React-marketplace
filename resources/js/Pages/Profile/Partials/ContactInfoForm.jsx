@@ -17,12 +17,7 @@ export default function ContactInfoForm({ className = '' }) {
         useForm({
             trc20_usdt_wallet: user.trc20_usdt_wallet || '',
             bitcoin_wallet: user.bitcoin_wallet || '',
-            whatsapp_number: user.whatsapp_number || '',
-            telegram_username: user.telegram_username || '',
-            instagram_username: user.instagram_username || '',
-            facebook_username: user.facebook_username || '',
             public_email: user.public_email || '',
-            about: user.about || '',
             stripe_api_key: showStripeFields ? user.stripe_api_key || '' : '',
             stripe_secret_key: showStripeFields ? user.stripe_secret_key || '' : '',
         });
@@ -50,68 +45,6 @@ export default function ContactInfoForm({ className = '' }) {
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel htmlFor="about" value="About" />
-                    <textarea
-                        id="about"
-                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                        value={data.about}
-                        onChange={(e) => setData('about', e.target.value)}
-                        disabled={!isPro}
-                    />
-                    <InputError message={errors.about} className="mt-2" />
-                </div>
-                <div>
-                    <InputLabel htmlFor="whatsapp_number" value="WhatsApp Number" />
-                    <TextInput
-                        id="whatsapp_number"
-                        className="mt-1 block w-full"
-                        value={data.whatsapp_number}
-                        onChange={(e) => setData('whatsapp_number', e.target.value)}
-                        disabled={!isPro}
-                        autoComplete="off"
-                    />
-                    <InputError message={errors.whatsapp_number} className="mt-2" />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="telegram_username" value="Telegram Username" />
-                    <TextInput
-                        id="telegram_username"
-                        className="mt-1 block w-full"
-                        value={data.telegram_username}
-                        onChange={(e) => setData('telegram_username', e.target.value)}
-                        disabled={!isPro}
-                        autoComplete="off"
-                    />
-                    <InputError message={errors.telegram_username} className="mt-2" />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="instagram_username" value="Instagram" />
-                    <TextInput
-                        id="instagram_username"
-                        className="mt-1 block w-full"
-                        value={data.instagram_username}
-                        onChange={(e) => setData('instagram_username', e.target.value)}
-                        disabled={!isPro}
-                        autoComplete="off"
-                    />
-                    <InputError message={errors.instagram_username} className="mt-2" />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="facebook_username" value="Facebook" />
-                    <TextInput
-                        id="facebook_username"
-                        className="mt-1 block w-full"
-                        value={data.facebook_username}
-                        onChange={(e) => setData('facebook_username', e.target.value)}
-                        disabled={!isPro}
-                        autoComplete="off"
-                    />
-                    <InputError message={errors.facebook_username} className="mt-2" />
-                </div>
 
                 <div>
                     <InputLabel htmlFor="public_email" value="Public Email" />
