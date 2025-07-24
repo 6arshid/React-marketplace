@@ -5,6 +5,7 @@ import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 // Custom SVG Icons
 const SaveIcon = () => (
@@ -54,6 +55,7 @@ const TextIcon = () => (
 );
 
 export default function Create() {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         name: '',
         icon: null,
@@ -74,7 +76,7 @@ export default function Create() {
                             className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200"
                         >
                             <BackIcon />
-                            Back
+                            {t('Back')}
                         </Link>
                         <div className="h-6 border-l border-gray-300"></div>
                         <div className="flex items-center space-x-3">
@@ -82,15 +84,15 @@ export default function Create() {
                                 <FolderPlusIcon />
                             </div>
                             <div>
-                                <h2 className="text-3xl font-bold text-gray-900">New Category</h2>
-                                <p className="text-sm text-gray-600">Create a new content category</p>
+                                <h2 className="text-3xl font-bold text-gray-900">{t('New Category')}</h2>
+                                <p className="text-sm text-gray-600">{t('Create a new content category')}</p>
                             </div>
                         </div>
                     </div>
                 </div>
             }
         >
-            <Head title="New Category" />
+            <Head title={t('New Category')} />
             
             <div className="py-8">
                 <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
@@ -98,8 +100,8 @@ export default function Create() {
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                         {/* Form Header */}
                         <div className="px-8 py-6 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900">Category Details</h3>
-                            <p className="text-sm text-gray-600 mt-1">Fill in the information below to create your category</p>
+                            <h3 className="text-lg font-semibold text-gray-900">{t('Category Details')}</h3>
+                            <p className="text-sm text-gray-600 mt-1">{t('Fill in the information below to create your category')}</p>
                         </div>
 
                         {/* Form Content */}
@@ -110,9 +112,9 @@ export default function Create() {
                                     <div className="p-1.5 bg-blue-50 rounded-lg">
                                         <TextIcon />
                                     </div>
-                                    <InputLabel 
-                                        htmlFor="name" 
-                                        value="Category Name" 
+                                    <InputLabel
+                                        htmlFor="name"
+                                        value={t('Category Name')}
                                         className="text-base font-medium text-gray-900"
                                     />
                                 </div>
@@ -120,14 +122,14 @@ export default function Create() {
                                     id="name"
                                     name="name"
                                     value={data.name}
-                                    placeholder="Enter category name..."
+                                    placeholder={t('Enter category name...')}
                                     className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-blue-500 text-base transition-all duration-200"
                                     onChange={(e) => setData('name', e.target.value)}
                                 />
                                 <InputError message={errors.name} className="mt-2" />
                                 {data.name && (
                                     <p className="text-xs text-gray-500 mt-2">
-                                        Slug will be: <span className="font-medium text-gray-700">{data.name.toLowerCase().replace(/\s+/g, '-')}</span>
+                                        {t('Slug will be:')} <span className="font-medium text-gray-700">{data.name.toLowerCase().replace(/\s+/g, '-')}</span>
                                     </p>
                                 )}
                             </div>
@@ -138,12 +140,12 @@ export default function Create() {
                                     <div className="p-1.5 bg-indigo-50 rounded-lg">
                                         <ImageIcon />
                                     </div>
-                                    <InputLabel 
-                                        htmlFor="icon" 
-                                        value="Category Icon" 
+                                    <InputLabel
+                                        htmlFor="icon"
+                                        value={t('Category Icon')}
                                         className="text-base font-medium text-gray-900"
                                     />
-                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Optional</span>
+                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{t('Optional')}</span>
                                 </div>
                                 <div className="bg-gray-50 rounded-xl p-4 border border-dashed border-gray-300">
                                     <FileDropzone
@@ -155,7 +157,7 @@ export default function Create() {
                                 </div>
                                 <InputError message={errors.icon} className="mt-2" />
                                 <p className="text-xs text-gray-500">
-                                    Upload an icon to represent this category. Recommended size: 64x64px
+                                    {t('Upload an icon to represent this category. Recommended size: 64x64px')}
                                 </p>
                             </div>
 
@@ -166,7 +168,7 @@ export default function Create() {
                                     className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 bg-white text-gray-700 text-sm font-medium rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200"
                                 >
                                     <CancelIcon />
-                                    Cancel
+                                    {t('Cancel')}
                                 </Link>
                                 
                                 <button
@@ -180,12 +182,12 @@ export default function Create() {
                                                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" fill="none"/>
                                                 <path fill="currentColor" className="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
                                             </svg>
-                                            Creating...
+                                            {t('Creating...')}
                                         </>
                                     ) : (
                                         <>
                                             <SaveIcon />
-                                            Create Category
+                                            {t('Create Category')}
                                         </>
                                     )}
                                 </button>
@@ -201,20 +203,20 @@ export default function Create() {
                                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
                                 <path d="M12 17h.01"/>
                             </svg>
-                            Tips for creating categories
+                            {t('Tips for creating categories')}
                         </h4>
                         <ul className="text-sm text-blue-800 space-y-2">
                             <li className="flex items-start gap-2">
                                 <span className="text-blue-600 mt-0.5">•</span>
-                                Use descriptive names that clearly represent the content type
+                                {t('Use descriptive names that clearly represent the content type')}
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-blue-600 mt-0.5">•</span>
-                                Icons help users quickly identify categories at a glance
+                                {t('Icons help users quickly identify categories at a glance')}
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-blue-600 mt-0.5">•</span>
-                                Category names will be automatically converted to URL-friendly slugs
+                                {t('Category names will be automatically converted to URL-friendly slugs')}
                             </li>
                         </ul>
                     </div>
