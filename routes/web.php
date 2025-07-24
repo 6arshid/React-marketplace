@@ -20,6 +20,7 @@ use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminAppearanceController;
+use App\Http\Controllers\AdminGeneralConfigController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -110,6 +111,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 
     Route::get('/appearance', [AdminAppearanceController::class, 'edit'])->name('admin.appearance.edit');
     Route::post('/appearance', [AdminAppearanceController::class, 'update'])->name('admin.appearance.update');
+
+    Route::get('/general-config', [AdminGeneralConfigController::class, 'edit'])->name('admin.general-config.edit');
+    Route::post('/general-config', [AdminGeneralConfigController::class, 'update'])->name('admin.general-config.update');
 
     Route::resource('pages', AdminPageController::class)
         ->except(['show'])

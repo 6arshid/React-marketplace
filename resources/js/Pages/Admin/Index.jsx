@@ -34,6 +34,11 @@ export default function Index() {
                             </Link>
                         </div>
                         <div>
+                            <Link href={route('admin.general-config.edit')} className="text-blue-500 hover:underline">
+                                General Config
+                            </Link>
+                        </div>
+                        <div>
                             <Link href={route('admin.pages.index')} className="text-blue-500 hover:underline">
                                 Pages
                             </Link>
