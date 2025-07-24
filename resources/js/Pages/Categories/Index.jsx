@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { useState, useEffect } from 'react';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
@@ -43,6 +44,7 @@ const EmptyStateIcon = () => (
 );
 
 export default function Index({ categories }) {
+    const { t } = useTranslation();
     const user = usePage().props.auth.user;
 
     const [search, setSearch] = useState('');
@@ -63,15 +65,15 @@ export default function Index({ categories }) {
             header={
                 <div className="flex items-center justify-between">
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-900">Categories</h2>
+                        <h2 className="text-3xl font-bold text-gray-900">{t('Categories')}</h2>
                         <p className="mt-1 text-sm text-gray-600">
-                            Manage your content categories
+                            {t('Manage your content categories')}
                         </p>
                     </div>
                 </div>
             }
         >
-            <Head title="Categories" />
+            <Head title={t('Categories')} />
 
             <div className="py-8">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -85,21 +87,21 @@ export default function Index({ categories }) {
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900">
-                                            {filteredCategories.length} {filteredCategories.length === 1 ? 'Category' : 'Categories'}
+                                            {filteredCategories.length} {filteredCategories.length === 1 ? t('Category') : t('Categories')}
                                         </h3>
                                         <p className="text-sm text-gray-500">
-                                            Organize your content effectively
+                                            {t('Organize your content effectively')}
                                         </p>
                                     </div>
                                 </div>
                                 <div className="flex items-center gap-4">
-                                    <SearchBar value={search} onChange={setSearch} placeholder="Search categories" />
+                                    <SearchBar value={search} onChange={setSearch} placeholder={t('Search categories')} />
                                     <Link
                                         href={route('categories.create')}
                                         className="inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 hover:scale-105"
                                     >
                                         <PlusIcon />
-                                        New Category
+                                        {t('New Category')}
                                     </Link>
                                 </div>
                             </div>
@@ -134,7 +136,7 @@ export default function Index({ categories }) {
                                                             {cat.name}
                                                         </h3>
                                                         <p className="text-sm text-gray-500 mt-1">
-                                                            Category slug: {cat.slug}
+                                                            {t('Category slug: {{slug}}', { slug: cat.slug })}
                                                         </p>
                                                     </Link>
                                                 </div>
@@ -147,7 +149,7 @@ export default function Index({ categories }) {
                                                     className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all duration-200"
                                                 >
                                                     <EditIcon />
-                                                    Edit
+                                                    {t('Edit')}
                                                 </Link>
                                                 <Link
                                                     href={route('categories.destroy', cat.slug)}
@@ -155,13 +157,13 @@ export default function Index({ categories }) {
                                                     as="button"
                                                     className="flex items-center gap-2 px-3 py-2 text-sm text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all duration-200"
                                                     onClick={(e) => {
-                                                        if (!confirm('Are you sure you want to delete this category?')) {
+                                                        if (!confirm(t('Are you sure you want to delete this category?'))) {
                                                             e.preventDefault();
                                                         }
                                                     }}
                                                 >
                                                     <DeleteIcon />
-                                                    Delete
+                                                    {t('Delete')}
                                                 </Link>
                                             </div>
                                         </div>
@@ -177,17 +179,17 @@ export default function Index({ categories }) {
                             <div className="flex flex-col items-center">
                                 <EmptyStateIcon />
                                 <h3 className="mt-6 text-lg font-semibold text-gray-900">
-                                    No categories yet
+                                    {t('No categories yet')}
                                 </h3>
                                 <p className="mt-2 text-sm text-gray-500 max-w-sm">
-                                    Get started by creating your first category to organize your content.
+                                    {t('Get started by creating your first category to organize your content.')}
                                 </p>
                                 <Link
                                     href={route('categories.create')}
                                     className="mt-6 inline-flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium rounded-xl hover:from-blue-700 hover:to-indigo-700 transition-all duration-200 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40"
                                 >
                                     <PlusIcon />
-                                    Create Your First Category
+                                    {t('Create Your First Category')}
                                 </Link>
                             </div>
                         </div>

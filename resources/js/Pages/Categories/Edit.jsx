@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Inertia } from '@inertiajs/inertia';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 // Custom SVG Icons
 const SaveIcon = () => (
@@ -62,6 +63,7 @@ const HistoryIcon = () => (
 );
 
 export default function Edit({ category }) {
+    const { t } = useTranslation();
     const { data, setData, put, processing, errors } = useForm({
         name: category.name,
         icon: category.icon ?? '',
@@ -107,7 +109,7 @@ const submit = (e) => {
                             className="flex items-center gap-2 px-3 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-all duration-200"
                         >
                             <BackIcon />
-                            Back
+                            {t('Back')}
                         </Link>
                         <div className="h-6 border-l border-gray-300"></div>
                         <div className="flex items-center space-x-3">
@@ -115,8 +117,8 @@ const submit = (e) => {
                                 <EditIcon />
                             </div>
                             <div>
-                                <h2 className="text-3xl font-bold text-gray-900">Edit Category</h2>
-                                <p className="text-sm text-gray-600">Modify "{category.name}" category</p>
+                                <h2 className="text-3xl font-bold text-gray-900">{t('Edit Category')}</h2>
+                                <p className="text-sm text-gray-600">{t('Modify "{{name}}" category', { name: category.name })}</p>
                             </div>
                         </div>
                     </div>
@@ -146,13 +148,13 @@ const submit = (e) => {
                                 )}
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-lg font-semibold text-amber-900">Current Category</h3>
+                                <h3 className="text-lg font-semibold text-amber-900">{t('Current Category')}</h3>
                                 <p className="text-amber-800 font-medium">{category.name}</p>
-                                <p className="text-sm text-amber-700">Slug: {category.slug}</p>
+                                <p className="text-sm text-amber-700">{t('Slug:')} {category.slug}</p>
                             </div>
                             <div className="flex items-center gap-2 text-amber-700 text-sm">
                                 <HistoryIcon />
-                                Editing
+                                {t('Editing')}
                             </div>
                         </div>
                     </div>
@@ -161,8 +163,8 @@ const submit = (e) => {
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                         {/* Form Header */}
                         <div className="px-8 py-6 bg-gradient-to-r from-gray-50 to-gray-100 border-b border-gray-200">
-                            <h3 className="text-lg font-semibold text-gray-900">Update Category Details</h3>
-                            <p className="text-sm text-gray-600 mt-1">Modify the information below to update your category</p>
+                            <h3 className="text-lg font-semibold text-gray-900">{t('Update Category Details')}</h3>
+                            <p className="text-sm text-gray-600 mt-1">{t('Modify the information below to update your category')}</p>
                         </div>
 
                         {/* Form Content */}
@@ -173,9 +175,9 @@ const submit = (e) => {
                                     <div className="p-1.5 bg-blue-50 rounded-lg">
                                         <TextIcon />
                                     </div>
-                                    <InputLabel 
-                                        htmlFor="name" 
-                                        value="Category Name" 
+                                    <InputLabel
+                                        htmlFor="name"
+                                        value={t('Category Name')}
                                         className="text-base font-medium text-gray-900"
                                     />
                                 </div>
@@ -183,7 +185,7 @@ const submit = (e) => {
                                     id="name"
                                     name="name"
                                     value={data.name}
-                                    placeholder="Enter category name..."
+                                    placeholder={t('Enter category name...')}
                                     className="mt-1 block w-full px-4 py-3 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-blue-500 text-base transition-all duration-200"
                                     onChange={(e) => setData('name', e.target.value)}
                                 />
@@ -195,7 +197,7 @@ const submit = (e) => {
                                             <path d="M12 6v6l4 2"/>
                                         </svg>
                                         <p className="text-xs text-blue-700">
-                                            New slug will be: <span className="font-medium">{data.name.toLowerCase().replace(/\s+/g, '-')}</span>
+                                            {t('New slug will be:')} <span className="font-medium">{data.name.toLowerCase().replace(/\s+/g, '-')}</span>
                                         </p>
                                     </div>
                                 )}
@@ -207,18 +209,18 @@ const submit = (e) => {
                                     <div className="p-1.5 bg-indigo-50 rounded-lg">
                                         <ImageIcon />
                                     </div>
-                                    <InputLabel 
-                                        htmlFor="icon" 
-                                        value="Category Icon" 
+                                    <InputLabel
+                                        htmlFor="icon"
+                                        value={t('Category Icon')}
                                         className="text-base font-medium text-gray-900"
                                     />
-                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">Optional</span>
+                                    <span className="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded-full">{t('Optional')}</span>
                                 </div>
                                 
                                 {/* Current Icon Preview */}
                                 {category.icon && (
                                     <div className="mb-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
-                                        <p className="text-sm font-medium text-gray-700 mb-2">Current Icon:</p>
+                                        <p className="text-sm font-medium text-gray-700 mb-2">{t('Current Icon:')}</p>
                                         <img
                                             src={`/storage/${category.icon}`}
                                             alt="Current category icon"
@@ -237,7 +239,7 @@ const submit = (e) => {
                                 </div>
                                 <InputError message={errors.icon} className="mt-2" />
                                 <p className="text-xs text-gray-500">
-                                    {category.icon ? 'Upload a new icon to replace the current one' : 'Upload an icon to represent this category'}. Recommended size: 64x64px
+                                    {category.icon ? t('Upload a new icon to replace the current one') : t('Upload an icon to represent this category')}. {t('Recommended size: 64x64px')}
                                 </p>
                             </div>
 
@@ -248,7 +250,7 @@ const submit = (e) => {
                                     className="inline-flex items-center gap-2 px-6 py-3 border border-gray-300 bg-white text-gray-700 text-sm font-medium rounded-xl hover:bg-gray-50 hover:border-gray-400 transition-all duration-200"
                                 >
                                     <CancelIcon />
-                                    Cancel
+                                    {t('Cancel')}
                                 </Link>
                                 
                                 <button
@@ -262,12 +264,12 @@ const submit = (e) => {
                                                 <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" className="opacity-25" fill="none"/>
                                                 <path fill="currentColor" className="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
                                             </svg>
-                                            Updating...
+                                            {t('Updating...')}
                                         </>
                                     ) : (
                                         <>
                                             <SaveIcon />
-                                            Update Category
+                                            {t('Update Category')}
                                         </>
                                     )}
                                 </button>
@@ -282,20 +284,20 @@ const submit = (e) => {
                                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/>
                                 <path d="M9 12l2 2 4-4"/>
                             </svg>
-                            Important notes about editing
+                            {t('Important notes about editing')}
                         </h4>
                         <ul className="text-sm text-amber-800 space-y-2">
                             <li className="flex items-start gap-2">
                                 <span className="text-amber-600 mt-0.5">•</span>
-                                Changing the category name will update its URL slug
+                                {t('Changing the category name will update its URL slug')}
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-amber-600 mt-0.5">•</span>
-                                Uploading a new icon will replace the existing one
+                                {t('Uploading a new icon will replace the existing one')}
                             </li>
                             <li className="flex items-start gap-2">
                                 <span className="text-amber-600 mt-0.5">•</span>
-                                All existing content in this category will remain unchanged
+                                {t('All existing content in this category will remain unchanged')}
                             </li>
                         </ul>
                     </div>
