@@ -31,6 +31,8 @@ class GoogleController extends Controller
             ]
         );
 
+        $wasNew = $user->wasRecentlyCreated;
+
         if (!$user->google_id) {
             $user->google_id = $googleUser->getId();
             $user->save();
@@ -57,6 +59,11 @@ class GoogleController extends Controller
         }
 
         Auth::login($user, true);
+
+        if ($wasNew) {
+            session(['choose_account_type' => true]);
+            return redirect()->route('account-type.show');
+        }
 
         return redirect()->intended(route('dashboard', absolute: false));
     }

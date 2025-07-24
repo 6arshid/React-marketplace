@@ -13,6 +13,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellerPageController;
 use App\Http\Controllers\SocialLinkController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\Auth\AccountTypeController;
 use App\Http\Controllers\StripeConfigController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscriptionController;
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile/cover', [ProfileController::class, 'deleteCover'])->name('profile.cover.delete');
     Route::get('/profile/become-seller', [ProfileController::class, 'becomeSeller'])->name('profile.become-seller');
     Route::get('/profile/become-buyer', [ProfileController::class, 'becomeBuyer'])->name('profile.become-buyer');
+    Route::get('/account-type', [AccountTypeController::class, 'show'])->name('account-type.show');
+    Route::post('/account-type', [AccountTypeController::class, 'store'])->name('account-type.store');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('categories', CategoryController::class);
