@@ -71,6 +71,7 @@ export default function ContactInfoForm({ className = '' }) {
                         className="mt-1 block w-full"
                         value={data.whatsapp_number}
                         onChange={(e) => setData('whatsapp_number', e.target.value)}
+                        disabled={!isPro}
                         autoComplete="off"
                     />
                     <InputError message={errors.whatsapp_number} className="mt-2" />
@@ -83,6 +84,7 @@ export default function ContactInfoForm({ className = '' }) {
                         className="mt-1 block w-full"
                         value={data.telegram_username}
                         onChange={(e) => setData('telegram_username', e.target.value)}
+                        disabled={!isPro}
                         autoComplete="off"
                     />
                     <InputError message={errors.telegram_username} className="mt-2" />
