@@ -16,8 +16,22 @@
         @viteReactRefresh
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead
+        @php
+            try {
+                $customCss = \App\Models\Setting::where('key', 'custom_css')->value('value');
+                $customJs = \App\Models\Setting::where('key', 'custom_js')->value('value');
+            } catch (\Throwable $e) {
+                $customCss = $customJs = null;
+            }
+        @endphp
+        @if(!empty($customCss))
+            <style>{!! $customCss !!}</style>
+        @endif
     </head>
     <body class="font-sans antialiased">
         @inertia
+        @if(!empty($customJs))
+            <script>{!! $customJs !!}</script>
+        @endif
     </body>
 </html>
