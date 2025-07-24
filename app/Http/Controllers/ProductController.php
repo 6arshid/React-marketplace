@@ -34,7 +34,7 @@ class ProductController extends Controller
         $user = $request->user();
         if ($user->pro_panel && (! $user->whatsapp_number || ! $user->telegram_username || ! $user->public_email)) {
             return Redirect::route('profile.edit')
-                ->with('error', 'Please complete your WhatsApp Number, Telegram Username and Public Email before creating a product.');
+                ->with('error', __('messages.complete_profile_message'));
         }
 
         return Inertia::render('Products/Create', [
