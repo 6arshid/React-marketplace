@@ -2,8 +2,10 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import AddToCartPrompt from '@/Components/AddToCartPrompt';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function CategoryProducts({ user, category, products }) {
+    const { t } = useTranslation();
     const [showCartPrompt, setShowCartPrompt] = useState(false);
     
     const addToCart = (slug) => {
@@ -59,7 +61,8 @@ export default function CategoryProducts({ user, category, products }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                             </svg>
                             <span className="text-white font-medium">
-                                {products.length} {products.length === 1 ? 'Product' : 'Products'}
+                                {products.length}{' '}
+                                {products.length === 1 ? t('Product') : t('Products')}
                             </span>
                         </div>
                     </div>
@@ -140,7 +143,7 @@ export default function CategoryProducts({ user, category, products }) {
                                                 d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.1 5m0 0h9.1M16 18a2 2 0 11-4 0 2 2 0 014 0zM9 18a2 2 0 11-4 0 2 2 0 014 0z"
                                             />
                                         </svg>
-                                        Add to Cart
+                                        {t('Add to Cart')}
                                     </button>
                                 </div>
                             </div>
@@ -156,10 +159,10 @@ export default function CategoryProducts({ user, category, products }) {
                                 </svg>
                             </div>
                             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                                No products found
+                                {t('No products found')}
                             </h3>
                             <p className="text-gray-600 mb-6">
-                                This category doesn't have any products yet.
+                                {t("This category doesn't have any products yet.")}
                             </p>
                             <Link
                                 href={route('profile.show', user.username)}
@@ -168,7 +171,7 @@ export default function CategoryProducts({ user, category, products }) {
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                 </svg>
-                                Back to Profile
+                                {t('Back to Profile')}
                             </Link>
                         </div>
                     </div>
@@ -184,7 +187,7 @@ export default function CategoryProducts({ user, category, products }) {
                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                             </svg>
-                            Back to {user.name}'s Profile
+                            {t("Back to {{name}}'s Profile", { name: user.name })}
                         </Link>
                     </div>
                 )}

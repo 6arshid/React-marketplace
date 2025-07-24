@@ -8,8 +8,10 @@ import ReportModal from '@/Components/ReportModal';
 import { Head, Link, router } from '@inertiajs/react';
 import Cropper from 'react-easy-crop';
 import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Profile({ user, pages = [], categories, products, isOwner, socialLinks = [] }) {
+    const { t } = useTranslation();
     const [visible, setVisible] = useState(10);
     const loadMoreRef = useRef(null);
     const fileInputRef = useRef();
@@ -26,7 +28,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
     const isSuspended = Boolean(user.suspended_at);
 
     const deleteField = (field) => {
-        if (!confirm('Delete this information?')) return;
+        if (!confirm(t('Delete this information?'))) return;
         router.post(
             route('profile.contact.update'),
             { _method: 'patch', [field]: '' },
@@ -150,7 +152,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
     };
 
     const deleteLink = (id) => {
-        if (!confirm('Delete this link?')) return;
+        if (!confirm(t('Delete this link?'))) return;
         router.delete(route('social-links.destroy', id), {
             onSuccess: () => router.reload({ only: ['socialLinks'] }),
         });
@@ -160,7 +162,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
         return (
             <GuestLayout>
                 <Head title={`${user.name} Profile`} />
-                <div className="min-h-screen flex items-center justify-center text-red-600 font-semibold">This user is suspended.</div>
+                <div className="min-h-screen flex items-center justify-center text-red-600 font-semibold">{t('This user is suspended.')}</div>
             </GuestLayout>
         );
     }
@@ -200,7 +202,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            Change Cover
+                            {t('Change Cover')}
                         </button>
                     )}
                 </div>
@@ -338,7 +340,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                             onClick={() => setShowReport(true)}
                             className="px-4 py-2 border border-red-300 text-red-600 rounded-full"
                         >
-                            Report Store
+                            {t('Report Store')}
                         </button>
                     </div>
                 )}
@@ -346,73 +348,73 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                 {/* Owner Edit Controls */}
                 {isOwner && (
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 mb-8">
-                        <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Edit</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('Quick Edit')}</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <span className="text-sm text-gray-600">About</span>
+                                <span className="text-sm text-gray-600">{t('About')}</span>
                                 <div className="flex gap-2">
                                     <Link href={route('profile.edit')} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                                        {user.about ? 'Edit' : 'Add'}
+                                        {user.about ? t('Edit') : t('Add')}
                                     </Link>
                                     {user.about && (
                                         <button onClick={() => deleteField('about')} className="text-red-500 hover:text-red-600 text-sm">
-                                            Delete
+                                            {t('Delete')}
                                         </button>
                                     )}
                                 </div>
                             </div>
                             
                             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <span className="text-sm text-gray-600">WhatsApp</span>
+                                <span className="text-sm text-gray-600">{t('WhatsApp')}</span>
                                 <div className="flex gap-2">
                                     <Link href={route('profile.edit')} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                                        {user.whatsapp_number ? 'Edit' : 'Add'}
+                                        {user.whatsapp_number ? t('Edit') : t('Add')}
                                     </Link>
                                     {user.whatsapp_number && (
                                         <button onClick={() => deleteField('whatsapp_number')} className="text-red-500 hover:text-red-600 text-sm">
-                                            Delete
+                                            {t('Delete')}
                                         </button>
                                     )}
                                 </div>
                             </div>
                             
                             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <span className="text-sm text-gray-600">Telegram</span>
+                                <span className="text-sm text-gray-600">{t('Telegram')}</span>
                                 <div className="flex gap-2">
                                     <Link href={route('profile.edit')} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                                        {user.telegram_username ? 'Edit' : 'Add'}
+                                        {user.telegram_username ? t('Edit') : t('Add')}
                                     </Link>
                                     {user.telegram_username && (
                                         <button onClick={() => deleteField('telegram_username')} className="text-red-500 hover:text-red-600 text-sm">
-                                            Delete
+                                            {t('Delete')}
                                         </button>
                                     )}
                                 </div>
                             </div>
                             
                             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <span className="text-sm text-gray-600">Instagram</span>
+                                <span className="text-sm text-gray-600">{t('Instagram')}</span>
                                 <div className="flex gap-2">
                                     <Link href={route('profile.edit')} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                                        {user.instagram_username ? 'Edit' : 'Add'}
+                                        {user.instagram_username ? t('Edit') : t('Add')}
                                     </Link>
                                     {user.instagram_username && (
                                         <button onClick={() => deleteField('instagram_username')} className="text-red-500 hover:text-red-600 text-sm">
-                                            Delete
+                                            {t('Delete')}
                                         </button>
                                     )}
                                 </div>
                             </div>
                             
                             <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                <span className="text-sm text-gray-600">Email</span>
+                                <span className="text-sm text-gray-600">{t('Email')}</span>
                                 <div className="flex gap-2">
                                     <Link href={route('profile.edit')} className="text-indigo-600 hover:text-indigo-700 text-sm font-medium">
-                                        {user.public_email ? 'Edit' : 'Add'}
+                                        {user.public_email ? t('Edit') : t('Add')}
                                     </Link>
                                     {user.public_email && (
                                         <button onClick={() => deleteField('public_email')} className="text-red-500 hover:text-red-600 text-sm">
-                                            Delete
+                                            {t('Delete')}
                                         </button>
                                     )}
                                 </div>
@@ -424,7 +426,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                 {/* Pages Section */}
                 {pages.length > 0 && (
                     <div className="mb-12">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Pages</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('Pages')}</h2>
                         <div className="flex flex-wrap gap-3">
                             {pages.map(p => (
                                 <Link
@@ -442,7 +444,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                 {/* Categories Section */}
                 {categories.length > 0 && (
                     <div className="mb-12">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-6">Categories</h2>
+                        <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('Categories')}</h2>
                         <div className="flex flex-wrap gap-3">
                             {categories.map(c => (
                                 <Link
@@ -466,7 +468,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
 
                 {/* Products Grid */}
                 <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Products</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 mb-6">{t('Products')}</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                         {products.slice(0, visible).map(p => (
                             <div key={p.id} className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
@@ -505,7 +507,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                                         onClick={() => addToCart(p.slug)}
                                         className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-medium py-3 px-4 rounded-xl transition-all duration-200 hover:shadow-lg transform hover:scale-105"
                                     >
-                                        Add to Cart
+                                        {t('Add to Cart')}
                                     </button>
                                 </div>
                             </div>
@@ -525,7 +527,9 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                 {cropSrc && (
                     <div className="p-6 space-y-6">
                         <h3 className="text-lg font-semibold text-gray-900">
-                            Crop {cropMode === 'logo' ? 'Profile Picture' : 'Cover Photo'}
+                            {cropMode === 'logo'
+                                ? t('Crop Profile Picture')
+                                : t('Crop Cover Photo')}
                         </h3>
                         
                         <div className="relative h-80 w-full bg-gray-100 rounded-lg overflow-hidden">
@@ -542,7 +546,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                         
                         <div className="flex items-center justify-between">
                             <div className="flex items-center space-x-4">
-                                <span className="text-sm text-gray-600">Zoom:</span>
+                                <span className="text-sm text-gray-600">{t('Zoom:')}</span>
                                 <input
                                     type="range"
                                     min={1}
@@ -560,14 +564,14 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                                     onClick={() => setCropSrc(null)}
                                     className="px-6 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors duration-200"
                                 >
-                                    Cancel
+                                    {t('Cancel')}
                                 </button>
                                 <button
                                     type="button"
                                     onClick={saveCropped}
                                     className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-lg font-medium transition-all duration-200"
                                 >
-                                    Save Changes
+                                    {t('Save Changes')}
                                 </button>
                             </div>
                         </div>
@@ -579,34 +583,34 @@ export default function Profile({ user, pages = [], categories, products, isOwne
             <Modal show={linksModal} onClose={() => setLinksModal(false)}>
                 <div className="p-6 space-y-6">
                     <h3 className="text-lg font-semibold text-gray-900">
-                        {linkData.id ? 'Edit Social Link' : 'Add Social Link'}
+                        {linkData.id ? t('Edit Social Link') : t('Add Social Link')}
                     </h3>
                     
                     <div className="space-y-4">
                         <div>
-                            <InputLabel htmlFor="label" value="Label" className="text-gray-700 font-medium" />
+                            <InputLabel htmlFor="label" value={t('Label')} className="text-gray-700 font-medium" />
                             <TextInput
                                 id="label"
                                 className="mt-2 block w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
                                 value={linkData.label}
                                 onChange={(e) => setLinkData({ ...linkData, label: e.target.value })}
-                                placeholder="e.g. LinkedIn, Portfolio, etc."
+                                placeholder={t('e.g. LinkedIn, Portfolio, etc.')}
                             />
                         </div>
                         
                         <div>
-                            <InputLabel htmlFor="url" value="URL" className="text-gray-700 font-medium" />
+                            <InputLabel htmlFor="url" value={t('URL')} className="text-gray-700 font-medium" />
                             <TextInput
                                 id="url"
                                 className="mt-2 block w-full rounded-lg border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
                                 value={linkData.url}
                                 onChange={(e) => setLinkData({ ...linkData, url: e.target.value })}
-                                placeholder="https://example.com"
+                                placeholder={t('https://example.com')}
                             />
                         </div>
                         
                         <div>
-                            <InputLabel htmlFor="icon" value="Icon (Optional)" className="text-gray-700 font-medium" />
+                            <InputLabel htmlFor="icon" value={t('Icon (Optional)')} className="text-gray-700 font-medium" />
                             <input
                                 type="file"
                                 id="icon"
@@ -615,7 +619,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                                 onChange={handleIconChange}
                                 accept="image/*"
                             />
-                            <p className="mt-1 text-sm text-gray-500">Upload a small icon for your link (optional)</p>
+                            <p className="mt-1 text-sm text-gray-500">{t('Upload a small icon for your link (optional)')}</p>
                         </div>
                     </div>
                     
@@ -625,7 +629,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                             onClick={() => setLinksModal(false)}
                             className="px-6 py-2 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors duration-200"
                         >
-                            Cancel
+                            {t('Cancel')}
                         </button>
                         <button
                             type="button"
@@ -633,7 +637,7 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                             disabled={!linkData.label || !linkData.url}
                             className="px-6 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg font-medium transition-all duration-200"
                         >
-                            {linkData.id ? 'Update Link' : 'Add Link'}
+                            {linkData.id ? t('Update Link') : t('Add Link')}
                         </button>
                     </div>
                 </div>
