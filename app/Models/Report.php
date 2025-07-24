@@ -14,6 +14,7 @@ class Report extends Model
         'reporter_id',
         'reported_user_id',
         'reason',
+        'evidence',
     ];
 
     public function reporter(): BelongsTo

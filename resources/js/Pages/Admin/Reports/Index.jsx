@@ -1,7 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import Pagination from '@/Components/Pagination';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Head, router } from '@inertiajs/react';
+import { Head, Link, router } from '@inertiajs/react';
 
 export default function Reports({ reports }) {
 
@@ -26,6 +26,7 @@ export default function Reports({ reports }) {
                                     <th className="px-4 py-2 text-left">Reported User</th>
                                     <th className="px-4 py-2">Reporter</th>
                                     <th className="px-4 py-2">Reason</th>
+                                    <th className="px-4 py-2">Evidence</th>
                                     <th className="px-4 py-2">Action</th>
                                 </tr>
                             </thead>
@@ -33,12 +34,25 @@ export default function Reports({ reports }) {
                                 {reports.data.map(r => (
                                     <tr key={r.id} className="border-b">
                                         <td className="px-4 py-2">
-                                            {r.reported_user?.name || r.reported_user?.username}
+                                            <Link href={route('profile.show', r.reported_user.username)} className="text-blue-500 hover:underline">
+                                                {r.reported_user?.name || r.reported_user?.username}
+                                            </Link>
                                         </td>
                                         <td className="px-4 py-2">
-                                            {r.reporter?.name || 'Guest'}
+                                            {r.reporter ? (
+                                                <Link href={route('profile.show', r.reporter.username)} className="text-blue-500 hover:underline">
+                                                    {r.reporter.name || r.reporter.username}
+                                                </Link>
+                                            ) : (
+                                                'Guest'
+                                            )}
                                         </td>
                                         <td className="px-4 py-2">{r.reason}</td>
+                                        <td className="px-4 py-2">
+                                            {r.evidence && (
+                                                <a href={`/storage/${r.evidence}`} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">View</a>
+                                            )}
+                                        </td>
                                         <td className="px-4 py-2 text-right">
                                             <PrimaryButton onClick={() => suspend(r.reported_user_id)}>Suspend</PrimaryButton>
                                         </td>
