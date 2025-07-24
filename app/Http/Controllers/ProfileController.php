@@ -71,6 +71,7 @@ class ProfileController extends Controller
             'facebook_username' => ['nullable', 'string'],
             'public_email' => ['nullable', 'string', 'email'],
             'about' => ['nullable', 'string'],
+            'footer_text' => ['nullable', 'string'],
         ];
 
         if (! $request->user()->is_admin) {

@@ -165,15 +165,26 @@ export default function GuestLayout({ children }) {
                             {/* Brand Section */}
                             <div className="col-span-1 sm:col-span-2 lg:col-span-2">
                                 <div className="flex items-center space-x-2 mb-4">
-                                    <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                                        <ApplicationLogo className="h-5 w-5 text-white" />
+                                    <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center overflow-hidden">
+                                        {props.user?.logo ? (
+                                            <img src={`/storage/${props.user.logo}`} alt="logo" className="w-full h-full object-cover" />
+                                        ) : (
+                                            <ApplicationLogo className="h-5 w-5 text-white" />
+                                        )}
                                     </div>
                                     <span className="text-lg sm:text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
                                         Store
                                     </span>
+                                    {props.isOwner && (
+                                        <Link href={route('profile.edit')} className="text-gray-400 hover:text-indigo-600" title="Edit footer text">
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                            </svg>
+                                        </Link>
+                                    )}
                                 </div>
-                                <p className="text-gray-600 text-sm sm:text-base max-w-md">
-                                    Your trusted marketplace for quality products. Shop with confidence and enjoy seamless shopping experience.
+                                <p className="text-gray-600 text-sm sm:text-base max-w-md whitespace-pre-line">
+                                    {props.user?.footer_text || 'Your trusted marketplace for quality products. Shop with confidence and enjoy seamless shopping experience.'}
                                 </p>
                             </div>
 
