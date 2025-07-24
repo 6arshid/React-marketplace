@@ -10,4 +10,9 @@ use Illuminate\Routing\Controller as BaseController;
 abstract class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    protected function maxUploadSize(): int
+    {
+        return (int) env('MAX_UPLOAD_SIZE_MB', 10) * 1024;
+    }
 }

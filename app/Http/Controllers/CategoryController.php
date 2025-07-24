@@ -31,7 +31,7 @@ class CategoryController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|unique:categories,name',
-            'icon' => 'nullable|file',
+            'icon' => 'nullable|file|max:' . $this->maxUploadSize(),
         ]);
 
         $data['slug'] = $this->generateUniqueSlug();
@@ -60,6 +60,9 @@ class CategoryController extends Controller
         ]);
 
         if ($request->hasFile('icon')) {
+            $request->validate([
+                'icon' => 'file|max:' . $this->maxUploadSize(),
+            ]);
             $data['icon'] = $request->file('icon')->store('icons', 'public');
         } elseif ($request->input('icon') === null) {
             $data['icon'] = null;

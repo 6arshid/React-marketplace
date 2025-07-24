@@ -18,7 +18,7 @@ class SocialLinkController extends Controller
         $data = $request->validate([
             'label' => 'required|string',
             'url' => 'required|string',
-            'icon' => 'nullable|file',
+            'icon' => 'nullable|file|max:' . $this->maxUploadSize(),
         ]);
 
         if ($request->hasFile('icon')) {
@@ -43,6 +43,9 @@ class SocialLinkController extends Controller
         ]);
 
         if ($request->hasFile('icon')) {
+            $request->validate([
+                'icon' => 'file|max:' . $this->maxUploadSize(),
+            ]);
             if ($socialLink->icon) {
                 Storage::disk('public')->delete($socialLink->icon);
             }

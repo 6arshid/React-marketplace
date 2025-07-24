@@ -39,6 +39,7 @@ class AdminGeneralConfigController extends Controller
             'VITE_APP_NAME',
             'GOOGLE_CLIENT_ID',
             'GOOGLE_CLIENT_SECRET',
+            'MAX_UPLOAD_SIZE_MB',
         ];
 
         $env = [];
@@ -81,6 +82,7 @@ class AdminGeneralConfigController extends Controller
             'VITE_APP_NAME' => 'required|string',
             'GOOGLE_CLIENT_ID' => 'nullable|string',
             'GOOGLE_CLIENT_SECRET' => 'nullable|string',
+            'MAX_UPLOAD_SIZE_MB' => 'required|numeric',
         ]);
 
         $this->updateEnvFile($data);

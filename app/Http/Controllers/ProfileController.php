@@ -92,7 +92,7 @@ class ProfileController extends Controller
     public function updateLogo(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'logo' => ['required', 'file', 'image'],
+            'logo' => ['required', 'file', 'image', 'max:' . $this->maxUploadSize()],
         ]);
 
         $path = $data['logo']->store('logos', 'public');
@@ -109,7 +109,7 @@ class ProfileController extends Controller
     public function updateCover(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'cover' => ['required', 'file', 'image'],
+            'cover' => ['required', 'file', 'image', 'max:' . $this->maxUploadSize()],
         ]);
 
         $path = $data['cover']->store('covers', 'public');

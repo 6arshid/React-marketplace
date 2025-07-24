@@ -22,17 +22,17 @@ class AdminAppearanceController extends Controller
     public function update(Request $request)
     {
         $data = $request->validate([
-            'app_logo' => ['nullable','file','mimetypes:image/svg+xml,text/plain'],
+            'app_logo' => ['nullable','file','mimetypes:image/svg+xml,text/plain','max:'. $this->maxUploadSize()],
             'welcome_tagline' => ['nullable','string','max:255'],
             'welcome_footer_text' => ['nullable','string','max:255'],
             'privacy_url' => ['nullable','string','max:255'],
             'terms_url' => ['nullable','string','max:255'],
             'support_url' => ['nullable','string','max:255'],
             'guest_footer_payment_label' => ['nullable','string','max:255'],
-            'payment_icon1' => ['nullable','file','mimetypes:image/svg+xml,text/plain'],
-            'payment_icon2' => ['nullable','file','mimetypes:image/svg+xml,text/plain'],
-            'payment_icon3' => ['nullable','file','mimetypes:image/svg+xml,text/plain'],
-            'payment_icon4' => ['nullable','file','mimetypes:image/svg+xml,text/plain'],
+            'payment_icon1' => ['nullable','file','mimetypes:image/svg+xml,text/plain','max:'. $this->maxUploadSize()],
+            'payment_icon2' => ['nullable','file','mimetypes:image/svg+xml,text/plain','max:'. $this->maxUploadSize()],
+            'payment_icon3' => ['nullable','file','mimetypes:image/svg+xml,text/plain','max:'. $this->maxUploadSize()],
+            'payment_icon4' => ['nullable','file','mimetypes:image/svg+xml,text/plain','max:'. $this->maxUploadSize()],
         ]);
 
         if ($request->hasFile('app_logo')) {

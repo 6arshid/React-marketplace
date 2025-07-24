@@ -60,10 +60,10 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'is_digital' => 'boolean',
             'shipping_cost' => 'nullable|numeric',
-            'demo_file' => 'nullable|file',
-            'main_file' => 'nullable|file',
+            'demo_file' => 'nullable|file|max:' . $this->maxUploadSize(),
+            'main_file' => 'nullable|file|max:' . $this->maxUploadSize(),
             'images' => 'nullable|array',
-            'images.*' => 'file',
+            'images.*' => 'file|max:' . $this->maxUploadSize(),
             'attributes' => 'array',
             'attributes.*.title' => 'required|string',
             'attributes.*.option' => 'required|string',
@@ -128,18 +128,27 @@ class ProductController extends Controller
         ]);
 
         if ($request->hasFile('demo_file')) {
+            $request->validate([
+                'demo_file' => 'file|max:' . $this->maxUploadSize(),
+            ]);
             $data['demo_file'] = $request->file('demo_file')->store('demos', 'public');
         } elseif ($request->input('demo_file') === null) {
             $data['demo_file'] = null;
         }
 
         if ($request->hasFile('main_file')) {
+            $request->validate([
+                'main_file' => 'file|max:' . $this->maxUploadSize(),
+            ]);
             $data['main_file'] = $request->file('main_file')->store('files', 'public');
         } elseif ($request->input('main_file') === null) {
             $data['main_file'] = null;
         }
 
         if ($request->hasFile('images')) {
+            $request->validate([
+                'images.*' => 'file|max:' . $this->maxUploadSize(),
+            ]);
             $paths = [];
             foreach ($request->file('images') as $img) {
                 $paths[] = $img->store('images', 'public');

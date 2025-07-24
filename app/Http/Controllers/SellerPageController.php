@@ -30,7 +30,7 @@ class SellerPageController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'images' => 'nullable|array',
-            'images.*' => 'file',
+            'images.*' => 'file|max:' . $this->maxUploadSize(),
         ]);
 
         $data['slug'] = Page::generateUniqueSlug();
@@ -65,6 +65,9 @@ class SellerPageController extends Controller
         ]);
 
         if ($request->hasFile('images')) {
+            $request->validate([
+                'images.*' => 'file|max:' . $this->maxUploadSize(),
+            ]);
             $paths = [];
             foreach ($request->file('images') as $img) {
                 $paths[] = $img->store('pages', 'public');
