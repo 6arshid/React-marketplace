@@ -164,6 +164,13 @@ export default function Index() {
             color: 'from-red-500 to-red-600'
         },
         {
+            href: route('admin.domains.index'),
+            label: t('Domains'),
+            icon: Map,
+            description: t('Manage user domains'),
+            color: 'from-green-500 to-green-600'
+        },
+        {
             href: route('admin.sitemap.index'),
             label: t('Sitemap'),
             icon: Map,

@@ -7,6 +7,7 @@ import UpdateProfileInformationForm from './Partials/UpdateProfileInformationFor
 import SettlementForm from './Partials/SettlementForm';
 import ContactInfoForm from './Partials/ContactInfoForm';
 import PublicInfoForm from './Partials/PublicInfoForm';
+import ParkDomainForm from './Partials/ParkDomainForm';
 
 
 export default function Edit({ mustVerifyEmail, status }) {
@@ -58,6 +59,18 @@ export default function Edit({ mustVerifyEmail, status }) {
                 </svg>
             ),
             component: SettlementForm,
+            props: { className: "max-w-none" }
+        },
+        {
+            id: 'domain',
+            title: t('Park Domain'),
+            description: t('Point your domain to ns1.server.com and ns2.server.com.'),
+            icon: (
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4h16v16H4z" />
+                </svg>
+            ),
+            component: ParkDomainForm,
             props: { className: "max-w-none" }
         },
         {
