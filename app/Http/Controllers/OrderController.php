@@ -40,7 +40,7 @@ class OrderController extends Controller
         $ordersQuery = $request->user()
             ->orders()
             ->where('is_digital', true)
-            ->latest();
+            ->orderByDesc('id');
 
         $orders = $ordersQuery
             ->paginate(10)
