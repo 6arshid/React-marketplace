@@ -13,11 +13,11 @@ class AdminSeeder extends Seeder
     {
         // Create admin user
         $user = User::updateOrCreate(
-            ['email' => 'kalouvalou3@gmail.com'],
+            ['email' => 'admin@admin.com'],
             [
-                'username' => 'kalouvalou3',
-                'name' => 'kalouvalou3',
-                'password' => Hash::make('kalouvalou3@gmail.com'),
+                'username' => 'administrator',
+                'name' => 'admin',
+                'password' => Hash::make('admin@admin.com'),
                 'is_admin' => true,
                 'is_seller' => true,
                 'stripe_api_key' => 'pk_test_51R7LMwGdTRLiMmQbFh44O6dUIbn40mJg2o3ZpH2ZFEzoMqqD6M7Fm9c7C6QRMq7NYLACyQw943X9hUoEdgzsDQSd00ooBnYsBA',
