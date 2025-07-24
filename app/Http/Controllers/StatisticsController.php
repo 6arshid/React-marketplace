@@ -25,13 +25,11 @@ class StatisticsController extends Controller
             ->get()
             ->keyBy('date');
 
-        $productViews = $dates->map(fn ($d) => $stats[$d]->product_views ?? 0);
         $profileViews = $dates->map(fn ($d) => $stats[$d]->profile_views ?? 0);
 
         return Inertia::render('Statistics', [
             'topProducts' => $topProducts,
             'labels' => $dates,
-            'productViews' => $productViews,
             'profileViews' => $profileViews,
         ]);
     }

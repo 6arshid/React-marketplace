@@ -1,35 +1,21 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import { Line } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
 import {
     Chart as ChartJS,
     CategoryScale,
     LinearScale,
-    PointElement,
-    LineElement,
+    BarElement,
     Title,
     Tooltip,
     Legend,
 } from 'chart.js';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
-export default function Statistics({ topProducts = [], productViews = [], profileViews = [], labels = [] }) {
+export default function Statistics({ topProducts = [], profileViews = [], labels = [] }) {
     const { t } = useTranslation();
-
-    const productData = {
-        labels,
-        datasets: [
-            {
-                label: t('Product Views'),
-                data: productViews,
-                borderColor: 'rgb(54, 162, 235)',
-                backgroundColor: 'rgba(54, 162, 235, 0.5)',
-                tension: 0.3,
-            },
-        ],
-    };
 
     const profileData = {
         labels,
@@ -50,12 +36,8 @@ export default function Statistics({ topProducts = [], productViews = [], profil
             <div className="py-12">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-8">
                     <div className="bg-white p-6 shadow-sm sm:rounded-lg">
-                        <h3 className="text-lg font-semibold mb-4">{t('Product Views')}</h3>
-                        <Line data={productData} />
-                    </div>
-                    <div className="bg-white p-6 shadow-sm sm:rounded-lg">
                         <h3 className="text-lg font-semibold mb-4">{t('Profile Views')}</h3>
-                        <Line data={profileData} />
+                        <Bar data={profileData} options={{ responsive: true, maintainAspectRatio: false }} className="h-64" />
                     </div>
                     <div className="bg-white p-6 shadow-sm sm:rounded-lg">
                         <h3 className="text-lg font-semibold mb-4">{t('Top 10 Products')}</h3>
