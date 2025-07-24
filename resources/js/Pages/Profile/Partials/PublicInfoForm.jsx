@@ -17,6 +17,7 @@ export default function PublicInfoForm({ className = '' }) {
             about: user.about || '',
             instagram_username: user.instagram_username || '',
             facebook_username: user.facebook_username || '',
+            footer_text: user.footer_text || '',
         });
 
     const [logo, setLogo] = useState(user.logo ?? '');
@@ -86,6 +87,17 @@ export default function PublicInfoForm({ className = '' }) {
                         autoComplete="off"
                     />
                     <InputError message={errors.facebook_username} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="footer_text" value={t('Store Footer Text')} />
+                    <textarea
+                        id="footer_text"
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                        value={data.footer_text}
+                        onChange={(e) => setData('footer_text', e.target.value)}
+                    />
+                    <InputError message={errors.footer_text} className="mt-2" />
                 </div>
 
                 <div>

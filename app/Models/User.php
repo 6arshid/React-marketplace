@@ -42,6 +42,7 @@ class User extends Authenticatable
         'about',
         'instagram_username',
         'facebook_username',
+        'footer_text',
         'password',
         'profile_views',
     ];

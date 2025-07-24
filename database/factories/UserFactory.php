@@ -37,6 +37,7 @@ class UserFactory extends Factory
             'public_email' => null,
             'is_seller' => false,
             'profile_views' => 0,
+            'footer_text' => null,
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
