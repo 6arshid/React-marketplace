@@ -493,7 +493,9 @@
   "Domains": "دامنه‌ها",
   "Domain": "دامنه",
   "Park Domain": "پارک دامنه",
-  "Point your domain to ns1.server.com and ns2.server.com.": "لطفاً دامنه خود را به ns1.server.com و ns2.server.com اشاره دهید.",
+  "Point your domain to {{ns1}} and {{ns2}}.": "لطفاً دامنه خود را به {{ns1}} و {{ns2}} اشاره دهید.",
+  "Default NS1": "NS1 پیش‌فرض",
+  "Default NS2": "NS2 پیش‌فرض",
   "Pro account required": "نیاز به حساب حرفه‌ای",
   "Manage user domains": "مدیریت دامنه‌ها"
   ,"Report Review": "گزارش نظر"

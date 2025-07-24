@@ -10,7 +10,7 @@ import PublicInfoForm from './Partials/PublicInfoForm';
 import ParkDomainForm from './Partials/ParkDomainForm';
 
 
-export default function Edit({ mustVerifyEmail, status }) {
+export default function Edit({ mustVerifyEmail, status, ns1, ns2 }) {
     const { t } = useTranslation();
     const sections = [
         {
@@ -64,14 +64,14 @@ export default function Edit({ mustVerifyEmail, status }) {
         {
             id: 'domain',
             title: t('Park Domain'),
-            description: t('Point your domain to ns1.server.com and ns2.server.com.'),
+            description: t('Point your domain to {{ns1}} and {{ns2}}.', { ns1, ns2 }),
             icon: (
                 <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4h16v16H4z" />
                 </svg>
             ),
             component: ParkDomainForm,
-            props: { className: "max-w-none" }
+            props: { className: "max-w-none", ns1, ns2 }
         },
         {
             id: 'password',

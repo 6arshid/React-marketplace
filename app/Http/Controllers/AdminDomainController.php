@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Domain;
+use App\Models\Setting;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -18,8 +19,15 @@ class AdminDomainController extends Controller
             ->paginate(10)
             ->withQueryString();
 
+        $settings = Setting::whereIn('key', ['default_ns1', 'default_ns2'])->pluck('value', 'key');
+
+        $ns1 = $settings['default_ns1'] ?? 'ns1.server.com';
+        $ns2 = $settings['default_ns2'] ?? 'ns2.server.com';
+
         return Inertia::render('Admin/Domains', [
             'domains' => $domains,
+            'ns1' => $ns1,
+            'ns2' => $ns2,
         ]);
     }
 
@@ -52,6 +60,19 @@ class AdminDomainController extends Controller
     public function destroy(Domain $domain): RedirectResponse
     {
         $domain->delete();
+
+        return Redirect::back();
+    }
+
+    public function updateDefaults(Request $request): RedirectResponse
+    {
+        $data = $request->validate([
+            'ns1' => 'required|string',
+            'ns2' => 'required|string',
+        ]);
+
+        Setting::updateOrCreate(['key' => 'default_ns1'], ['value' => $data['ns1']]);
+        Setting::updateOrCreate(['key' => 'default_ns2'], ['value' => $data['ns2']]);
 
         return Redirect::back();
     }

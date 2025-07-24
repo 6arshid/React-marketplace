@@ -15,6 +15,8 @@ class SettingSeeder extends Seeder
             'footer_terms_url' => '#',
             'footer_support_url' => '#',
             'guest_footer_payment_label' => 'Secure payments',
+            'default_ns1' => 'ns1.server.com',
+            'default_ns2' => 'ns2.server.com',
         ];
 
         foreach ($defaults as $key => $value) {

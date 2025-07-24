@@ -2,10 +2,24 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
+import InputLabel from '@/Components/InputLabel';
+import TextInput from '@/Components/TextInput';
+import InputError from '@/Components/InputError';
+import PrimaryButton from '@/Components/PrimaryButton';
 
-export default function Domains({ domains }) {
+export default function Domains({ domains, ns1: initialNs1, ns2: initialNs2 }) {
     const { t } = useTranslation();
     const { post, patch, delete: destroy } = useForm();
+    const {
+        data,
+        setData,
+        post: saveDefaults,
+        processing,
+        errors,
+    } = useForm({
+        ns1: initialNs1 || '',
+        ns2: initialNs2 || '',
+    });
 
     const [editing, setEditing] = useState(null);
     const [ns1, setNs1] = useState('');
@@ -36,11 +50,31 @@ export default function Domains({ domains }) {
     const reject = (id) => post(route('admin.domains.reject', id));
     const remove = (id) => destroy(route('admin.domains.destroy', id));
 
+    const submitDefaults = (e) => {
+        e.preventDefault();
+        saveDefaults(route('admin.domains.defaults'), { preserveScroll: true });
+    };
+
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">{t('Domains')}</h2>}>
             <Head title={t('Domains')} />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl bg-white p-4 shadow sm:rounded-lg">
+                    <form onSubmit={submitDefaults} className="mb-6 flex items-end space-x-4">
+                        <div>
+                            <InputLabel htmlFor="ns1" value={t('Default NS1')} />
+                            <TextInput id="ns1" value={data.ns1} onChange={(e) => setData('ns1', e.target.value)} className="mt-1 block w-full" />
+                            <InputError message={errors.ns1} className="mt-2" />
+                        </div>
+                        <div>
+                            <InputLabel htmlFor="ns2" value={t('Default NS2')} />
+                            <TextInput id="ns2" value={data.ns2} onChange={(e) => setData('ns2', e.target.value)} className="mt-1 block w-full" />
+                            <InputError message={errors.ns2} className="mt-2" />
+                        </div>
+                        <div className="pt-4">
+                            <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
+                        </div>
+                    </form>
                     <table className="min-w-full divide-y divide-gray-200">
                         <thead>
                             <tr>
