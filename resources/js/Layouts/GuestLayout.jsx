@@ -40,7 +40,7 @@ export default function GuestLayout({ children }) {
                     {/* Footer */}
                     <div className="text-center">
                         <p className="text-sm text-gray-500">
-                            Secure and encrypted
+                            {settings.welcome_footer_text || 'Secure and encrypted'}
                         </p>
                     </div>
                 </div>
