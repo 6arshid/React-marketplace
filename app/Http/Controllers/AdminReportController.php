@@ -38,7 +38,14 @@ class AdminReportController extends Controller
         }
 
         if ($user->logo) {Storage::disk('public')->delete($user->logo);}
-        if ($user->cover) {Storage::disk('public')->delete($user->cover);}
+        if ($user->cover) {Storage::disk('public')->delete($user->cover);} 
+
+        return Redirect::back();
+    }
+
+    public function unsuspend(User $user): RedirectResponse
+    {
+        $user->update(['suspended_at' => null]);
 
         return Redirect::back();
     }

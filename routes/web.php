@@ -110,6 +110,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 
     Route::get('/reports', [AdminReportController::class, 'index'])->name('admin.reports.index');
     Route::post('/reports/{user}/suspend', [AdminReportController::class, 'suspend'])->name('admin.reports.suspend');
+    Route::post('/reports/{user}/unsuspend', [AdminReportController::class, 'unsuspend'])->name('admin.reports.unsuspend');
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
