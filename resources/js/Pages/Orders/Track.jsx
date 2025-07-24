@@ -33,7 +33,9 @@ const ExternalLinkIcon = ({ className = "w-4 h-4 md:w-5 md:h-5" }) => (
     </svg>
 );
 
-const getStatusDetails = (status) => {
+// Helper to map order status to styling and message. Requires the translation
+// function so messages can be localized inside the component.
+const getStatusDetails = (status, t) => {
     switch (status.toLowerCase()) {
         case 'delivered':
         case 'completed':
@@ -144,7 +146,8 @@ const getFileTypeLabel = (filename) => {
 
 export default function Track({ order, files }) {
     const { t } = useTranslation();
-    const statusDetails = getStatusDetails(order.status);
+    // Pass the translation function so messages inside helpers are localized
+    const statusDetails = getStatusDetails(order.status, t);
     const canDownload = ['accepted', 'paid', 'delivered', 'completed', 'success'].includes(
         order.status?.toLowerCase()
     );
