@@ -45,7 +45,7 @@ class TransactionController extends Controller
         $user = $request->user();
 
         if ($user->pro_panel) {
-            return Redirect::back()->with('error', 'Pro users are paid automatically.');
+            return Redirect::back()->with('error', __('messages.pro_user_payout_error'));
         }
 
         $user->transactions()
@@ -58,6 +58,6 @@ class TransactionController extends Controller
             'reference' => (string) Str::uuid(),
         ]);
 
-        return Redirect::back()->with('success', 'Payout request submitted successfully');
+        return Redirect::back()->with('success', __('messages.payout_request_submitted'));
     }
 }
