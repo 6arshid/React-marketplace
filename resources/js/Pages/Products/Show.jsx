@@ -303,8 +303,8 @@ export default function Show({ product }) {
 
             <div className="max-w-2xl mx-auto mt-10">
                 <h3 className="text-lg font-semibold mb-4">Reviews</h3>
-                <ReviewForm productId={product.id} onCreated={(r) => setReviews([r, ...reviews])} />
-                <ReviewList productId={product.id} />
+                <ReviewForm productId={product.slug} onCreated={(r) => setReviews([r, ...reviews])} />
+                <ReviewList productId={product.slug} />
             </div>
 
             <style>{`
