@@ -12,14 +12,14 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $user = User::where('email', 'admin@admin.com')->first();
-        if ($user) {
-            $category = Category::where('user_id', $user->id)->first() ?? Category::factory()->create(['user_id' => $user->id]);
-            Product::factory(50)->create([
-                'user_id' => $user->id,
-                'category_id' => $category->id,
-            ]);
-        } else {
-            Product::factory(50)->create();
+        if (! $user) {
+            return;
         }
+
+        $category = Category::where('user_id', $user->id)->first() ?? Category::factory()->create(['user_id' => $user->id]);
+        Product::factory(50)->create([
+            'user_id' => $user->id,
+            'category_id' => $category->id,
+        ]);
     }
 }
