@@ -14,7 +14,7 @@ class StoreController extends Controller
     {
         $pages = $user->pages()->latest()->get(['id', 'title', 'slug']);
         $categories = $user->categories()->get(['id', 'name', 'slug', 'icon']);
-        $products = $user->products()->latest()->get(['id', 'title', 'slug', 'price', 'images']);
+        $products = $user->products()->latest()->get(['id', 'title', 'slug', 'price', 'images', 'views']);
 
         $socialLinks = $user->socialLinks()->get(['id', 'label', 'url', 'icon']);
 
@@ -30,7 +30,7 @@ class StoreController extends Controller
 
     public function category(User $user, Category $category): Response
     {
-        $products = $category->products()->where('user_id', $user->id)->get();
+        $products = $category->products()->where('user_id', $user->id)->get(['id', 'title', 'slug', 'price', 'images', 'views']);
 
         return Inertia::render('Store/CategoryProducts', [
             'user' => $user->only('name', 'username'),
