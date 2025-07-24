@@ -51,6 +51,11 @@ export default function Index() {
                                 {t('Reserved Usernames')}
                             </Link>
                         </div>
+                        <div>
+                            <Link href={route('admin.sitemap.index')} className="text-blue-500 hover:underline">
+                                {t('Sitemap')}
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>

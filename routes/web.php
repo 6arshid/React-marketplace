@@ -21,6 +21,8 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminAppearanceController;
 use App\Http\Controllers\AdminGeneralConfigController;
+use App\Http\Controllers\AdminSitemapController;
+use App\Http\Controllers\SitemapController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -115,6 +117,8 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/general-config', [AdminGeneralConfigController::class, 'edit'])->name('admin.general-config.edit');
     Route::post('/general-config', [AdminGeneralConfigController::class, 'update'])->name('admin.general-config.update');
 
+    Route::get('/sitemap', [AdminSitemapController::class, 'index'])->name('admin.sitemap.index');
+
     Route::resource('pages', AdminPageController::class)
         ->except(['show'])
         ->names('admin.pages');
@@ -133,6 +137,9 @@ Route::get('/track', function () {
 Route::get('/track/{code}', [\App\Http\Controllers\OrderController::class, 'track'])->name('orders.track');
 
 Route::get('/pages/{page:slug}', [PageController::class, 'show'])->name('pages.show');
+
+Route::get('/sitemap{index?}.xml', [SitemapController::class, 'index'])
+    ->where('index', '\\d*');
 
 require __DIR__.'/auth.php';
 
