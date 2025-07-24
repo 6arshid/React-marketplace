@@ -4,11 +4,13 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 export default function ContactInfoForm({ className = '' }) {
     const user = usePage().props.auth.user;
     const stripe = usePage().props.stripe;
+    const { t } = useTranslation();
 
     const isPro = user.pro_panel;
     const showStripeFields = !user.is_admin;
@@ -40,14 +42,14 @@ export default function ContactInfoForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">Bank details and contact information</h2>
-                <p className="mt-1 text-sm text-gray-600">Update your public contact details and payment wallets.</p>
+                <h2 className="text-lg font-medium text-gray-900">{t('Bank details and contact information')}</h2>
+                <p className="mt-1 text-sm text-gray-600">{t('Update your public contact details and payment wallets.')}</p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
 
                 <div>
-                    <InputLabel htmlFor="public_email" value="Public Email" />
+                    <InputLabel htmlFor="public_email" value={t('Public Email')} />
                     <TextInput
                         id="public_email"
                         type="email"
@@ -61,7 +63,7 @@ export default function ContactInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="trc20_usdt_wallet" value="USDT Wallet" />
+                    <InputLabel htmlFor="trc20_usdt_wallet" value={t('USDT Wallet')} />
                     <TextInput
                         id="trc20_usdt_wallet"
                         className="mt-1 block w-full"
@@ -74,7 +76,7 @@ export default function ContactInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="bitcoin_wallet" value="Bitcoin Wallet" />
+                    <InputLabel htmlFor="bitcoin_wallet" value={t('Bitcoin Wallet')} />
                     <TextInput
                         id="bitcoin_wallet"
                         className="mt-1 block w-full"
@@ -89,7 +91,7 @@ export default function ContactInfoForm({ className = '' }) {
                 {showStripeFields && (
                     <>
                         <div>
-                            <InputLabel htmlFor="stripe_api_key" value="Stripe API Key" />
+                            <InputLabel htmlFor="stripe_api_key" value={t('Stripe API Key')} />
                             <TextInput
                                 id="stripe_api_key"
                                 className="mt-1 block w-full"
@@ -101,7 +103,7 @@ export default function ContactInfoForm({ className = '' }) {
                         </div>
 
                         <div>
-                            <InputLabel htmlFor="stripe_secret_key" value="Stripe Secret Key" />
+                            <InputLabel htmlFor="stripe_secret_key" value={t('Stripe Secret Key')} />
                             <TextInput
                                 id="stripe_secret_key"
                                 className="mt-1 block w-full"
@@ -117,14 +119,14 @@ export default function ContactInfoForm({ className = '' }) {
                 <div className="flex items-center gap-4">
                     {isPro ? (
                         <>
-                            <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                            <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
                             <button type="button" onClick={cancelSubscription} className="ml-2 text-red-600 hover:underline">
-                                Cancel Plan
+                                {t('Cancel Plan')}
                             </button>
                         </>
                     ) : (
                         <PrimaryButton type="button" onClick={upgrade} disabled={processing}>
-                            Upgrade to Pro (${stripe.price} monthly)
+                            {t('Upgrade to Pro ({{price}} monthly)', { price: stripe.price })}
                         </PrimaryButton>
                     )}
                     {isPro && (
@@ -135,7 +137,7 @@ export default function ContactInfoForm({ className = '' }) {
                             leave="transition ease-in-out"
                             leaveTo="opacity-0"
                         >
-                            <p className="text-sm text-gray-600">Saved.</p>
+                            <p className="text-sm text-gray-600">{t('Saved.')}</p>
                         </Transition>
                     )}
                 </div>

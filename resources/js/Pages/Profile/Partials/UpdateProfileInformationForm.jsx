@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 import { useEffect, useState } from 'react';
 
 export default function UpdateProfileInformation({
@@ -11,6 +12,7 @@ export default function UpdateProfileInformation({
     status,
     className = '',
 }) {
+    const { t } = useTranslation();
     const user = usePage().props.auth.user;
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
@@ -48,17 +50,17 @@ export default function UpdateProfileInformation({
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">
-                    Profile Information
+                    {t('Profile Information')}
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
+                    {t("Update your account profile information and email address.")}
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="username" value="Username" />
+                    <InputLabel htmlFor="username" value={t('Username')} />
 
                     <TextInput
                         id="username"
@@ -70,23 +72,23 @@ export default function UpdateProfileInformation({
                     />
 
                     {usernameStatus === 'checking' && (
-                        <p className="mt-2 text-sm text-gray-500">Checking...</p>
+                        <p className="mt-2 text-sm text-gray-500">{t('Checking...')}</p>
                     )}
                     {usernameStatus === 'available' && (
-                        <p className="mt-2 text-sm text-green-600">Username available</p>
+                        <p className="mt-2 text-sm text-green-600">{t('Username available')}</p>
                     )}
                     {usernameStatus === 'taken' && (
-                        <p className="mt-2 text-sm text-red-600">Username already taken</p>
+                        <p className="mt-2 text-sm text-red-600">{t('Username already taken')}</p>
                     )}
                     {usernameStatus === 'self' && (
-                        <p className="mt-2 text-sm text-green-600">You own this username</p>
+                        <p className="mt-2 text-sm text-green-600">{t('You own this username')}</p>
                     )}
 
                     <InputError className="mt-2" message={errors.username} />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value={t('Name')} />
 
                     <TextInput
                         id="name"
@@ -102,7 +104,7 @@ export default function UpdateProfileInformation({
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value={t('Email')} />
 
                     <TextInput
                         id="email"
@@ -120,28 +122,27 @@ export default function UpdateProfileInformation({
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-800">
-                            Your email address is unverified.
+                            {t('Your email address is unverified.')}
                             <Link
                                 href={route('verification.send')}
                                 method="post"
                                 as="button"
                                 className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                             >
-                                Click here to re-send the verification email.
+                                {t('Click here to re-send the verification email.')}
                             </Link>
                         </p>
 
                         {status === 'verification-link-sent' && (
                             <div className="mt-2 text-sm font-medium text-green-600">
-                                A new verification link has been sent to your
-                                email address.
+                                {t('A new verification link has been sent to your email address.')}
                             </div>
                         )}
                     </div>
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -151,7 +152,7 @@ export default function UpdateProfileInformation({
                         leaveTo="opacity-0"
                     >
                         <p className="text-sm text-gray-600">
-                            Saved.
+                            {t('Saved.')}
                         </p>
                     </Transition>
                 </div>
