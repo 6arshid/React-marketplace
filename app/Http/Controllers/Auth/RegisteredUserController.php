@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReservedUsername;
+use App\Models\Page;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -51,6 +52,26 @@ class RegisteredUserController extends Controller
             'is_seller' => $request->boolean('is_seller'),
             'password' => Hash::make($request->password),
         ]);
+
+        if ($user->is_seller) {
+            $user->pages()->create([
+                'title' => 'Return Policy',
+                'slug' => Page::generateUniqueSlug('return-'),
+                'description' => 'Edit this page to describe your return policy.',
+            ]);
+
+            $user->pages()->create([
+                'title' => 'About Us',
+                'slug' => Page::generateUniqueSlug('about-'),
+                'description' => 'Tell your customers about your store here.',
+            ]);
+
+            $user->pages()->create([
+                'title' => 'Contact Us',
+                'slug' => Page::generateUniqueSlug('contact-'),
+                'description' => 'Provide your contact information here.',
+            ]);
+        }
 
         event(new Registered($user));
 
