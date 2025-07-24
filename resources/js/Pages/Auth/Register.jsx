@@ -6,8 +6,10 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import GoogleIcon from '@/Components/GoogleIcon';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Register() {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         username: '',
         name: '',
@@ -43,11 +45,11 @@ export default function Register() {
 
     return (
         <GuestLayout>
-            <Head title="Register" />
+            <Head title={t('Register')} />
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="username" value="Username" />
+                    <InputLabel htmlFor="username" value={t('Username')} />
 
                     <TextInput
                         id="username"
@@ -60,20 +62,20 @@ export default function Register() {
                     />
 
                     {usernameStatus === 'checking' && (
-                        <p className="mt-2 text-sm text-gray-500">Checking...</p>
+                        <p className="mt-2 text-sm text-gray-500">{t('Checking...')}</p>
                     )}
                     {usernameStatus === 'available' && (
-                        <p className="mt-2 text-sm text-green-600">Username available</p>
+                        <p className="mt-2 text-sm text-green-600">{t('Username available')}</p>
                     )}
                     {usernameStatus === 'taken' && (
-                        <p className="mt-2 text-sm text-red-600">Username already taken</p>
+                        <p className="mt-2 text-sm text-red-600">{t('Username already taken')}</p>
                     )}
 
                     <InputError message={errors.username} className="mt-2" />
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value={t('Name')} />
 
                     <TextInput
                         id="name"
@@ -90,7 +92,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value={t('Email')} />
 
                     <TextInput
                         id="email"
@@ -107,7 +109,7 @@ export default function Register() {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel value="Account Type" />
+                    <InputLabel value={t('Account Type')} />
                     <div className="flex items-center mt-1 space-x-4">
                         <label className="flex items-center">
                             <input
@@ -118,7 +120,7 @@ export default function Register() {
                                 onChange={() => setData('is_seller', false)}
                                 className="mr-2"
                             />
-                            Buyer
+                            {t('Buyer')}
                         </label>
                         <label className="flex items-center">
                             <input
@@ -129,7 +131,7 @@ export default function Register() {
                                 onChange={() => setData('is_seller', true)}
                                 className="mr-2"
                             />
-                            Seller
+                            {t('Seller')}
                         </label>
                     </div>
                     <InputError message={errors.is_seller} className="mt-2" />
@@ -137,7 +139,7 @@ export default function Register() {
 
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value={t('Password')} />
 
                     <TextInput
                         id="password"
@@ -156,7 +158,7 @@ export default function Register() {
                 <div className="mt-4">
                     <InputLabel
                         htmlFor="password_confirmation"
-                        value="Confirm Password"
+                        value={t('Confirm Password')}
                     />
 
                     <TextInput
@@ -183,11 +185,11 @@ export default function Register() {
                         href={route('login')}
                         className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
-                        Already registered?
+                        {t('Already registered?')}
                     </Link>
 
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Register
+                        {t('Register')}
                     </PrimaryButton>
                 </div>
             </form>
@@ -198,7 +200,7 @@ export default function Register() {
                     className="inline-flex items-center px-4 py-2 border rounded-md bg-white text-gray-700 shadow-sm hover:bg-gray-50"
                 >
                     <GoogleIcon className="h-5 w-5 mr-2" />
-                    <span>Continue with Google</span>
+                    <span>{t('Continue with Google')}</span>
                 </a>
             </div>
         </GuestLayout>
