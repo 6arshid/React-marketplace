@@ -15,6 +15,7 @@ class ReviewController extends Controller
         $reviews = Review::with(['user', 'replies.user', 'likes'])
             ->where('product_id', $product->id)
             ->whereNull('parent_id')
+            ->whereNull('suspended_at')
             ->latest()
             ->paginate(5);
 

@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { usePage } from '@inertiajs/react';
 import axios from 'axios';
 import ReplyForm from './ReplyForm';
+import ReviewReportModal from './ReviewReportModal';
 
 export default function ReviewList({ productId }) {
     const [reviews, setReviews] = useState([]);
     const [next, setNext] = useState(null);
     const [replying, setReplying] = useState(null);
+    const [reporting, setReporting] = useState(null);
     const userId = usePage().props.auth?.user?.id;
 
     const loadReviews = (url = route('reviews.index', productId)) => {
@@ -73,6 +75,7 @@ export default function ReviewList({ productId }) {
                             <span>({dislikeCount(r)})</span>
                         </button>
                         <button onClick={() => setReplying(replying === r.id ? null : r.id)}>Reply</button>
+                        <button onClick={() => setReporting(r.id)}>Report</button>
                     </div>
                     {replying === r.id && <ReplyForm reviewId={r.id} onCreated={(reply) => handleReplyCreated(r.id, reply)} />}
                     {r.replies.map((rep) => (
@@ -88,6 +91,7 @@ export default function ReviewList({ productId }) {
                     Load more
                 </button>
             )}
+            <ReviewReportModal reviewId={reporting} show={Boolean(reporting)} onClose={() => setReporting(null)} />
         </div>
     );
 }

@@ -122,6 +122,13 @@ export default function Index() {
             color: 'from-blue-500 to-blue-600'
         },
         {
+            href: route('admin.review-reports.index'),
+            label: t('Review Reports'),
+            icon: BarChart3,
+            description: t('Review Reports'),
+            color: 'from-blue-400 to-blue-500'
+        },
+        {
             href: route('admin.appearance.edit'),
             label: t('Appearance'),
             icon: Palette,
