@@ -19,6 +19,7 @@ use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AdminAppearanceController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -106,6 +107,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
+
+    Route::get('/appearance', [AdminAppearanceController::class, 'edit'])->name('admin.appearance.edit');
+    Route::post('/appearance', [AdminAppearanceController::class, 'update'])->name('admin.appearance.update');
 
     Route::resource('pages', AdminPageController::class)
         ->except(['show'])

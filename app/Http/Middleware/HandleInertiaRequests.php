@@ -83,6 +83,13 @@ class HandleInertiaRequests extends Middleware
                     return [];
                 }
             },
+            'settings' => function () {
+                try {
+                    return \App\Models\Setting::pluck('value','key');
+                } catch (\Throwable $e) {
+                    return [];
+                }
+            },
         ];
     }
 }
