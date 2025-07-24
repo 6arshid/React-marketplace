@@ -34,6 +34,7 @@ export default function GeneralConfig({ env }) {
         VITE_APP_NAME: env.VITE_APP_NAME || '',
         GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID || '',
         GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET || '',
+        MAX_UPLOAD_SIZE_MB: env.MAX_UPLOAD_SIZE_MB || '',
     });
 
     const submit = (e) => {
@@ -203,6 +204,11 @@ export default function GeneralConfig({ env }) {
                                     <InputLabel htmlFor="GOOGLE_CLIENT_SECRET" value="GOOGLE_CLIENT_SECRET" />
                                     <TextInput id="GOOGLE_CLIENT_SECRET" value={data.GOOGLE_CLIENT_SECRET} className="mt-1 block w-full" onChange={e => setData('GOOGLE_CLIENT_SECRET', e.target.value)} />
                                     <InputError message={errors.GOOGLE_CLIENT_SECRET} className="mt-2" />
+                                </div>
+                                <div>
+                                    <InputLabel htmlFor="MAX_UPLOAD_SIZE_MB" value="MAX_UPLOAD_SIZE_MB" />
+                                    <TextInput id="MAX_UPLOAD_SIZE_MB" value={data.MAX_UPLOAD_SIZE_MB} className="mt-1 block w-full" onChange={e => setData('MAX_UPLOAD_SIZE_MB', e.target.value)} />
+                                    <InputError message={errors.MAX_UPLOAD_SIZE_MB} className="mt-2" />
                                 </div>
                             </div>
                             <div className="flex justify-end">
