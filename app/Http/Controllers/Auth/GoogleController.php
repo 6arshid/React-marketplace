@@ -23,7 +23,7 @@ class GoogleController extends Controller
             ['email' => $googleUser->getEmail()],
             [
                 'name' => $googleUser->getName() ?: $googleUser->getNickname(),
-                'username' => $this->generateUsername($googleUser->getNickname() ?: explode('@', $googleUser->getEmail())[0]),
+                'username' => uniqid() . $this->generateUsername($googleUser->getNickname() ?: explode('@', $googleUser->getEmail())[0]),
                 'google_id' => $googleUser->getId(),
                 'password' => bcrypt(Str::random(16)),
                 'email_verified_at' => now(),
