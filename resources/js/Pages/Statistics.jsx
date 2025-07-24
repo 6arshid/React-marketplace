@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { Line } from 'react-chartjs-2';
 import {
@@ -53,7 +53,11 @@ export default function Statistics({ topProducts = [], totalViews = 0 }) {
                             <tbody>
                                 {topProducts.map((p) => (
                                     <tr key={p.id} className="border-b">
-                                        <td className="px-4 py-2">{p.title}</td>
+                                        <td className="px-4 py-2">
+                                            <Link href={route('products.show', p.slug)} className="text-blue-600 hover:underline">
+                                                {p.title}
+                                            </Link>
+                                        </td>
                                         <td className="px-4 py-2 text-right">{p.views}</td>
                                     </tr>
                                 ))}

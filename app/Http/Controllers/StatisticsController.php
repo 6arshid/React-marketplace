@@ -15,7 +15,7 @@ class StatisticsController extends Controller
         $topProducts = $user->products()
             ->orderByDesc('views')
             ->take(10)
-            ->get(['id', 'title', 'views']);
+            ->get(['id', 'title', 'slug', 'views']);
 
         $totalViews = $user->products()->sum('views');
 
