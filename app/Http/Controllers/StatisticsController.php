@@ -18,10 +18,12 @@ class StatisticsController extends Controller
             ->get(['id', 'title', 'slug', 'views']);
 
         $totalViews = $user->products()->sum('views');
+        $profileViews = $user->profile_views;
 
         return Inertia::render('Statistics', [
             'topProducts' => $topProducts,
             'totalViews' => $totalViews,
+            'profileViews' => $profileViews,
         ]);
     }
 }
