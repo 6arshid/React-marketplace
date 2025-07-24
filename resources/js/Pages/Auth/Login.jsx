@@ -6,13 +6,20 @@ import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
 import GoogleIcon from '@/Components/GoogleIcon';
 import { Head, Link, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 export default function Login({ status, canResetPassword }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+    };
 
     const submit = (e) => {
         e.preventDefault();
@@ -24,7 +31,15 @@ export default function Login({ status, canResetPassword }) {
 
     return (
         <GuestLayout>
-            <Head title="Log in" />
+            <Head title={t('Log in')} />
+            <div className="flex justify-end space-x-2 mb-4">
+                <button type="button" onClick={() => changeLanguage('en')} className="text-sm underline">
+                    EN
+                </button>
+                <button type="button" onClick={() => changeLanguage('fa')} className="text-sm underline">
+                    فارسی
+                </button>
+            </div>
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
@@ -34,7 +49,7 @@ export default function Login({ status, canResetPassword }) {
 
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value={t('Email')} />
 
                     <TextInput
                         id="email"
@@ -51,7 +66,7 @@ export default function Login({ status, canResetPassword }) {
                 </div>
 
                 <div className="mt-4">
-                    <InputLabel htmlFor="password" value="Password" />
+                    <InputLabel htmlFor="password" value={t('Password')} />
 
                     <TextInput
                         id="password"
@@ -76,7 +91,7 @@ export default function Login({ status, canResetPassword }) {
                             }
                         />
                         <span className="ms-2 text-sm text-gray-600">
-                            Remember me
+                            {t('Remember me')}
                         </span>
                     </label>
                 </div>
@@ -87,12 +102,12 @@ export default function Login({ status, canResetPassword }) {
                             href={route('password.request')}
                             className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                         >
-                            Forgot your password?
+                            {t('Forgot your password?')}
                         </Link>
                     )}
 
                     <PrimaryButton className="ms-4" disabled={processing}>
-                        Log in
+                        {t('Log in')}
                     </PrimaryButton>
                 </div>
             </form>
@@ -103,7 +118,7 @@ export default function Login({ status, canResetPassword }) {
                     className="inline-flex items-center px-4 py-2 border rounded-md bg-white text-gray-700 shadow-sm hover:bg-gray-50"
                 >
                     <GoogleIcon className="h-5 w-5 mr-2" />
-                    <span>Continue with Google</span>
+                    <span>{t('Continue with Google')}</span>
                 </a>
             </div>
         </GuestLayout>

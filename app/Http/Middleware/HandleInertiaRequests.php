@@ -38,6 +38,7 @@ class HandleInertiaRequests extends Middleware
                 'success' => session('success'),
                 'error' => session('error'),
             ],
+            'locale' => app()->getLocale(),
             'cart' => function () {
                 $cart = session('cart', ['seller_id' => null, 'items' => []]);
 
