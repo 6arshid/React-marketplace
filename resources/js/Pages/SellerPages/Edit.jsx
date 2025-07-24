@@ -4,6 +4,7 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
+import { Inertia } from '@inertiajs/inertia'; 
 import { Head, useForm, Link } from '@inertiajs/react';
 import Editor from 'react-simple-wysiwyg';
 
@@ -14,10 +15,35 @@ export default function Edit({ page }) {
         images: page.images || [],
     });
 
-    const submit = (e) => {
-        e.preventDefault();
-        put(route('seller.pages.update', page.slug), { forceFormData: true });
-    };
+
+const submit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+
+    // تصاویر
+    if (Array.isArray(data.images)) {
+        data.images.forEach((file, i) => {
+            if (file instanceof File) {
+                formData.append(`images[${i}]`, file);
+            }
+        });
+    }
+
+    // برای درخواست PUT در لاراول
+    formData.append('_method', 'PUT');
+
+    Inertia.post(route('seller.pages.update', page.slug), formData, {
+        preserveScroll: true,
+        onError: (errors) => {
+            console.log(errors);
+        },
+    });
+};
+
 
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Edit Page</h2>}>
