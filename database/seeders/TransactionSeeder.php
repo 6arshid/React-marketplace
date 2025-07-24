@@ -10,11 +10,11 @@ class TransactionSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::where('email', 'kadmin@admin.com')->first();
-        if ($user) {
-            Transaction::factory(50)->create(['user_id' => $user->id]);
-        } else {
-            Transaction::factory(50)->create();
+        $user = User::where('email', 'admin@admin.com')->first();
+        if (! $user) {
+            return;
         }
+
+        Transaction::factory(50)->create(['user_id' => $user->id]);
     }
 }
