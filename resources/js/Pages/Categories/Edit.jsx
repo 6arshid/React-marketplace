@@ -4,6 +4,7 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
+import { Inertia } from '@inertiajs/inertia';
 import { Head, Link, useForm } from '@inertiajs/react';
 
 // Custom SVG Icons
@@ -66,10 +67,35 @@ export default function Edit({ category }) {
         icon: category.icon ?? '',
     });
 
-    const submit = (e) => {
-        e.preventDefault();
-        put(route('categories.update', category.slug), { forceFormData: true });
-    };
+
+const submit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    // افزودن فیلدهای متنی
+    formData.append('name', data.name);
+
+    // اگر فایل جدیدی انتخاب شده، ارسالش کن
+    if (data.icon && typeof data.icon !== 'string') {
+        formData.append('icon', data.icon);
+    }
+
+    // برای پشتیبانی از method PUT در Laravel
+    formData.append('_method', 'PUT');
+
+    // ارسال با Inertia
+    Inertia.post(route('categories.update', category.slug), formData, {
+        preserveScroll: true,
+        onError: (errors) => {
+            console.log('Validation Errors:', errors);
+        },
+        onSuccess: () => {
+            console.log('Category updated successfully!');
+        },
+    });
+};
+
 
     return (
         <AuthenticatedLayout
