@@ -10,7 +10,11 @@ class SalesController extends Controller
 {
     public function index(Request $request): Response
     {
-        $orders = $request->user()->sales()->with('buyer')->latest()->get();
+        $orders = $request->user()
+            ->sales()
+            ->with('buyer')
+            ->orderByDesc('id')
+            ->get();
 
         $commissionPercent = 0;
         if (! $request->user()->pro_panel) {
