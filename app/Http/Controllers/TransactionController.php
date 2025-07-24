@@ -16,14 +16,20 @@ class TransactionController extends Controller
     public function index(Request $request): Response
     {
         return Inertia::render('Transactions/Index', [
-            'transactions' => $request->user()->transactions()->latest()->get(),
+            'transactions' => $request->user()
+                ->transactions()
+                ->orderByDesc('id')
+                ->get(),
         ]);
     }
 
     public function money(Request $request): JsonResponse
     {
         return response()->json(
-            $request->user()->transactions()->latest()->get()
+            $request->user()
+                ->transactions()
+                ->orderByDesc('id')
+                ->get()
         );
     }
 

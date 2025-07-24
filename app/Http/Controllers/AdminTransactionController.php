@@ -18,7 +18,7 @@ class AdminTransactionController extends Controller
             // Show pending and paid withdraw requests
             'transactions' => Transaction::with('user')
                 ->whereIn('status', ['success', 'completed', 'paid'])
-                ->latest()
+                ->orderByDesc('id')
                 ->get(),
         ]);
     }
@@ -30,7 +30,7 @@ class AdminTransactionController extends Controller
             // withdraw requests
             Transaction::with('user')
                 ->whereIn('status', ['success', 'completed', 'paid'])
-                ->latest()
+                ->orderByDesc('id')
                 ->get()
         );
     }
