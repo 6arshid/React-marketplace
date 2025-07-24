@@ -188,5 +188,24 @@
   ,"Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "از ثبت‌نام شما متشکریم! قبل از شروع، لطفاً با کلیک روی لینکی که برایتان ایمیل کردیم ایمیل خود را تأیید کنید. اگر ایمیل را دریافت نکردید، با خوشحالی دوباره آن را ارسال می‌کنیم.",
   ,"A new verification link has been sent to the email address you provided during registration.": "یک لینک تأیید جدید به ایمیلی که هنگام ثبت‌نام وارد کردید ارسال شد.",
   ,"Resend Verification Email": "ارسال مجدد ایمیل تأیید",
+  ,"Total": "مجموع",
+  ,"Address": "آدرس",
+  ,"Phone": "تلفن"
+  ,"Cart": "سبد خرید",
+  ,"Total Amount": "مبلغ کل",
+  ,"First Name": "نام",
+  ,"Last Name": "نام خانوادگی",
+  ,"Email Address": "آدرس ایمیل",
+  ,"Full Address": "آدرس کامل",
+  ,"Postal Code": "کد پستی",
+  ,"Phone Number": "شماره تلفن",
+  ,"Variant": "نوع",
+  ,"Enter your first name": "نام خود را وارد کنید",
+  ,"Enter your last name": "نام خانوادگی خود را وارد کنید",
+  ,"your.email@example.com": "your.email@example.com",
+  ,"Street address, city, state": "نشانی خیابان، شهر، استان",
+  ,"12345": "12345",
+  ,"+1 (555) 123-4567": "+1 (555) 123-4567",
+  ,"Enter your wallet address for confirmation": "آدرس کیف پول خود را برای تایید وارد کنید"
   ,"Log Out": "خروج"
 }

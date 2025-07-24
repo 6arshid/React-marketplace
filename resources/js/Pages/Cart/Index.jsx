@@ -28,10 +28,10 @@ export default function Index({ items, total, seller, requires_shipping }) {
     const baseMessage =
         items
             .map((i) => `${i.product_title}${i.attribute ? ` (${i.attribute})` : ''} - $${i.price + i.shipping_cost}`)
-            .join('\n') + `\nTotal: $${total}`;
+            .join('\n') + `\n${t('Total')}: $${total}`;
 
     const shippingMessage = requires_shipping
-        ? `\nName: ${data.first_name} ${data.last_name}\nEmail: ${data.email}\nAddress: ${data.address}\nPostal Code: ${data.postal_code}\nPhone: ${data.phone}`
+        ? `\n${t('Name')}: ${data.first_name} ${data.last_name}\n${t('Email')}: ${data.email}\n${t('Address')}: ${data.address}\n${t('Postal Code')}: ${data.postal_code}\n${t('Phone')}: ${data.phone}`
         : '';
 
     const message = encodeURIComponent(baseMessage + shippingMessage);
@@ -101,7 +101,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                 </div>
             }
         >
-            <Head title="Cart" />
+            <Head title={t('Cart')} />
             <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-12">
                 <div className="mx-auto max-w-4xl px-6 lg:px-8">
                     <div className="backdrop-blur-sm bg-white/80 rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
@@ -133,7 +133,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                             </Link>
                                                             {item.attribute && (
                                                                 <p className="text-gray-600 mt-1">
-                                                                    Variant: {item.attribute}
+                                                                    {t('Variant')}: {item.attribute}
                                                                 </p>
                                                             )}
                                                         </div>
@@ -142,7 +142,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                                 ${item.price + item.shipping_cost}
                                                             </p>
                                                             {item.shipping_cost > 0 && (
-                                                                <p className="text-xs text-gray-500">Shipping: ${item.shipping_cost}</p>
+                                                                <p className="text-xs text-gray-500">{t('Shipping')}: ${item.shipping_cost}</p>
                                                             )}
                                                         </div>
                                                     </div>
@@ -151,7 +151,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                             
                                             <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
                                                 <div className="flex justify-between items-center">
-                                                    <span className="text-xl font-semibold">Total Amount</span>
+                                                    <span className="text-xl font-semibold">{t('Total Amount')}</span>
                                                     <span className="text-3xl font-bold">${total}</span>
                                                 </div>
                                             </div>
@@ -201,74 +201,74 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                             <div className="grid gap-6">
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                     <div className="space-y-2">
-                                                    <InputLabel htmlFor="first_name" value="First Name" className="text-gray-700 font-medium" />
+                                                    <InputLabel htmlFor="first_name" value={t('First Name')} className="text-gray-700 font-medium" />
                                                     <TextInput
                                                         id="first_name"
                                                         className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                         value={data.first_name}
                                                         onChange={(e) => setData('first_name', e.target.value)}
-                                                        placeholder="Enter your first name"
+                                                        placeholder={t('Enter your first name')}
                                                     />
                                                     <InputError message={errors.first_name} className="mt-2" />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <InputLabel htmlFor="last_name" value="Last Name" className="text-gray-700 font-medium" />
+                                                    <InputLabel htmlFor="last_name" value={t('Last Name')} className="text-gray-700 font-medium" />
                                                     <TextInput
                                                         id="last_name"
                                                         className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                         value={data.last_name}
                                                         onChange={(e) => setData('last_name', e.target.value)}
-                                                        placeholder="Enter your last name"
+                                                        placeholder={t('Enter your last name')}
                                                     />
                                                     <InputError message={errors.last_name} className="mt-2" />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
-                                                <InputLabel htmlFor="email" value="Email Address" className="text-gray-700 font-medium" />
+                                                <InputLabel htmlFor="email" value={t('Email Address')} className="text-gray-700 font-medium" />
                                                     <TextInput
                                                         id="email"
                                                         type="email"
                                                         className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                         value={data.email}
                                                         onChange={(e) => setData('email', e.target.value)}
-                                                        placeholder="your.email@example.com"
+                                                        placeholder={t('your.email@example.com')}
                                                     />
                                                 <InputError message={errors.email} className="mt-2" />
                                             </div>
 
                                             <div className="space-y-2">
-                                                <InputLabel htmlFor="address" value="Full Address" className="text-gray-700 font-medium" />
+                                                <InputLabel htmlFor="address" value={t('Full Address')} className="text-gray-700 font-medium" />
                                                 <TextInput
                                                     id="address"
                                                     className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                     value={data.address}
                                                     onChange={(e) => setData('address', e.target.value)}
-                                                    placeholder="Street address, city, state"
+                                                    placeholder={t('Street address, city, state')}
                                                 />
                                                 <InputError message={errors.address} className="mt-2" />
                                             </div>
 
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
-                                                    <InputLabel htmlFor="postal_code" value="Postal Code" className="text-gray-700 font-medium" />
+                                                    <InputLabel htmlFor="postal_code" value={t('Postal Code')} className="text-gray-700 font-medium" />
                                                         <TextInput
                                                             id="postal_code"
                                                             className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                         value={data.postal_code}
                                                         onChange={(e) => setData('postal_code', e.target.value)}
-                                                        placeholder="12345"
+                                                        placeholder={t('12345')}
                                                     />
                                                     <InputError message={errors.postal_code} className="mt-2" />
                                                 </div>
                                                 <div className="space-y-2">
-                                                    <InputLabel htmlFor="phone" value="Phone Number" className="text-gray-700 font-medium" />
+                                                    <InputLabel htmlFor="phone" value={t('Phone Number')} className="text-gray-700 font-medium" />
                                                     <TextInput
                                                         id="phone"
                                                         className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                         value={data.phone}
                                                         onChange={(e) => setData('phone', e.target.value)}
-                                                        placeholder="+1 (555) 123-4567"
+                                                        placeholder={t('+1 (555) 123-4567')}
                                                     />
                                                     <InputError message={errors.phone} className="mt-2" />
                                                 </div>
@@ -367,7 +367,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                 <div className="flex-1">
                                                     <TextInput
                                                         id="buyer_wallet"
-                                                        placeholder="Enter your wallet address for confirmation"
+                                                        placeholder={t('Enter your wallet address for confirmation')}
                                                         className="w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200"
                                                         value={data.buyer_wallet}
                                                         onChange={(e) => setData('buyer_wallet', e.target.value)}

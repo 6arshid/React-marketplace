@@ -187,6 +187,25 @@
   ,"Email Verification": "Email Verification",
   ,"Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
   ,"A new verification link has been sent to the email address you provided during registration.": "A new verification link has been sent to the email address you provided during registration.",
+  ,"Total": "Total",
+  ,"Address": "Address",
+  ,"Phone": "Phone"
   ,"Resend Verification Email": "Resend Verification Email",
+  ,"Cart": "Cart",
+  ,"Total Amount": "Total Amount",
+  ,"First Name": "First Name",
+  ,"Last Name": "Last Name",
+  ,"Email Address": "Email Address",
+  ,"Full Address": "Full Address",
+  ,"Postal Code": "Postal Code",
+  ,"Phone Number": "Phone Number",
+  ,"Variant": "Variant",
+  ,"Enter your first name": "Enter your first name",
+  ,"Enter your last name": "Enter your last name",
+  ,"your.email@example.com": "your.email@example.com",
+  ,"Street address, city, state": "Street address, city, state",
+  ,"12345": "12345",
+  ,"+1 (555) 123-4567": "+1 (555) 123-4567",
+  ,"Enter your wallet address for confirmation": "Enter your wallet address for confirmation"
   ,"Log Out": "Log Out"
 }
