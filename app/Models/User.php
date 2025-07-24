@@ -35,6 +35,7 @@ class User extends Authenticatable
         'stripe_customer_id',
         'pro_panel',
         'pro_panel_expires_at',
+        'suspended_at',
         'logo',
         'cover',
         'about',
@@ -67,6 +68,7 @@ class User extends Authenticatable
             'is_seller' => 'boolean',
             'pro_panel' => 'boolean',
             'pro_panel_expires_at' => 'datetime',
+            'suspended_at' => 'datetime',
             'stripe_api_key' => 'encrypted',
             'stripe_secret_key' => 'encrypted',
         ];

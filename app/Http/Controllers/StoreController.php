@@ -19,7 +19,7 @@ class StoreController extends Controller
         $socialLinks = $user->socialLinks()->get(['id', 'label', 'url', 'icon']);
 
         return Inertia::render('Store/Profile', [
-            'user' => $user->only('name', 'username', 'logo', 'cover', 'about', 'whatsapp_number', 'telegram_username', 'instagram_username', 'facebook_username', 'public_email'),
+            'user' => $user->only('id', 'name', 'username', 'logo', 'cover', 'about', 'whatsapp_number', 'telegram_username', 'instagram_username', 'facebook_username', 'public_email', 'suspended_at'),
             'pages' => $pages,
             'categories' => $categories,
             'products' => $products,

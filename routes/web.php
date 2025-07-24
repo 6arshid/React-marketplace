@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\AdminReservedUsernameController;
 use App\Http\Controllers\AdminTransactionController;
+use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\StripeConfigController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -78,6 +80,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllRead'])->name('notifications.read-all');
     Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
+
+    Route::post('/report/{user:username}', [ReportController::class, 'store'])->name('report.store');
 });
 
 Route::get('{user:username}/store/categories/{category:slug}', [StoreController::class, 'category'])
@@ -103,6 +107,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::resource('pages', AdminPageController::class)
         ->except(['show'])
         ->names('admin.pages');
+
+    Route::get('/reports', [AdminReportController::class, 'index'])->name('admin.reports.index');
+    Route::post('/reports/{user}/suspend', [AdminReportController::class, 'suspend'])->name('admin.reports.suspend');
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');

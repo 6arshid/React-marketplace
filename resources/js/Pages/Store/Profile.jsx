@@ -4,6 +4,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import AddToCartPrompt from '@/Components/AddToCartPrompt';
+import ReportModal from '@/Components/ReportModal';
 import { Head, Link, router } from '@inertiajs/react';
 import Cropper from 'react-easy-crop';
 import { useEffect, useRef, useState } from 'react';
@@ -18,9 +19,11 @@ export default function Profile({ user, pages = [], categories, products, isOwne
     const [zoom, setZoom] = useState(1);
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
     const [showCartPrompt, setShowCartPrompt] = useState(false);
+    const [showReport, setShowReport] = useState(false);
     const [linksModal, setLinksModal] = useState(false);
     const [linkData, setLinkData] = useState({ id: null, label: '', url: '', icon: null });
     const iconInputRef = useRef();
+    const isSuspended = Boolean(user.suspended_at);
 
     const deleteField = (field) => {
         if (!confirm('Delete this information?')) return;
@@ -152,6 +155,15 @@ export default function Profile({ user, pages = [], categories, products, isOwne
             onSuccess: () => router.reload({ only: ['socialLinks'] }),
         });
     };
+
+    if (isSuspended) {
+        return (
+            <GuestLayout>
+                <Head title={`${user.name} Profile`} />
+                <div className="min-h-screen flex items-center justify-center text-red-600 font-semibold">This user is suspended.</div>
+            </GuestLayout>
+        );
+    }
 
     return (
         <GuestLayout>
@@ -308,8 +320,8 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                         ))}
                         
                         {isOwner && (
-                            <button 
-                                onClick={openNewLink} 
+                            <button
+                                onClick={openNewLink}
                                 className="p-3 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white rounded-full transition-all duration-200 hover:scale-110 shadow-md hover:shadow-lg"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -319,6 +331,17 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                         )}
                     </div>
                 </div>
+
+                {!isOwner && (
+                    <div className="mt-4 text-center">
+                        <button
+                            onClick={() => setShowReport(true)}
+                            className="px-4 py-2 border border-red-300 text-red-600 rounded-full"
+                        >
+                            Report Store
+                        </button>
+                    </div>
+                )}
 
                 {/* Owner Edit Controls */}
                 {isOwner && (
@@ -622,6 +645,8 @@ export default function Profile({ user, pages = [], categories, products, isOwne
                 onClose={() => setShowCartPrompt(false)}
                 onGoToCart={() => router.visit(route('cart.show'))}
             />
+
+            <ReportModal userId={user.username} show={showReport} onClose={() => setShowReport(false)} />
         </GuestLayout>
     );
 }
