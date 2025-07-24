@@ -25,10 +25,8 @@
     "dependencies": {
         "@inertiajs/inertia": "^0.11.1",
         "@stripe/stripe-js": "^2.4.0",
-        "chart.js": "^4.4.3",
         "i18next": "^25.3.2",
         "qrcode.react": "^4.2.0",
-        "react-chartjs-2": "^5.2.0",
         "react-dropzone": "^14.3.8",
         "react-easy-crop": "^5.5.0",
         "react-i18next": "^15.6.1",
