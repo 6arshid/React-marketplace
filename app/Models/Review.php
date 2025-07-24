@@ -15,7 +15,15 @@ class Review extends Model
         'parent_id',
         'rating',
         'body',
+        'suspended_at',
     ];
+
+    protected function casts(): array
+    {
+        return [
+            'suspended_at' => 'datetime',
+        ];
+    }
 
     public function user()
     {

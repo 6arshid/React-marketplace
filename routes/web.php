@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\AdminReservedUsernameController;
 use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\AdminReportController;
+use App\Http\Controllers\AdminReviewReportController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
@@ -19,6 +20,7 @@ use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReviewReportController;
 use App\Http\Controllers\AdminAppearanceController;
 use App\Http\Controllers\AdminGeneralConfigController;
 use App\Http\Controllers\AdminCustomCodeController;
@@ -67,6 +69,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/reviews/{review}', [\App\Http\Controllers\ReviewController::class, 'destroy'])->name('reviews.destroy');
     Route::post('/reviews/{review}/like', [\App\Http\Controllers\ReviewController::class, 'like'])->name('reviews.like');
     Route::post('/reviews/{review}/dislike', [\App\Http\Controllers\ReviewController::class, 'dislike'])->name('reviews.dislike');
+    Route::post('/reviews/{review}/report', [\App\Http\Controllers\ReviewReportController::class, 'store'])->name('reviews.report');
     Route::resource('pages', SellerPageController::class)->names('seller.pages');
     Route::resource('social-links', SocialLinkController::class)->except(['create', 'edit', 'show']);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
@@ -133,6 +136,11 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/reports', [AdminReportController::class, 'index'])->name('admin.reports.index');
     Route::post('/reports/{user}/suspend', [AdminReportController::class, 'suspend'])->name('admin.reports.suspend');
     Route::post('/reports/{user}/unsuspend', [AdminReportController::class, 'unsuspend'])->name('admin.reports.unsuspend');
+
+    Route::get('/review-reports', [AdminReviewReportController::class, 'index'])->name('admin.review-reports.index');
+    Route::post('/review-reports/{review}/suspend', [AdminReviewReportController::class, 'suspend'])->name('admin.review-reports.suspend');
+    Route::post('/review-reports/{review}/unsuspend', [AdminReviewReportController::class, 'unsuspend'])->name('admin.review-reports.unsuspend');
+    Route::delete('/review-reports/{review}', [AdminReviewReportController::class, 'destroy'])->name('admin.review-reports.destroy');
 
     Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
     Route::post('/users/{user}/suspend', [AdminUserController::class, 'suspend'])->name('admin.users.suspend');
