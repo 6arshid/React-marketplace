@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Editor from 'react-simple-wysiwyg';
 
 // Custom SVG Icons
@@ -61,6 +62,7 @@ const FileIcon = () => (
 );
 
 export default function Edit({ product, categories }) {
+    const { t } = useTranslation();
     const { data, setData, put, processing, errors } = useForm({
         title: product.title,
         slug: product.slug,
@@ -110,7 +112,7 @@ const submit = (e) => {
 
     return (
         <AuthenticatedLayout>
-            <Head title="Edit Product" />
+            <Head title={t('Edit Product')} />
             
             {/* Header Section */}
             <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50">
@@ -123,8 +125,8 @@ const submit = (e) => {
                                     <EditIcon />
                                 </div>
                                 <div>
-                                    <h1 className="text-2xl font-bold text-gray-900">Edit Product</h1>
-                                    <p className="text-sm text-gray-500 mt-1">Update your product information</p>
+                                    <h1 className="text-2xl font-bold text-gray-900">{t('Edit Product')}</h1>
+                                    <p className="text-sm text-gray-500 mt-1">{t('Update your product information')}</p>
                                 </div>
                             </div>
                         </div>
@@ -141,30 +143,30 @@ const submit = (e) => {
                                     {/* Basic Information Section */}
                                     <div className="space-y-6">
                                         <div className="border-b border-gray-100 pb-4">
-                                            <h2 className="text-lg font-semibold text-gray-900">Basic Information</h2>
-                                            <p className="text-sm text-gray-500 mt-1">Essential product details</p>
+                                            <h2 className="text-lg font-semibold text-gray-900">{t('Basic Information')}</h2>
+                                            <p className="text-sm text-gray-500 mt-1">{t('Essential product details')}</p>
                                         </div>
                                         
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                             <div className="md:col-span-2">
-                                                <InputLabel htmlFor="title" value="Product Title" className="text-sm font-medium text-gray-700" />
+                                                <InputLabel htmlFor="title" value={t('Product Title')} className="text-sm font-medium text-gray-700" />
                                                 <TextInput 
                                                     id="title" 
                                                     value={data.title} 
                                                     className="mt-2 block w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200" 
                                                     onChange={(e) => setData('title', e.target.value)} 
-                                                    placeholder="Enter product title..."
+                                                    placeholder={t('Enter product title...')}
                                                 />
                                                 <InputError message={errors.title} className="mt-2" />
                                             </div>
 
                                             <div className="md:col-span-2">
-                                                <InputLabel htmlFor="description" value="Description" className="text-sm font-medium text-gray-700" />
+                                                <InputLabel htmlFor="description" value={t('Description')} className="text-sm font-medium text-gray-700" />
                                                 <Editor
                                                     id="description"
                                                     value={data.description}
                                                     onChange={(e) => setData('description', e.target.value)}
-                                                    placeholder="Describe your product..."
+                                                    placeholder={t('Describe your product...')}
                                                     containerProps={{
                                                         className:
                                                             'mt-2 w-full rounded-xl border-gray-200 shadow-sm focus:border-blue-500 focus:ring-blue-500 transition-colors duration-200 min-h-[120px]'
@@ -174,7 +176,7 @@ const submit = (e) => {
                                             </div>
 
                                             <div>
-                                                <InputLabel htmlFor="price" value="Price" className="text-sm font-medium text-gray-700" />
+                                                <InputLabel htmlFor="price" value={t('Price')} className="text-sm font-medium text-gray-700" />
                                                 <div className="relative mt-2">
                                                     <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
                                                     <TextInput 
@@ -190,7 +192,7 @@ const submit = (e) => {
                                             </div>
 
                                             <div>
-                                                <InputLabel htmlFor="category_id" value="Category" className="text-sm font-medium text-gray-700" />
+                                                <InputLabel htmlFor="category_id" value={t('Category')} className="text-sm font-medium text-gray-700" />
                                                 <select 
                                                     id="category_id" 
                                                     value={data.category_id} 
@@ -209,8 +211,8 @@ const submit = (e) => {
                                     {/* Product Type Section */}
                                     <div className="space-y-6">
                                         <div className="border-b border-gray-100 pb-4">
-                                            <h2 className="text-lg font-semibold text-gray-900">Product Type</h2>
-                                            <p className="text-sm text-gray-500 mt-1">Configure product delivery method</p>
+                                            <h2 className="text-lg font-semibold text-gray-900">{t('Product Type')}</h2>
+                                            <p className="text-sm text-gray-500 mt-1">{t('Configure product delivery method')}</p>
                                         </div>
 
                                         <div className="flex items-center p-4 bg-gray-50 rounded-xl">
@@ -222,13 +224,13 @@ const submit = (e) => {
                                                 className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                                             />
                                             <label htmlFor="is_digital" className="ml-3 text-sm font-medium text-gray-700">
-                                                This is a digital product
+                                                {t('This is a digital product')}
                                             </label>
                                         </div>
 
                                         {!data.is_digital && (
                                             <div className="animate-fadeIn">
-                                                <InputLabel htmlFor="shipping_cost" value="Shipping Cost" className="text-sm font-medium text-gray-700" />
+                                                <InputLabel htmlFor="shipping_cost" value={t('Shipping Cost')} className="text-sm font-medium text-gray-700" />
                                                 <div className="relative mt-2">
                                                     <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
                                                     <TextInput 
@@ -249,15 +251,15 @@ const submit = (e) => {
                                     {data.is_digital && (
                                         <div className="space-y-6 animate-fadeIn">
                                             <div className="border-b border-gray-100 pb-4">
-                                                <h2 className="text-lg font-semibold text-gray-900">Digital Files</h2>
-                                                <p className="text-sm text-gray-500 mt-1">Upload demo and main product files</p>
+                                                <h2 className="text-lg font-semibold text-gray-900">{t('Digital Files')}</h2>
+                                                <p className="text-sm text-gray-500 mt-1">{t('Upload demo and main product files')}</p>
                                             </div>
                                             
                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                                 <div>
-                                                    <InputLabel htmlFor="demo_file" value="Demo File" className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                                    <InputLabel htmlFor="demo_file" value={t('Demo File')} className="text-sm font-medium text-gray-700 flex items-center gap-2">
                                                         <FileIcon />
-                                                        Demo File
+                                                        {t('Demo File')}
                                                     </InputLabel>
                                                     <FileDropzone
                                                         name="demo_file"
@@ -269,9 +271,9 @@ const submit = (e) => {
                                                 </div>
                                                 
                                                 <div>
-                                                    <InputLabel htmlFor="main_file" value="Main File" className="text-sm font-medium text-gray-700 flex items-center gap-2">
+                                                    <InputLabel htmlFor="main_file" value={t('Main File')} className="text-sm font-medium text-gray-700 flex items-center gap-2">
                                                         <FileIcon />
-                                                        Main File
+                                                        {t('Main File')}
                                                     </InputLabel>
                                                     <FileDropzone
                                                         name="main_file"
@@ -290,9 +292,9 @@ const submit = (e) => {
                                         <div className="border-b border-gray-100 pb-4">
                                             <h2 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
                                                 <ImageIcon />
-                                                Product Images
+                                                {t('Product Images')}
                                             </h2>
-                                            <p className="text-sm text-gray-500 mt-1">Upload product photos and gallery images</p>
+                                            <p className="text-sm text-gray-500 mt-1">{t('Upload product photos and gallery images')}</p>
                                         </div>
                                         
                                         <FileDropzone
@@ -310,8 +312,8 @@ const submit = (e) => {
                                         <div className="border-b border-gray-100 pb-4">
                                             <div className="flex items-center justify-between">
                                                 <div>
-                                                    <h2 className="text-lg font-semibold text-gray-900">Product Attributes</h2>
-                                                    <p className="text-sm text-gray-500 mt-1">Add variants, options, and pricing</p>
+                                                    <h2 className="text-lg font-semibold text-gray-900">{t('Product Attributes')}</h2>
+                                                    <p className="text-sm text-gray-500 mt-1">{t('Add variants, options, and pricing')}</p>
                                                 </div>
                                                 <button 
                                                     type="button" 
@@ -319,7 +321,7 @@ const submit = (e) => {
                                                     className="inline-flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors duration-200 shadow-sm"
                                                 >
                                                     <PlusIcon />
-                                                    Add Attribute
+                                                    {t('Add Attribute')}
                                                 </button>
                                             </div>
                                         </div>
@@ -339,14 +341,14 @@ const submit = (e) => {
                                                             </button>
                                                         </div>
                                                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                                            <TextInput 
-                                                                placeholder="Attribute name (e.g., Size)" 
+                                                            <TextInput
+                                                                placeholder={t('Attribute name (e.g., Size)')}
                                                                 value={attr.title} 
                                                                 onChange={(e) => updateAttr(index, 'title', e.target.value)}
                                                                 className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                                                             />
-                                                            <TextInput 
-                                                                placeholder="Option (e.g., Large)" 
+                                                            <TextInput
+                                                                placeholder={t('Option (e.g., Large)')}
                                                                 value={attr.option} 
                                                                 onChange={(e) => updateAttr(index, 'option', e.target.value)}
                                                                 className="rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500"
@@ -354,7 +356,7 @@ const submit = (e) => {
                                                             <div className="relative">
                                                                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 text-sm">$</span>
                                                                 <TextInput 
-                                                                    placeholder="Additional price" 
+                                                                    placeholder={t('Additional price')}
                                                                     type="number" 
                                                                     value={attr.price} 
                                                                     onChange={(e) => updateAttr(index, 'price', e.target.value)}
@@ -372,8 +374,8 @@ const submit = (e) => {
                                                 <div className="mx-auto w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center mb-4">
                                                     <PlusIcon />
                                                 </div>
-                                                <p>No attributes added yet</p>
-                                                <p className="text-sm mt-1">Click "Add Attribute" to create product variants</p>
+                                                <p>{t('No attributes added yet')}</p>
+                                                <p className="text-sm mt-1">{t('Click "Add Attribute" to create product variants')}</p>
                                             </div>
                                         )}
                                     </div>
@@ -385,7 +387,7 @@ const submit = (e) => {
                                             className="inline-flex items-center gap-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-colors duration-200 font-medium"
                                         >
                                             <CancelIcon />
-                                            Cancel
+                                            {t('Cancel')}
                                         </Link>
                                         
                                         <PrimaryButton 
@@ -397,7 +399,7 @@ const submit = (e) => {
                                             ) : (
                                                 <SaveIcon />
                                             )}
-                                            {processing ? 'Saving...' : 'Save Changes'}
+                                            {processing ? t('Saving...') : t('Save Changes')}
                                         </PrimaryButton>
                                     </div>
                                 </form>

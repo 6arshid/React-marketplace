@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Editor from 'react-simple-wysiwyg';
 
 // Custom SVG Icons
@@ -73,6 +74,7 @@ const Icons = {
 };
 
 export default function Create({ categories }) {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         title: '',
         description: '',
@@ -111,12 +113,12 @@ export default function Create({ categories }) {
                         <Icons.Package />
                     </div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                        Create New Product
+                        {t('Create New Product')}
                     </h2>
                 </div>
             }
         >
-            <Head title="New Product" />
+            <Head title={t('New Product')} />
             
             <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-12">
                 <div className="mx-auto max-w-4xl px-6">
@@ -124,7 +126,7 @@ export default function Create({ categories }) {
                         <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-8 py-6">
                             <h3 className="text-white text-lg font-semibold flex items-center space-x-2">
                                 <Icons.Package />
-                                <span>Product Information</span>
+                                <span>{t('Product Information')}</span>
                             </h3>
                         </div>
 
@@ -133,14 +135,14 @@ export default function Create({ categories }) {
                             <div className="space-y-6">
                                 <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
                                     <Icons.Description />
-                                    <span>Basic Information</span>
+                                    <span>{t('Basic Information')}</span>
                                 </h4>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div className="group">
                                         <InputLabel 
                                             htmlFor="title" 
-                                            value="Product Title" 
+                                            value={t('Product Title')}
                                             className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                         />
                                         <div className="relative">
@@ -152,7 +154,7 @@ export default function Create({ categories }) {
                                                 value={data.title} 
                                                 className="pl-10 w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white" 
                                                 onChange={(e) => setData('title', e.target.value)}
-                                                placeholder="Enter product title..."
+                                                placeholder={t('Enter product title...')}
                                             />
                                         </div>
                                         <InputError message={errors.title} className="mt-2 text-red-500" />
@@ -161,7 +163,7 @@ export default function Create({ categories }) {
                                     <div className="group">
                                         <InputLabel 
                                             htmlFor="category_id" 
-                                            value="Category" 
+                                            value={t('Category')}
                                             className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                         />
                                         <div className="relative">
@@ -185,14 +187,14 @@ export default function Create({ categories }) {
                                 <div>
                                     <InputLabel 
                                         htmlFor="description" 
-                                        value="Description" 
+                                        value={t('Description')}
                                         className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                     />
                                     <Editor
                                         id="description"
                                         value={data.description}
                                         onChange={(e) => setData('description', e.target.value)}
-                                        placeholder="Describe your product..."
+                                        placeholder={t('Describe your product...')}
                                         containerProps={{
                                             className:
                                                 'w-full rounded-xl border-gray-200 focus:border-blue-500 focus:ring-blue-500 transition-all duration-200 bg-gray-50 focus:bg-white min-h-[120px]'
@@ -206,14 +208,14 @@ export default function Create({ categories }) {
                             <div className="space-y-6">
                                 <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
                                     <Icons.Price />
-                                    <span>Pricing & Delivery</span>
+                                    <span>{t('Pricing & Delivery')}</span>
                                 </h4>
                                 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
                                         <InputLabel 
                                             htmlFor="price" 
-                                            value="Price ($)" 
+                                            value={t('Price ($)')}
                                             className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                         />
                                         <div className="relative">
@@ -242,7 +244,7 @@ export default function Create({ categories }) {
                                             />
                                             <div className="flex items-center space-x-2">
                                                 <Icons.Digital />
-                                                <span className="font-medium text-gray-700">Digital Product</span>
+                                                <span className="font-medium text-gray-700">{t('Digital Product')}</span>
                                             </div>
                                         </label>
                                     </div>
@@ -252,7 +254,7 @@ export default function Create({ categories }) {
                                     <div>
                                         <InputLabel 
                                             htmlFor="shipping_cost" 
-                                            value="Shipping Cost ($)" 
+                                            value={t('Shipping Cost ($)')}
                                             className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                         />
                                         <div className="relative max-w-md">
@@ -278,14 +280,14 @@ export default function Create({ categories }) {
                                 <div className="space-y-6">
                                     <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
                                         <Icons.File />
-                                        <span>Digital Files</span>
+                                        <span>{t('Digital Files')}</span>
                                     </h4>
                                     
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <InputLabel 
                                                 htmlFor="demo_file" 
-                                                value="Demo File" 
+                                                value={t('Demo File')}
                                                 className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                             />
                                             <FileDropzone
@@ -300,7 +302,7 @@ export default function Create({ categories }) {
                                         <div>
                                             <InputLabel 
                                                 htmlFor="main_file" 
-                                                value="Main File" 
+                                                value={t('Main File')}
                                                 className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                             />
                                             <FileDropzone
@@ -319,13 +321,13 @@ export default function Create({ categories }) {
                             <div className="space-y-6">
                                 <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
                                     <Icons.Image />
-                                    <span>Product Images</span>
+                                    <span>{t('Product Images')}</span>
                                 </h4>
                                 
                                 <div>
                                     <InputLabel 
                                         htmlFor="images" 
-                                        value="Upload Images" 
+                                        value={t('Upload Images')}
                                         className="flex items-center space-x-2 text-gray-700 font-medium mb-2"
                                     />
                                     <FileDropzone
@@ -344,7 +346,7 @@ export default function Create({ categories }) {
                                 <div className="flex items-center justify-between border-b border-gray-200 pb-2">
                                     <h4 className="text-lg font-semibold text-gray-800 flex items-center space-x-2">
                                         <Icons.Settings />
-                                        <span>Product Attributes</span>
+                                        <span>{t('Product Attributes')}</span>
                                     </h4>
                                     
                                     <button 
@@ -353,7 +355,7 @@ export default function Create({ categories }) {
                                         className="flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg"
                                     >
                                         <Icons.Plus />
-                                        <span>Add Attribute</span>
+                                        <span>{t('Add Attribute')}</span>
                                     </button>
                                 </div>
                                 
@@ -363,7 +365,7 @@ export default function Create({ categories }) {
                                             <div key={index} className="p-4 bg-gray-50 rounded-xl border border-gray-200">
                                                 <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end">
                                                     <TextInput 
-                                                        placeholder="Attribute title..." 
+                                                        placeholder={t('Attribute title...')}
                                                         value={attr.title} 
                                                         className="rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                                                         onChange={(e) => {
@@ -374,7 +376,7 @@ export default function Create({ categories }) {
                                                         }} 
                                                     />
                                                     <TextInput 
-                                                        placeholder="Option value..." 
+                                                        placeholder={t('Option value...')}
                                                         value={attr.option} 
                                                         className="rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
                                                         onChange={(e) => {
@@ -385,7 +387,7 @@ export default function Create({ categories }) {
                                                         }} 
                                                     />
                                                     <TextInput 
-                                                        placeholder="Additional price..." 
+                                                        placeholder={t('Additional price...')}
                                                         type="number" 
                                                         value={attr.price} 
                                                         className="rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500"
@@ -401,7 +403,7 @@ export default function Create({ categories }) {
                                                         onClick={() => removeAttribute(index)}
                                                         className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200"
                                                     >
-                                                        Remove
+                                                        {t('Remove')}
                                                     </button>
                                                 </div>
                                             </div>
@@ -417,7 +419,7 @@ export default function Create({ categories }) {
                                     className="flex items-center space-x-2 px-6 py-3 bg-gray-100 text-gray-700 rounded-xl hover:bg-gray-200 transition-all duration-200 border border-gray-200"
                                 >
                                     <Icons.Back />
-                                    <span>Cancel</span>
+                                    <span>{t('Cancel')}</span>
                                 </Link>
                                 
                                 <PrimaryButton 
@@ -425,7 +427,7 @@ export default function Create({ categories }) {
                                     className="flex items-center space-x-2 px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
                                     <Icons.Save />
-                                    <span>{processing ? 'Saving...' : 'Save Product'}</span>
+                                    <span>{processing ? t('Saving...') : t('Save Product')}</span>
                                 </PrimaryButton>
                             </div>
                         </form>

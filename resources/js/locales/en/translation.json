@@ -4,210 +4,207 @@
   "Password": "Password",
   "Remember me": "Remember me",
   "Forgot your password?": "Forgot your password?",
-  "Continue with Google": "Continue with Google"
-  ,"Item added to cart": "Item added to cart"
-  ,"Would you like to continue shopping or go to your cart?": "Would you like to continue shopping or go to your cart?"
-  ,"Continue Shopping": "Continue Shopping"
-  ,"Go to Cart": "Go to Cart"
-  ,"Shopping Cart": "Shopping Cart"
-  ,"Review Your Order": "Review Your Order"
-  ,"Check your items before proceeding": "Check your items before proceeding"
-  ,"Your cart is empty": "Your cart is empty"
-  ,"Add some items to get started": "Add some items to get started"
-  ,"Continue to": "Continue to"
-  ,"Shipping": "Shipping"
-  ,"Payment": "Payment"
-  ,"Shipping Information": "Shipping Information"
-  ,"Almost There!": "Almost There!"
-  ,"Please provide your delivery details": "Please provide your delivery details"
-  ,"Ready to proceed to payment": "Ready to proceed to payment"
-  ,"No shipping required": "No shipping required"
-  ,"Digital products will be delivered instantly": "Digital products will be delivered instantly"
-  ,"Back to Cart": "Back to Cart"
-  ,"Continue to Payment": "Continue to Payment"
-  ,"Payment Options": "Payment Options"
-  ,"Choose your preferred payment method": "Choose your preferred payment method"
-  ,"USDT Payment": "USDT Payment"
-  ,"Bitcoin Payment": "Bitcoin Payment"
-  ,"Your Transaction Details": "Your Transaction Details"
-  ,"Submit Order": "Submit Order"
-  ,"Contact Seller": "Contact Seller"
-  ,"WhatsApp": "WhatsApp"
-  ,"Telegram": "Telegram"
-  ,"Email": "Email"
-  ,"Pay {{amount}} with Stripe": "Pay {{amount}} with Stripe"
-  ,"Back to": "Back to"
-  ,"Previous Step": "Previous Step"
-  ,"Admin Dashboard": "Admin Dashboard"
-  ,"Configure Stripe": "Configure Stripe"
-  ,"Transactions": "Transactions"
-  ,"Pro Panel": "Pro Panel"
-  ,"Reports": "Reports"
-  ,"Appearance": "Appearance"
-  ,"General Config": "General Config"
-  ,"Pages": "Pages"
-  ,"Reserved Usernames": "Reserved Usernames"
-  ,"Username": "Username"
-  ,"Add": "Add"
-  ,"Delete": "Delete"
-  ,"Custom Profile URLs": "Custom Profile URLs"
-  ,"Build your online store with your own profile at /username": "Build your online store with your own profile at /username"
-  ,"Crypto Payments": "Crypto Payments"
-  ,"Accept Bitcoin & USDT (TRC20) with instant transactions": "Accept Bitcoin & USDT (TRC20) with instant transactions"
-  ,"Multi-Channel Orders": "Multi-Channel Orders"
-  ,"Customers can order via WhatsApp, Telegram, or Email": "Customers can order via WhatsApp, Telegram, or Email"
-  ,"Visual Categories": "Visual Categories"
-  ,"Organize products with beautiful photo-based categories": "Organize products with beautiful photo-based categories"
-  ,"Order Management": "Order Management"
-  ,"Track orders and manage transactions effortlessly": "Track orders and manage transactions effortlessly"
-  ,"Bitcoin": "Bitcoin"
-  ,"USDT TRC20": "USDT TRC20"
-  ,"Traditional": "Traditional"
-  ,"Your Store, Your Way": "Your Store, Your Way"
-  ,"Dashboard": "Dashboard"
-  ,"Get Started": "Get Started"
-  ,"Now with Crypto Payments & Multi-Channel Orders": "Now with Crypto Payments & Multi-Channel Orders"
-  ,"Your Store": "Your Store"
-  ,"Your Rules": "Your Rules"
-  ,"Create a professional online store with custom profiles, crypto payments, and multi-channel ordering.": "Create a professional online store with custom profiles, crypto payments, and multi-channel ordering."
-  ,"Accept Bitcoin & USDT (TRC20)": "Accept Bitcoin & USDT (TRC20)"
-  ,"WhatsApp, Telegram, or Email": "WhatsApp, Telegram, or Email"
-  ,"Accept:": "Accept:"
-  ,"Orders via:": "Orders via:"
-  ,"Start Building": "Start Building"
-  ,"Watch Demo": "Watch Demo"
-  ,"Commission": "Commission"
-  ,"For free plan": "For free plan"
-  ,"Crypto Types": "Crypto Types"
-  ,"Bitcoin & USDT TRC20": "Bitcoin & USDT TRC20"
-  ,"Order Channels": "Order Channels"
-  ,"WhatsApp, Telegram, Email": "WhatsApp, Telegram, Email"
-  ,"Customization": "Customization"
-  ,"Unlimited possibilities": "Unlimited possibilities"
-  ,"Everything You Need to Succeed": "Everything You Need to Succeed"
-  ,"Get your unique /username profile for professional branding": "Get your unique /username profile for professional branding"
-  ,"Accept Bitcoin & USDT (TRC20) with instant verification": "Accept Bitcoin & USDT (TRC20) with instant verification"
-  ,"Let customers order via WhatsApp, Telegram, or Email": "Let customers order via WhatsApp, Telegram, or Email"
-  ,"Track and manage all your orders in one dashboard": "Track and manage all your orders in one dashboard"
-  ,"Zero Fees": "Zero Fees"
-  ,"No commissions, no hidden costs - keep all your profits for pro profiles": "No commissions, no hidden costs - keep all your profits for pro profiles"
-  ,"Privacy": "Privacy"
-  ,"Terms": "Terms"
-  ,"Support": "Support"
-  ,"Order Tracking": "Order Tracking"
-  ,"Welcome": "Welcome"
-  ,"and let customers order via": "and let customers order via"
-  ,"Good Morning": "Good Morning"
-  ,"Good Afternoon": "Good Afternoon"
-  ,"Good Evening": "Good Evening"
-  ,"Total Orders": "Total Orders"
-  ,"Revenue": "Revenue"
-  ,"Products": "Products"
-  ,"Sales": "Sales"
-  ,"Cart Items": "Cart Items"
-  ,"Add Product": "Add Product"
-  ,"Create a new product listing": "Create a new product listing"
-  ,"Manage Orders": "Manage Orders"
-  ,"View and process orders": "View and process orders"
-  ,"View Sales": "View Sales"
-  ,"Check your sales performance": "Check your sales performance"
-  ,"Manage Categories": "Manage Categories"
-  ,"Organize your product categories": "Organize your product categories"
-  ,"View Transactions": "View Transactions"
-  ,"Check your payment history": "Check your payment history"
-  ,"Edit Profile": "Edit Profile"
-  ,"Update your store profile": "Update your store profile"
-  ,"Browse Products": "Browse Products"
-  ,"Discover new products": "Discover new products"
-  ,"My Orders": "My Orders"
-  ,"Track your orders": "Track your orders"
-  ,"Shopping Cart": "Shopping Cart"
-  ,"View items in your cart": "View items in your cart"
-  ,"Downloads": "Downloads"
-  ,"Access your digital purchases": "Access your digital purchases"
-  ,"Become Seller": "Become Seller"
-  ,"Start selling your products": "Start selling your products"
-  ,"Update your profile information": "Update your profile information"
-  ,"New order #{{id}} from {{name}}": "New order #{{id}} from {{name}}"
-  ,"Customer": "Customer"
-  ,"Product \"{{name}}\" {{action}}": "Product \"{{name}}\" {{action}}"
-  ,"updated": "updated"
-  ,"created": "created"
-  ,"Order #{{id}} - {{status}}": "Order #{{id}} - {{status}}"
-  ,"Welcome to your dashboard!": "Welcome to your dashboard!"
-  ,"Complete your profile setup": "Complete your profile setup"
-  ,"Just now": "Just now"
-  ,"1 hour ago": "1 hour ago"
-  ,"Manage your store and track your sales": "Manage your store and track your sales"
-  ,"Welcome back to your marketplace dashboard": "Welcome back to your marketplace dashboard"
-  ,"View Store": "View Store"
-  ,"View Profile": "View Profile"
-  ,"Your Store URL": "Your Store URL"
-  ,"Your Profile URL": "Your Profile URL"
-  ,"Seller Account": "Seller Account"
-  ,"Buyer Account": "Buyer Account"
-  ,"Admin": "Admin"
-  ,"Quick Actions": "Quick Actions"
-  ,"Recent Activity": "Recent Activity"
-  ,"View All": "View All"
-  ,"Orders": "Orders"
-  ,"Account Status": "Account Status"
-  ,"Account Type": "Account Type"
-  ,"Seller": "Seller"
-  ,"Buyer": "Buyer"
-  ,"Profile Complete": "Profile Complete"
-  ,"Admin Access": "Admin Access"
-  ,"Admin Panel": "Admin Panel"
-  ,"Store Tools": "Store Tools"
-  ,"Quick Links": "Quick Links"
-  ,"Categories": "Categories"
-  ,"Manage": "Manage"
-  ,"Pages": "Pages"
-  ,"Edit": "Edit"
-  ,"View": "View"
-  ,"Access": "Access"
-  ,"Track Order": "Track Order"
-  ,"Track": "Track"
-  ,"Start": "Start"
-  ,"Select Account Type": "Select Account Type"
-  ,"Continue": "Continue"
-  ,"Confirm Password": "Confirm Password"
-  ,"This is a secure area of the application. Please confirm your password before continuing.": "This is a secure area of the application. Please confirm your password before continuing."
-  ,"Confirm": "Confirm"
-  ,"Forgot Password": "Forgot Password"
-  ,"Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one."
-  ,"Email Password Reset Link": "Email Password Reset Link"
-  ,"Register": "Register"
-  ,"Checking...": "Checking..."
-  ,"Username available": "Username available"
-  ,"Username already taken": "Username already taken"
-  ,"Name": "Name"
-  ,"Already registered?": "Already registered?"
-  ,"Reset Password": "Reset Password"
-  ,"Email Verification": "Email Verification"
-  ,"Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another."
-  ,"A new verification link has been sent to the email address you provided during registration.": "A new verification link has been sent to the email address you provided during registration."
-  ,"Total": "Total"
-  ,"Address": "Address"
-  ,"Phone": "Phone"
-  ,"Resend Verification Email": "Resend Verification Email"
-  ,"Cart": "Cart"
-  ,"Total Amount": "Total Amount"
-  ,"First Name": "First Name"
-  ,"Last Name": "Last Name"
-  ,"Email Address": "Email Address"
-  ,"Full Address": "Full Address"
-  ,"Postal Code": "Postal Code"
-  ,"Phone Number": "Phone Number"
-  ,"Variant": "Variant"
-  ,"Enter your first name": "Enter your first name"
-  ,"Enter your last name": "Enter your last name"
-  ,"your.email@example.com": "your.email@example.com"
-  ,"Street address, city, state": "Street address, city, state"
-  ,"12345": "12345"
-  ,"+1 (555) 123-4567": "+1 (555) 123-4567"
-  ,"Enter your wallet address for confirmation": "Enter your wallet address for confirmation"
-  ,"Log Out": "Log Out",
+  "Continue with Google": "Continue with Google",
+  "Item added to cart": "Item added to cart",
+  "Would you like to continue shopping or go to your cart?": "Would you like to continue shopping or go to your cart?",
+  "Continue Shopping": "Continue Shopping",
+  "Go to Cart": "Go to Cart",
+  "Shopping Cart": "Shopping Cart",
+  "Review Your Order": "Review Your Order",
+  "Check your items before proceeding": "Check your items before proceeding",
+  "Your cart is empty": "Your cart is empty",
+  "Add some items to get started": "Add some items to get started",
+  "Continue to": "Continue to",
+  "Shipping": "Shipping",
+  "Payment": "Payment",
+  "Shipping Information": "Shipping Information",
+  "Almost There!": "Almost There!",
+  "Please provide your delivery details": "Please provide your delivery details",
+  "Ready to proceed to payment": "Ready to proceed to payment",
+  "No shipping required": "No shipping required",
+  "Digital products will be delivered instantly": "Digital products will be delivered instantly",
+  "Back to Cart": "Back to Cart",
+  "Continue to Payment": "Continue to Payment",
+  "Payment Options": "Payment Options",
+  "Choose your preferred payment method": "Choose your preferred payment method",
+  "USDT Payment": "USDT Payment",
+  "Bitcoin Payment": "Bitcoin Payment",
+  "Your Transaction Details": "Your Transaction Details",
+  "Submit Order": "Submit Order",
+  "Contact Seller": "Contact Seller",
+  "WhatsApp": "WhatsApp",
+  "Telegram": "Telegram",
+  "Pay {{amount}} with Stripe": "Pay {{amount}} with Stripe",
+  "Back to": "Back to",
+  "Previous Step": "Previous Step",
+  "Admin Dashboard": "Admin Dashboard",
+  "Configure Stripe": "Configure Stripe",
+  "Transactions": "Transactions",
+  "Pro Panel": "Pro Panel",
+  "Reports": "Reports",
+  "Appearance": "Appearance",
+  "General Config": "General Config",
+  "Pages": "Pages",
+  "Reserved Usernames": "Reserved Usernames",
+  "Username": "Username",
+  "Add": "Add",
+  "Delete": "Delete",
+  "Custom Profile URLs": "Custom Profile URLs",
+  "Build your online store with your own profile at /username": "Build your online store with your own profile at /username",
+  "Crypto Payments": "Crypto Payments",
+  "Accept Bitcoin & USDT (TRC20) with instant transactions": "Accept Bitcoin & USDT (TRC20) with instant transactions",
+  "Multi-Channel Orders": "Multi-Channel Orders",
+  "Customers can order via WhatsApp, Telegram, or Email": "Customers can order via WhatsApp, Telegram, or Email",
+  "Visual Categories": "Visual Categories",
+  "Organize products with beautiful photo-based categories": "Organize products with beautiful photo-based categories",
+  "Order Management": "Order Management",
+  "Track orders and manage transactions effortlessly": "Track orders and manage transactions effortlessly",
+  "Bitcoin": "Bitcoin",
+  "USDT TRC20": "USDT TRC20",
+  "Traditional": "Traditional",
+  "Your Store, Your Way": "Your Store, Your Way",
+  "Dashboard": "Dashboard",
+  "Get Started": "Get Started",
+  "Now with Crypto Payments & Multi-Channel Orders": "Now with Crypto Payments & Multi-Channel Orders",
+  "Your Store": "Your Store",
+  "Your Rules": "Your Rules",
+  "Create a professional online store with custom profiles, crypto payments, and multi-channel ordering.": "Create a professional online store with custom profiles, crypto payments, and multi-channel ordering.",
+  "Accept Bitcoin & USDT (TRC20)": "Accept Bitcoin & USDT (TRC20)",
+  "WhatsApp, Telegram, or Email": "WhatsApp, Telegram, or Email",
+  "Accept:": "Accept:",
+  "Orders via:": "Orders via:",
+  "Start Building": "Start Building",
+  "Watch Demo": "Watch Demo",
+  "Commission": "Commission",
+  "For free plan": "For free plan",
+  "Crypto Types": "Crypto Types",
+  "Bitcoin & USDT TRC20": "Bitcoin & USDT TRC20",
+  "Order Channels": "Order Channels",
+  "WhatsApp, Telegram, Email": "WhatsApp, Telegram, Email",
+  "Customization": "Customization",
+  "Unlimited possibilities": "Unlimited possibilities",
+  "Everything You Need to Succeed": "Everything You Need to Succeed",
+  "Get your unique /username profile for professional branding": "Get your unique /username profile for professional branding",
+  "Accept Bitcoin & USDT (TRC20) with instant verification": "Accept Bitcoin & USDT (TRC20) with instant verification",
+  "Let customers order via WhatsApp, Telegram, or Email": "Let customers order via WhatsApp, Telegram, or Email",
+  "Track and manage all your orders in one dashboard": "Track and manage all your orders in one dashboard",
+  "Zero Fees": "Zero Fees",
+  "No commissions, no hidden costs - keep all your profits for pro profiles": "No commissions, no hidden costs - keep all your profits for pro profiles",
+  "Privacy": "Privacy",
+  "Terms": "Terms",
+  "Support": "Support",
+  "Order Tracking": "Order Tracking",
+  "Welcome": "Welcome",
+  "and let customers order via": "and let customers order via",
+  "Good Morning": "Good Morning",
+  "Good Afternoon": "Good Afternoon",
+  "Good Evening": "Good Evening",
+  "Total Orders": "Total Orders",
+  "Revenue": "Revenue",
+  "Products": "Products",
+  "Sales": "Sales",
+  "Cart Items": "Cart Items",
+  "Add Product": "Add Product",
+  "Create a new product listing": "Create a new product listing",
+  "Manage Orders": "Manage Orders",
+  "View and process orders": "View and process orders",
+  "View Sales": "View Sales",
+  "Check your sales performance": "Check your sales performance",
+  "Manage Categories": "Manage Categories",
+  "Organize your product categories": "Organize your product categories",
+  "View Transactions": "View Transactions",
+  "Check your payment history": "Check your payment history",
+  "Edit Profile": "Edit Profile",
+  "Update your store profile": "Update your store profile",
+  "Browse Products": "Browse Products",
+  "Discover new products": "Discover new products",
+  "My Orders": "My Orders",
+  "Track your orders": "Track your orders",
+  "View items in your cart": "View items in your cart",
+  "Downloads": "Downloads",
+  "Access your digital purchases": "Access your digital purchases",
+  "Become Seller": "Become Seller",
+  "Start selling your products": "Start selling your products",
+  "Update your profile information": "Update your profile information",
+  "New order #{{id}} from {{name}}": "New order #{{id}} from {{name}}",
+  "Customer": "Customer",
+  "Product \"{{name}}\" {{action}}": "Product \"{{name}}\" {{action}}",
+  "updated": "updated",
+  "created": "created",
+  "Order #{{id}} - {{status}}": "Order #{{id}} - {{status}}",
+  "Welcome to your dashboard!": "Welcome to your dashboard!",
+  "Complete your profile setup": "Complete your profile setup",
+  "Just now": "Just now",
+  "1 hour ago": "1 hour ago",
+  "Manage your store and track your sales": "Manage your store and track your sales",
+  "Welcome back to your marketplace dashboard": "Welcome back to your marketplace dashboard",
+  "View Store": "View Store",
+  "View Profile": "View Profile",
+  "Your Store URL": "Your Store URL",
+  "Your Profile URL": "Your Profile URL",
+  "Seller Account": "Seller Account",
+  "Buyer Account": "Buyer Account",
+  "Admin": "Admin",
+  "Quick Actions": "Quick Actions",
+  "Recent Activity": "Recent Activity",
+  "View All": "View All",
+  "Orders": "Orders",
+  "Account Status": "Account Status",
+  "Account Type": "Account Type",
+  "Seller": "Seller",
+  "Buyer": "Buyer",
+  "Profile Complete": "Profile Complete",
+  "Admin Access": "Admin Access",
+  "Admin Panel": "Admin Panel",
+  "Store Tools": "Store Tools",
+  "Quick Links": "Quick Links",
+  "Categories": "Categories",
+  "Manage": "Manage",
+  "Edit": "Edit",
+  "View": "View",
+  "Access": "Access",
+  "Track Order": "Track Order",
+  "Track": "Track",
+  "Start": "Start",
+  "Select Account Type": "Select Account Type",
+  "Continue": "Continue",
+  "Confirm Password": "Confirm Password",
+  "This is a secure area of the application. Please confirm your password before continuing.": "This is a secure area of the application. Please confirm your password before continuing.",
+  "Confirm": "Confirm",
+  "Forgot Password": "Forgot Password",
+  "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.",
+  "Email Password Reset Link": "Email Password Reset Link",
+  "Register": "Register",
+  "Checking...": "Checking...",
+  "Username available": "Username available",
+  "Username already taken": "Username already taken",
+  "Name": "Name",
+  "Already registered?": "Already registered?",
+  "Reset Password": "Reset Password",
+  "Email Verification": "Email Verification",
+  "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.",
+  "A new verification link has been sent to the email address you provided during registration.": "A new verification link has been sent to the email address you provided during registration.",
+  "Total": "Total",
+  "Address": "Address",
+  "Phone": "Phone",
+  "Resend Verification Email": "Resend Verification Email",
+  "Cart": "Cart",
+  "Total Amount": "Total Amount",
+  "First Name": "First Name",
+  "Last Name": "Last Name",
+  "Email Address": "Email Address",
+  "Full Address": "Full Address",
+  "Postal Code": "Postal Code",
+  "Phone Number": "Phone Number",
+  "Variant": "Variant",
+  "Enter your first name": "Enter your first name",
+  "Enter your last name": "Enter your last name",
+  "your.email@example.com": "your.email@example.com",
+  "Street address, city, state": "Street address, city, state",
+  "12345": "12345",
+  "+1 (555) 123-4567": "+1 (555) 123-4567",
+  "Enter your wallet address for confirmation": "Enter your wallet address for confirmation",
+  "Log Out": "Log Out",
   "Back": "Back",
   "New Category": "New Category",
   "Create a new content category": "Create a new content category",
@@ -243,7 +240,6 @@
   "Changing the category name will update its URL slug": "Changing the category name will update its URL slug",
   "Uploading a new icon will replace the existing one": "Uploading a new icon will replace the existing one",
   "All existing content in this category will remain unchanged": "All existing content in this category will remain unchanged",
-  "Categories": "Categories",
   "Manage your content categories": "Manage your content categories",
   "Category": "Category",
   "Organize your content effectively": "Organize your content effectively",
@@ -252,66 +248,129 @@
   "Are you sure you want to delete this category?": "Are you sure you want to delete this category?",
   "No categories yet": "No categories yet",
   "Get started by creating your first category to organize your content.": "Get started by creating your first category to organize your content.",
-  "Create Your First Category": "Create Your First Category"
-  ,"Track and manage your order history": "Track and manage your order history"
-  ,"Total Spent": "Total Spent"
-  ,"Completed": "Completed"
-  ,"Digital Items": "Digital Items"
-  ,"Order History": "Order History"
-  ,"Search orders": "Search orders"
-  ,"Tracking": "Tracking"
-  ,"Amount": "Amount"
-  ,"Status": "Status"
-  ,"Seller": "Seller"
-  ,"Shipping": "Shipping"
-  ,"Action": "Action"
-  ,"Download Available": "Download Available"
-  ,"Track": "Track"
-  ,"No orders found": "No orders found"
-  ,"You haven't placed any orders yet.": "You haven't placed any orders yet."
-  ,"Start Shopping": "Start Shopping"
-  ,"Tracking code": "Tracking code"
-  ,"Save": "Save"
-  ,"Track Your Order": "Track Your Order"
-  ,"Enter your tracking code to get real-time updates": "Enter your tracking code to get real-time updates"
-  ,"Tracking Code": "Tracking Code"
-  ,"Enter your tracking code...": "Enter your tracking code..."
-  ,"Tracking...": "Tracking..."
-  ,"Order Tracking": "Order Tracking"
-  ,"Track your order status and download files": "Track your order status and download files"
-  ,"Order Information": "Order Information"
-  ,"Order Status": "Order Status"
-  ,"Your order has been successfully delivered!": "Your order has been successfully delivered!"
-  ,"Your order is on its way!": "Your order is on its way!"
-  ,"Your order is being processed.": "Your order is being processed."
-  ,"There was an issue with your order.": "There was an issue with your order."
-  ,"Order status updated.": "Order status updated."
-  ,"Shipping Information": "Shipping Information"
-  ,"Postal Tracking Code:": "Postal Tracking Code:"
-  ,"Use this code to track your package with the shipping carrier.": "Use this code to track your package with the shipping carrier."
-  ,"Available Downloads": "Available Downloads"
-  ,"files": "files"
-  ,"file": "file"
-  ,"ready for download": "ready for download"
-  ,"Ready": "Ready"
-  ,"Download": "Download"
-  ,"Download All Files": "Download All Files"
-  ,"Need help with your order?": "Need help with your order?"
-  ,"Contact Support": "Contact Support"
-  ,"Access your purchased files and digital content": "Access your purchased files and digital content"
-  ,"Available Files": "Available Files"
-  ,"Storage Used": "Storage Used"
-  ,"available": "available"
-  ,"No downloads available": "No downloads available"
-  ,"You don't have any downloadable files yet.": "You don't have any downloadable files yet."
-  ,"Browse Products": "Browse Products"
-  ,"New Page": "New Page"
-  ,"Edit Page": "Edit Page"
-  ,"Title": "Title"
-  ,"Description": "Description"
-  ,"Images": "Images"
-  ,"Search pages": "Search pages"
-  ,"Actions": "Actions"
-  ,"No pages found": "No pages found"
-  ,"Delete?": "Delete?"
+  "Create Your First Category": "Create Your First Category",
+  "Track and manage your order history": "Track and manage your order history",
+  "Total Spent": "Total Spent",
+  "Completed": "Completed",
+  "Digital Items": "Digital Items",
+  "Order History": "Order History",
+  "Search orders": "Search orders",
+  "Tracking": "Tracking",
+  "Amount": "Amount",
+  "Status": "Status",
+  "Action": "Action",
+  "Download Available": "Download Available",
+  "No orders found": "No orders found",
+  "You haven't placed any orders yet.": "You haven't placed any orders yet.",
+  "Start Shopping": "Start Shopping",
+  "Tracking code": "Tracking code",
+  "Save": "Save",
+  "Track Your Order": "Track Your Order",
+  "Enter your tracking code to get real-time updates": "Enter your tracking code to get real-time updates",
+  "Tracking Code": "Tracking Code",
+  "Enter your tracking code...": "Enter your tracking code...",
+  "Tracking...": "Tracking...",
+  "Track your order status and download files": "Track your order status and download files",
+  "Order Information": "Order Information",
+  "Order Status": "Order Status",
+  "Your order has been successfully delivered!": "Your order has been successfully delivered!",
+  "Your order is on its way!": "Your order is on its way!",
+  "Your order is being processed.": "Your order is being processed.",
+  "There was an issue with your order.": "There was an issue with your order.",
+  "Order status updated.": "Order status updated.",
+  "Postal Tracking Code:": "Postal Tracking Code:",
+  "Use this code to track your package with the shipping carrier.": "Use this code to track your package with the shipping carrier.",
+  "Available Downloads": "Available Downloads",
+  "files": "files",
+  "file": "file",
+  "ready for download": "ready for download",
+  "Ready": "Ready",
+  "Download": "Download",
+  "Download All Files": "Download All Files",
+  "Need help with your order?": "Need help with your order?",
+  "Contact Support": "Contact Support",
+  "Access your purchased files and digital content": "Access your purchased files and digital content",
+  "Available Files": "Available Files",
+  "Storage Used": "Storage Used",
+  "available": "available",
+  "No downloads available": "No downloads available",
+  "You don't have any downloadable files yet.": "You don't have any downloadable files yet.",
+  "New Page": "New Page",
+  "Edit Page": "Edit Page",
+  "Title": "Title",
+  "Description": "Description",
+  "Images": "Images",
+  "Search pages": "Search pages",
+  "Actions": "Actions",
+  "No pages found": "No pages found",
+  "Delete?": "Delete?",
+  "Create New Product": "Create New Product",
+  "New Product": "New Product",
+  "Product Information": "Product Information",
+  "Basic Information": "Basic Information",
+  "Product Title": "Product Title",
+  "Enter product title...": "Enter product title...",
+  "Describe your product...": "Describe your product...",
+  "Price ($)": "Price ($)",
+  "Price": "Price",
+  "Digital Product": "Digital Product",
+  "Shipping Cost ($)": "Shipping Cost ($)",
+  "Shipping Cost": "Shipping Cost",
+  "Digital Files": "Digital Files",
+  "Demo File": "Demo File",
+  "Main File": "Main File",
+  "Product Images": "Product Images",
+  "Upload Images": "Upload Images",
+  "Product Attributes": "Product Attributes",
+  "Add Attribute": "Add Attribute",
+  "Attribute title...": "Attribute title...",
+  "Option value...": "Option value...",
+  "Additional price...": "Additional price...",
+  "Attribute name (e.g., Size)": "Attribute name (e.g., Size)",
+  "Option (e.g., Large)": "Option (e.g., Large)",
+  "Additional price": "Additional price",
+  "Remove": "Remove",
+  "Save Product": "Save Product",
+  "Save Changes": "Save Changes",
+  "Saving...": "Saving...",
+  "Update your product information": "Update your product information",
+  "Essential product details": "Essential product details",
+  "Product Type": "Product Type",
+  "Configure product delivery method": "Configure product delivery method",
+  "This is a digital product": "This is a digital product",
+  "Upload demo and main product files": "Upload demo and main product files",
+  "Upload product photos and gallery images": "Upload product photos and gallery images",
+  "Add variants, options, and pricing": "Add variants, options, and pricing",
+  "No attributes added yet": "No attributes added yet",
+  "Click \"Add Attribute\" to create product variants": "Click \"Add Attribute\" to create product variants",
+  "items": "items",
+  "Product Management": "Product Management",
+  "Manage and organize your product catalog": "Manage and organize your product catalog",
+  "Search products": "Search products",
+  "Filter": "Filter",
+  "No products found": "No products found",
+  "Get started by creating your first product.": "Get started by creating your first product.",
+  "Create Product": "Create Product",
+  "Edit product": "Edit product",
+  "Delete product": "Delete product",
+  "Are you sure you want to delete this product?": "Are you sure you want to delete this product?",
+  "Uncategorized": "Uncategorized",
+  "Views": "Views",
+  "Product": "Product",
+  "Total Products": "Total Products",
+  "Total Value": "Total Value",
+  "Total Views": "Total Views",
+  "Added to cart!": "Added to cart!",
+  "views": "views",
+  "No image available": "No image available",
+  "Files": "Files",
+  "Choose an Option": "Choose an Option",
+  "Add to Cart": "Add to Cart",
+  "Report Store": "Report Store",
+  "What's Included": "What's Included",
+  "Secure Payment Processing": "Secure Payment Processing",
+  "Fast & Reliable Delivery": "Fast & Reliable Delivery",
+  "Instant Download Access": "Instant Download Access",
+  "24/7 Customer Support": "24/7 Customer Support",
+  "Customer Reviews": "Customer Reviews"
 }
