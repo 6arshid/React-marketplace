@@ -17,7 +17,7 @@ class ProductController extends Controller
     {
         $products = Product::with('category')
             ->where('user_id', auth()->id())
-            ->latest()
+            ->orderByDesc('created_at')
             ->get();
 
         return Inertia::render('Products/Index', [
