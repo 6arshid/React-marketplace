@@ -1,213 +1,210 @@
 {
-  "Log in": "\u0648\u0631\u0648\u062f",
-  "Email": "\u0627\u06cc\u0645\u06cc\u0644",
-  "Password": "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631",
-  "Remember me": "\u0645\u0631\u0627 \u0628\u0647 \u062e\u0627\u0637\u0631 \u0628\u0633\u067e\u0627\u0631",
-  "Forgot your password?": "\u0631\u0645\u0632 \u0639\u0628\u0648\u0631 \u062e\u0648\u062f \u0631\u0627 \u0641\u0631\u0627\u0645\u0648\u0634 \u06a9\u0631\u062f\u0647\u200c\u0627\u06cc\u062f\u061f",
-  "Continue with Google": "\u0648\u0631\u0648\u062f \u0628\u0627 \u06af\u0648\u06af\u0644"
-  ,"Item added to cart": "\u0622\u06cc\u062a\u0645 \u0628\u0647 \u0633\u0628\u062f \u062e\u0631\u06cc\u062f \u0627\u0636\u0627\u0641\u0647 \u0634\u062f"
-  ,"Would you like to continue shopping or go to your cart?": "\u0645\u06cc\u200c\u062e\u0648\u0627\u0647\u06cc\u062f \u0628\u0647 \u062e\u0631\u06cc\u062f \u0627\u062f\u0627\u0645\u0647 \u062f\u0647\u06cc\u062f \u06cc\u0627 \u0628\u0647 \u0633\u0628\u062f \u062e\u0631\u06cc\u062f \u0628\u0631\u0648\u06cc\u062f\u061f"
-  ,"Continue Shopping": "\u0627\u062f\u0627\u0645\u0647 \u062e\u0631\u06cc\u062f"
-  ,"Go to Cart": "\u0631\u0641\u062a\u0646 \u0628\u0647 \u0633\u0628\u062f \u062e\u0631\u06cc\u062f"
-  ,"Shopping Cart": "\u0633\u0628\u062f \u062e\u0631\u06cc\u062f"
-  ,"Review Your Order": "\u0633\u0641\u0627\u0631\u0634 \u062e\u0648\u062f \u0631\u0627 \u0645\u0631\u0648\u0631 \u06a9\u0646\u06cc\u062f"
-  ,"Check your items before proceeding": "\u0642\u0628\u0644 \u0627\u0632 \u0627\u062f\u0627\u0645\u0647 \u0627\u0642\u062f\u0627\u0645\u0627\u062a \u0645\u062d\u0635\u0648\u0644\u0627\u062a \u062e\u0648\u062f \u0631\u0627 \u0628\u0631\u0631\u0633\u06cc \u06a9\u0646\u06cc\u062f"
-  ,"Your cart is empty": "\u0633\u0628\u062f \u062e\u0631\u06cc\u062f \u0634\u0645\u0627 \u062e\u0627\u0644\u06cc \u0627\u0633\u062a"
-  ,"Add some items to get started": "\u0628\u0631\u0627\u06cc \u0634\u0631\u0648\u0639 \u06a9\u0645\u06cc \u0645\u062d\u0635\u0648\u0644 \u0627\u0636\u0627\u0641\u0647 \u06a9\u0646\u06cc\u062f"
-  ,"Continue to": "\u0627\u062f\u0627\u0645\u0647 \u0628\u0647"
-  ,"Shipping": "\u062d\u0645\u0644"
-  ,"Payment": "\u067e\u0631\u062f\u0627\u062e\u062a"
-  ,"Shipping Information": "\u0627\u0637\u0644\u0627\u0639\u0627\u062a \u062d\u0645\u0644"
-  ,"Almost There!": "\u0646\u0632\u062f\u06cc\u06a9 \u0647\u0633\u062a\u06cc\u062f!"
-  ,"Please provide your delivery details": "\u0644\u0637\u0641\u0627 \u062c\u0632\u06cc\u06cc\u0627\u062a \u062f\u0631\u06cc\u0627\u0641\u062a \u0631\u0627 \u0648\u0627\u0631\u062f \u06a9\u0646\u06cc\u062f"
-  ,"Ready to proceed to payment": "\u0622\u0645\u0627\u062f\u0647 \u0628\u0631\u0627\u06cc \u0627\u0646\u062c\u0627\u0645 \u067e\u0631\u062f\u0627\u062e\u062a"
-  ,"No shipping required": "\u0628\u062f\u0648\u0646 \u0646\u06cc\u0627\u0632 \u0628\u0647 \u0627\u0631\u0633\u0627\u0644"
-  ,"Digital products will be delivered instantly": "\u0645\u062d\u0635\u0648\u0644\u0627\u062a \u0631\u0642\u0645\u06cc \u0641\u0648\u0631\u0627 \u0627\u0631\u0633\u0627\u0644 \u062e\u0648\u0627\u0647\u0646\u062f \u0634\u062f"
-  ,"Back to Cart": "\u0628\u0627\u0632\u06af\u0634\u062a \u0628\u0647 \u0633\u0628\u062f \u062e\u0631\u06cc\u062f"
-  ,"Continue to Payment": "\u0627\u062f\u0627\u0645\u0647 \u0628\u0647 \u067e\u0631\u062f\u0627\u062e\u062a"
-  ,"Payment Options": "\u06af\u0632\u06cc\u0646\u0647 \u0647\u0627\u06cc \u067e\u0631\u062f\u0627\u062e\u062a"
-  ,"Choose your preferred payment method": "\u0631\u0648\u0634 \u067e\u0631\u062f\u0627\u062e\u062a \u0645\u0648\u0631\u062f \u0639\u0644\u0627\u0642\u0647 \u062e\u0648\u062f \u0631\u0627 \u0627\u0646\u062a\u062e\u0627\u0628 \u06a9\u0646\u06cc\u062f"
-  ,"USDT Payment": "\u067e\u0631\u062f\u0627\u062e\u062a USDT"
-  ,"Bitcoin Payment": "\u067e\u0631\u062f\u0627\u062e\u062a \u0628\u06cc\u062a\u06a9\u0648\u06cc\u0646"
-  ,"Your Transaction Details": "\u062c\u0632\u06cc\u06cc\u0627\u062a \u062a\u0631\u0627\u0646\u0632\u0627\u06a9\u0634 \u0634\u0645\u0627"
-  ,"Submit Order": "\u062b\u0628\u062a \u0633\u0641\u0627\u0631\u0634"
-  ,"Contact Seller": "\u0627\u0631\u062a\u0628\u0627\u0637 \u0628\u0627 \u0641\u0631\u0648\u0634\u0646\u062f\u0647"
-  ,"WhatsApp": "WhatsApp"
-  ,"Telegram": "Telegram"
-  ,"Email": "\u0627\u06cc\u0645\u06cc\u0644"
-  ,"Pay {{amount}} with Stripe": "\u067e\u0631\u062f\u0627\u062e\u062a {{amount}} \u0628\u0627 Stripe"
-  ,"Back to": "\u0628\u0627\u0632\u06af\u0634\u062a \u0628\u0647"
-  ,"Previous Step": "\u0645\u0631\u062d\u0644\u0647 \u0642\u0628\u0644"
-  ,"Admin Dashboard": "\u062f\u0627\u0634\u0628\u0648\u0631\u062f \u0645\u062f\u06cc\u0631\u06cc\u062a"
-  ,"Configure Stripe": "\u062a\u0646\u0638\u06cc\u0645\u0627\u062a \u0627\u0633\u062a\u0631\u0627\u06cc\u067e"
-  ,"Transactions": "\u062a\u0631\u0627\u06a9\u0646\u0634\u200c\u0647\u0627"
-  ,"Pro Panel": "\u067e\u0646\u0644 \u062d\u0631\u0641\u0647\u200c\u0627\u06cc"
-  ,"Reports": "\u06af\u0632\u0627\u0631\u0634\u200c\u0647\u0627"
-  ,"Appearance": "\u0638\u0627\u0647\u0631"
-  ,"General Config": "\u062a\u0646\u0638\u06cc\u0645\u0627\u062a \u0639\u0645\u0648\u0645\u06cc"
-  ,"Pages": "\u0635\u0641\u062d\u0627\u062a"
-  ,"Reserved Usernames": "\u0646\u0627\u0645\u200c\u0647\u0627\u06cc \u06a9\u0627\u0631\u0628\u0631\u06cc \u0631\u0632\u0631\u0648 \u0634\u062f\u0647"
-  ,"Username": "\u0646\u0627\u0645 \u06a9\u0627\u0631\u0628\u0631\u06cc"
-  ,"Add": "\u0627\u0641\u0632\u0648\u062f\u0646"
-  ,"Delete": "\u062d\u0630\u0641"
-  ,"Custom Profile URLs": "\u0622\u062f\u0631\u0633\u200c\u0647\u0627\u06cc \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0633\u0641\u0627\u0631\u0634\u06cc"
-  ,"Build your online store with your own profile at /username": "\u0641\u0631\u0648\u0634\u06af\u0627\u0647 \u0622\u0646\u0644\u0627\u06cc\u0646 \u062e\u0648\u062f \u0631\u0627 \u0628\u0627 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0627\u062e\u062a\u0635\u0627\u0635\u06cc \u062f\u0631 /username \u0628\u0633\u0627\u0632\u06cc\u062f"
-  ,"Crypto Payments": "\u067e\u0631\u062f\u0627\u062e\u062a\u200c\u0647\u0627\u06cc \u0627\u0631\u0632 \u062f\u06cc\u062c\u06cc\u062a\u0627\u0644"
-  ,"Accept Bitcoin & USDT (TRC20) with instant transactions": "\u0628\u06cc\u062a\u200c\u06a9\u0648\u06cc\u0646 \u0648 USDT (TRC20) \u0631\u0627 \u0628\u0627 \u062a\u0627\u06cc\u06cc\u062f \u0641\u0648\u0631\u06cc \u0628\u067e\u0630\u06cc\u0631\u06cc\u062f"
-  ,"Multi-Channel Orders": "\u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627\u06cc \u0686\u0646\u062f\u06a9\u0627\u0646\u0627\u0644\u0647"
-  ,"Customers can order via WhatsApp, Telegram, or Email": "\u0645\u0634\u062a\u0631\u06cc\u0627\u0646 \u0645\u06cc\u200c\u062a\u0648\u0627\u0646\u0646\u062f \u0627\u0632 \u0637\u0631\u06cc\u0642 \u0648\u0627\u062a\u0633\u200c\u0627\u067e\u060c \u062a\u0644\u06af\u0631\u0627\u0645 \u06cc\u0627 \u0627\u06cc\u0645\u06cc\u0644 \u0633\u0641\u0627\u0631\u0634 \u062f\u0647\u0646\u062f"
-  ,"Visual Categories": "\u062f\u0633\u062a\u0647\u200c\u0628\u0646\u062f\u06cc\u200c\u0647\u0627\u06cc \u062a\u0635\u0648\u06cc\u0631\u06cc"
-  ,"Organize products with beautiful photo-based categories": "\u0645\u062d\u0635\u0648\u0644\u0627\u062a \u0631\u0627 \u0628\u0627 \u062f\u0633\u062a\u0647\u200c\u0628\u0646\u062f\u06cc\u200c\u0647\u0627\u06cc \u0632\u06cc\u0628\u0627 \u0628\u0631 \u0627\u0633\u0627\u0633 \u0639\u06a9\u0633 \u0645\u0631\u062a\u0628 \u06a9\u0646\u06cc\u062f"
-  ,"Order Management": "\u0645\u062f\u06cc\u0631\u06cc\u062a \u0633\u0641\u0627\u0631\u0634"
-  ,"Track orders and manage transactions effortlessly": "\u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627 \u0631\u0627 \u067e\u06cc\u06af\u06cc\u0631\u06cc \u0648 \u062a\u0631\u0627\u06a9\u0646\u0634\u200c\u0647\u0627 \u0631\u0627 \u0628\u0647 \u0633\u0627\u062f\u06af\u06cc \u0645\u062f\u06cc\u0631\u06cc\u062a \u06a9\u0646\u06cc\u062f"
-  ,"Bitcoin": "\u0628\u06cc\u062a\u200c\u06a9\u0648\u06cc\u0646"
-  ,"USDT TRC20": "USDT TRC20"
-  ,"Traditional": "\u0633\u0646\u062a\u06cc"
-  ,"Your Store, Your Way": "\u0641\u0631\u0648\u0634\u06af\u0627\u0647 \u0634\u0645\u0627\u060c \u0628\u0647 \u0633\u0628\u06a9 \u0634\u0645\u0627"
-  ,"Dashboard": "\u062f\u0627\u0634\u0628\u0648\u0631\u062f"
-  ,"Get Started": "\u0634\u0631\u0648\u0639 \u06a9\u0646\u06cc\u062f"
-  ,"Now with Crypto Payments & Multi-Channel Orders": "\u0627\u06a9\u0646\u0648\u0646 \u0628\u0627 \u067e\u0631\u062f\u0627\u062e\u062a \u0627\u0631\u0632 \u062f\u06cc\u062c\u06cc\u062a\u0627\u0644 \u0648 \u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627\u06cc \u0686\u0646\u062f\u06a9\u0627\u0646\u0627\u0644\u0647"
-  ,"Your Store": "\u0641\u0631\u0648\u0634\u06af\u0627\u0647 \u0634\u0645\u0627"
-  ,"Your Rules": "\u0642\u0648\u0627\u0646\u06cc\u0646 \u0634\u0645\u0627"
-  ,"Create a professional online store with custom profiles, crypto payments, and multi-channel ordering.": "\u06cc\u06a9 \u0641\u0631\u0648\u0634\u06af\u0627\u0647 \u0622\u0646\u0644\u0627\u06cc\u0646 \u062d\u0631\u0641\u0647\u200c\u0627\u06cc \u0628\u0627 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644\u200c\u0647\u0627\u06cc \u0633\u0641\u0627\u0631\u0634\u06cc\u060c \u067e\u0631\u062f\u0627\u062e\u062a \u0627\u0631\u0632 \u062f\u06cc\u062c\u06cc\u062a\u0627\u0644 \u0648 \u0633\u0641\u0627\u0631\u0634 \u0686\u0646\u062f\u06a9\u0627\u0646\u0627\u0644\u0647 \u0628\u0633\u0627\u0632\u06cc\u062f."
-  ,"Accept Bitcoin & USDT (TRC20)": "\u067e\u0630\u06cc\u0631\u0634 \u0628\u06cc\u062a\u200c\u06a9\u0648\u06cc\u0646 \u0648 USDT (TRC20)"
-  ,"WhatsApp, Telegram, or Email": "\u0648\u0627\u062a\u0633\u200c\u0627\u067e\u060c \u062a\u0644\u06af\u0631\u0627\u0645 \u06cc\u0627 \u0627\u06cc\u0645\u06cc\u0644"
-  ,"Accept:": "\u067e\u0630\u06cc\u0631\u0634:"
-  ,"Orders via:": "\u0633\u0641\u0627\u0631\u0634 \u0627\u0632 \u0637\u0631\u06cc\u0642:"
-  ,"Start Building": "\u0634\u0631\u0648\u0639 \u0633\u0627\u062e\u062a"
-  ,"Watch Demo": "\u0645\u0634\u0627\u0647\u062f\u0647 \u062f\u0645\u0648"
-  ,"Commission": "\u06a9\u0627\u0631\u0645\u0632\u062f"
-  ,"For free plan": "\u0628\u0631\u0627\u06cc \u067e\u0644\u0646 \u0631\u0627\u06cc\u06af\u0627\u0646"
-  ,"Crypto Types": "\u0627\u0646\u0648\u0627\u0639 \u0627\u0631\u0632 \u062f\u06cc\u062c\u06cc\u062a\u0627\u0644"
-  ,"Bitcoin & USDT TRC20": "\u0628\u06cc\u062a\u200c\u06a9\u0648\u06cc\u0646 \u0648 USDT TRC20"
-  ,"Order Channels": "\u06a9\u0627\u0646\u0627\u0644\u200c\u0647\u0627\u06cc \u0633\u0641\u0627\u0631\u0634"
-  ,"WhatsApp, Telegram, Email": "\u0648\u0627\u062a\u0633\u200c\u0627\u067e\u060c \u062a\u0644\u06af\u0631\u0627\u0645\u060c \u0627\u06cc\u0645\u06cc\u0644"
-  ,"Customization": "\u0633\u0641\u0627\u0631\u0634\u06cc\u200c\u0633\u0627\u0632\u06cc"
-  ,"Unlimited possibilities": "\u0627\u0645\u06a9\u0627\u0646\u0627\u062a \u0646\u0627\u0645\u062d\u062f\u0648\u062f"
-  ,"Everything You Need to Succeed": "\u0647\u0631 \u0622\u0646\u0686\u0647 \u0628\u0631\u0627\u06cc \u0645\u0648\u0641\u0642\u06cc\u062a \u0646\u06cc\u0627\u0632 \u062f\u0627\u0631\u06cc\u062f"
-  ,"Get your unique /username profile for professional branding": "\u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0645\u0646\u062d\u0635\u0631\u0628\u0647\u200c\u0641\u0631\u062f /username \u062e\u0648\u062f \u0631\u0627 \u0628\u0631\u0627\u06cc \u0628\u0631\u0646\u062f\u0633\u0627\u0632\u06cc \u062d\u0631\u0641\u0647\u200c\u0627\u06cc \u062f\u0631\u06cc\u0627\u0641\u062a \u06a9\u0646\u06cc\u062f"
-  ,"Accept Bitcoin & USDT (TRC20) with instant verification": "\u0628\u06cc\u062a\u200c\u06a9\u0648\u06cc\u0646 \u0648 USDT (TRC20) \u0631\u0627 \u0628\u0627 \u062a\u0627\u06cc\u06cc\u062f \u0641\u0648\u0631\u06cc \u0628\u067e\u0630\u06cc\u0631\u06cc\u062f"
-  ,"Let customers order via WhatsApp, Telegram, or Email": "\u0627\u062c\u0627\u0632\u0647 \u062f\u0647\u06cc\u062f \u0645\u0634\u062a\u0631\u06cc\u0627\u0646 \u0627\u0632 \u0637\u0631\u06cc\u0642 \u0648\u0627\u062a\u0633\u200c\u0627\u067e\u060c \u062a\u0644\u06af\u0631\u0627\u0645 \u06cc\u0627 \u0627\u06cc\u0645\u06cc\u0644 \u0633\u0641\u0627\u0631\u0634 \u062f\u0647\u0646\u062f"
-  ,"Track and manage all your orders in one dashboard": "\u062a\u0645\u0627\u0645 \u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627\u06cc \u062e\u0648\u062f \u0631\u0627 \u062f\u0631 \u06cc\u06a9 \u062f\u0627\u0634\u0628\u0648\u0631\u062f \u067e\u06cc\u06af\u06cc\u0631\u06cc \u0648 \u0645\u062f\u06cc\u0631\u06cc\u062a \u06a9\u0646\u06cc\u062f"
-  ,"Zero Fees": "\u0628\u062f\u0648\u0646 \u06a9\u0627\u0631\u0645\u0632\u062f"
-  ,"No commissions, no hidden costs - keep all your profits for pro profiles": "\u0628\u062f\u0648\u0646 \u06a9\u0645\u06cc\u0633\u06cc\u0648\u0646 \u0648 \u0647\u0632\u06cc\u0646\u0647 \u0645\u062e\u0641\u06cc - \u0647\u0645\u0647 \u0633\u0648\u062f \u0628\u0631\u0627\u06cc \u067e\u0631\u0648\u0641\u0627\u06cc\u0644\u200c\u0647\u0627\u06cc \u062d\u0631\u0641\u0647\u200c\u0627\u06cc"
-  ,"Privacy": "\u062d\u0631\u06cc\u0645 \u062e\u0635\u0648\u0635\u06cc"
-  ,"Terms": "\u0642\u0648\u0627\u0646\u06cc\u0646"
-  ,"Support": "\u067e\u0634\u062a\u06cc\u0628\u0627\u0646\u06cc"
-  ,"Order Tracking": "\u067e\u06cc\u06af\u06cc\u0631\u06cc \u0633\u0641\u0627\u0631\u0634"
-  ,"Welcome": "\u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f"
-  ,"and let customers order via": "\u0648 \u0628\u06af\u0630\u0627\u0631\u06cc\u062f \u0645\u0634\u062a\u0631\u06cc\u0627\u0646 \u0627\u0632 \u0637\u0631\u06cc\u0642"
-  ,"Good Morning": "\u0635\u0628\u062d \u0628\u062e\u06cc\u0631"
-  ,"Good Afternoon": "\u0639\u0635\u0631 \u0628\u062e\u06cc\u0631"
-  ,"Good Evening": "\u0634\u0628 \u0628\u062e\u06cc\u0631"
-  ,"Total Orders": "\u06a9\u0644 \u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627"
-  ,"Revenue": "\u062f\u0631\u0622\u0645\u062f"
-  ,"Products": "\u0645\u062d\u0635\u0648\u0644\u0627\u062a"
-  ,"Sales": "\u0641\u0631\u0648\u0634\u200c\u0647\u0627"
-  ,"Cart Items": "\u0622\u06cc\u062a\u0645\u200c\u0647\u0627\u06cc \u0633\u0628\u062f \u062e\u0631\u06cc\u062f"
-  ,"Add Product": "\u0627\u0641\u0632\u0648\u062f\u0646 \u0645\u062d\u0635\u0648\u0644"
-  ,"Create a new product listing": "\u0627\u06cc\u062c\u0627\u062f \u0641\u0647\u0631\u0633\u062a \u0645\u062d\u0635\u0648\u0644 \u062c\u062f\u06cc\u062f"
-  ,"Manage Orders": "\u0645\u062f\u06cc\u0631\u06cc\u062a \u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627"
-  ,"View and process orders": "\u0645\u0634\u0627\u0647\u062f\u0647 \u0648 \u067e\u0631\u062f\u0627\u0632\u0634 \u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627"
-  ,"View Sales": "\u0645\u0634\u0627\u0647\u062f\u0647 \u0641\u0631\u0648\u0634\u200c\u0647\u0627"
-  ,"Check your sales performance": "\u0628\u0631\u0631\u0633\u06cc \u0639\u0645\u0644\u06a9\u0631\u062f \u0641\u0631\u0648\u0634"
-  ,"Manage Categories": "\u0645\u062f\u06cc\u0631\u06cc\u062a \u062f\u0633\u062a\u0647\u200c\u0628\u0646\u062f\u06cc\u200c\u0647\u0627"
-  ,"Organize your product categories": "\u062f\u0633\u062a\u0647\u200c\u0628\u0646\u062f\u06cc\u200c\u0647\u0627\u06cc \u0645\u062d\u0635\u0648\u0644 \u0631\u0627 \u0633\u0631\u0648\u0633\u0627\u0645\u0627\u0646 \u062f\u0647\u06cc\u062f"
-  ,"View Transactions": "\u0645\u0634\u0627\u0647\u062f\u0647 \u062a\u0631\u0627\u06a9\u0646\u0634\u200c\u0647\u0627"
-  ,"Check your payment history": "\u0628\u0631\u0631\u0633\u06cc \u0633\u0627\u0628\u0642\u0647 \u067e\u0631\u062f\u0627\u062e\u062a"
-  ,"Edit Profile": "\u0648\u06cc\u0631\u0627\u06cc\u0634 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
-  ,"Update your store profile": "\u0628\u0647\u200c\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06cc \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0641\u0631\u0648\u0634\u06af\u0627\u0647"
-  ,"Browse Products": "\u0645\u0631\u0648\u0631 \u0645\u062d\u0635\u0648\u0644\u0627\u062a"
-  ,"Discover new products": "\u0645\u062d\u0635\u0648\u0644\u0627\u062a \u062c\u062f\u06cc\u062f \u0631\u0627 \u06a9\u0634\u0641 \u06a9\u0646\u06cc\u062f"
-  ,"My Orders": "\u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627\u06cc \u0645\u0646"
-  ,"Track your orders": "\u067e\u06cc\u06af\u06cc\u0631\u06cc \u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627\u06cc \u0634\u0645\u0627"
-  ,"Shopping Cart": "\u0633\u0628\u062f \u062e\u0631\u06cc\u062f"
-  ,"View items in your cart": "\u0645\u0634\u0627\u0647\u062f\u0647 \u0622\u06cc\u062a\u0645\u200c\u0647\u0627\u06cc \u0633\u0628\u062f \u062e\u0631\u06cc\u062f"
-  ,"Downloads": "\u062f\u0627\u0646\u0644\u0648\u062f\u0647\u0627"
-  ,"Access your digital purchases": "\u062f\u0633\u062a\u0631\u0633\u06cc \u0628\u0647 \u062e\u0631\u06cc\u062f\u0647\u0627\u06cc \u0631\u0642\u0645\u06cc \u0634\u0645\u0627"
-  ,"Become Seller": "\u0641\u0631\u0648\u0634\u0646\u062f\u0647 \u0634\u0648\u06cc\u062f"
-  ,"Start selling your products": "\u0641\u0631\u0648\u0634 \u0645\u062d\u0635\u0648\u0644\u0627\u062a \u062e\u0648\u062f \u0631\u0627 \u0622\u063a\u0627\u0632 \u06a9\u0646\u06cc\u062f"
-  ,"Update your profile information": "\u0628\u0647\u200c\u0631\u0648\u0632\u0631\u0633\u0627\u0646\u06cc \u0627\u0637\u0644\u0627\u0639\u0627\u062a \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
-  ,"New order #{{id}} from {{name}}": "\u0633\u0641\u0627\u0631\u0634 \u062c\u062f\u06cc\u062f #{{id}} \u0627\u0632 {{name}}"
-  ,"Customer": "\u0645\u0634\u062a\u0631\u06cc"
-  ,"Product \"{{name}}\" {{action}}": "\u0645\u062d\u0635\u0648\u0644 \"{{name}}\" {{action}}"
-  ,"updated": "\u0628\u0647\u200c\u0631\u0648\u0632 \u0634\u062f"
-  ,"created": "\u0627\u06cc\u062c\u0627\u062f \u0634\u062f"
-  ,"Order #{{id}} - {{status}}": "\u0633\u0641\u0627\u0631\u0634 #{{id}} - {{status}}"
-  ,"Welcome to your dashboard!": "\u0628\u0647 \u062f\u0627\u0634\u0628\u0648\u0631\u062f \u062e\u0648\u062f \u062e\u0648\u0634 \u0622\u0645\u062f\u06cc\u062f!"
-  ,"Complete your profile setup": "\u062a\u06a9\u0645\u06cc\u0644 \u062a\u0646\u0638\u06cc\u0645\u0627\u062a \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
-  ,"Just now": "\u0647\u0645\u06cc\u0646 \u0627\u0644\u0627\u0646"
-  ,"1 hour ago": "1 \u0633\u0627\u0639\u062a \u067e\u06cc\u0634"
-  ,"Manage your store and track your sales": "\u0641\u0631\u0648\u0634\u06af\u0627\u0647 \u062e\u0648\u062f \u0631\u0627 \u0645\u062f\u06cc\u0631\u06cc\u062a \u06a9\u0646\u06cc\u062f \u0648 \u0641\u0631\u0648\u0634\u200c\u0647\u0627 \u0631\u0627 \u067e\u06cc\u06af\u06cc\u0631\u06cc \u06a9\u0646\u06cc\u062f"
-  ,"Welcome back to your marketplace dashboard": "\u0628\u0647 \u062f\u0627\u0634\u0628\u0648\u0631\u062f \u0645\u0627\u0631\u06a9\u062a\u200c\u067e\u0644\u06cc\u0633 \u062e\u0648\u062f \u0628\u0627\u0632\u06af\u0634\u062a\u06cc\u062f"
-  ,"View Store": "\u0645\u0634\u0627\u0647\u062f\u0647 \u0641\u0631\u0648\u0634\u06af\u0627\u0647"
-  ,"View Profile": "\u0645\u0634\u0627\u0647\u062f\u0647 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
-  ,"Your Store URL": "\u0622\u062f\u0631\u0633 \u0641\u0631\u0648\u0634\u06af\u0627\u0647 \u0634\u0645\u0627"
-  ,"Your Profile URL": "\u0622\u062f\u0631\u0633 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644 \u0634\u0645\u0627"
-  ,"Seller Account": "\u062d\u0633\u0627\u0628 \u0641\u0631\u0648\u0634\u0646\u062f\u0647"
-  ,"Buyer Account": "\u062d\u0633\u0627\u0628 \u062e\u0631\u06cc\u062f\u0627\u0631"
-  ,"Admin": "\u0645\u062f\u06cc\u0631"
-  ,"Quick Actions": "\u0627\u0642\u062f\u0627\u0645\u0627\u062a \u0633\u0631\u06cc\u0639"
-  ,"Recent Activity": "\u0641\u0639\u0627\u0644\u06cc\u062a\u200c\u0647\u0627\u06cc \u0627\u062e\u06cc\u0631"
-  ,"View All": "\u0645\u0634\u0627\u0647\u062f\u0647 \u0647\u0645\u0647"
-  ,"Orders": "\u0633\u0641\u0627\u0631\u0634\u200c\u0647\u0627"
-  ,"Account Status": "\u0648\u0636\u0639\u06cc\u062a \u062d\u0633\u0627\u0628"
-  ,"Account Type": "\u0646\u0648\u0639 \u062d\u0633\u0627\u0628"
-  ,"Seller": "\u0641\u0631\u0648\u0634\u0646\u062f\u0647"
-  ,"Buyer": "\u062e\u0631\u06cc\u062f\u0627\u0631"
-  ,"Profile Complete": "\u062a\u06a9\u0645\u06cc\u0644 \u067e\u0631\u0648\u0641\u0627\u06cc\u0644"
-  ,"Admin Access": "\u062f\u0633\u062a\u0631\u0633\u06cc \u0627\u062f\u0645\u06cc\u0646"
-  ,"Admin Panel": "\u067e\u0646\u0644 \u0645\u062f\u06cc\u0631\u06cc\u062a"
-  ,"Store Tools": "\u0627\u0628\u0632\u0627\u0631\u0647\u0627\u06cc \u0641\u0631\u0648\u0634\u06af\u0627\u0647"
-  ,"Quick Links": "\u0644\u06cc\u0646\u06a9\u200c\u0647\u0627\u06cc \u0633\u0631\u06cc\u0639"
-  ,"Categories": "\u062f\u0633\u062a\u0647\u200c\u0628\u0646\u062f\u06cc\u200c\u0647\u0627"
-  ,"Manage": "\u0645\u062f\u06cc\u0631\u06cc\u062a"
-  ,"Pages": "\u0635\u0641\u062d\u0627\u062a"
-  ,"Edit": "\u0648\u06cc\u0631\u0627\u06cc\u0634"
-  ,"View": "\u0645\u0634\u0627\u0647\u062f\u0647"
-  ,"Access": "\u062f\u0633\u062a\u0631\u0633\u06cc"
-  ,"Track Order": "\u067e\u06cc\u06af\u06cc\u0631\u06cc \u0633\u0641\u0627\u0631\u0634"
-  ,"Track": "\u067e\u06cc\u06af\u06cc\u0631\u06cc"
-  ,"Start": "\u0634\u0631\u0648\u0639"
-  ,"Select Account Type": "نوع حساب را انتخاب کنید"
-  ,"Continue": "ادامه"
-  ,"Confirm Password": "تایید رمز عبور"
-  ,"This is a secure area of the application. Please confirm your password before continuing.": "این بخش از برنامه امن است. لطفاً قبل از ادامه، رمز عبور خود را تایید کنید."
-  ,"Confirm": "تایید"
-  ,"Forgot Password": "فراموشی رمز عبور"
-  ,"Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "رمز عبور خود را فراموش کرده‌اید؟ مشکلی نیست. فقط ایمیل خود را به ما بدهید تا لینک بازنشانی رمز عبور را برایتان ارسال کنیم تا بتوانید رمز جدیدی انتخاب کنید."
-  ,"Email Password Reset Link": "ارسال لینک بازنشانی رمز عبور"
-  ,"Register": "ثبت نام"
-  ,"Checking...": "در حال بررسی..."
-  ,"Username available": "نام کاربری موجود است"
-  ,"Username already taken": "نام کاربری قبلاً استفاده شده است"
-  ,"Name": "نام"
-  ,"Already registered?": "قبلاً ثبت‌نام کرده‌اید؟"
-  ,"Reset Password": "بازنشانی رمز عبور"
-  ,"Email Verification": "تایید ایمیل"
-  ,"Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "از ثبت‌نام شما متشکریم! قبل از شروع، لطفاً با کلیک روی لینکی که برایتان ایمیل کردیم ایمیل خود را تأیید کنید. اگر ایمیل را دریافت نکردید، با خوشحالی دوباره آن را ارسال می‌کنیم."
-  ,"A new verification link has been sent to the email address you provided during registration.": "یک لینک تأیید جدید به ایمیلی که هنگام ثبت‌نام وارد کردید ارسال شد."
-  ,"Resend Verification Email": "ارسال مجدد ایمیل تأیید"
-  ,"Total": "مجموع"
-  ,"Address": "آدرس"
-  ,"Phone": "تلفن"
-  ,"Cart": "سبد خرید"
-  ,"Total Amount": "مبلغ کل"
-  ,"First Name": "نام"
-  ,"Last Name": "نام خانوادگی"
-  ,"Email Address": "آدرس ایمیل"
-  ,"Full Address": "آدرس کامل"
-  ,"Postal Code": "کد پستی"
-  ,"Phone Number": "شماره تلفن"
-  ,"Variant": "نوع"
-  ,"Enter your first name": "نام خود را وارد کنید"
-  ,"Enter your last name": "نام خانوادگی خود را وارد کنید"
-  ,"your.email@example.com": "your.email@example.com"
-  ,"Street address, city, state": "نشانی خیابان، شهر، استان"
-  ,"12345": "12345"
-  ,"+1 (555) 123-4567": "+1 (555) 123-4567"
-  ,"Enter your wallet address for confirmation": "آدرس کیف پول خود را برای تایید وارد کنید"
-  ,"Log Out": "خروج",
+  "Log in": "ورود",
+  "Email": "ایمیل",
+  "Password": "رمز عبور",
+  "Remember me": "مرا به خاطر بسپار",
+  "Forgot your password?": "رمز عبور خود را فراموش کرده‌اید؟",
+  "Continue with Google": "ورود با گوگل",
+  "Item added to cart": "آیتم به سبد خرید اضافه شد",
+  "Would you like to continue shopping or go to your cart?": "می‌خواهید به خرید ادامه دهید یا به سبد خرید بروید؟",
+  "Continue Shopping": "ادامه خرید",
+  "Go to Cart": "رفتن به سبد خرید",
+  "Shopping Cart": "سبد خرید",
+  "Review Your Order": "سفارش خود را مرور کنید",
+  "Check your items before proceeding": "قبل از ادامه اقدامات محصولات خود را بررسی کنید",
+  "Your cart is empty": "سبد خرید شما خالی است",
+  "Add some items to get started": "برای شروع کمی محصول اضافه کنید",
+  "Continue to": "ادامه به",
+  "Shipping": "ارسال",
+  "Payment": "پرداخت",
+  "Shipping Information": "اطلاعات ارسال",
+  "Almost There!": "نزدیک هستید!",
+  "Please provide your delivery details": "لطفا جزییات دریافت را وارد کنید",
+  "Ready to proceed to payment": "آماده برای انجام پرداخت",
+  "No shipping required": "بدون نیاز به ارسال",
+  "Digital products will be delivered instantly": "محصولات رقمی فورا ارسال خواهند شد",
+  "Back to Cart": "بازگشت به سبد خرید",
+  "Continue to Payment": "ادامه به پرداخت",
+  "Payment Options": "گزینه های پرداخت",
+  "Choose your preferred payment method": "روش پرداخت مورد علاقه خود را انتخاب کنید",
+  "USDT Payment": "پرداخت USDT",
+  "Bitcoin Payment": "پرداخت بیتکوین",
+  "Your Transaction Details": "جزییات ترانزاکش شما",
+  "Submit Order": "ثبت سفارش",
+  "Contact Seller": "ارتباط با فروشنده",
+  "WhatsApp": "WhatsApp",
+  "Telegram": "Telegram",
+  "Pay {{amount}} with Stripe": "پرداخت {{amount}} با Stripe",
+  "Back to": "بازگشت به",
+  "Previous Step": "مرحله قبل",
+  "Admin Dashboard": "داشبورد مدیریت",
+  "Configure Stripe": "تنظیمات استرایپ",
+  "Transactions": "تراکنش‌ها",
+  "Pro Panel": "پنل حرفه‌ای",
+  "Reports": "گزارش‌ها",
+  "Appearance": "ظاهر",
+  "General Config": "تنظیمات عمومی",
+  "Pages": "صفحات",
+  "Reserved Usernames": "نام‌های کاربری رزرو شده",
+  "Username": "نام کاربری",
+  "Add": "افزودن",
+  "Delete": "حذف",
+  "Custom Profile URLs": "آدرس‌های پروفایل سفارشی",
+  "Build your online store with your own profile at /username": "فروشگاه آنلاین خود را با پروفایل اختصاصی در /username بسازید",
+  "Crypto Payments": "پرداخت‌های ارز دیجیتال",
+  "Accept Bitcoin & USDT (TRC20) with instant transactions": "بیت‌کوین و USDT (TRC20) را با تایید فوری بپذیرید",
+  "Multi-Channel Orders": "سفارش‌های چندکاناله",
+  "Customers can order via WhatsApp, Telegram, or Email": "مشتریان می‌توانند از طریق واتس‌اپ، تلگرام یا ایمیل سفارش دهند",
+  "Visual Categories": "دسته‌بندی‌های تصویری",
+  "Organize products with beautiful photo-based categories": "محصولات را با دسته‌بندی‌های زیبا بر اساس عکس مرتب کنید",
+  "Order Management": "مدیریت سفارش",
+  "Track orders and manage transactions effortlessly": "سفارش‌ها را پیگیری و تراکنش‌ها را به سادگی مدیریت کنید",
+  "Bitcoin": "بیت‌کوین",
+  "USDT TRC20": "USDT TRC20",
+  "Traditional": "سنتی",
+  "Your Store, Your Way": "فروشگاه شما، به سبک شما",
+  "Dashboard": "داشبورد",
+  "Get Started": "شروع کنید",
+  "Now with Crypto Payments & Multi-Channel Orders": "اکنون با پرداخت ارز دیجیتال و سفارش‌های چندکاناله",
+  "Your Store": "فروشگاه شما",
+  "Your Rules": "قوانین شما",
+  "Create a professional online store with custom profiles, crypto payments, and multi-channel ordering.": "یک فروشگاه آنلاین حرفه‌ای با پروفایل‌های سفارشی، پرداخت ارز دیجیتال و سفارش چندکاناله بسازید.",
+  "Accept Bitcoin & USDT (TRC20)": "پذیرش بیت‌کوین و USDT (TRC20)",
+  "WhatsApp, Telegram, or Email": "واتس‌اپ، تلگرام یا ایمیل",
+  "Accept:": "پذیرش:",
+  "Orders via:": "سفارش از طریق:",
+  "Start Building": "شروع ساخت",
+  "Watch Demo": "مشاهده دمو",
+  "Commission": "کارمزد",
+  "For free plan": "برای پلن رایگان",
+  "Crypto Types": "انواع ارز دیجیتال",
+  "Bitcoin & USDT TRC20": "بیت‌کوین و USDT TRC20",
+  "Order Channels": "کانال‌های سفارش",
+  "WhatsApp, Telegram, Email": "واتس‌اپ، تلگرام، ایمیل",
+  "Customization": "سفارشی‌سازی",
+  "Unlimited possibilities": "امکانات نامحدود",
+  "Everything You Need to Succeed": "هر آنچه برای موفقیت نیاز دارید",
+  "Get your unique /username profile for professional branding": "پروفایل منحصربه‌فرد /username خود را برای برندسازی حرفه‌ای دریافت کنید",
+  "Accept Bitcoin & USDT (TRC20) with instant verification": "بیت‌کوین و USDT (TRC20) را با تایید فوری بپذیرید",
+  "Let customers order via WhatsApp, Telegram, or Email": "اجازه دهید مشتریان از طریق واتس‌اپ، تلگرام یا ایمیل سفارش دهند",
+  "Track and manage all your orders in one dashboard": "تمام سفارش‌های خود را در یک داشبورد پیگیری و مدیریت کنید",
+  "Zero Fees": "بدون کارمزد",
+  "No commissions, no hidden costs - keep all your profits for pro profiles": "بدون کمیسیون و هزینه مخفی - همه سود برای پروفایل‌های حرفه‌ای",
+  "Privacy": "حریم خصوصی",
+  "Terms": "قوانین",
+  "Support": "پشتیبانی",
+  "Order Tracking": "پیگیری سفارش",
+  "Welcome": "خوش آمدید",
+  "and let customers order via": "و بگذارید مشتریان از طریق",
+  "Good Morning": "صبح بخیر",
+  "Good Afternoon": "عصر بخیر",
+  "Good Evening": "شب بخیر",
+  "Total Orders": "کل سفارش‌ها",
+  "Revenue": "درآمد",
+  "Products": "محصولات",
+  "Sales": "فروش‌ها",
+  "Cart Items": "آیتم‌های سبد خرید",
+  "Add Product": "افزودن محصول",
+  "Create a new product listing": "ایجاد فهرست محصول جدید",
+  "Manage Orders": "مدیریت سفارش‌ها",
+  "View and process orders": "مشاهده و پردازش سفارش‌ها",
+  "View Sales": "مشاهده فروش‌ها",
+  "Check your sales performance": "بررسی عملکرد فروش",
+  "Manage Categories": "مدیریت دسته‌بندی‌ها",
+  "Organize your product categories": "دسته‌بندی‌های محصول را سروسامان دهید",
+  "View Transactions": "مشاهده تراکنش‌ها",
+  "Check your payment history": "بررسی سابقه پرداخت",
+  "Edit Profile": "ویرایش پروفایل",
+  "Update your store profile": "به‌روزرسانی پروفایل فروشگاه",
+  "Browse Products": "مشاهده محصولات",
+  "Discover new products": "محصولات جدید را کشف کنید",
+  "My Orders": "سفارش‌های من",
+  "Track your orders": "پیگیری سفارش‌های شما",
+  "View items in your cart": "مشاهده آیتم‌های سبد خرید",
+  "Downloads": "دانلودها",
+  "Access your digital purchases": "دسترسی به خریدهای رقمی شما",
+  "Become Seller": "فروشنده شوید",
+  "Start selling your products": "فروش محصولات خود را آغاز کنید",
+  "Update your profile information": "به‌روزرسانی اطلاعات پروفایل",
+  "New order #{{id}} from {{name}}": "سفارش جدید #{{id}} از {{name}}",
+  "Customer": "مشتری",
+  "Product \"{{name}}\" {{action}}": "محصول \"{{name}}\" {{action}}",
+  "updated": "به‌روز شد",
+  "created": "ایجاد شد",
+  "Order #{{id}} - {{status}}": "سفارش #{{id}} - {{status}}",
+  "Welcome to your dashboard!": "به داشبورد خود خوش آمدید!",
+  "Complete your profile setup": "تکمیل تنظیمات پروفایل",
+  "Just now": "همین الان",
+  "1 hour ago": "1 ساعت پیش",
+  "Manage your store and track your sales": "فروشگاه خود را مدیریت کنید و فروش‌ها را پیگیری کنید",
+  "Welcome back to your marketplace dashboard": "به داشبورد مارکت‌پلیس خود بازگشتید",
+  "View Store": "مشاهده فروشگاه",
+  "View Profile": "مشاهده پروفایل",
+  "Your Store URL": "آدرس فروشگاه شما",
+  "Your Profile URL": "آدرس پروفایل شما",
+  "Seller Account": "حساب فروشنده",
+  "Buyer Account": "حساب خریدار",
+  "Admin": "مدیر",
+  "Quick Actions": "اقدامات سریع",
+  "Recent Activity": "فعالیت‌های اخیر",
+  "View All": "مشاهده همه",
+  "Orders": "سفارش‌ها",
+  "Account Status": "وضعیت حساب",
+  "Account Type": "نوع حساب",
+  "Seller": "فروشنده",
+  "Buyer": "خریدار",
+  "Profile Complete": "تکمیل پروفایل",
+  "Admin Access": "دسترسی ادمین",
+  "Admin Panel": "پنل مدیریت",
+  "Store Tools": "ابزارهای فروشگاه",
+  "Quick Links": "لینک‌های سریع",
+  "Categories": "دسته‌ها",
+  "Manage": "مدیریت",
+  "Edit": "ویرایش",
+  "View": "مشاهده",
+  "Access": "دسترسی",
+  "Track Order": "پیگیری سفارش",
+  "Track": "پیگیری",
+  "Start": "شروع",
+  "Select Account Type": "نوع حساب را انتخاب کنید",
+  "Continue": "ادامه",
+  "Confirm Password": "تایید رمز عبور",
+  "This is a secure area of the application. Please confirm your password before continuing.": "این بخش از برنامه امن است. لطفاً قبل از ادامه، رمز عبور خود را تایید کنید.",
+  "Confirm": "تایید",
+  "Forgot Password": "فراموشی رمز عبور",
+  "Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "رمز عبور خود را فراموش کرده‌اید؟ مشکلی نیست. فقط ایمیل خود را به ما بدهید تا لینک بازنشانی رمز عبور را برایتان ارسال کنیم تا بتوانید رمز جدیدی انتخاب کنید.",
+  "Email Password Reset Link": "ارسال لینک بازنشانی رمز عبور",
+  "Register": "ثبت نام",
+  "Checking...": "در حال بررسی...",
+  "Username available": "نام کاربری موجود است",
+  "Username already taken": "نام کاربری قبلاً استفاده شده است",
+  "Name": "نام",
+  "Already registered?": "قبلاً ثبت‌نام کرده‌اید؟",
+  "Reset Password": "بازنشانی رمز عبور",
+  "Email Verification": "تایید ایمیل",
+  "Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "از ثبت‌نام شما متشکریم! قبل از شروع، لطفاً با کلیک روی لینکی که برایتان ایمیل کردیم ایمیل خود را تأیید کنید. اگر ایمیل را دریافت نکردید، با خوشحالی دوباره آن را ارسال می‌کنیم.",
+  "A new verification link has been sent to the email address you provided during registration.": "یک لینک تأیید جدید به ایمیلی که هنگام ثبت‌نام وارد کردید ارسال شد.",
+  "Resend Verification Email": "ارسال مجدد ایمیل تأیید",
+  "Total": "مجموع",
+  "Address": "آدرس",
+  "Phone": "تلفن",
+  "Cart": "سبد خرید",
+  "Total Amount": "مبلغ کل",
+  "First Name": "نام",
+  "Last Name": "نام خانوادگی",
+  "Email Address": "آدرس ایمیل",
+  "Full Address": "آدرس کامل",
+  "Postal Code": "کد پستی",
+  "Phone Number": "شماره تلفن",
+  "Variant": "نوع",
+  "Enter your first name": "نام خود را وارد کنید",
+  "Enter your last name": "نام خانوادگی خود را وارد کنید",
+  "your.email@example.com": "your.email@example.com",
+  "Street address, city, state": "نشانی خیابان، شهر، استان",
+  "12345": "12345",
+  "+1 (555) 123-4567": "+1 (555) 123-4567",
+  "Enter your wallet address for confirmation": "آدرس کیف پول خود را برای تایید وارد کنید",
+  "Log Out": "خروج",
   "Back": "بازگشت",
   "New Category": "دسته‌بندی جدید",
   "Create a new content category": "ایجاد دسته‌بندی محتوای جدید",
@@ -243,7 +240,6 @@
   "Changing the category name will update its URL slug": "تغییر نام دسته‌بندی، اسلاگ آن را به‌روزرسانی می‌کند",
   "Uploading a new icon will replace the existing one": "بارگذاری آیکون جدید، آیکون فعلی را جایگزین می‌کند",
   "All existing content in this category will remain unchanged": "تمام محتوای موجود در این دسته‌بندی بدون تغییر باقی می‌ماند",
-  "Categories": "دسته‌بندی‌ها",
   "Manage your content categories": "دسته‌بندی‌های محتوای خود را مدیریت کنید",
   "Category": "دسته‌بندی",
   "Organize your content effectively": "محتوای خود را به‌صورت موثر سازماندهی کنید",
@@ -252,66 +248,129 @@
   "Are you sure you want to delete this category?": "آیا از حذف این دسته‌بندی مطمئنید؟",
   "No categories yet": "هنوز دسته‌بندی‌ای وجود ندارد",
   "Get started by creating your first category to organize your content.": "برای سازماندهی محتوای خود، اولین دسته‌بندی را ایجاد کنید.",
-  "Create Your First Category": "اولین دسته‌بندی خود را ایجاد کنید"
-  ,"Track and manage your order history": "پیگیری و مدیریت تاریخچه سفارش‌های شما"
-  ,"Total Spent": "مجموع هزینه"
-  ,"Completed": "تکمیل‌شده"
-  ,"Digital Items": "موارد دیجیتال"
-  ,"Order History": "تاریخچه سفارش"
-  ,"Search orders": "جستجوی سفارش‌ها"
-  ,"Tracking": "کد رهگیری"
-  ,"Amount": "مبلغ"
-  ,"Status": "وضعیت"
-  ,"Seller": "فروشنده"
-  ,"Shipping": "ارسال"
-  ,"Action": "عملیات"
-  ,"Download Available": "دانلود موجود است"
-  ,"Track": "پیگیری"
-  ,"No orders found": "هیچ سفارشی یافت نشد"
-  ,"You haven't placed any orders yet.": "هنوز سفارشی ثبت نکرده‌اید."
-  ,"Start Shopping": "شروع خرید"
-  ,"Tracking code": "کد رهگیری"
-  ,"Save": "ذخیره"
-  ,"Track Your Order": "سفارش خود را پیگیری کنید"
-  ,"Enter your tracking code to get real-time updates": "کد رهگیری خود را وارد کنید تا به‌روزرسانی‌های لحظه‌ای دریافت کنید"
-  ,"Tracking Code": "کد رهگیری"
-  ,"Enter your tracking code...": "کد رهگیری خود را وارد کنید..."
-  ,"Tracking...": "در حال پیگیری..."
-  ,"Order Tracking": "پیگیری سفارش"
-  ,"Track your order status and download files": "وضعیت سفارش را پیگیری کرده و فایل‌ها را دانلود کنید"
-  ,"Order Information": "اطلاعات سفارش"
-  ,"Order Status": "وضعیت سفارش"
-  ,"Your order has been successfully delivered!": "سفارش شما با موفقیت تحویل داده شد!"
-  ,"Your order is on its way!": "سفارش شما در راه است!"
-  ,"Your order is being processed.": "سفارش شما در حال پردازش است."
-  ,"There was an issue with your order.": "مشکلی در سفارش شما به وجود آمده است."
-  ,"Order status updated.": "وضعیت سفارش به‌روز شد."
-  ,"Shipping Information": "اطلاعات ارسال"
-  ,"Postal Tracking Code:": "کد رهگیری پستی:"
-  ,"Use this code to track your package with the shipping carrier.": "برای پیگیری بسته خود نزد شرکت حمل‌ونقل از این کد استفاده کنید."
-  ,"Available Downloads": "دانلودهای موجود"
-  ,"files": "فایل"
-  ,"file": "فایل"
-  ,"ready for download": "آماده دانلود"
-  ,"Ready": "آماده"
-  ,"Download": "دانلود"
-  ,"Download All Files": "دانلود همه فایل‌ها"
-  ,"Need help with your order?": "به کمک در مورد سفارش نیاز دارید؟"
-  ,"Contact Support": "تماس با پشتیبانی"
-  ,"Access your purchased files and digital content": "به فایل‌ها و محتوای دیجیتال خریداری‌شده دسترسی پیدا کنید"
-  ,"Available Files": "فایل‌های موجود"
-  ,"Storage Used": "فضای استفاده‌شده"
-  ,"available": "موجود"
-  ,"No downloads available": "دانلودی در دسترس نیست"
-  ,"You don't have any downloadable files yet.": "هنوز هیچ فایل قابل دانلودی ندارید."
-  ,"Browse Products": "مشاهده محصولات"
-  ,"New Page": "صفحه جدید"
-  ,"Edit Page": "ویرایش صفحه"
-  ,"Title": "عنوان"
-  ,"Description": "توضیحات"
-  ,"Images": "تصاویر"
-  ,"Search pages": "جستجوی صفحه‌ها"
-  ,"Actions": "عملیات"
-  ,"No pages found": "صفحه‌ای یافت نشد"
-  ,"Delete?": "حذف شود؟"
+  "Create Your First Category": "اولین دسته‌بندی خود را ایجاد کنید",
+  "Track and manage your order history": "پیگیری و مدیریت تاریخچه سفارش‌های شما",
+  "Total Spent": "مجموع هزینه",
+  "Completed": "تکمیل‌شده",
+  "Digital Items": "موارد دیجیتال",
+  "Order History": "تاریخچه سفارش",
+  "Search orders": "جستجوی سفارش‌ها",
+  "Tracking": "کد رهگیری",
+  "Amount": "مبلغ",
+  "Status": "وضعیت",
+  "Action": "عملیات",
+  "Download Available": "دانلود موجود است",
+  "No orders found": "هیچ سفارشی یافت نشد",
+  "You haven't placed any orders yet.": "هنوز سفارشی ثبت نکرده‌اید.",
+  "Start Shopping": "شروع خرید",
+  "Tracking code": "کد رهگیری",
+  "Save": "ذخیره",
+  "Track Your Order": "سفارش خود را پیگیری کنید",
+  "Enter your tracking code to get real-time updates": "کد رهگیری خود را وارد کنید تا به‌روزرسانی‌های لحظه‌ای دریافت کنید",
+  "Tracking Code": "کد رهگیری",
+  "Enter your tracking code...": "کد رهگیری خود را وارد کنید...",
+  "Tracking...": "در حال پیگیری...",
+  "Track your order status and download files": "وضعیت سفارش را پیگیری کرده و فایل‌ها را دانلود کنید",
+  "Order Information": "اطلاعات سفارش",
+  "Order Status": "وضعیت سفارش",
+  "Your order has been successfully delivered!": "سفارش شما با موفقیت تحویل داده شد!",
+  "Your order is on its way!": "سفارش شما در راه است!",
+  "Your order is being processed.": "سفارش شما در حال پردازش است.",
+  "There was an issue with your order.": "مشکلی در سفارش شما به وجود آمده است.",
+  "Order status updated.": "وضعیت سفارش به‌روز شد.",
+  "Postal Tracking Code:": "کد رهگیری پستی:",
+  "Use this code to track your package with the shipping carrier.": "برای پیگیری بسته خود نزد شرکت حمل‌ونقل از این کد استفاده کنید.",
+  "Available Downloads": "دانلودهای موجود",
+  "files": "فایل",
+  "file": "فایل",
+  "ready for download": "آماده دانلود",
+  "Ready": "آماده",
+  "Download": "دانلود",
+  "Download All Files": "دانلود همه فایل‌ها",
+  "Need help with your order?": "به کمک در مورد سفارش نیاز دارید؟",
+  "Contact Support": "تماس با پشتیبانی",
+  "Access your purchased files and digital content": "به فایل‌ها و محتوای دیجیتال خریداری‌شده دسترسی پیدا کنید",
+  "Available Files": "فایل‌های موجود",
+  "Storage Used": "فضای استفاده‌شده",
+  "available": "موجود",
+  "No downloads available": "دانلودی در دسترس نیست",
+  "You don't have any downloadable files yet.": "هنوز هیچ فایل قابل دانلودی ندارید.",
+  "New Page": "صفحه جدید",
+  "Edit Page": "ویرایش صفحه",
+  "Title": "عنوان",
+  "Description": "توضیحات",
+  "Images": "تصاویر",
+  "Search pages": "جستجوی صفحه‌ها",
+  "Actions": "عملیات",
+  "No pages found": "صفحه‌ای یافت نشد",
+  "Delete?": "حذف شود؟",
+  "Create New Product": "ایجاد محصول جدید",
+  "New Product": "محصول جدید",
+  "Product Information": "اطلاعات محصول",
+  "Basic Information": "اطلاعات پایه",
+  "Product Title": "عنوان محصول",
+  "Enter product title...": "عنوان محصول را وارد کنید...",
+  "Describe your product...": "محصول خود را توضیح دهید...",
+  "Price ($)": "قیمت (دلار)",
+  "Price": "قیمت",
+  "Digital Product": "محصول دیجیتال",
+  "Shipping Cost ($)": "هزینه ارسال (دلار)",
+  "Shipping Cost": "هزینه ارسال",
+  "Digital Files": "فایل‌های دیجیتال",
+  "Demo File": "فایل دمو",
+  "Main File": "فایل اصلی",
+  "Product Images": "تصاویر محصول",
+  "Upload Images": "بارگذاری تصاویر",
+  "Product Attributes": "ویژگی‌های محصول",
+  "Add Attribute": "افزودن ویژگی",
+  "Attribute title...": "عنوان ویژگی...",
+  "Option value...": "مقدار گزینه...",
+  "Additional price...": "قیمت اضافه...",
+  "Attribute name (e.g., Size)": "نام ویژگی (مثلاً اندازه)",
+  "Option (e.g., Large)": "گزینه (مثلاً بزرگ)",
+  "Additional price": "قیمت اضافی",
+  "Remove": "حذف",
+  "Save Product": "ذخیره محصول",
+  "Save Changes": "ذخیره تغییرات",
+  "Saving...": "در حال ذخیره...",
+  "Update your product information": "به‌روزرسانی اطلاعات محصول",
+  "Essential product details": "جزئیات ضروری محصول",
+  "Product Type": "نوع محصول",
+  "Configure product delivery method": "روش تحویل محصول را تنظیم کنید",
+  "This is a digital product": "این یک محصول دیجیتال است",
+  "Upload demo and main product files": "فایل‌های دمو و اصلی را بارگذاری کنید",
+  "Upload product photos and gallery images": "تصاویر محصول را بارگذاری کنید",
+  "Add variants, options, and pricing": "تنوع‌ها، گزینه‌ها و قیمت را اضافه کنید",
+  "No attributes added yet": "هنوز ویژگی‌ای اضافه نشده است",
+  "Click \"Add Attribute\" to create product variants": "برای ایجاد تنوع روی \"افزودن ویژگی\" کلیک کنید",
+  "items": "آیتم",
+  "Product Management": "مدیریت محصولات",
+  "Manage and organize your product catalog": "کاتالوگ محصولات خود را مدیریت کنید",
+  "Search products": "جستجوی محصولات",
+  "Filter": "فیلتر",
+  "No products found": "محصولی یافت نشد",
+  "Get started by creating your first product.": "با ایجاد اولین محصول شروع کنید.",
+  "Create Product": "ایجاد محصول",
+  "Edit product": "ویرایش محصول",
+  "Delete product": "حذف محصول",
+  "Are you sure you want to delete this product?": "آیا از حذف این محصول مطمئن هستید؟",
+  "Uncategorized": "بدون دسته",
+  "Views": "بازدید",
+  "Product": "محصول",
+  "Total Products": "تعداد کل محصولات",
+  "Total Value": "ارزش کل",
+  "Total Views": "کل بازدیدها",
+  "Added to cart!": "به سبد اضافه شد!",
+  "views": "بازدید",
+  "No image available": "تصویری موجود نیست",
+  "Files": "فایل‌ها",
+  "Choose an Option": "یک گزینه انتخاب کنید",
+  "Add to Cart": "افزودن به سبد",
+  "Report Store": "گزارش فروشگاه",
+  "What's Included": "شامل موارد زیر",
+  "Secure Payment Processing": "پرداخت امن",
+  "Fast & Reliable Delivery": "تحویل سریع و قابل اعتماد",
+  "Instant Download Access": "دسترسی دانلود فوری",
+  "24/7 Customer Support": "پشتیبانی ۲۴ ساعته",
+  "Customer Reviews": "نظرات مشتریان"
 }

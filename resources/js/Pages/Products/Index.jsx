@@ -2,10 +2,12 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
 
 export default function Index({ products }) {
+    const { t } = useTranslation();
     const [search, setSearch] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     useEffect(() => setCurrentPage(1), [search]);
@@ -28,34 +30,34 @@ export default function Index({ products }) {
             header={
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                     <h2 className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                        Products
+                        {t('Products')}
                     </h2>
                     <div className="text-sm text-gray-500 font-medium">
-                        {filteredProducts.length} items
+                        {filteredProducts.length} {t('items')}
                     </div>
                 </div>
             }
         >
-            <Head title="Products" />
+            <Head title={t('Products')} />
             
             <div className="py-6 sm:py-8">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     {/* Header Section */}
                     <div className="mb-6 sm:mb-8 flex flex-col gap-4">
                         <div>
-                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Product Management</h1>
-                            <p className="mt-2 text-gray-600 text-sm sm:text-base">Manage and organize your product catalog</p>
+                            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('Product Management')}</h1>
+                            <p className="mt-2 text-gray-600 text-sm sm:text-base">{t('Manage and organize your product catalog')}</p>
                         </div>
                         
                         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
                             <div className="w-full sm:w-auto">
-                                <SearchBar value={search} onChange={setSearch} placeholder="Search products" />
+                                <SearchBar value={search} onChange={setSearch} placeholder={t('Search products')} />
                             </div>
                             <button className="inline-flex items-center px-4 py-2 bg-white border border-gray-200 rounded-xl text-gray-700 hover:bg-gray-50 transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto justify-center sm:justify-start">
                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.707A1 1 0 013 7V4z" />
                                 </svg>
-                                Filter
+                                {t('Filter')}
                             </button>
                             
                             <PrimaryButton 
@@ -66,7 +68,7 @@ export default function Index({ products }) {
                                 <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                                 </svg>
-                                New Product
+                                {t('New Product')}
                             </PrimaryButton>
                         </div>
                     </div>
@@ -80,10 +82,10 @@ export default function Index({ products }) {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M9 9h.01M15 9h.01M9 15h.01M15 15h.01" />
                                     </svg>
                                 </div>
-                                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">No products found</h3>
-                                <p className="text-gray-500 text-sm sm:text-base mb-6">Get started by creating your first product.</p>
+                                <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">{t('No products found')}</h3>
+                                <p className="text-gray-500 text-sm sm:text-base mb-6">{t('Get started by creating your first product.')}</p>
                                 <PrimaryButton as={Link} href={route('products.create')} className="px-4 py-2">
-                                    Create Product
+                                    {t('Create Product')}
                                 </PrimaryButton>
                             </div>
                         ) : (
@@ -101,7 +103,7 @@ export default function Index({ products }) {
                                                 <Link
                                                     href={route('products.edit', p.slug)}
                                                     className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-600 hover:text-blue-700 transition-all duration-200"
-                                                    title="Edit product"
+                                                    title={t('Edit product')}
                                                 >
                                                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
@@ -112,9 +114,9 @@ export default function Index({ products }) {
                                                     method="delete"
                                                     as="button"
                                                     className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 transition-all duration-200"
-                                                    title="Delete product"
+                                                    title={t('Delete product')}
                                                     onClick={(e) => {
-                                                        if (!confirm('Are you sure you want to delete this product?')) {
+                                                        if (!confirm(t('Are you sure you want to delete this product?'))) {
                                                             e.preventDefault();
                                                         }
                                                     }}
@@ -128,13 +130,13 @@ export default function Index({ products }) {
                                         <div className="text-sm text-gray-500 mb-1">ID: #{p.id}</div>
                                         <div className="text-sm">
                                             <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 border border-green-200">
-                                                {p.category?.name || 'Uncategorized'}
+                                                {p.category?.name || t('Uncategorized')}
                                             </span>
                                         </div>
                                         <div className="text-base font-bold text-gray-900 mt-1">
                                             ${parseFloat(p.price).toLocaleString()}
                                         </div>
-                                        <div className="text-sm text-gray-500">Views: {p.views}</div>
+                                        <div className="text-sm text-gray-500">{t('Views')}: {p.views}</div>
                                     </div>
                                 ))}
                             </div>
@@ -148,7 +150,7 @@ export default function Index({ products }) {
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
                                                 </svg>
-                                                Product
+                                                {t('Product')}
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
@@ -156,7 +158,7 @@ export default function Index({ products }) {
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                                 </svg>
-                                                Category
+                                                {t('Category')}
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
@@ -164,7 +166,7 @@ export default function Index({ products }) {
                                                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                                                 </svg>
-                                                Price
+                                                {t('Price')}
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
@@ -173,11 +175,11 @@ export default function Index({ products }) {
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                                 </svg>
-                                                Views
+                                                {t('Views')}
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-right text-xs font-bold text-gray-600 uppercase tracking-wider">
-                                            Actions
+                                            {t('Actions')}
                                         </th>
                                     </tr>
                                 </thead>
@@ -265,25 +267,25 @@ export default function Index({ products }) {
                             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
                                 <div className="text-center">
                                     <div className="text-lg sm:text-2xl font-bold text-gray-900">{filteredProducts.length}</div>
-                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Total Products</div>
+                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">{t('Total Products')}</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-lg sm:text-2xl font-bold text-green-600">
                                         ${filteredProducts.reduce((sum, p) => sum + parseFloat(p.price || 0), 0).toLocaleString()}
                                     </div>
-                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Total Value</div>
+                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">{t('Total Value')}</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-lg sm:text-2xl font-bold text-blue-600">
                                         {new Set(filteredProducts.map(p => p.category?.name).filter(Boolean)).size}
                                     </div>
-                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Categories</div>
+                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">{t('Categories')}</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-lg sm:text-2xl font-bold text-purple-600">
                                         {filteredProducts.reduce((sum, p) => sum + (p.views || 0), 0)}
                                     </div>
-                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">Total Views</div>
+                                    <div className="text-xs sm:text-sm text-gray-600 font-medium">{t('Total Views')}</div>
                                 </div>
                             </div>
                         </div>
