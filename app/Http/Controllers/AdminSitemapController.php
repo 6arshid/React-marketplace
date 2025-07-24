@@ -12,7 +12,7 @@ class AdminSitemapController extends Controller
     public function index(): Response
     {
         $users = User::orderByDesc('id')->get(['id', 'name', 'username']);
-        $products = Product::orderByDesc('id')->get(['id', 'title']);
+        $products = Product::orderByDesc('id')->get(['id', 'title', 'slug']);
 
         return Inertia::render('Admin/Sitemap', [
             'users' => $users,
