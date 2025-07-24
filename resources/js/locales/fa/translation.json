@@ -466,5 +466,15 @@
   "Reference": "شناسه",
   "Date": "تاریخ",
   "No transactions": "تراکنشی وجود ندارد",
-  "Get started by creating your first transaction.": "برای شروع اولین تراکنش خود را ایجاد کنید."
+  "Get started by creating your first transaction.": "برای شروع اولین تراکنش خود را ایجاد کنید.",
+  "Change to Buyer": "تبدیل به خریدار",
+  "Change to Seller": "تبدیل به فروشنده",
+  "Notifications": "اعلان‌ها",
+  "No notifications": "اعلانی وجود ندارد",
+  "No more notifications": "اعلان دیگری وجود ندارد",
+  "Loading...": "در حال بارگذاری...",
+  "Mark all as read": "علامت‌گذاری همه به‌عنوان خوانده شده",
+  "Close": "بستن",
+  "Show Profile": "نمایش پروفایل",
+  "Store": "فروشگاه"
 }
