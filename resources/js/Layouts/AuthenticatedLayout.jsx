@@ -7,6 +7,7 @@ import { createPortal } from 'react-dom';
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const homeUrl = user?.pro_panel ? `/${user.username}` : '/';
+    const pages = usePage().props.pages || [];
     const flash = usePage().props.flash;
     const cart = usePage().props.cart;
     const notifications = usePage().props.notifications || [];
@@ -399,10 +400,10 @@ const navigationItems = [
 
                 {/* Navigation */}
                 <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
-                                {navigationItems.map((item) => {
-                                    const isActive = route().current(item.href);
-                                    return (
-                                        <Link
+                    {navigationItems.map((item) => {
+                        const isActive = route().current(item.href);
+                        return (
+                            <Link
                                             key={item.name}
                                             href={route(item.href)}
                                             className={`group flex items-center px-4 py-3 text-sm font-medium rounded-2xl transition-all duration-200 hover:scale-[1.02] ${
@@ -423,13 +424,29 @@ const navigationItems = [
                                                 }`}>
                                                     {item.badge}
                                                 </div>
-                                            )}
-                                        </Link>
-                                    );
-                                })}
+                                        )}
+                                    </Link>
+                                );
+                            })}
                 </div>
 
-   
+                {pages.length > 0 && (
+                    <div className="px-4 pb-6">
+                        <h3 className="font-semibold text-gray-900 mb-2 text-sm">Support</h3>
+                        <div className="space-y-1">
+                            {pages.map((p) => (
+                                <Link
+                                    key={p.slug}
+                                    href={route('pages.show', p.slug)}
+                                    className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 text-sm"
+                                >
+                                    {p.title}
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                )}
+
             </aside>
 
             {/* Main Content */}

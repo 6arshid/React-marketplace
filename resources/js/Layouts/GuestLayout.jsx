@@ -195,12 +195,16 @@ export default function GuestLayout({ children }) {
                             )}
 
                             {/* Support */}
-                            {user?.pro_panel && (
+                            {props.pages?.length > 0 && (
                                 <div>
                                     <h3 className="font-semibold text-gray-900 mb-4 text-sm sm:text-base">Support</h3>
                                     <div className="space-y-2">
-                                        {props.pages?.map((p) => (
-                                            <Link key={p.slug} href={route('pages.show', p.slug)} className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm">
+                                        {props.pages.map((p) => (
+                                            <Link
+                                                key={p.slug}
+                                                href={route('pages.show', p.slug)}
+                                                className="block text-gray-600 hover:text-indigo-600 transition-colors duration-200 text-sm"
+                                            >
                                                 {p.title}
                                             </Link>
                                         ))}
