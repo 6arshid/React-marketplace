@@ -22,6 +22,7 @@ use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminAppearanceController;
 use App\Http\Controllers\AdminGeneralConfigController;
 use App\Http\Controllers\AdminSitemapController;
+use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -126,6 +127,12 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/reports', [AdminReportController::class, 'index'])->name('admin.reports.index');
     Route::post('/reports/{user}/suspend', [AdminReportController::class, 'suspend'])->name('admin.reports.suspend');
     Route::post('/reports/{user}/unsuspend', [AdminReportController::class, 'unsuspend'])->name('admin.reports.unsuspend');
+
+    Route::get('/users', [AdminUserController::class, 'index'])->name('admin.users.index');
+    Route::post('/users/{user}/suspend', [AdminUserController::class, 'suspend'])->name('admin.users.suspend');
+    Route::post('/users/{user}/unsuspend', [AdminUserController::class, 'unsuspend'])->name('admin.users.unsuspend');
+    Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
+    Route::post('/users/{user}/make-admin', [AdminUserController::class, 'makeAdmin'])->name('admin.users.make-admin');
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');

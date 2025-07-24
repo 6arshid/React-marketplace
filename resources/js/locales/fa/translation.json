@@ -480,6 +480,9 @@
   "Sitemap": "نقشه سایت",
   "Sitemap URL": "آدرس نقشه سایت",
   "Users": "کاربران",
+  "Suspend": "تعلیق",
+  "Unsuspend": "رفع تعلیق",
+  "Make Admin": "تبدیل به مدیر",
   "Accept": "قبول",
   "Reject": "رد"
 }
