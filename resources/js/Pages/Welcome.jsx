@@ -1,9 +1,11 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const settings = usePage().props.settings || {};
+    const { t } = useTranslation();
     const [scrollY, setScrollY] = useState(0);
     const [currentFeature, setCurrentFeature] = useState(0);
 
@@ -22,52 +24,52 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
     const features = [
         {
-            title: "Custom Profile URLs",
-            description: "Build your online store with your own profile at /username",
+            title: t('Custom Profile URLs'),
+            description: t('Build your online store with your own profile at /username'),
             icon: "🏪",
             gradient: "from-purple-500 to-pink-500"
         },
         {
-            title: "Crypto Payments",
-            description: "Accept Bitcoin & USDT (TRC20) with instant transactions",
+            title: t('Crypto Payments'),
+            description: t('Accept Bitcoin & USDT (TRC20) with instant transactions'),
             icon: "₿",
             gradient: "from-orange-500 to-yellow-500"
         },
         {
-            title: "Multi-Channel Orders",
-            description: "Customers can order via WhatsApp, Telegram, or Email",
+            title: t('Multi-Channel Orders'),
+            description: t('Customers can order via WhatsApp, Telegram, or Email'),
             icon: "📱",
             gradient: "from-green-500 to-teal-500"
         },
         {
-            title: "Visual Categories",
-            description: "Organize products with beautiful photo-based categories",
+            title: t('Visual Categories'),
+            description: t('Organize products with beautiful photo-based categories'),
             icon: "📸",
             gradient: "from-blue-500 to-cyan-500"
         },
         {
-            title: "Order Management",
-            description: "Track orders and manage transactions effortlessly",
+            title: t('Order Management'),
+            description: t('Track orders and manage transactions effortlessly'),
             icon: "📊",
             gradient: "from-violet-500 to-purple-500"
         }
     ];
 
     const paymentMethods = [
-        { name: "Bitcoin", icon: "₿", color: "text-orange-400" },
-        { name: "USDT TRC20", icon: "₮", color: "text-green-400" },
-        { name: "Traditional", icon: "💳", color: "text-blue-400" }
+        { name: t('Bitcoin'), icon: "₿", color: "text-orange-400" },
+        { name: t('USDT TRC20'), icon: "₮", color: "text-green-400" },
+        { name: t('Traditional'), icon: "💳", color: "text-blue-400" }
     ];
 
     const messagingChannels = [
-        { name: "WhatsApp", icon: "📱", color: "text-green-400" },
-        { name: "Telegram", icon: "✈️", color: "text-blue-400" },
-        { name: "Email", icon: "📧", color: "text-red-400" }
+        { name: t('WhatsApp'), icon: "📱", color: "text-green-400" },
+        { name: t('Telegram'), icon: "✈️", color: "text-blue-400" },
+        { name: t('Email'), icon: "📧", color: "text-red-400" }
     ];
 
     return (
         <>
-            <Head title="Welcome" />
+            <Head title={t('Welcome')} />
             <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
                 {/* Animated Background */}
                 <div className="absolute inset-0 hidden md:block">
@@ -100,7 +102,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <h1 className="text-xl md:text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                                     {import.meta.env.VITE_APP_NAME}
                                 </h1>
-                                <p className="text-xs text-gray-400">{settings.welcome_tagline || "Your Store, Your Way"}</p>
+                                <p className="text-xs text-gray-400">{settings.welcome_tagline || t('Your Store, Your Way')}</p>
                             </div>
                         </div>
 
@@ -111,7 +113,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                     href={route('dashboard')}
                                     className="px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full font-semibold text-sm md:text-base text-white hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"
                                 >
-                                    Dashboard
+                                    {t('Dashboard')}
                                 </Link>
                             ) : (
                                 <div className="flex items-center space-x-2 md:space-x-3">
@@ -119,13 +121,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                         href={route('login')}
                                         className="px-4 py-2 md:px-6 md:py-3 text-gray-300 hover:text-white border border-gray-600 hover:border-gray-400 rounded-full transition-all duration-300 hover:bg-white/5 text-sm md:text-base"
                                     >
-                                        Log in
+                                        {t('Log in')}
                                     </Link>
                                     <Link
                                         href={route('register')}
                                         className="px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full font-semibold text-sm md:text-base text-white hover:shadow-lg hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300"
                                     >
-                                        Get Started
+                                        {t('Get Started')}
                                     </Link>
                                 </div>
                             )}
@@ -140,29 +142,29 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <div className="text-center py-12 md:py-20">
                             <div className="inline-flex items-center px-3 py-1 md:px-4 md:py-2 bg-white/10 backdrop-blur-sm rounded-full text-xs md:text-sm text-gray-300 mb-6 md:mb-8 border border-white/20">
                                 <span className="w-1.5 h-1.5 md:w-2 md:h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
-                                Now with Crypto Payments & Multi-Channel Orders
+                                {t('Now with Crypto Payments & Multi-Channel Orders')}
                             </div>
                             
                             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold mb-6 md:mb-8 leading-tight">
                                 <span className="bg-gradient-to-r from-white via-purple-200 to-cyan-200 bg-clip-text text-transparent">
-                                    Your Store
+                                    {t('Your Store')}
                                 </span>
                                 <br />
                                 <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                                    Your Rules
+                                    {t('Your Rules')}
                                 </span>
                             </h1>
                             
                             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 mb-8 md:mb-12 max-w-3xl mx-auto leading-relaxed">
-                                Create a professional online store with custom profiles, crypto payments, and multi-channel ordering. 
-                                <span className="text-purple-300"> Accept Bitcoin & USDT (TRC20)</span> and let customers order via 
-                                <span className="text-green-300"> WhatsApp, Telegram, or Email</span>.
+                                {t('Create a professional online store with custom profiles, crypto payments, and multi-channel ordering.')}
+                                <span className="text-purple-300"> {t('Accept Bitcoin & USDT (TRC20)')}</span> {t('and let customers order via')}
+                                <span className="text-green-300"> {t('WhatsApp, Telegram, or Email')}</span>.
                             </p>
 
                             {/* Payment Methods & Messaging Channels */}
                             <div className="flex flex-col gap-6 md:gap-8 justify-center items-center mb-8 md:mb-12">
                                 <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-                                    <span className="text-gray-400 text-xs md:text-sm">Accept:</span>
+                                    <span className="text-gray-400 text-xs md:text-sm">{t('Accept:')}</span>
                                     {paymentMethods.map((method, index) => (
                                         <div key={index} className="flex items-center space-x-2 px-2 py-1 md:px-3 md:py-2 bg-white/5 rounded-lg border border-white/10">
                                             <span className={`text-base md:text-lg ${method.color}`}>{method.icon}</span>
@@ -172,7 +174,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 </div>
                                 
                                 <div className="flex flex-wrap justify-center items-center gap-3 md:gap-4">
-                                    <span className="text-gray-400 text-xs md:text-sm">Orders via:</span>
+                                    <span className="text-gray-400 text-xs md:text-sm">{t('Orders via:')}</span>
                                     {messagingChannels.map((channel, index) => (
                                         <div key={index} className="flex items-center space-x-2 px-2 py-1 md:px-3 md:py-2 bg-white/5 rounded-lg border border-white/10">
                                             <span className={`text-base md:text-lg ${channel.color}`}>{channel.icon}</span>
@@ -184,10 +186,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center items-center mb-12 md:mb-16">
                                 <a href="/register" className="px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full font-semibold text-base md:text-lg hover:shadow-2xl hover:shadow-purple-500/25 transform hover:scale-105 transition-all duration-300 min-w-[180px] md:min-w-[200px]">
-                                    Start Building
+                                    {t('Start Building')}
                                 </a>
                                 <a href="/demo" className="px-6 py-3 md:px-8 md:py-4 border border-gray-400 hover:border-white text-gray-300 hover:text-white rounded-full font-semibold text-base md:text-lg transition-all duration-300 hover:bg-white/5 min-w-[180px] md:min-w-[200px]">
-                                    Watch Demo
+                                    {t('Watch Demo')}
                                 </a>
                             </div>
                         </div>
@@ -237,10 +239,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <div className="py-12 md:py-20">
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
                                 {[
-                                    { number: "2%", label: "Commission", subtext: "For free plan" },
-                                    { number: "3", label: "Crypto Types", subtext: "Bitcoin & USDT TRC20" },
-                                    { number: "3", label: "Order Channels", subtext: "WhatsApp, Telegram, Email" },
-                                    { number: "∞", label: "Customization", subtext: "Unlimited possibilities" }
+                                    { number: "2%", label: t('Commission'), subtext: t('For free plan') },
+                                    { number: "3", label: t('Crypto Types'), subtext: t('Bitcoin & USDT TRC20') },
+                                    { number: "3", label: t('Order Channels'), subtext: t('WhatsApp, Telegram, Email') },
+                                    { number: "∞", label: t('Customization'), subtext: t('Unlimited possibilities') }
                                 ].map((stat, index) => (
                                     <div key={index} className="text-center group">
                                         <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 md:p-8 border border-white/10 hover:bg-white/10 transition-all duration-500 transform hover:scale-105">
@@ -258,39 +260,39 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         {/* Feature Highlights */}
                         <div className="py-12 md:py-20">
                             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 md:mb-16 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                                Everything You Need to Succeed
+                                {t('Everything You Need to Succeed')}
                             </h2>
                             
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
                                 {[
                                     {
-                                        title: "Custom Profile URLs",
-                                        description: "Get your unique /username profile for professional branding",
+                                        title: t('Custom Profile URLs'),
+                                        description: t('Get your unique /username profile for professional branding'),
                                         icon: "🔗"
                                     },
                                     {
-                                        title: "Crypto Payments",
-                                        description: "Accept Bitcoin & USDT (TRC20) with instant verification",
+                                        title: t('Crypto Payments'),
+                                        description: t('Accept Bitcoin & USDT (TRC20) with instant verification'),
                                         icon: "₿"
                                     },
                                     {
-                                        title: "Multi-Channel Orders",
-                                        description: "Let customers order via WhatsApp, Telegram, or Email",
+                                        title: t('Multi-Channel Orders'),
+                                        description: t('Let customers order via WhatsApp, Telegram, or Email'),
                                         icon: "📞"
                                     },
                                     {
-                                        title: "Visual Categories",
-                                        description: "Organize products with beautiful photo-based categories",
+                                        title: t('Visual Categories'),
+                                        description: t('Organize products with beautiful photo-based categories'),
                                         icon: "🖼️"
                                     },
                                     {
-                                        title: "Order Tracking",
-                                        description: "Track and manage all your orders in one dashboard",
+                                        title: t('Order Tracking'),
+                                        description: t('Track and manage all your orders in one dashboard'),
                                         icon: "📦"
                                     },
                                     {
-                                        title: "Zero Fees",
-                                        description: "No commissions, no hidden costs - keep all your profits for pro profiles",
+                                        title: t('Zero Fees'),
+                                        description: t('No commissions, no hidden costs - keep all your profits for pro profiles'),
                                         icon: "💰"
                                     }
                                 ].map((item, index) => (
@@ -313,9 +315,9 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 {settings.welcome_footer_text || `Built with ❤️ using Laravel v${laravelVersion} & PHP v${phpVersion}`}
                             </div>
                             <div className="flex flex-wrap justify-center space-x-4 md:space-x-6 text-gray-400 text-xs md:text-sm">
-                                <a href={settings.footer_privacy_url || '#'} className="hover:text-white transition-colors duration-300">Privacy</a>
-                                <a href={settings.footer_terms_url || '#'} className="hover:text-white transition-colors duration-300">Terms</a>
-                                <a href={settings.footer_support_url || '#'} className="hover:text-white transition-colors duration-300">Support</a>
+                                <a href={settings.footer_privacy_url || '#'} className="hover:text-white transition-colors duration-300">{t('Privacy')}</a>
+                                <a href={settings.footer_terms_url || '#'} className="hover:text-white transition-colors duration-300">{t('Terms')}</a>
+                                <a href={settings.footer_support_url || '#'} className="hover:text-white transition-colors duration-300">{t('Support')}</a>
                             </div>
                         </div>
                     </div>
