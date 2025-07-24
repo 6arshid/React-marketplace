@@ -14,12 +14,19 @@ class ReportController extends Controller
     {
         $data = $request->validate([
             'reason' => ['required', 'string'],
+            'evidence' => ['nullable', 'file', 'mimes:jpg,jpeg,png,gif,mov,mp4'],
         ]);
+
+        $path = null;
+        if ($request->hasFile('evidence')) {
+            $path = $request->file('evidence')->store('reports', 'public');
+        }
 
         Report::create([
             'reporter_id' => $request->user()?->id,
             'reported_user_id' => $user->id,
             'reason' => $data['reason'],
+            'evidence' => $path,
         ]);
 
         return Redirect::back();

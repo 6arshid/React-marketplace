@@ -1,8 +1,9 @@
 import {useDropzone} from 'react-dropzone';
 
-export default function FileDropzone({ value, onChange, multiple = false, className = '', name }) {
+export default function FileDropzone({ value, onChange, multiple = false, className = '', name, accept }) {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         multiple,
+        accept,
         onDrop: (accepted) => {
             if (multiple) {
                 const existing = Array.isArray(value) ? value : [];
@@ -30,7 +31,7 @@ export default function FileDropzone({ value, onChange, multiple = false, classN
             {...getRootProps()}
             className={`rounded border border-dashed p-4 text-center ${isDragActive ? 'bg-gray-100' : ''} ${className}`}
         >
-            <input {...getInputProps({ name })} />
+            <input {...getInputProps({ name, accept })} />
             {files.length > 0 ? (
                 <ul className="list-disc text-left">
                     {files.map((file, idx) => (

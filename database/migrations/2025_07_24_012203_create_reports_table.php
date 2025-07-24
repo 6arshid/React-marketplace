@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('reporter_id')->nullable()->constrained('users')->nullOnDelete();
             $table->foreignId('reported_user_id')->constrained('users')->cascadeOnDelete();
             $table->string('reason');
+            $table->string('evidence')->nullable();
             $table->timestamps();
         });
     }
