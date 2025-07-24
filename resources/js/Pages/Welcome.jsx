@@ -1,7 +1,8 @@
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
+    const settings = usePage().props.settings || {};
     const [scrollY, setScrollY] = useState(0);
     const [currentFeature, setCurrentFeature] = useState(0);
 
@@ -315,12 +316,12 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                     <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12">
                         <div className="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                             <div className="text-gray-400 text-xs md:text-sm mb-4 md:mb-0">
-                                Built with ❤️ using Laravel v{laravelVersion} & PHP v{phpVersion}
+                                {settings.welcome_footer_text || `Built with ❤️ using Laravel v${laravelVersion} & PHP v${phpVersion}`}
                             </div>
                             <div className="flex flex-wrap justify-center space-x-4 md:space-x-6 text-gray-400 text-xs md:text-sm">
-                                <a href="#" className="hover:text-white transition-colors duration-300">Privacy</a>
-                                <a href="#" className="hover:text-white transition-colors duration-300">Terms</a>
-                                <a href="#" className="hover:text-white transition-colors duration-300">Support</a>
+                                <a href={settings.footer_privacy_url || '#'} className="hover:text-white transition-colors duration-300">Privacy</a>
+                                <a href={settings.footer_terms_url || '#'} className="hover:text-white transition-colors duration-300">Terms</a>
+                                <a href={settings.footer_support_url || '#'} className="hover:text-white transition-colors duration-300">Support</a>
                             </div>
                         </div>
                     </div>
