@@ -9,6 +9,7 @@ import { Head, useForm } from '@inertiajs/react';
 export default function Appearance({ settings }) {
     const { data, setData, post, processing, errors } = useForm({
         app_logo: null,
+        welcome_tagline: settings.welcome_tagline || '',
         welcome_footer_text: settings.welcome_footer_text || '',
         privacy_url: settings.footer_privacy_url || '',
         terms_url: settings.footer_terms_url || '',
@@ -38,6 +39,11 @@ export default function Appearance({ settings }) {
                             {settings.app_logo && !data.app_logo && (
                                 <img src={`/storage/${settings.app_logo}`} alt="Current logo" className="h-16 mt-2" />
                             )}
+                        </div>
+                        <div>
+                            <InputLabel htmlFor="welcome_tagline" value="Welcome Tagline" />
+                            <TextInput id="welcome_tagline" value={data.welcome_tagline} className="mt-1 block w-full" onChange={(e) => setData('welcome_tagline', e.target.value)} />
+                            <InputError message={errors.welcome_tagline} className="mt-2" />
                         </div>
                         <div>
                             <InputLabel htmlFor="welcome_footer_text" value="Welcome Footer Text" />
