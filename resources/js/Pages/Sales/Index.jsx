@@ -3,6 +3,7 @@ import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import UpdateStatusForm from './Partials/UpdateStatusForm';
+import AcceptRejectButtons from './Partials/AcceptRejectButtons';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
 
@@ -193,7 +194,11 @@ export default function Index({ orders, commission_percent }) {
                                                 )}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
-                                                <UpdateStatusForm order={order} />
+                                                {order.status === 'pending' && order.buyer_wallet ? (
+                                                    <AcceptRejectButtons order={order} />
+                                                ) : (
+                                                    <UpdateStatusForm order={order} />
+                                                )}
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">

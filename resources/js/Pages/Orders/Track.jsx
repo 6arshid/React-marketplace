@@ -145,6 +145,9 @@ const getFileTypeLabel = (filename) => {
 export default function Track({ order, files }) {
     const { t } = useTranslation();
     const statusDetails = getStatusDetails(order.status);
+    const canDownload = ['accepted', 'paid', 'delivered', 'completed', 'success'].includes(
+        order.status?.toLowerCase()
+    );
 
     return (
         <GuestLayout>
@@ -226,7 +229,7 @@ export default function Track({ order, files }) {
                     )}
 
                     {/* Downloads Section */}
-                    {files.length > 0 && (
+                    {files.length > 0 && canDownload && (
                         <div className="overflow-hidden rounded-2xl bg-white shadow-xl ring-1 ring-gray-200">
                             <div className="bg-gradient-to-r from-green-50 to-emerald-50 px-6 py-4">
                                 <div className="flex items-center justify-between">

@@ -40,6 +40,7 @@ class OrderController extends Controller
         $ordersQuery = $request->user()
             ->orders()
             ->where('is_digital', true)
+            ->whereIn('status', ['accepted', 'paid'])
             ->orderByDesc('id');
 
         $orders = $ordersQuery
