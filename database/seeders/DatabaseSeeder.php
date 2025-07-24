@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TransactionSeeder::class,
             OrderSeeder::class,
             DownloadSeeder::class,
+            SettingSeeder::class,
             NotificationSeeder::class,
         ]);
     }

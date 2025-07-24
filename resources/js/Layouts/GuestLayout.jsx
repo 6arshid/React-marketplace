@@ -3,6 +3,7 @@ import { Link, usePage } from '@inertiajs/react';
 
 export default function GuestLayout({ children }) {
     const { component, url, props } = usePage();
+    const settings = usePage().props.settings || {};
     const isAuthPage = component && component.startsWith('Auth/');
 
     const isProfilePage = /^\/[a-zA-Z0-9_-]+$/.test(url);
@@ -218,12 +219,11 @@ export default function GuestLayout({ children }) {
                                 © {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME}. All rights reserved.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
-                                <span className="text-xs sm:text-sm text-gray-500">Secure payments</span>
+                                <span className="text-xs sm:text-sm text-gray-500">{settings.guest_footer_payment_label || 'Secure payments'}</span>
                                 <div className="flex space-x-2">
-                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/visa.svg" alt="Visa" />
-                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mastercard.svg" alt="Mastercard" />
-                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/bitcoin.svg" alt="Bitcoin" />
-                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/tether.svg" alt="USDT" />
+                                    {['payment_icon1','payment_icon2','payment_icon3','payment_icon4'].map((k) => settings[k] ? (
+                                        <img key={k} className="w-6 h-4 sm:w-8 sm:h-5" src={`/storage/${settings[k]}`} alt="icon" />
+                                    ) : null)}
                                 </div>
                             </div>
                         </div>
