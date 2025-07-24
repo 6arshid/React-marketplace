@@ -133,6 +133,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::post('/users/{user}/unsuspend', [AdminUserController::class, 'unsuspend'])->name('admin.users.unsuspend');
     Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('admin.users.destroy');
     Route::post('/users/{user}/make-admin', [AdminUserController::class, 'makeAdmin'])->name('admin.users.make-admin');
+    Route::post('/users/{user}/remove-admin', [AdminUserController::class, 'removeAdmin'])->name('admin.users.remove-admin');
 });
 
 Route::post('/stripe/webhook', StripeWebhookController::class)->name('stripe.webhook');
