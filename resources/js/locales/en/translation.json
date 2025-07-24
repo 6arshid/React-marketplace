@@ -483,6 +483,7 @@
   "Suspend": "Suspend",
   "Unsuspend": "Unsuspend",
   "Make Admin": "Make Admin",
+  "Remove Admin": "Remove Admin",
   "Accept": "Accept",
   "Reject": "Reject"
 }

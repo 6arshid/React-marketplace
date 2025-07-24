@@ -66,4 +66,11 @@ class AdminUserController extends Controller
 
         return Redirect::back();
     }
+
+    public function removeAdmin(User $user): RedirectResponse
+    {
+        $user->update(['is_admin' => false]);
+
+        return Redirect::back();
+    }
 }

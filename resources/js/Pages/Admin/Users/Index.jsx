@@ -27,6 +27,11 @@ export default function Users({ users }) {
         window.axios.post(route('admin.users.make-admin', id)).then(() => window.location.reload());
     };
 
+    const removeAdmin = (id) => {
+        if (!confirm('Remove Admin?')) return;
+        window.axios.post(route('admin.users.remove-admin', id)).then(() => window.location.reload());
+    };
+
     const onPageChange = (p) => {
         router.visit(route('admin.users.index', { page: p }));
     };
@@ -60,8 +65,10 @@ export default function Users({ users }) {
                                             ) : (
                                                 <PrimaryButton onClick={() => suspend(u.id)}>{t('Suspend')}</PrimaryButton>
                                             )}
-                                            {!u.is_admin && (
+                                            {!u.is_admin ? (
                                                 <PrimaryButton onClick={() => makeAdmin(u.id)}>{t('Make Admin')}</PrimaryButton>
+                                            ) : (
+                                                <PrimaryButton onClick={() => removeAdmin(u.id)}>{t('Remove Admin')}</PrimaryButton>
                                             )}
                                             <button onClick={() => destroy(u.id)} className="text-red-600 hover:underline">
                                                 {t('Delete')}
