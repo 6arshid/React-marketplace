@@ -1,5 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 // Custom SVG Icons
 const DownloadIcon = ({ className = "w-5 h-5" }) => (
@@ -82,6 +83,7 @@ const getFileTypeLabel = (filename) => {
 };
 
 export default function Downloads({ orders, totalOrders, totalFiles }) {
+    const { t } = useTranslation();
     const filesCount = typeof totalFiles === 'number' ? totalFiles : orders.data.reduce((sum, order) => sum + order.files.length, 0);
     const ordersCount = typeof totalOrders === 'number' ? totalOrders : orders.total;
 
@@ -95,13 +97,13 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                         <DownloadIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Downloads</h2>
-                        <p className="text-sm text-gray-600">Access your purchased files and digital content</p>
+                        <h2 className="text-2xl font-bold text-gray-900">{t('Downloads')}</h2>
+                        <p className="text-sm text-gray-600">{t('Access your purchased files and digital content')}</p>
                     </div>
                 </div>
             }
         >
-            <Head title="Downloads" />
+            <Head title={t('Downloads')} />
             
             <div className="py-8">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -115,7 +117,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Total Orders</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Orders')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{ordersCount}</p>
                                 </div>
                             </div>
@@ -129,7 +131,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Available Files</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Available Files')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{filesCount}</p>
                                 </div>
                             </div>
@@ -143,7 +145,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Storage Used</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Storage Used')}</p>
                                     <p className="text-2xl font-bold text-gray-900">2.4 GB</p>
                                 </div>
                             </div>
@@ -166,7 +168,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                                     Order #{order.tracking_code}
                                                 </h3>
                                                 <p className="text-sm text-gray-600">
-                                                    {order.files.length} file{order.files.length !== 1 ? 's' : ''} available
+                                                    {order.files.length} {order.files.length !== 1 ? t('files') : t('file')} {t('available')}
                                                 </p>
                                             </div>
                                         </div>
@@ -175,7 +177,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                                 <svg className="w-3 h-3 mr-1" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                                                 </svg>
-                                                Ready
+                                                {t('Ready')}
                                             </span>
                                         </div>
                                     </div>
@@ -215,7 +217,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                                     <div className="absolute inset-0 bg-indigo-500 bg-opacity-0 group-hover:bg-opacity-5 rounded-xl transition-all duration-200 flex items-center justify-center opacity-0 group-hover:opacity-100">
                                                         <div className="flex items-center space-x-2 text-indigo-600 font-medium">
                                                             <DownloadIcon className="w-4 h-4" />
-                                                            <span className="text-sm">Download</span>
+                                                        <span className="text-sm">{t('Download')}</span>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -228,7 +230,7 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                         <div className="mt-6 pt-4 border-t border-gray-200">
                                             <button className="inline-flex items-center px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md">
                                                 <DownloadIcon className="w-4 h-4 mr-2" />
-                                                Download All Files
+                                                {t('Download All Files')}
                                             </button>
                                         </div>
                                     )}
@@ -258,10 +260,10 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                             <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                                 <DownloadIcon className="w-12 h-12 text-gray-400" />
                             </div>
-                            <h3 className="text-xl font-medium text-gray-900 mb-2">No downloads available</h3>
-                            <p className="text-gray-500 mb-6">You don't have any downloadable files yet.</p>
+                            <h3 className="text-xl font-medium text-gray-900 mb-2">{t('No downloads available')}</h3>
+                            <p className="text-gray-500 mb-6">{t("You don't have any downloadable files yet.")}</p>
                             <button className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
-                                Browse Products
+                                {t('Browse Products')}
                             </button>
                         </div>
                     )}

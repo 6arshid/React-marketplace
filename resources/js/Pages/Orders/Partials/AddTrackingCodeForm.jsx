@@ -1,8 +1,10 @@
 import { useForm } from '@inertiajs/react';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
+import { useTranslation } from 'react-i18next';
 
 export default function AddTrackingCodeForm({ order }) {
+    const { t } = useTranslation();
     const { data, setData, patch, processing, errors } = useForm({
         status: order.status || 'preparing',
         postal_tracking_code: '',
@@ -20,13 +22,13 @@ export default function AddTrackingCodeForm({ order }) {
                 value={data.postal_tracking_code}
                 onChange={(e) => setData('postal_tracking_code', e.target.value)}
                 className="block w-full text-xs px-2 py-1"
-                placeholder="Tracking code"
+                placeholder={t('Tracking code')}
             />
             <PrimaryButton
                 disabled={processing || !data.postal_tracking_code}
                 className="px-2 py-1 text-xs"
             >
-                Save
+                {t('Save')}
             </PrimaryButton>
             {errors.postal_tracking_code && (
                 <span className="text-xs text-red-600">{errors.postal_tracking_code}</span>

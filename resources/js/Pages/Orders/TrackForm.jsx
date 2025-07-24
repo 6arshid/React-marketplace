@@ -5,8 +5,10 @@ import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import InputError from '@/Components/InputError';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function TrackForm() {
+    const { t } = useTranslation();
     const { data, setData, get, processing, errors } = useForm({
         code: '',
     });
@@ -21,7 +23,7 @@ export default function TrackForm() {
 
     return (
         <GuestLayout>
-            <Head title="Track Order" />
+            <Head title={t('Track Order')} />
             
             {/* Background with gradient and animated particles */}
             <div className="min-h-screen relative overflow-hidden">
@@ -42,9 +44,9 @@ export default function TrackForm() {
                                 </svg>
                             </div>
                             <h1 className="text-3xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-                                Track Your Order
+                                {t('Track Your Order')}
                             </h1>
-                            <p className="text-gray-500 mt-2">Enter your tracking code to get real-time updates</p>
+                            <p className="text-gray-500 mt-2">{t('Enter your tracking code to get real-time updates')}</p>
                         </div>
 
                         {/* Main form card */}
@@ -57,9 +59,9 @@ export default function TrackForm() {
                         >
                             <form onSubmit={submit} className="space-y-6">
                                 <div className="space-y-2">
-                                    <InputLabel 
-                                        htmlFor="code" 
-                                        value="Tracking Code" 
+                                    <InputLabel
+                                        htmlFor="code"
+                                        value={t('Tracking Code')}
                                         className="text-sm font-semibold text-gray-700"
                                     />
                                     
@@ -68,7 +70,7 @@ export default function TrackForm() {
                                             id="code"
                                             className="mt-1 block w-full px-4 py-4 bg-gray-50/50 border border-gray-200 rounded-2xl focus:ring-4 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all duration-300 text-lg placeholder-gray-400 group-hover:bg-gray-50"
                                             value={data.code}
-                                            placeholder="Enter your tracking code..."
+                                            placeholder={t('Enter your tracking code...')}
                                             isFocused
                                             onChange={(e) => setData('code', e.target.value)}
                                         />
@@ -94,11 +96,11 @@ export default function TrackForm() {
                                         {processing ? (
                                             <div className="flex items-center justify-center space-x-2">
                                                 <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                                                <span>Tracking...</span>
+                                                <span>{t('Tracking...')}</span>
                                             </div>
                                         ) : (
                                             <div className="flex items-center justify-center space-x-2">
-                                                <span>Track Order</span>
+                                                <span>{t('Track Order')}</span>
                                                 <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                                 </svg>
