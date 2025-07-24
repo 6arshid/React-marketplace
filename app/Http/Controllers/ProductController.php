@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\ViewStatistic;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -47,11 +46,6 @@ class ProductController extends Controller
     {
         $product->increment('views');
 
-        $stat = ViewStatistic::firstOrCreate(
-            ['user_id' => $product->user_id, 'date' => now()->toDateString()],
-            ['product_views' => 0, 'profile_views' => 0]
-        );
-        $stat->increment('product_views');
 
         return Inertia::render('Products/Show', [
             'product' => $product->fresh()->load('category', 'attributes', 'user'),

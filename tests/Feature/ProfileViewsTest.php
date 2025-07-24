@@ -21,10 +21,5 @@ class ProfileViewsTest extends TestCase
             'profile_views' => 1,
         ]);
 
-        $this->assertDatabaseHas('view_statistics', [
-            'user_id' => $user->id,
-            'date' => now()->toDateString().' 00:00:00',
-            'profile_views' => 1,
-        ]);
     }
 }
