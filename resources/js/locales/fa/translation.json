@@ -169,4 +169,24 @@
   ,"Track Order": "\u067e\u06cc\u06af\u06cc\u0631\u06cc \u0633\u0641\u0627\u0631\u0634"
   ,"Track": "\u067e\u06cc\u06af\u06cc\u0631\u06cc"
   ,"Start": "\u0634\u0631\u0648\u0639"
+  ,"Select Account Type": "نوع حساب را انتخاب کنید",
+  ,"Continue": "ادامه",
+  ,"Confirm Password": "تایید رمز عبور",
+  ,"This is a secure area of the application. Please confirm your password before continuing.": "این بخش از برنامه امن است. لطفاً قبل از ادامه، رمز عبور خود را تایید کنید.",
+  ,"Confirm": "تایید",
+  ,"Forgot Password": "فراموشی رمز عبور",
+  ,"Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.": "رمز عبور خود را فراموش کرده‌اید؟ مشکلی نیست. فقط ایمیل خود را به ما بدهید تا لینک بازنشانی رمز عبور را برایتان ارسال کنیم تا بتوانید رمز جدیدی انتخاب کنید.",
+  ,"Email Password Reset Link": "ارسال لینک بازنشانی رمز عبور",
+  ,"Register": "ثبت نام",
+  ,"Checking...": "در حال بررسی...",
+  ,"Username available": "نام کاربری موجود است",
+  ,"Username already taken": "نام کاربری قبلاً استفاده شده است",
+  ,"Name": "نام",
+  ,"Already registered?": "قبلاً ثبت‌نام کرده‌اید؟",
+  ,"Reset Password": "بازنشانی رمز عبور",
+  ,"Email Verification": "تایید ایمیل",
+  ,"Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn't receive the email, we will gladly send you another.": "از ثبت‌نام شما متشکریم! قبل از شروع، لطفاً با کلیک روی لینکی که برایتان ایمیل کردیم ایمیل خود را تأیید کنید. اگر ایمیل را دریافت نکردید، با خوشحالی دوباره آن را ارسال می‌کنیم.",
+  ,"A new verification link has been sent to the email address you provided during registration.": "یک لینک تأیید جدید به ایمیلی که هنگام ثبت‌نام وارد کردید ارسال شد.",
+  ,"Resend Verification Email": "ارسال مجدد ایمیل تأیید",
+  ,"Log Out": "خروج"
 }

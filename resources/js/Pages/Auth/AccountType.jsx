@@ -3,8 +3,10 @@ import InputLabel from '@/Components/InputLabel';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, useForm } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 export default function AccountType() {
+    const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
         is_seller: false,
     });
@@ -16,10 +18,10 @@ export default function AccountType() {
 
     return (
         <GuestLayout>
-            <Head title="Account Type" />
+            <Head title={t('Account Type')} />
             <form onSubmit={submit}>
                 <div>
-                    <InputLabel value="Select Account Type" />
+                    <InputLabel value={t('Select Account Type')} />
                     <div className="flex items-center mt-2 space-x-4">
                         <label className="flex items-center">
                             <input
@@ -30,7 +32,7 @@ export default function AccountType() {
                                 onChange={() => setData('is_seller', false)}
                                 className="mr-2"
                             />
-                            Buyer
+                            {t('Buyer')}
                         </label>
                         <label className="flex items-center">
                             <input
@@ -41,13 +43,13 @@ export default function AccountType() {
                                 onChange={() => setData('is_seller', true)}
                                 className="mr-2"
                             />
-                            Seller
+                            {t('Seller')}
                         </label>
                     </div>
                     <InputError message={errors.is_seller} className="mt-2" />
                 </div>
                 <div className="mt-4 flex justify-end">
-                    <PrimaryButton disabled={processing}>Continue</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{t('Continue')}</PrimaryButton>
                 </div>
             </form>
         </GuestLayout>
