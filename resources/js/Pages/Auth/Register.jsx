@@ -193,13 +193,13 @@ export default function Register() {
             </form>
 
             <div className="mt-6 flex justify-center">
-                <Link
+                <a
                     href={route('login.google')}
                     className="inline-flex items-center px-4 py-2 border rounded-md bg-white text-gray-700 shadow-sm hover:bg-gray-50"
                 >
                     <GoogleIcon className="h-5 w-5 mr-2" />
                     <span>Continue with Google</span>
-                </Link>
+                </a>
             </div>
         </GuestLayout>
     );
