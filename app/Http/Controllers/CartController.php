@@ -28,7 +28,7 @@ class CartController extends Controller
         $cart = session()->get('cart', ['seller_id' => null, 'items' => []]);
 
         if ($cart['seller_id'] && $cart['seller_id'] != $product->user_id) {
-            return Redirect::back()->with('error', 'Cart contains products from another seller. Please empty it first.');
+            return Redirect::back()->with('error', __('messages.cart_other_seller'));
         }
 
         if (! $cart['seller_id']) {
@@ -103,7 +103,7 @@ class CartController extends Controller
         $cart = session('cart', ['seller_id' => null, 'items' => []]);
 
         if (! $cart['seller_id'] || count($cart['items']) === 0) {
-            return Redirect::route('cart.show')->with('error', 'Cart is empty');
+            return Redirect::route('cart.show')->with('error', __('messages.cart_empty'));
         }
 
         $seller = User::findOrFail($cart['seller_id']);
@@ -186,7 +186,7 @@ class CartController extends Controller
                 [
                     'price_data' => [
                         'currency' => 'usd',
-                        'product_data' => ['name' => 'Marketplace Order'],
+                        'product_data' => ['name' => __('messages.marketplace_order')],
                         'unit_amount' => (int) ($total * 100),
                     ],
                     'quantity' => 1,
