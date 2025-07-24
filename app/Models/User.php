@@ -43,6 +43,7 @@ class User extends Authenticatable
         'instagram_username',
         'facebook_username',
         'password',
+        'profile_views',
     ];
 
     /**
@@ -72,6 +73,7 @@ class User extends Authenticatable
             'suspended_at' => 'datetime',
             'stripe_api_key' => 'encrypted',
             'stripe_secret_key' => 'encrypted',
+            'profile_views' => 'integer',
         ];
     }
 

@@ -487,6 +487,10 @@
   "Unsuspend": "Unsuspend",
   "Make Admin": "Make Admin",
   "Remove Admin": "Remove Admin",
+  "Statistics": "Statistics",
+  "Top 10 Products": "Top 10 Products",
+  "Product Views": "Product Views",
+  "Profile Views": "Profile Views",
   "Accept": "Accept",
   "Reject": "Reject"
 }
