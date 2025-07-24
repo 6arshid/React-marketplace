@@ -215,14 +215,15 @@ export default function GuestLayout({ children }) {
 
                         <div className="border-t border-gray-200 mt-6 sm:mt-8 pt-6 sm:pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
                             <p className="text-gray-500 text-xs sm:text-sm text-center sm:text-left">
-                                © 2025 Store. All rights reserved.
+                                © {new Date().getFullYear()} {import.meta.env.VITE_APP_NAME}. All rights reserved.
                             </p>
                             <div className="flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-4">
                                 <span className="text-xs sm:text-sm text-gray-500">Secure payments</span>
                                 <div className="flex space-x-2">
-                                    <div className="w-6 h-4 sm:w-8 sm:h-5 bg-gray-200 rounded"></div>
-                                    <div className="w-6 h-4 sm:w-8 sm:h-5 bg-gray-200 rounded"></div>
-                                    <div className="w-6 h-4 sm:w-8 sm:h-5 bg-gray-200 rounded"></div>
+                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/visa.svg" alt="Visa" />
+                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/mastercard.svg" alt="Mastercard" />
+                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/bitcoin.svg" alt="Bitcoin" />
+                                    <img className="w-6 h-4 sm:w-8 sm:h-5" src="https://raw.githubusercontent.com/simple-icons/simple-icons/develop/icons/tether.svg" alt="USDT" />
                                 </div>
                             </div>
                         </div>
