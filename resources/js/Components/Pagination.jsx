@@ -1,13 +1,15 @@
 export default function Pagination({ currentPage, totalPages, onPageChange }) {
     if (totalPages <= 1) return null;
 
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
+    const visiblePages = [];
+    const startPage = Math.floor((currentPage - 1) / 5) * 5 + 1;
+    const endPage = Math.min(startPage + 4, totalPages);
+    for (let i = startPage; i <= endPage; i++) {
+        visiblePages.push(i);
     }
 
     return (
-        <div className="flex items-center justify-center space-x-2 py-4">
+        <div className="flex items-center justify-center flex-wrap gap-2 py-4">
             <button
                 onClick={() => currentPage > 1 && onPageChange(currentPage - 1)}
                 className="px-3 py-1.5 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
@@ -15,7 +17,7 @@ export default function Pagination({ currentPage, totalPages, onPageChange }) {
             >
                 Previous
             </button>
-            {pages.map((page) => (
+            {visiblePages.map((page) => (
                 <button
                     key={page}
                     onClick={() => onPageChange(page)}
