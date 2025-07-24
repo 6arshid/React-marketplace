@@ -31,7 +31,7 @@ class AdminPageController extends Controller
             'images.*' => 'file',
         ]);
 
-        $data['slug'] = $this->generateUniqueSlug();
+        $data['slug'] = Page::generateUniqueSlug();
 
         if ($request->hasFile('images')) {
             $paths = [];
@@ -81,12 +81,4 @@ class AdminPageController extends Controller
         return Redirect::route('admin.pages.index');
     }
 
-    private function generateUniqueSlug(): string
-    {
-        do {
-            $slug = uniqid();
-        } while (Page::where('slug', $slug)->exists());
-
-        return $slug;
-    }
 }
