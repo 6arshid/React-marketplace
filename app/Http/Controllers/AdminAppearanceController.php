@@ -23,6 +23,7 @@ class AdminAppearanceController extends Controller
     {
         $data = $request->validate([
             'app_logo' => ['nullable','file','mimetypes:image/svg+xml,text/plain'],
+            'welcome_tagline' => ['nullable','string','max:255'],
             'welcome_footer_text' => ['nullable','string','max:255'],
             'privacy_url' => ['nullable','string','max:255'],
             'terms_url' => ['nullable','string','max:255'],
@@ -38,6 +39,8 @@ class AdminAppearanceController extends Controller
             $path = $request->file('app_logo')->store('appearance', 'public');
             Setting::updateOrCreate(['key' => 'app_logo'], ['value' => $path]);
         }
+
+        Setting::updateOrCreate(['key' => 'welcome_tagline'], ['value' => $data['welcome_tagline'] ?? '']);
 
         Setting::updateOrCreate(['key' => 'welcome_footer_text'], ['value' => $data['welcome_footer_text'] ?? '']);
         Setting::updateOrCreate(['key' => 'footer_privacy_url'], ['value' => $data['privacy_url'] ?? '']);
