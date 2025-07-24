@@ -456,5 +456,15 @@
   "Edit Social Link": "ویرایش لینک اجتماعی",
   "Add Social Link": "افزودن لینک اجتماعی",
   "e.g. LinkedIn, Portfolio, etc.": "مثلاً LinkedIn، Portfolio و غیره",
-  "https://example.com": "https://example.com"
+  "https://example.com": "https://example.com",
+  "Manage and track your transaction history": "تاریخچه تراکنش‌های خود را مدیریت و پیگیری کنید",
+  "Total Transactions": "تعداد کل تراکنش‌ها",
+  "Success Rate": "نرخ موفقیت",
+  "Request Payout": "درخواست تسویه",
+  "Recent Transactions": "تراکنش‌های اخیر",
+  "Search transactions": "جستجوی تراکنش‌ها",
+  "Reference": "شناسه",
+  "Date": "تاریخ",
+  "No transactions": "تراکنشی وجود ندارد",
+  "Get started by creating your first transaction.": "برای شروع اولین تراکنش خود را ایجاد کنید."
 }

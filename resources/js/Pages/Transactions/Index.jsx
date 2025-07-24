@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
@@ -51,6 +52,7 @@ const ReferenceIcon = () => (
 );
 
 export default function Index({ transactions }) {
+    const { t } = useTranslation();
     const user = usePage().props.auth.user;
     const formatDate = (dateString) => {
         return new Date(dateString).toLocaleDateString('en-US', {
@@ -140,8 +142,8 @@ export default function Index({ transactions }) {
                         </svg>
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Transactions</h2>
-                        <p className="text-sm text-gray-600">Manage and track your transaction history</p>
+                        <h2 className="text-2xl font-bold text-gray-900">{t('Transactions')}</h2>
+                        <p className="text-sm text-gray-600">{t('Manage and track your transaction history')}</p>
                     </div>
                 </div>
             }
@@ -160,7 +162,7 @@ export default function Index({ transactions }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Total Amount</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Amount')}</p>
                                     <p className="text-2xl font-bold text-gray-900">
                                         {formatAmount(
                                             transactionList
@@ -182,7 +184,7 @@ export default function Index({ transactions }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Total Transactions</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Transactions')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{transactionList.length}</p>
                                 </div>
                             </div>
@@ -198,7 +200,7 @@ export default function Index({ transactions }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Success Rate</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Success Rate')}</p>
                                     <p className="text-2xl font-bold text-gray-900">
                                         {Math.round((transactionList.filter(t => t.status === 'completed').length / transactionList.length) * 100)}%
                                     </p>
@@ -210,13 +212,13 @@ export default function Index({ transactions }) {
                     {!user.pro_panel && (
                         <form onSubmit={submitRequest} className="mb-8 flex items-end space-x-2">
                             <div className="flex-1">
-                                <InputLabel htmlFor="amount" value="Amount" />
+                                <InputLabel htmlFor="amount" value={t('Amount')} />
                                 <div className="mt-1 block w-full rounded-md border-gray-300 px-3 py-2 bg-gray-100">
                                     {formatAmount(successAmount)}
                                 </div>
                                 <InputError message={errors.amount} className="mt-2" />
                             </div>
-                            <PrimaryButton disabled={processing}>Request Payout</PrimaryButton>
+                            <PrimaryButton disabled={processing}>{t('Request Payout')}</PrimaryButton>
                         </form>
                     )}
 
@@ -224,8 +226,8 @@ export default function Index({ transactions }) {
                     <div className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
                         <div className="px-6 py-4 border-b border-gray-200">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                <h3 className="text-lg font-semibold text-gray-900">Recent Transactions</h3>
-                                <SearchBar value={search} onChange={setSearch} placeholder="Search transactions" />
+                                <h3 className="text-lg font-semibold text-gray-900">{t('Recent Transactions')}</h3>
+                                <SearchBar value={search} onChange={setSearch} placeholder={t('Search transactions')} />
                             </div>
                         </div>
                         
@@ -236,7 +238,7 @@ export default function Index({ transactions }) {
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <CurrencyIcon />
-                                                <span>Amount</span>
+                                                <span>{t('Amount')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -244,19 +246,19 @@ export default function Index({ transactions }) {
                                                 <svg className="w-4 h-4 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                                                 </svg>
-                                                <span>Status</span>
+                                                <span>{t('Status')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <ReferenceIcon />
-                                                <span>Reference</span>
+                                                <span>{t('Reference')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <CalendarIcon />
-                                                <span>Date</span>
+                                                <span>{t('Date')}</span>
                                             </div>
                                         </th>
                                     </tr>
@@ -309,8 +311,8 @@ export default function Index({ transactions }) {
                                 <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                                 </svg>
-                                <h3 className="mt-2 text-sm font-medium text-gray-900">No transactions</h3>
-                                <p className="mt-1 text-sm text-gray-500">Get started by creating your first transaction.</p>
+                                <h3 className="mt-2 text-sm font-medium text-gray-900">{t('No transactions')}</h3>
+                                <p className="mt-1 text-sm text-gray-500">{t('Get started by creating your first transaction.')}</p>
                             </div>
                         )}
                     </div>

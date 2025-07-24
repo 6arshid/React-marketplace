@@ -456,5 +456,15 @@
   "Edit Social Link": "Edit Social Link",
   "Add Social Link": "Add Social Link",
   "e.g. LinkedIn, Portfolio, etc.": "e.g. LinkedIn, Portfolio, etc.",
-  "https://example.com": "https://example.com"
+  "https://example.com": "https://example.com",
+  "Manage and track your transaction history": "Manage and track your transaction history",
+  "Total Transactions": "Total Transactions",
+  "Success Rate": "Success Rate",
+  "Request Payout": "Request Payout",
+  "Recent Transactions": "Recent Transactions",
+  "Search transactions": "Search transactions",
+  "Reference": "Reference",
+  "Date": "Date",
+  "No transactions": "No transactions",
+  "Get started by creating your first transaction.": "Get started by creating your first transaction."
 }
