@@ -2,6 +2,7 @@ import { Head, Link, usePage } from '@inertiajs/react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const settings = usePage().props.settings || {};
@@ -66,6 +67,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         { name: t('Telegram'), icon: "✈️", color: "text-blue-400" },
         { name: t('Email'), icon: "📧", color: "text-red-400" }
     ];
+
+    const changeLanguage = (lng) => {
+        i18n.changeLanguage(lng);
+    };
 
     return (
         <>
@@ -319,6 +324,22 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <a href={settings.footer_terms_url || '#'} className="hover:text-white transition-colors duration-300">{t('Terms')}</a>
                                 <a href={settings.footer_support_url || '#'} className="hover:text-white transition-colors duration-300">{t('Support')}</a>
                             </div>
+                        </div>
+                        <div className="flex justify-center mt-4 space-x-2">
+                            <button
+                                type="button"
+                                onClick={() => changeLanguage('en')}
+                                className="underline text-gray-400 hover:text-white transition-colors duration-300 text-xs md:text-sm"
+                            >
+                                EN
+                            </button>
+                            <button
+                                type="button"
+                                onClick={() => changeLanguage('fa')}
+                                className="underline text-gray-400 hover:text-white transition-colors duration-300 text-xs md:text-sm"
+                            >
+                                فارسی
+                            </button>
                         </div>
                     </div>
                 </footer>
