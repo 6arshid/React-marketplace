@@ -122,6 +122,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::post('/domains/{domain}/approve', [AdminDomainController::class, 'approve'])->name('admin.domains.approve');
     Route::post('/domains/{domain}/reject', [AdminDomainController::class, 'reject'])->name('admin.domains.reject');
     Route::patch('/domains/{domain}', [AdminDomainController::class, 'update'])->name('admin.domains.update');
+    Route::post('/domains/defaults', [AdminDomainController::class, 'updateDefaults'])->name('admin.domains.defaults');
     Route::delete('/domains/{domain}', [AdminDomainController::class, 'destroy'])->name('admin.domains.destroy');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');

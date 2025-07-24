@@ -493,7 +493,9 @@
   "Domains": "Domains",
   "Domain": "Domain",
   "Park Domain": "Park Domain",
-  "Point your domain to ns1.server.com and ns2.server.com.": "Please point your domain to ns1.server.com and ns2.server.com.",
+  "Point your domain to {{ns1}} and {{ns2}}.": "Please point your domain to {{ns1}} and {{ns2}}.",
+  "Default NS1": "Default NS1",
+  "Default NS2": "Default NS2",
   "Pro account required": "Pro account required",
   "Manage user domains": "Manage user domains"
   ,"Report Review": "Report Review"

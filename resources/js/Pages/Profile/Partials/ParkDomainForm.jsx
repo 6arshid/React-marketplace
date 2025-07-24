@@ -6,7 +6,7 @@ import { Transition } from '@headlessui/react';
 import { useForm, usePage } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
-export default function ParkDomainForm({ className = '' }) {
+export default function ParkDomainForm({ ns1, ns2, className = '' }) {
     const user = usePage().props.auth.user;
     const { t } = useTranslation();
 
@@ -28,7 +28,7 @@ export default function ParkDomainForm({ className = '' }) {
             <header>
                 <h2 className="text-lg font-medium text-gray-900">{t('Park Domain')}</h2>
                 <p className="mt-1 text-sm text-gray-600">
-                    {t('Point your domain to ns1.server.com and ns2.server.com.')}
+                    {t('Point your domain to {{ns1}} and {{ns2}}.', { ns1, ns2 })}
                 </p>
             </header>
 
