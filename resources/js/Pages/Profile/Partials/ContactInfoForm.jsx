@@ -20,6 +20,8 @@ export default function ContactInfoForm({ className = '' }) {
             trc20_usdt_wallet: user.trc20_usdt_wallet || '',
             bitcoin_wallet: user.bitcoin_wallet || '',
             public_email: user.public_email || '',
+            whatsapp_number: user.whatsapp_number || '',
+            telegram_username: user.telegram_username || '',
             stripe_api_key: showStripeFields ? user.stripe_api_key || '' : '',
             stripe_secret_key: showStripeFields ? user.stripe_secret_key || '' : '',
         });
@@ -60,6 +62,30 @@ export default function ContactInfoForm({ className = '' }) {
                         autoComplete="off"
                     />
                     <InputError message={errors.public_email} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="whatsapp_number" value={t('WhatsApp Number')} />
+                    <TextInput
+                        id="whatsapp_number"
+                        className="mt-1 block w-full"
+                        value={data.whatsapp_number}
+                        onChange={(e) => setData('whatsapp_number', e.target.value)}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.whatsapp_number} className="mt-2" />
+                </div>
+
+                <div>
+                    <InputLabel htmlFor="telegram_username" value={t('Telegram Username')} />
+                    <TextInput
+                        id="telegram_username"
+                        className="mt-1 block w-full"
+                        value={data.telegram_username}
+                        onChange={(e) => setData('telegram_username', e.target.value)}
+                        autoComplete="off"
+                    />
+                    <InputError message={errors.telegram_username} className="mt-2" />
                 </div>
 
                 <div>
