@@ -466,5 +466,15 @@
   "Reference": "Reference",
   "Date": "Date",
   "No transactions": "No transactions",
-  "Get started by creating your first transaction.": "Get started by creating your first transaction."
+  "Get started by creating your first transaction.": "Get started by creating your first transaction.",
+  "Change to Buyer": "Change to Buyer",
+  "Change to Seller": "Change to Seller",
+  "Notifications": "Notifications",
+  "No notifications": "No notifications",
+  "No more notifications": "No more notifications",
+  "Loading...": "Loading...",
+  "Mark all as read": "Mark all as read",
+  "Close": "Close",
+  "Show Profile": "Show Profile",
+  "Store": "Store"
 }

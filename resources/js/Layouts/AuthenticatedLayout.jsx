@@ -1,11 +1,13 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link, usePage } from '@inertiajs/react';
 import { useState, useRef, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { createPortal } from 'react-dom';
 
 export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
+    const { t } = useTranslation();
     const homeUrl = user?.pro_panel ? `/${user.username}` : '/';
     const pages = usePage().props.pages || [];
     const flash = usePage().props.flash;
@@ -104,7 +106,7 @@ export default function AuthenticatedLayout({ header, children }) {
 
 const navigationItems = [
         {
-            name: 'Dashboard',
+            name: t('Dashboard'),
             href: 'dashboard',
             icon: (
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +120,7 @@ const navigationItems = [
     if (user.is_seller) {
         navigationItems.push(
             {
-                name: 'Products',
+                name: t('Products'),
                 href: 'products.index',
                 icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,7 +129,7 @@ const navigationItems = [
                 )
             },
             {
-                name: 'Categories',
+                name: t('Categories'),
                 href: 'categories.index',
                 icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -136,7 +138,7 @@ const navigationItems = [
                 )
             },
             {
-                name: 'Pages',
+                name: t('Pages'),
                 href: 'seller.pages.index',
                 icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,7 +147,7 @@ const navigationItems = [
                 )
             },
             {
-                name: 'Transactions',
+                name: t('Transactions'),
                 href: 'transactions.index',
                 icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -154,7 +156,7 @@ const navigationItems = [
                 )
             },
             {
-                name: 'Sales',
+                name: t('Sales'),
                 href: 'sales.index',
                 icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -163,7 +165,7 @@ const navigationItems = [
                 )
             },
             {
-                name: 'Change to Buyer',
+                name: t('Change to Buyer'),
                 href: 'profile.become-buyer',
                 icon: (
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -174,7 +176,7 @@ const navigationItems = [
         );
     } else {
         navigationItems.push({
-            name: 'Change to Seller',
+            name: t('Change to Seller'),
             href: 'profile.become-seller',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -186,7 +188,7 @@ const navigationItems = [
 
     navigationItems.push(
         {
-            name: 'Cart',
+            name: t('Cart'),
             href: 'cart.show',
             badge: cart.count,
             icon: (
@@ -196,7 +198,7 @@ const navigationItems = [
             )
         },
         {
-            name: 'Orders',
+            name: t('Orders'),
             href: 'orders.index',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -205,7 +207,7 @@ const navigationItems = [
             )
         },
         {
-            name: 'Downloads',
+            name: t('Downloads'),
             href: 'orders.downloads',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -217,7 +219,7 @@ const navigationItems = [
 
     if (user.is_admin) {
         navigationItems.push({
-            name: 'Admin',
+            name: t('Admin'),
             href: 'admin.index',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -269,7 +271,7 @@ const navigationItems = [
                         }}
                     >
                         <div className="px-4 py-3 border-b border-gray-100">
-                            <h3 className="font-semibold text-gray-800">Notifications</h3>
+                            <h3 className="font-semibold text-gray-800">{t('Notifications')}</h3>
                         </div>
                         <div
                             className="py-2 max-h-64 overflow-y-auto"
@@ -277,7 +279,7 @@ const navigationItems = [
                             onScroll={handleNotificationScroll}
                         >
                             {notificationList.length === 0 && !loadingNotifications && (
-                                <div className="px-4 py-3 text-sm text-gray-500">No notifications</div>
+                                <div className="px-4 py-3 text-sm text-gray-500">{t('No notifications')}</div>
                             )}
                             {notificationList.map((n) => (
                                 n.data.tracking_code ? (
@@ -315,18 +317,18 @@ const navigationItems = [
                                 )
                             ))}
                             {loadingNotifications && (
-                                <div className="px-4 py-3 text-sm text-gray-500">Loading...</div>
+                                <div className="px-4 py-3 text-sm text-gray-500">{t('Loading...')}</div>
                             )}
                             {!hasMoreNotifications && notificationList.length > 0 && (
-                                <div className="px-4 py-3 text-sm text-gray-500 text-center">No more notifications</div>
+                                <div className="px-4 py-3 text-sm text-gray-500 text-center">{t('No more notifications')}</div>
                             )}
                         </div>
                         <div className="border-t border-gray-100 px-4 py-3 flex justify-between items-center">
                             <Link as="button" method="post" href={route('notifications.read-all')} className="text-sm text-gray-500 hover:text-gray-700 mr-2">
-                                Mark all as read
+                                {t('Mark all as read')}
                             </Link>
                             <button className="text-sm text-blue-600 hover:text-blue-800 font-medium" onClick={() => setNotificationOpen(false)}>
-                                Close
+                                {t('Close')}
                             </button>
                         </div>
                     </div>
@@ -357,7 +359,7 @@ const navigationItems = [
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
-                            Edit Profile
+                            {t('Edit Profile')}
                         </Link>
                         <Link
                             href={route('profile.show', user.username)}
@@ -367,7 +369,7 @@ const navigationItems = [
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                             </svg>
-                            Show Profile
+                            {t('Show Profile')}
                         </Link>
                         <Link
                             href={route('logout')}
@@ -379,13 +381,13 @@ const navigationItems = [
                             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                             </svg>
-                            Log Out
+                            {t('Log Out')}
                         </Link>
                     </div>
                 </>,
                 document.body
             )}
-                            <span className="text-xl font-bold text-white">Store</span>
+                            <span className="text-xl font-bold text-white">{t('Store')}</span>
                         </div>
                     </Link>
                     <button
@@ -432,7 +434,7 @@ const navigationItems = [
 
                 {pages.length > 0 && (
                     <div className="px-4 pb-6">
-                        <h3 className="font-semibold text-gray-900 mb-2 text-sm">Pages</h3>
+                        <h3 className="font-semibold text-gray-900 mb-2 text-sm">{t('Pages')}</h3>
                         <div className="space-y-1">
                             {pages.map((p) => (
                                 <Link
