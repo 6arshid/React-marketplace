@@ -1,11 +1,13 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import UpdateStatusForm from './Partials/UpdateStatusForm';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
 
 export default function Index({ orders, commission_percent }) {
+    const { t } = useTranslation();
     const formatAmount = (amount) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -45,17 +47,17 @@ export default function Index({ orders, commission_percent }) {
         <AuthenticatedLayout 
             header={
                 <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">Sales Dashboard</h2>
+                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">{t('Sales Dashboard')}</h2>
                     <div className="flex items-center space-x-2 text-sm text-gray-500">
                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
                         </svg>
-                        <span>Last updated: just now</span>
+                        <span>{t('Last updated: just now')}</span>
                     </div>
                 </div>
             }
         >
-            <Head title="Sales Dashboard" />
+            <Head title={t('Sales Dashboard')} />
             
             <div className="py-8">
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -64,7 +66,7 @@ export default function Index({ orders, commission_percent }) {
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-600">Total Orders</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Orders')}</p>
                                     <p className="text-3xl font-bold text-gray-900">{orders.length}</p>
                                 </div>
                                 <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
@@ -78,7 +80,7 @@ export default function Index({ orders, commission_percent }) {
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-600">Total Revenue</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Revenue')}</p>
                                     <p className="text-3xl font-bold text-gray-900">
                                         {formatAmount(orders.reduce((sum, order) => sum + (order.net_amount || order.amount), 0))}
                                     </p>
@@ -94,7 +96,7 @@ export default function Index({ orders, commission_percent }) {
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-600">Pending Orders</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Pending Orders')}</p>
                                     <p className="text-3xl font-bold text-gray-900">
                                         {orders.filter(o => o.status?.toLowerCase() === 'pending').length}
                                     </p>
@@ -110,7 +112,7 @@ export default function Index({ orders, commission_percent }) {
                         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
                             <div className="flex items-center justify-between">
                                 <div>
-                                    <p className="text-sm font-medium text-gray-600">Completed</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Completed')}</p>
                                     <p className="text-3xl font-bold text-gray-900">
                                         {orders.filter(o => o.status?.toLowerCase() === 'delivered').length}
                                     </p>
@@ -128,8 +130,8 @@ export default function Index({ orders, commission_percent }) {
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
                         <div className="px-6 py-4 border-b border-gray-100">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                <h3 className="text-lg font-semibold text-gray-900">Recent Orders</h3>
-                                <SearchBar value={search} onChange={setSearch} placeholder="Search orders" />
+                                <h3 className="text-lg font-semibold text-gray-900">{t('Recent Orders')}</h3>
+                                <SearchBar value={search} onChange={setSearch} placeholder={t('Search orders')} />
                             </div>
                         </div>
 
@@ -139,26 +141,26 @@ export default function Index({ orders, commission_percent }) {
                                     <tr>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-1">
-                                                <span>Order</span>
+                                                <span>{t('Order')}</span>
                                                 <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4m0 6l-4 4-4-4" />
                                                 </svg>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Amount
+                                            {t('Amount')}
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Status
+                                            {t('Status')}
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Customer
+                                            {t('Customer')}
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Payment
+                                            {t('Payment')}
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                            Shipping
+                                            {t('Shipping')}
                                         </th>
                                     </tr>
                                 </thead>
@@ -175,7 +177,7 @@ export default function Index({ orders, commission_percent }) {
                                                             {order.tracking_code}
                                                         </div>
                                                         <div className="text-xs text-gray-500">
-                                                            Order ID: {order.id}
+                                                            {t('Order ID: {{id}}', { id: order.id })}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -203,7 +205,7 @@ export default function Index({ orders, commission_percent }) {
                                                             {order.buyer.name}
                                                         </div>
                                                         <div className="text-xs text-gray-500">
-                                                            Customer
+                                                            {t('Customer')}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -219,7 +221,7 @@ export default function Index({ orders, commission_percent }) {
                                                         </div>
                                                     ) : (
                                                         <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                                                            No wallet
+                                                            {t('No wallet')}
                                                         </span>
                                                     )}
                                                 </div>
@@ -236,7 +238,7 @@ export default function Index({ orders, commission_percent }) {
                                                             </div>
                                                         </div>
                                                     ) : (
-                                                        <span className="text-sm text-gray-400">No shipping info</span>
+                                                        <span className="text-sm text-gray-400">{t('No shipping info')}</span>
                                                     )}
                                                 </div>
                                             </td>
@@ -250,14 +252,14 @@ export default function Index({ orders, commission_percent }) {
                         <div className="bg-gray-50/50 px-6 py-4 border-t border-gray-200">
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center text-sm text-gray-600 flex-wrap gap-2">
-                                    <span>Showing {filteredOrders.length} orders</span>
+                                    <span>{t('Showing {{count}} orders', { count: filteredOrders.length })}</span>
                                     {commission_percent > 0 && (
                                         <div className="ml-6 flex items-center">
                                             <svg className="w-4 h-4 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                             </svg>
                                             <span className="text-blue-700 font-medium">
-                                                {commission_percent}% commission deducted from displayed amounts
+                                                {t('{{percent}}% commission deducted from displayed amounts', { percent: commission_percent })}
                                             </span>
                                         </div>
                                     )}
