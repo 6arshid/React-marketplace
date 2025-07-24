@@ -46,9 +46,13 @@ class ProductController extends Controller
     {
         $product->increment('views');
 
+        $product = $product->fresh()->load('category', 'attributes', 'user');
+        $owner = $product->user;
 
         return Inertia::render('Products/Show', [
-            'product' => $product->fresh()->load('category', 'attributes', 'user'),
+            'product' => $product,
+            'user' => $owner ? $owner->only('id', 'name', 'username', 'logo', 'footer_text') : null,
+            'isOwner' => auth()->check() && $owner && auth()->id() === $owner->id,
         ]);
     }
 
