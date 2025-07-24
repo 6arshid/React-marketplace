@@ -409,7 +409,7 @@
   "Stripe API Key": "کلید API استرایپ",
   "Stripe Secret Key": "کلید مخفی استرایپ",
   "Cancel Plan": "لغو پلن",
-  "Upgrade to Pro ({{price}} monthly)": "ارتقا به پرو (ماهانه {{price}})",
+  "Upgrade to Pro (${{price}} monthly)": "ارتقا به پرو (ماهانه ${{price}})",
   "Settlement Information": "اطلاعات تسویه",
   "Update your settlement information.": "اطلاعات تسویه خود را به‌روزرسانی کنید.",
   "TRC20 USDT Wallet": "کیف پول USDT شبکه TRC20",

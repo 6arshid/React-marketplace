@@ -409,7 +409,7 @@
   "Stripe API Key": "Stripe API Key",
   "Stripe Secret Key": "Stripe Secret Key",
   "Cancel Plan": "Cancel Plan",
-  "Upgrade to Pro ({{price}} monthly)": "Upgrade to Pro ({{price}} monthly)",
+  "Upgrade to Pro (${{price}} monthly)": "Upgrade to Pro (${{price}} monthly)",
   "Settlement Information": "Settlement Information",
   "Update your settlement information.": "Update your settlement information.",
   "TRC20 USDT Wallet": "TRC20 USDT Wallet",
