@@ -10,6 +10,11 @@ export default function Reports({ reports }) {
         window.axios.post(route('admin.reports.suspend', userId)).then(() => window.location.reload());
     };
 
+    const unsuspend = (userId) => {
+        if (!confirm('Unsuspend this user?')) return;
+        window.axios.post(route('admin.reports.unsuspend', userId)).then(() => window.location.reload());
+    };
+
     const onPageChange = (p) => {
         router.visit(route('admin.reports.index', { page: p }));
     };
@@ -54,7 +59,11 @@ export default function Reports({ reports }) {
                                             )}
                                         </td>
                                         <td className="px-4 py-2 text-right">
-                                            <PrimaryButton onClick={() => suspend(r.reported_user_id)}>Suspend</PrimaryButton>
+                                            {r.reported_user?.suspended_at ? (
+                                                <PrimaryButton onClick={() => unsuspend(r.reported_user_id)}>Unsuspend</PrimaryButton>
+                                            ) : (
+                                                <PrimaryButton onClick={() => suspend(r.reported_user_id)}>Suspend</PrimaryButton>
+                                            )}
                                         </td>
                                     </tr>
                                 ))}
