@@ -10,7 +10,7 @@ class SettingSeeder extends Seeder
     public function run(): void
     {
         $defaults = [
-            'welcome_footer_text' => 'Built with ❤️ using Laravel v12.21.0 & PHP v8.2.12',
+            'welcome_footer_text' => 'Built with ❤️ using Laravel',
             'footer_privacy_url' => '#',
             'footer_terms_url' => '#',
             'footer_support_url' => '#',

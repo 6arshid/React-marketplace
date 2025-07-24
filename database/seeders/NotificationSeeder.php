@@ -12,7 +12,7 @@ class NotificationSeeder extends Seeder
 {
     public function run(): void
     {
-        $admin = User::where('email', 'kalouvalou3@gmail.com')->first();
+        $admin = User::where('email', 'admin@admin.com')->first();
 
         if ($admin) {
             for ($i = 0; $i < 50; $i++) {

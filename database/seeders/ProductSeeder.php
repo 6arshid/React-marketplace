@@ -11,7 +11,7 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        $user = User::where('email', 'kalouvalou3@gmail.com')->first();
+        $user = User::where('email', 'admin@admin.com')->first();
         if ($user) {
             $category = Category::where('user_id', $user->id)->first() ?? Category::factory()->create(['user_id' => $user->id]);
             Product::factory(50)->create([
