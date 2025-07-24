@@ -87,11 +87,16 @@ export default function Edit({ product, categories }) {
         setAttributeInputs(copy);
     };
 
-    const submit = (e) => {
-        e.preventDefault();
-        setData('attributes', attributeInputs);
-        put(route('products.update', product.slug), { forceFormData: true });
-    };
+const submit = (e) => {
+    e.preventDefault();
+    setData('attributes', attributeInputs);
+
+    const hasFiles = data.main_file || data.demo_file || (data.images && data.images.length > 0);
+    put(route('products.update', product.slug), {
+        forceFormData: hasFiles,
+    });
+};
+
 
     const updateAttr = (index, field, value) => {
         const copy = [...attributeInputs];
