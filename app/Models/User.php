@@ -33,6 +33,7 @@ class User extends Authenticatable
         'stripe_api_key',
         'stripe_secret_key',
         'stripe_customer_id',
+        'google_id',
         'pro_panel',
         'pro_panel_expires_at',
         'suspended_at',

@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
+import GoogleIcon from '@/Components/GoogleIcon';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useEffect, useState } from 'react';
 
@@ -190,6 +191,16 @@ export default function Register() {
                     </PrimaryButton>
                 </div>
             </form>
+
+            <div className="mt-6 flex justify-center">
+                <Link
+                    href={route('login.google')}
+                    className="inline-flex items-center px-4 py-2 border rounded-md bg-white text-gray-700 shadow-sm hover:bg-gray-50"
+                >
+                    <GoogleIcon className="h-5 w-5 mr-2" />
+                    <span>Continue with Google</span>
+                </Link>
+            </div>
         </GuestLayout>
     );
 }
