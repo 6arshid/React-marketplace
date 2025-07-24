@@ -154,7 +154,7 @@ export default function ContactInfoForm({ className = '' }) {
                         </>
                     ) : (
                         <PrimaryButton type="button" onClick={upgrade} disabled={processing}>
-                            {t('Upgrade to Pro ({{price}} monthly)', { price: stripe.price })}
+                            {t('Upgrade to Pro (${{price}} monthly)', { price: stripe.price })}
                         </PrimaryButton>
                     )}
                     {isPro && (
