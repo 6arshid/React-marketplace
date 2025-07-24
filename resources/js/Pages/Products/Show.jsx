@@ -5,12 +5,14 @@ import ReviewForm from '@/Components/ReviewForm';
 import ReviewList from '@/Components/ReviewList';
 import { Head, Link, router } from '@inertiajs/react';
 import { useState } from 'react';
+import ReportModal from '@/Components/ReportModal';
 
 export default function Show({ product }) {
     const [selected, setSelected] = useState(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [showCartPrompt, setShowCartPrompt] = useState(false);
+    const [showReport, setShowReport] = useState(false);
     const [reviews, setReviews] = useState([]);
 
     const addAttributeToCart = (id) => {
@@ -36,6 +38,18 @@ export default function Show({ product }) {
 
     const selectedAttribute = product.attributes?.find(attr => attr.id === selected);
     const currentPrice = selected ? selectedAttribute?.price : product.price;
+    const isSuspended = Boolean(product.user.suspended_at);
+
+    if (isSuspended) {
+        return (
+            <GuestLayout>
+                <Head title={product.title} />
+                <div className="min-h-screen flex items-center justify-center text-red-600 font-semibold">
+                    This user is suspended.
+                </div>
+            </GuestLayout>
+        );
+    }
 
     return (
         <GuestLayout>
@@ -276,6 +290,17 @@ export default function Show({ product }) {
                                     </svg>
                                     Continue Shopping
                                 </Link>
+
+                                <button
+                                    type="button"
+                                    onClick={() => setShowReport(true)}
+                                    className="w-full border border-red-300 hover:border-red-400 text-red-600 font-medium py-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18.364 5.636l-12.728 12.728M5.636 5.636l12.728 12.728" />
+                                    </svg>
+                                    Report Store
+                                </button>
                             </div>
 
                             {/* Features */}
@@ -334,6 +359,8 @@ export default function Show({ product }) {
                 onClose={() => setShowCartPrompt(false)}
                 onGoToCart={() => router.visit(route('cart.show'))}
             />
+
+            <ReportModal userId={product.user.username} show={showReport} onClose={() => setShowReport(false)} />
 
             <style jsx>{`
                 @keyframes slideIn {
