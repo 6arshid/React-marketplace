@@ -1,6 +1,7 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
 import AddTrackingCodeForm from './Partials/AddTrackingCodeForm';
@@ -98,6 +99,7 @@ const getStatusIcon = (status) => {
 };
 
 export default function Index({ orders }) {
+    const { t } = useTranslation();
     const formatAmount = (amount) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -134,8 +136,8 @@ export default function Index({ orders }) {
                         <OrderIcon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-900">Orders</h2>
-                        <p className="text-sm text-gray-600">Track and manage your order history</p>
+                        <h2 className="text-2xl font-bold text-gray-900">{t('Orders')}</h2>
+                        <p className="text-sm text-gray-600">{t('Track and manage your order history')}</p>
                     </div>
                 </div>
             }
@@ -154,7 +156,7 @@ export default function Index({ orders }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Total Orders</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Orders')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{totalOrders}</p>
                                 </div>
                             </div>
@@ -168,7 +170,7 @@ export default function Index({ orders }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Total Spent</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Total Spent')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{formatAmount(totalAmount)}</p>
                                 </div>
                             </div>
@@ -184,7 +186,7 @@ export default function Index({ orders }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Completed</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Completed')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{completedOrders}</p>
                                 </div>
                             </div>
@@ -198,7 +200,7 @@ export default function Index({ orders }) {
                                     </div>
                                 </div>
                                 <div className="ml-4">
-                                    <p className="text-sm font-medium text-gray-600">Digital Items</p>
+                                    <p className="text-sm font-medium text-gray-600">{t('Digital Items')}</p>
                                     <p className="text-2xl font-bold text-gray-900">{digitalOrders}</p>
                                 </div>
                             </div>
@@ -209,8 +211,8 @@ export default function Index({ orders }) {
                     <div className="overflow-hidden bg-white shadow-xl sm:rounded-2xl ring-1 ring-gray-200">
                         <div className="px-6 py-4 border-b border-gray-200">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                <h3 className="text-lg font-semibold text-gray-900">Order History</h3>
-                                <SearchBar value={search} onChange={setSearch} placeholder="Search orders" />
+                                <h3 className="text-lg font-semibold text-gray-900">{t('Order History')}</h3>
+                                <SearchBar value={search} onChange={setSearch} placeholder={t('Search orders')} />
                             </div>
                         </div>
                         
@@ -221,13 +223,13 @@ export default function Index({ orders }) {
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <TrackingIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
-                                                <span>Tracking</span>
+                                                <span>{t('Tracking')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <CurrencyIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
-                                                <span>Amount</span>
+                                                <span>{t('Amount')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
@@ -235,25 +237,25 @@ export default function Index({ orders }) {
                                                 <svg className="w-4 h-4 md:w-5 md:h-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
                                                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
                                                 </svg>
-                                                <span>Status</span>
+                                                <span>{t('Status')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <SellerIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
-                                                <span>Seller</span>
+                                                <span>{t('Seller')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <ShippingIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
-                                                <span>Shipping</span>
+                                                <span>{t('Shipping')}</span>
                                             </div>
                                         </th>
                                         <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-2">
                                                 <ViewIcon className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
-                                                <span>Action</span>
+                                                <span>{t('Action')}</span>
                                             </div>
                                         </th>
                                     </tr>
@@ -300,7 +302,7 @@ export default function Index({ orders }) {
                                                         <>
                                                             <DigitalIcon className="w-4 h-4 md:w-5 md:h-5 text-green-500" />
                                                             <span className="text-sm text-green-600 font-medium">
-                                                                Download Available
+                                                                {t('Download Available')}
                                                             </span>
                                                         </>
                                                     ) : order.postal_tracking_code ? (
@@ -321,7 +323,7 @@ export default function Index({ orders }) {
                                                     className="inline-flex items-center px-3 py-2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium rounded-lg transition-colors duration-200 space-x-2"
                                                 >
                                                     <ViewIcon />
-                                                    <span>Track</span>
+                                                    <span>{t('Track')}</span>
                                                 </Link>
                                             </td>
                                         </tr>
@@ -337,10 +339,10 @@ export default function Index({ orders }) {
                                 <div className="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
                                     <OrderIcon className="w-12 h-12 md:w-16 md:h-16 text-gray-400" />
                                 </div>
-                                <h3 className="text-xl font-medium text-gray-900 mb-2">No orders found</h3>
-                                <p className="text-gray-500 mb-6">You haven't placed any orders yet.</p>
+                                <h3 className="text-xl font-medium text-gray-900 mb-2">{t('No orders found')}</h3>
+                                <p className="text-gray-500 mb-6">{t("You haven't placed any orders yet.")}</p>
                                 <button className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors duration-200">
-                                    Start Shopping
+                                    {t('Start Shopping')}
                                 </button>
                             </div>
                         )}
