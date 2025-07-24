@@ -4,11 +4,13 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
-import { Inertia } from '@inertiajs/inertia'; 
+import { Inertia } from '@inertiajs/inertia';
 import { Head, useForm, Link } from '@inertiajs/react';
 import Editor from 'react-simple-wysiwyg';
+import { useTranslation } from 'react-i18next';
 
 export default function Edit({ page }) {
+    const { t } = useTranslation();
     const { data, setData, put, processing, errors } = useForm({
         title: page.title,
         description: page.description || '',
@@ -46,29 +48,29 @@ const submit = (e) => {
 
 
     return (
-        <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Edit Page</h2>}>
-            <Head title="Edit Page" />
+        <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">{t('Edit Page')}</h2>}>
+            <Head title={t('Edit Page')} />
             <div className="py-8">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
                     <form onSubmit={submit} className="space-y-6" encType="multipart/form-data">
                         <div>
-                            <InputLabel htmlFor="title" value="Title" />
+                            <InputLabel htmlFor="title" value={t('Title')} />
                             <TextInput id="title" value={data.title} className="mt-1 block w-full" onChange={e=>setData('title', e.target.value)} />
                             <InputError message={errors.title} className="mt-2" />
                         </div>
                         <div>
-                            <InputLabel htmlFor="description" value="Description" />
+                            <InputLabel htmlFor="description" value={t('Description')} />
                             <Editor id="description" value={data.description} onChange={e=>setData('description', e.target.value)} containerProps={{className:'min-h-[120px] border rounded'}} />
                             <InputError message={errors.description} className="mt-2" />
                         </div>
                         <div>
-                            <InputLabel htmlFor="images" value="Images" />
+                            <InputLabel htmlFor="images" value={t('Images')} />
                             <FileDropzone name="images" multiple value={data.images} onChange={f=>setData('images', f)} />
                             <InputError message={errors.images} className="mt-2" />
                         </div>
                         <div className="flex justify-between">
-                            <Link href={route('seller.pages.index')} className="text-gray-600 hover:underline">Cancel</Link>
-                            <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                            <Link href={route('seller.pages.index')} className="text-gray-600 hover:underline">{t('Cancel')}</Link>
+                            <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
                         </div>
                     </form>
                 </div>
