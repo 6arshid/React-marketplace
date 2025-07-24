@@ -15,8 +15,6 @@ export default function PublicInfoForm({ className = '' }) {
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             about: user.about || '',
-            whatsapp_number: user.whatsapp_number || '',
-            telegram_username: user.telegram_username || '',
             instagram_username: user.instagram_username || '',
             facebook_username: user.facebook_username || '',
         });
@@ -64,29 +62,6 @@ export default function PublicInfoForm({ className = '' }) {
                         onChange={(e) => setData('about', e.target.value)}
                     />
                     <InputError message={errors.about} className="mt-2" />
-                </div>
-                <div>
-                    <InputLabel htmlFor="whatsapp_number" value={t('WhatsApp Number')} />
-                    <TextInput
-                        id="whatsapp_number"
-                        className="mt-1 block w-full"
-                        value={data.whatsapp_number}
-                        onChange={(e) => setData('whatsapp_number', e.target.value)}
-                        autoComplete="off"
-                    />
-                    <InputError message={errors.whatsapp_number} className="mt-2" />
-                </div>
-
-                <div>
-                    <InputLabel htmlFor="telegram_username" value={t('Telegram Username')} />
-                    <TextInput
-                        id="telegram_username"
-                        className="mt-1 block w-full"
-                        value={data.telegram_username}
-                        onChange={(e) => setData('telegram_username', e.target.value)}
-                        autoComplete="off"
-                    />
-                    <InputError message={errors.telegram_username} className="mt-2" />
                 </div>
 
                 <div>
