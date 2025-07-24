@@ -78,13 +78,16 @@ export default function Edit({ product, categories }) {
     const [attributeInputs, setAttributeInputs] = useState(product.attributes ?? []);
 
     const addAttribute = () => {
-        setAttributeInputs([...attributeInputs, { title: '', option: '', price: '' }]);
+        const updated = [...attributeInputs, { title: '', option: '', price: '' }];
+        setAttributeInputs(updated);
+        setData('attributes', updated);
     };
 
     const removeAttribute = (index) => {
         const copy = [...attributeInputs];
         copy.splice(index, 1);
         setAttributeInputs(copy);
+        setData('attributes', copy);
     };
 
     const submit = (e) => {
@@ -97,6 +100,7 @@ export default function Edit({ product, categories }) {
         const copy = [...attributeInputs];
         copy[index][field] = value;
         setAttributeInputs(copy);
+        setData('attributes', copy);
     };
 
     return (
