@@ -56,6 +56,11 @@ export default function Index() {
                                 {t('Sitemap')}
                             </Link>
                         </div>
+                        <div>
+                            <Link href={route('admin.users.index')} className="text-blue-500 hover:underline">
+                                {t('Users')}
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
