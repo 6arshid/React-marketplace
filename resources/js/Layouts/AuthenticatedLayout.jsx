@@ -11,12 +11,10 @@ export default function AuthenticatedLayout({ header, children }) {
     const cart = usePage().props.cart;
     const notifications = usePage().props.notifications || [];
     const notificationsCount = usePage().props.notifications_count || 0;
-    const pages = usePage().props.pages || [];
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [notificationOpen, setNotificationOpen] = useState(false);
     const [userDropdownOpen, setUserDropdownOpen] = useState(false);
-    const [openSection, setOpenSection] = useState(null);
     const [notificationRect, setNotificationRect] = useState(null);
     const [userDropdownRect, setUserDropdownRect] = useState(null);
     
@@ -219,17 +217,13 @@ const navigationItems = [
     if (user.is_admin) {
         navigationItems.push({
             name: 'Admin',
+            href: 'admin.index',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-            ),
-            children: pages.map((p) => ({
-                name: p.title,
-                href: 'pages.show',
-                params: p.slug,
-            }))
+            )
         });
     }
 
@@ -406,52 +400,6 @@ const navigationItems = [
                 {/* Navigation */}
                 <div className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
                                 {navigationItems.map((item) => {
-                                    if (item.children) {
-                                        const isOpen = openSection === item.name;
-                                        return (
-                                            <div key={item.name} className="space-y-1">
-                                                <button
-                                                    onClick={() => setOpenSection(isOpen ? null : item.name)}
-                                                    className={`group flex items-center w-full px-4 py-3 text-sm font-medium rounded-2xl transition-all duration-200 hover:scale-[1.02] ${
-                                                        isOpen
-                                                            ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg'
-                                                            : 'text-gray-700 hover:bg-white/70 hover:shadow-md'
-                                                    }`}
-                                                >
-                                                    <div className={`mr-3 transition-colors ${isOpen ? 'text-white' : 'text-gray-500 group-hover:text-blue-600'}`}>{item.icon}</div>
-                                                    <span className="flex-1 text-left">{item.name}</span>
-                                                    <svg
-                                                        className={`w-4 h-4 transform transition-transform ${isOpen ? 'rotate-90' : ''}`}
-                                                        fill="none"
-                                                        stroke="currentColor"
-                                                        viewBox="0 0 24 24"
-                                                    >
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                                    </svg>
-                                                </button>
-                                                {isOpen && (
-                                                    <div className="ml-8 space-y-1">
-                                                        {item.children.map((child) => {
-                                                            const childActive = route().current(child.href, child.params);
-                                                            return (
-                                                                <Link
-                                                                    key={child.name}
-                                                                    href={route(child.href, child.params)}
-                                                                    className={`block px-3 py-2 text-sm rounded-xl transition-colors ${
-                                                                        childActive
-                                                                            ? 'bg-blue-100 text-blue-600'
-                                                                            : 'text-gray-600 hover:bg-white/60'
-                                                                    }`}
-                                                                >
-                                                                    {child.name}
-                                                                </Link>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                )}
-                                            </div>
-                                        );
-                                    }
                                     const isActive = route().current(item.href);
                                     return (
                                         <Link
@@ -463,14 +411,16 @@ const navigationItems = [
                                                     : 'text-gray-700 hover:bg-white/70 hover:shadow-md'
                                             }`}
                                         >
-                                            <div className={`mr-3 transition-colors ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-blue-600'}`}>{item.icon}</div>
+                                            <div className={`mr-3 transition-colors ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-blue-600'}`}>
+                                                {item.icon}
+                                            </div>
                                             <span className="flex-1">{item.name}</span>
                                             {item.badge && (
-                                                <div
-                                                    className={`ml-2 px-2 py-1 text-xs font-bold rounded-full ${
-                                                        isActive ? 'bg-white/20 text-white' : 'bg-blue-100 text-blue-600'
-                                                    }`}
-                                                >
+                                                <div className={`ml-2 px-2 py-1 text-xs font-bold rounded-full ${
+                                                    isActive 
+                                                        ? 'bg-white/20 text-white' 
+                                                        : 'bg-blue-100 text-blue-600'
+                                                }`}>
                                                     {item.badge}
                                                 </div>
                                             )}
