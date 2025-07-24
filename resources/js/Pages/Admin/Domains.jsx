@@ -1,10 +1,36 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { useTranslation, Trans } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 export default function Domains({ domains }) {
     const { t } = useTranslation();
     const { post, patch, delete: destroy } = useForm();
+
+    const [editing, setEditing] = useState(null);
+    const [ns1, setNs1] = useState('');
+    const [ns2, setNs2] = useState('');
+
+    const startEdit = (domain) => {
+        setEditing(domain.id);
+        setNs1(domain.ns1 || '');
+        setNs2(domain.ns2 || '');
+    };
+
+    const cancelEdit = () => {
+        setEditing(null);
+        setNs1('');
+        setNs2('');
+    };
+
+    const saveEdit = (id) => {
+        patch(route('admin.domains.update', id), {
+            preserveScroll: true,
+            ns1,
+            ns2,
+            onSuccess: cancelEdit,
+        });
+    };
 
     const approve = (id) => post(route('admin.domains.approve', id));
     const reject = (id) => post(route('admin.domains.reject', id));
@@ -31,13 +57,43 @@ export default function Domains({ domains }) {
                                 <tr key={d.id}>
                                     <td className="px-3 py-2 text-sm text-gray-900">{d.domain}</td>
                                     <td className="px-3 py-2 text-sm text-gray-900">{d.user.name}</td>
-                                    <td className="px-3 py-2 text-sm text-gray-900">{d.ns1 || '-'}</td>
-                                    <td className="px-3 py-2 text-sm text-gray-900">{d.ns2 || '-'}</td>
+                                    <td className="px-3 py-2 text-sm text-gray-900">
+                                        {editing === d.id ? (
+                                            <input
+                                                value={ns1}
+                                                onChange={(e) => setNs1(e.target.value)}
+                                                className="w-full rounded border-gray-300"
+                                            />
+                                        ) : (
+                                            d.ns1 || '-'
+                                        )}
+                                    </td>
+                                    <td className="px-3 py-2 text-sm text-gray-900">
+                                        {editing === d.id ? (
+                                            <input
+                                                value={ns2}
+                                                onChange={(e) => setNs2(e.target.value)}
+                                                className="w-full rounded border-gray-300"
+                                            />
+                                        ) : (
+                                            d.ns2 || '-'
+                                        )}
+                                    </td>
                                     <td className="px-3 py-2 text-sm text-gray-900">{d.status}</td>
                                     <td className="px-3 py-2 text-sm text-right space-x-2">
-                                        <button onClick={() => approve(d.id)} className="text-green-600 hover:underline">{t('Accept')}</button>
-                                        <button onClick={() => reject(d.id)} className="text-yellow-600 hover:underline">{t('Reject')}</button>
-                                        <button onClick={() => remove(d.id)} className="text-red-600 hover:underline">{t('Delete')}</button>
+                                        {editing === d.id ? (
+                                            <>
+                                                <button onClick={() => saveEdit(d.id)} className="text-green-600 hover:underline">{t('Save')}</button>
+                                                <button onClick={cancelEdit} className="text-gray-600 hover:underline">{t('Cancel')}</button>
+                                            </>
+                                        ) : (
+                                            <>
+                                                <button onClick={() => startEdit(d)} className="text-blue-600 hover:underline">{t('Edit')}</button>
+                                                <button onClick={() => approve(d.id)} className="text-green-600 hover:underline">{t('Accept')}</button>
+                                                <button onClick={() => reject(d.id)} className="text-yellow-600 hover:underline">{t('Reject')}</button>
+                                                <button onClick={() => remove(d.id)} className="text-red-600 hover:underline">{t('Delete')}</button>
+                                            </>
+                                        )}
                                     </td>
                                 </tr>
                             ))}
