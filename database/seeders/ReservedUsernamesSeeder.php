@@ -14,7 +14,7 @@ class ReservedUsernamesSeeder extends Seeder
     {
         $usernames = [
             'admin',
-            'demo',
+            'administrator',
             'user',
             'users',
             'support',
