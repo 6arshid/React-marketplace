@@ -24,6 +24,11 @@ export default function Index() {
                             </Link>
                         </div>
                         <div>
+                            <Link href={route('admin.reports.index')} className="text-blue-500 hover:underline">
+                                Reports
+                            </Link>
+                        </div>
+                        <div>
                             <Link href={route('admin.pages.index')} className="text-blue-500 hover:underline">
                                 Pages
                             </Link>
