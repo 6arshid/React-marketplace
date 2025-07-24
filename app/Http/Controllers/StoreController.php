@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\ViewStatistic;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -13,6 +14,12 @@ class StoreController extends Controller
     public function profile(User $user): Response
     {
         $user->increment('profile_views');
+
+        $stat = ViewStatistic::firstOrCreate(
+            ['user_id' => $user->id, 'date' => now()->toDateString()],
+            ['product_views' => 0, 'profile_views' => 0]
+        );
+        $stat->increment('profile_views');
 
         $pages = $user->pages()->latest()->get(['id', 'title', 'slug']);
         $categories = $user->categories()->get(['id', 'name', 'slug', 'icon']);

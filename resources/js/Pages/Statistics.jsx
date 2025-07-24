@@ -15,17 +15,15 @@ import {
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
-export default function Statistics({ topProducts = [], totalViews = 0, profileViews = 0 }) {
+export default function Statistics({ topProducts = [], productViews = [], profileViews = [], labels = [] }) {
     const { t } = useTranslation();
 
-    // Sample chart data using total views spread over last 12 months
-    const labels = Array.from({ length: 12 }, (_, i) => t('Month') + ' ' + (i + 1));
     const productData = {
         labels,
         datasets: [
             {
                 label: t('Product Views'),
-                data: labels.map(() => Math.floor(totalViews / 12)),
+                data: productViews,
                 borderColor: 'rgb(54, 162, 235)',
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 tension: 0.3,
@@ -38,7 +36,7 @@ export default function Statistics({ topProducts = [], totalViews = 0, profileVi
         datasets: [
             {
                 label: t('Profile Views'),
-                data: labels.map(() => Math.floor(profileViews / 12)),
+                data: profileViews,
                 borderColor: 'rgb(75, 192, 192)',
                 backgroundColor: 'rgba(75, 192, 192, 0.5)',
                 tension: 0.3,
