@@ -42,6 +42,11 @@ export default function Index() {
                             </Link>
                         </div>
                         <div>
+                            <Link href={route('admin.custom-code.edit')} className="text-blue-500 hover:underline">
+                                {t('Custom Code')}
+                            </Link>
+                        </div>
+                        <div>
                             <Link href={route('admin.pages.index')} className="text-blue-500 hover:underline">
                                 {t('Pages')}
                             </Link>

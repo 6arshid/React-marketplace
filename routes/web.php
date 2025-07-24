@@ -21,6 +21,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\AdminAppearanceController;
 use App\Http\Controllers\AdminGeneralConfigController;
+use App\Http\Controllers\AdminCustomCodeController;
 use App\Http\Controllers\AdminSitemapController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\SitemapController;
@@ -118,6 +119,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
 
     Route::get('/general-config', [AdminGeneralConfigController::class, 'edit'])->name('admin.general-config.edit');
     Route::post('/general-config', [AdminGeneralConfigController::class, 'update'])->name('admin.general-config.update');
+
+    Route::get('/custom-code', [AdminCustomCodeController::class, 'edit'])->name('admin.custom-code.edit');
+    Route::post('/custom-code', [AdminCustomCodeController::class, 'update'])->name('admin.custom-code.update');
 
     Route::get('/sitemap', [AdminSitemapController::class, 'index'])->name('admin.sitemap.index');
 
