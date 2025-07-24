@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Page;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
@@ -33,6 +34,26 @@ class GoogleController extends Controller
         if (!$user->google_id) {
             $user->google_id = $googleUser->getId();
             $user->save();
+        }
+
+        if ($user->is_seller && !$user->pages()->exists()) {
+            $user->pages()->create([
+                'title' => 'Return Policy',
+                'slug' => Page::generateUniqueSlug('return-'),
+                'description' => 'Edit this page to describe your return policy.',
+            ]);
+
+            $user->pages()->create([
+                'title' => 'About Us',
+                'slug' => Page::generateUniqueSlug('about-'),
+                'description' => 'Tell your customers about your store here.',
+            ]);
+
+            $user->pages()->create([
+                'title' => 'Contact Us',
+                'slug' => Page::generateUniqueSlug('contact-'),
+                'description' => 'Provide your contact information here.',
+            ]);
         }
 
         Auth::login($user, true);
