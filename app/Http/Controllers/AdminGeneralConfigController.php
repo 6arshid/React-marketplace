@@ -61,7 +61,7 @@ class AdminGeneralConfigController extends Controller
             'APP_LOCALE' => 'required|string',
             'APP_FALLBACK_LOCALE' => 'required|string',
             'APP_FAKER_LOCALE' => 'required|string',
-            'SESSION_DRIVER' => 'required|string',
+            'SESSION_DRIVER' => 'required|in:file,database',
             'SESSION_LIFETIME' => 'required',
             'SESSION_ENCRYPT' => 'required|in:true,false',
             'SESSION_PATH' => 'required|string',

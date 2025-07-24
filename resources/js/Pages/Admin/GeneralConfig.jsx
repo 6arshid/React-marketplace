@@ -90,7 +90,15 @@ export default function GeneralConfig({ env }) {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <InputLabel htmlFor="SESSION_DRIVER" value="SESSION_DRIVER" />
-                                    <TextInput id="SESSION_DRIVER" value={data.SESSION_DRIVER} className="mt-1 block w-full" onChange={e => setData('SESSION_DRIVER', e.target.value)} />
+                                    <select
+                                        id="SESSION_DRIVER"
+                                        value={data.SESSION_DRIVER}
+                                        onChange={e => setData('SESSION_DRIVER', e.target.value)}
+                                        className="mt-1 block w-full rounded border-gray-300"
+                                    >
+                                        <option value="file">file</option>
+                                        <option value="database">database</option>
+                                    </select>
                                     <InputError message={errors.SESSION_DRIVER} className="mt-2" />
                                 </div>
                                 <div>
