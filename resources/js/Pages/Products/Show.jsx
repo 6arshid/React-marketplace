@@ -38,135 +38,168 @@ export default function Show({ product }) {
     const currentPrice = selected ? selectedAttribute?.price : product.price;
 
     return (
-        <GuestLayout 
-            header={
-                <div className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 py-8">
-                    <h2 className="text-3xl font-bold text-center text-white">
-                        {product.title}
-                    </h2>
-                    {product.category && (
-                        <p className="text-center text-purple-200 mt-2 text-lg">
-                            {product.category.name}
-                        </p>
-                    )}
-                    <div className="flex items-center justify-center mt-2 text-purple-200 text-sm">
-                        <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                        </svg>
-                        <span>{product.views}</span>
-                    </div>
-                </div>
-            }
-        >
+        <GuestLayout>
             <Head title={product.title} />
             
-            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 py-12">
-                <div className="mx-auto max-w-7xl px-6 lg:px-8">
-                    {/* Success Modal */}
-                    {showSuccessModal && (
-                        <div className="fixed top-4 right-4 z-50 animate-slide-in">
-                            <div className="bg-green-500 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center space-x-3">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                </svg>
-                                <span className="font-semibold">Added to cart successfully!</span>
-                            </div>
-                        </div>
-                    )}
+            {/* Success Toast */}
+            {showSuccessModal && (
+                <div className="fixed top-6 right-6 z-50 animate-slideIn">
+                    <div className="bg-emerald-500 text-white px-6 py-3 rounded-xl shadow-lg flex items-center gap-2">
+                        <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        <span className="font-medium">Added to cart!</span>
+                    </div>
+                </div>
+            )}
 
-                    <div className="grid lg:grid-cols-2 gap-12">
-                        {/* Left Column - Images */}
-                        <div className="space-y-6">
-                            <div className="backdrop-blur-sm bg-white/80 rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
-                                {product.images && product.images.length > 0 ? (
-                                    <div className="space-y-4 p-6">
-                                        {/* Main Image */}
-                                        <div className="aspect-square rounded-2xl overflow-hidden bg-gray-100 group">
-                                            <img
-                                                src={`/storage/${product.images[selectedImageIndex]}`}
-                                                alt={product.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                            />
-                                        </div>
-                                        
-                                        {/* Image Thumbnails */}
-                                        {product.images.length > 1 && (
-                                            <div className="flex gap-3 overflow-x-auto pb-2">
-                                                {product.images.map((img, idx) => (
-                                                    <button
-                                                        key={idx}
-                                                        onClick={() => setSelectedImageIndex(idx)}
-                                                        className={`flex-shrink-0 w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
-                                                            selectedImageIndex === idx 
-                                                                ? 'border-blue-500 shadow-lg scale-105' 
-                                                                : 'border-gray-200 hover:border-gray-300'
-                                                        }`}
-                                                    >
-                                                        <img
-                                                            src={`/storage/${img}`}
-                                                            alt={`${product.title} ${idx + 1}`}
-                                                            className="w-full h-full object-cover"
-                                                        />
-                                                    </button>
-                                                ))}
-                                            </div>
-                                        )}
+            <div className="min-h-screen bg-gray-50">
+                {/* Header Section */}
+                <div className="bg-white border-b border-gray-100">
+                    <div className="max-w-7xl mx-auto px-4 py-8">
+                        <nav className="flex items-center gap-2 text-sm text-gray-500 mb-6">
+                            <Link href={route('products.index')} className="hover:text-gray-900 transition-colors">
+                                Products
+                            </Link>
+                            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                            </svg>
+                            {product.category && (
+                                <>
+                                    <span className="hover:text-gray-900 transition-colors">{product.category.name}</span>
+                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                                    </svg>
+                                </>
+                            )}
+                            <span className="text-gray-900">{product.title}</span>
+                        </nav>
+
+                        <div className="flex items-center justify-between">
+                            <div>
+                                <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
+                                <div className="flex items-center gap-4 text-sm text-gray-500">
+                                    {product.category && (
+                                        <span className="px-3 py-1 bg-gray-100 rounded-full text-gray-600">
+                                            {product.category.name}
+                                        </span>
+                                    )}
+                                    {product.is_digital && (
+                                        <span className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full font-medium">
+                                            Digital Product
+                                        </span>
+                                    )}
+                                    <div className="flex items-center gap-1">
+                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                            <path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd" />
+                                        </svg>
+                                        <span>{product.views} views</span>
                                     </div>
-                                ) : (
-                                    <div className="aspect-square flex items-center justify-center bg-gray-100 m-6 rounded-2xl">
-                                        <div className="text-center">
-                                            <svg className="w-24 h-24 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                            <p className="text-gray-500 text-lg">No images available</p>
-                                        </div>
+                                </div>
+                            </div>
+                            <div className="text-right">
+                                <div className="text-3xl font-bold text-gray-900 mb-1">
+                                    ${selected ? selectedAttribute?.price : product.price}
+                                </div>
+                                {selected && (
+                                    <div className="text-sm text-gray-500 line-through">
+                                        Was ${product.price}
                                     </div>
                                 )}
                             </div>
+                        </div>
+                    </div>
+                </div>
 
-                            {/* Digital Files Section */}
-                            {product.is_digital && (
-                                <div className="backdrop-blur-sm bg-white/80 rounded-3xl shadow-2xl border border-white/20 p-6">
-                                    <div className="flex items-center mb-4">
-                                        <div className="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mr-4">
-                                            <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                            </svg>
-                                        </div>
-                                        <h3 className="text-xl font-semibold text-gray-800">Digital Files</h3>
+                {/* Main Content */}
+                <div className="max-w-7xl mx-auto px-4 py-12">
+                    <div className="grid lg:grid-cols-2 gap-16">
+                        {/* Image Gallery */}
+                        <div className="space-y-6">
+                            {product.images && product.images.length > 0 ? (
+                                <>
+                                    {/* Main Image */}
+                                    <div className="aspect-square bg-white rounded-2xl overflow-hidden shadow-sm border border-gray-100">
+                                        <img
+                                            src={`/storage/${product.images[selectedImageIndex]}`}
+                                            alt={product.title}
+                                            className="w-full h-full object-cover"
+                                        />
                                     </div>
+                                    
+                                    {/* Thumbnails */}
+                                    {product.images.length > 1 && (
+                                        <div className="flex gap-4 overflow-x-auto pb-2">
+                                            {product.images.map((img, idx) => (
+                                                <button
+                                                    key={idx}
+                                                    onClick={() => setSelectedImageIndex(idx)}
+                                                    className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden transition-all ${
+                                                        selectedImageIndex === idx 
+                                                            ? 'ring-2 ring-gray-900 ring-offset-2' 
+                                                            : 'ring-1 ring-gray-200 hover:ring-gray-300'
+                                                    }`}
+                                                >
+                                                    <img
+                                                        src={`/storage/${img}`}
+                                                        alt={`${product.title} ${idx + 1}`}
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </>
+                            ) : (
+                                <div className="aspect-square bg-gray-100 rounded-2xl flex items-center justify-center">
+                                    <div className="text-center">
+                                        <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                        </svg>
+                                        <p className="text-gray-500">No image available</p>
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Digital Files */}
+                            {product.is_digital && (product.demo_file || product.main_file) && (
+                                <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                                    <h3 className="font-semibold text-gray-900 mb-4">Files</h3>
                                     <div className="space-y-3">
                                         {product.demo_file && (
-                                            <div className="bg-white/70 rounded-xl p-4 border border-gray-100">
-                                                <p className="text-sm text-gray-600 mb-2">Demo File</p>
+                                            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                                <div>
+                                                    <p className="font-medium text-gray-900">Demo File</p>
+                                                    <p className="text-sm text-gray-500">{product.demo_file}</p>
+                                                </div>
                                                 <a 
                                                     href={`/storage/${product.demo_file}`}
-                                                    className="text-blue-600 hover:text-blue-800 font-medium flex items-center group"
+                                                    className="text-blue-600 hover:text-blue-700 transition-colors"
                                                     target="_blank"
                                                     rel="noopener"
                                                 >
-                                                    <svg className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                                     </svg>
-                                                    {product.demo_file}
                                                 </a>
                                             </div>
                                         )}
                                         {product.main_file && (
-                                            <div className="bg-white/70 rounded-xl p-4 border border-gray-100">
-                                                <p className="text-sm text-gray-600 mb-2">Main File</p>
+                                            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                                <div>
+                                                    <p className="font-medium text-gray-900">Main File</p>
+                                                    <p className="text-sm text-gray-500">{product.main_file}</p>
+                                                </div>
                                                 <a 
                                                     href={`/storage/${product.main_file}`}
-                                                    className="text-purple-600 hover:text-purple-800 font-medium flex items-center group"
+                                                    className="text-blue-600 hover:text-blue-700 transition-colors"
                                                     target="_blank"
                                                     rel="noopener"
                                                 >
-                                                    <svg className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                                                     </svg>
-                                                    {product.main_file}
                                                 </a>
                                             </div>
                                         )}
@@ -175,162 +208,149 @@ export default function Show({ product }) {
                             )}
                         </div>
 
-                        {/* Right Column - Product Details */}
-                        <div className="space-y-6">
-                            {/* Main Product Info */}
-                            <div className="backdrop-blur-sm bg-white/80 rounded-3xl shadow-2xl border border-white/20 p-8">
-                                {/* Price Section */}
-                                <div className="mb-8">
-                                    <div className="flex items-center space-x-4">
-                                        <span className={`text-4xl font-bold transition-all duration-300 ${
-                                            selected ? 'text-gray-400 line-through' : 'text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600'
-                                        }`}>
-                                            ${product.price}
-                                        </span>
-                                        {selected && (
-                                            <span className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-500 to-emerald-600 animate-fade-in">
-                                                ${selectedAttribute?.price}
-                                            </span>
-                                        )}
-                                    </div>
-                                    {product.is_digital && (
-                                        <div className="flex items-center mt-3">
-                                            <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-                                            <span className="text-green-600 font-medium">Digital Product - Instant Download</span>
-                                        </div>
-                                    )}
+                        {/* Product Details */}
+                        <div className="space-y-8">
+                            {/* Description */}
+                            {product.description && (
+                                <div>
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Description</h2>
+                                    <p className="text-gray-600 leading-relaxed">{product.description}</p>
                                 </div>
+                            )}
 
-                                {/* Add to Cart Button */}
+                            {/* Attributes */}
+                            {product.attributes && product.attributes.length > 0 && (
+                                <div>
+                                    <h2 className="text-xl font-semibold text-gray-900 mb-4">Choose an Option</h2>
+                                    <div className="space-y-3">
+                                        {product.attributes.map((attr) => (
+                                            <button
+                                                key={attr.id}
+                                                onClick={() => addAttributeToCart(attr.id)}
+                                                className={`w-full p-4 rounded-xl border text-left transition-all hover:shadow-sm ${
+                                                    selected === attr.id
+                                                        ? 'border-gray-900 bg-gray-50'
+                                                        : 'border-gray-200 hover:border-gray-300'
+                                                }`}
+                                            >
+                                                <div className="flex justify-between items-center">
+                                                    <div>
+                                                        <h3 className="font-medium text-gray-900">{attr.title}</h3>
+                                                        <p className="text-sm text-gray-500">{attr.option}</p>
+                                                    </div>
+                                                    <div className="flex items-center gap-3">
+                                                        <span className="font-semibold text-gray-900">${attr.price}</span>
+                                                        {selected === attr.id && (
+                                                            <div className="w-5 h-5 bg-gray-900 rounded-full flex items-center justify-center">
+                                                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                                </svg>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            {/* Add to Cart */}
+                            <div className="space-y-4">
                                 <button
                                     onClick={addToCart}
-                                    className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-bold rounded-2xl hover:shadow-2xl hover:scale-105 transition-all duration-300 text-lg mb-6 flex items-center justify-center"
+                                    className="w-full bg-gray-900 hover:bg-gray-800 text-white font-medium py-4 rounded-xl transition-colors flex items-center justify-center gap-2"
                                 >
-                                    <svg className="w-6 h-6 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.15M7 13l-1.1 5m0 0h9.1M16 18a2 2 0 11-4 0 2 2 0 014 0zM9 18a2 2 0 11-4 0 2 2 0 014 0z" />
                                     </svg>
-                                    Add to Cart - ${product.price}
+                                    Add to Cart • ${currentPrice}
                                 </button>
 
-                                {/* Description */}
-                                {product.description && (
-                                    <div className="mb-8">
-                                        <h3 className="text-lg font-semibold text-gray-800 mb-3">Description</h3>
-                                        <div className="prose prose-gray max-w-none">
-                                            <p className="text-gray-600 leading-relaxed">{product.description}</p>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {/* Attributes */}
-                                {product.attributes && product.attributes.length > 0 && (
-                                    <div className="mb-8">
-                                        <h3 className="text-lg font-semibold text-gray-800 mb-4">Choose an Option</h3>
-                                        <div className="grid gap-3">
-                                            {product.attributes.map((attr) => (
-                                                <button
-                                                    key={attr.id}
-                                                    onClick={() => addAttributeToCart(attr.id)}
-                                                    className={`p-4 rounded-2xl border-2 text-left transition-all duration-300 hover:scale-[1.02] ${
-                                                        selected === attr.id
-                                                            ? 'border-blue-500 bg-blue-50 shadow-lg'
-                                                            : 'border-gray-200 bg-white/70 hover:border-gray-300 hover:shadow-md'
-                                                    }`}
-                                                >
-                                                    <div className="flex justify-between items-center">
-                                                        <div>
-                                                            <h4 className="font-semibold text-gray-800">{attr.title}</h4>
-                                                            <p className="text-gray-600 text-sm">{attr.option}</p>
-                                                        </div>
-                                                        <div className="text-right">
-                                                            <span className="text-xl font-bold text-blue-600">${attr.price}</span>
-                                                            {selected === attr.id && (
-                                                                <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mt-1 ml-auto">
-                                                                    <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                                                    </svg>
-                                                                </div>
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                </button>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )}
-
-
-                                {/* Back Button */}
                                 <Link
                                     href={route('products.index')}
-                                    className="w-full py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-2xl hover:bg-gray-50 hover:scale-105 transition-all duration-300 flex items-center justify-center"
+                                    className="w-full border border-gray-300 hover:border-gray-400 text-gray-700 font-medium py-4 rounded-xl transition-colors flex items-center justify-center gap-2"
                                 >
-                                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                                     </svg>
-                                    Back to Products
+                                    Continue Shopping
                                 </Link>
                             </div>
 
-                            {/* Product Features */}
-                            <div className="backdrop-blur-sm bg-white/80 rounded-3xl shadow-2xl border border-white/20 p-6">
-                                <h3 className="text-lg font-semibold text-gray-800 mb-4">Product Features</h3>
+                            {/* Features */}
+                            <div className="bg-gray-50 rounded-2xl p-6">
+                                <h3 className="font-semibold text-gray-900 mb-4">What's Included</h3>
                                 <div className="space-y-3">
-                                    <div className="flex items-center">
-                                        <div className="w-2 h-2 bg-green-500 rounded-full mr-3"></div>
-                                        <span className="text-gray-600">Secure Payment</span>
+                                    <div className="flex items-center gap-3">
+                                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                        <span className="text-gray-700">Secure Payment Processing</span>
                                     </div>
-                                    <div className="flex items-center">
-                                        <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                                        <span className="text-gray-600">Fast Delivery</span>
+                                    <div className="flex items-center gap-3">
+                                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                        <span className="text-gray-700">Fast & Reliable Delivery</span>
                                     </div>
                                     {product.is_digital && (
-                                        <div className="flex items-center">
-                                            <div className="w-2 h-2 bg-purple-500 rounded-full mr-3"></div>
-                                            <span className="text-gray-600">Instant Download</span>
+                                        <div className="flex items-center gap-3">
+                                            <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                            <span className="text-gray-700">Instant Download Access</span>
                                         </div>
                                     )}
-                                    <div className="flex items-center">
-                                        <div className="w-2 h-2 bg-orange-500 rounded-full mr-3"></div>
-                                        <span className="text-gray-600">24/7 Support</span>
+                                    <div className="flex items-center gap-3">
+                                        <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                        <span className="text-gray-700">24/7 Customer Support</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                {/* Reviews Section */}
+                <div className="max-w-4xl mx-auto px-4 py-12">
+                    <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-8">Customer Reviews</h2>
+                        <div className="space-y-8">
+                            <ReviewForm 
+                                productId={product.slug} 
+                                onCreated={(r) => setReviews([r, ...reviews])} 
+                            />
+                            <ReviewList productId={product.slug} />
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div className="max-w-2xl mx-auto mt-10">
-                <h3 className="text-lg font-semibold mb-4">Reviews</h3>
-                <ReviewForm productId={product.slug} onCreated={(r) => setReviews([r, ...reviews])} />
-                <ReviewList productId={product.slug} />
-            </div>
-
-            <style>{`
-                @keyframes fade-in {
-                    from { opacity: 0; transform: translateY(10px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                
-                @keyframes slide-in {
-                    from { opacity: 0; transform: translateX(100px); }
-                    to { opacity: 1; transform: translateX(0); }
-                }
-                
-                .animate-fade-in {
-                    animation: fade-in 0.5s ease-out;
-                }
-                
-                .animate-slide-in {
-                    animation: slide-in 0.3s ease-out;
-                }
-            `}</style>
             <AddToCartPrompt
                 show={showCartPrompt}
                 onClose={() => setShowCartPrompt(false)}
                 onGoToCart={() => router.visit(route('cart.show'))}
             />
+
+            <style jsx>{`
+                @keyframes slideIn {
+                    from {
+                        opacity: 0;
+                        transform: translateX(100px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateX(0);
+                    }
+                }
+                
+                .animate-slideIn {
+                    animation: slideIn 0.3s ease-out;
+                }
+            `}</style>
         </GuestLayout>
     );
 }
