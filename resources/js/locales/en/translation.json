@@ -489,7 +489,13 @@
   "Make Admin": "Make Admin",
   "Remove Admin": "Remove Admin",
   "Accept": "Accept",
-  "Reject": "Reject"
+  "Reject": "Reject",
+  "Domains": "Domains",
+  "Domain": "Domain",
+  "Park Domain": "Park Domain",
+  "Point your domain to ns1.server.com and ns2.server.com.": "Point your domain to ns1.server.com and ns2.server.com.",
+  "Pro account required": "Pro account required",
+  "Manage user domains": "Manage user domains"
   ,"Report Review": "Report Review"
   ,"Review Reports": "Review Reports"
 }

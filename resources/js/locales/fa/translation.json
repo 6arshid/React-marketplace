@@ -489,7 +489,13 @@
   "Make Admin": "تبدیل به مدیر",
   "Remove Admin": "حذف نقش مدیر",
   "Accept": "قبول",
-  "Reject": "رد"
+  "Reject": "رد",
+  "Domains": "دامنه‌ها",
+  "Domain": "دامنه",
+  "Park Domain": "پارک دامنه",
+  "Point your domain to ns1.server.com and ns2.server.com.": "دامنه خود را به ns1.server.com و ns2.server.com اشاره دهید.",
+  "Pro account required": "نیاز به حساب حرفه‌ای",
+  "Manage user domains": "مدیریت دامنه‌ها"
   ,"Report Review": "گزارش نظر"
   ,"Review Reports": "گزارش‌های نظر"
 }

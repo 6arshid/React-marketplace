@@ -19,6 +19,8 @@ use App\Http\Controllers\StripeConfigController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\DomainController;
+use App\Http\Controllers\AdminDomainController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReviewReportController;
 use App\Http\Controllers\AdminAppearanceController;
@@ -95,6 +97,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/read-all', [\App\Http\Controllers\NotificationController::class, 'markAllRead'])->name('notifications.read-all');
     Route::get('/notifications', [\App\Http\Controllers\NotificationController::class, 'index'])->name('notifications.index');
 
+    Route::post('/domains', [DomainController::class, 'store'])->name('domains.store');
+
     Route::post('/report/{user:username}', [ReportController::class, 'store'])->name('report.store');
 });
 
@@ -114,6 +118,11 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/transactions/money', [AdminTransactionController::class, 'money'])->name('admin.transactions.money');
     Route::post('/transactions/{transaction}/pay', [AdminTransactionController::class, 'pay'])->name('admin.transactions.pay');
     Route::post('/transactions/pay-all', [AdminTransactionController::class, 'payAll'])->name('admin.transactions.pay-all');
+    Route::get('/domains', [AdminDomainController::class, 'index'])->name('admin.domains.index');
+    Route::post('/domains/{domain}/approve', [AdminDomainController::class, 'approve'])->name('admin.domains.approve');
+    Route::post('/domains/{domain}/reject', [AdminDomainController::class, 'reject'])->name('admin.domains.reject');
+    Route::patch('/domains/{domain}', [AdminDomainController::class, 'update'])->name('admin.domains.update');
+    Route::delete('/domains/{domain}', [AdminDomainController::class, 'destroy'])->name('admin.domains.destroy');
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
