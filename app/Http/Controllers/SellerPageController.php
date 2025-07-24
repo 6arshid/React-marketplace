@@ -33,7 +33,7 @@ class SellerPageController extends Controller
             'images.*' => 'file',
         ]);
 
-        $data['slug'] = $this->generateUniqueSlug();
+        $data['slug'] = Page::generateUniqueSlug();
 
         if ($request->hasFile('images')) {
             $paths = [];
@@ -85,12 +85,4 @@ class SellerPageController extends Controller
         return Redirect::route('seller.pages.index');
     }
 
-    private function generateUniqueSlug(): string
-    {
-        do {
-            $slug = uniqid();
-        } while (Page::where('slug', $slug)->exists());
-
-        return $slug;
-    }
 }

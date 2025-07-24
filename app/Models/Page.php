@@ -24,4 +24,13 @@ class Page extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public static function generateUniqueSlug(string $prefix = ''): string
+    {
+        do {
+            $slug = uniqid($prefix);
+        } while (static::where('slug', $slug)->exists());
+
+        return $slug;
+    }
 }
