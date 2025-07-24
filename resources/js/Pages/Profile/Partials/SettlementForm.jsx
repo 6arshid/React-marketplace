@@ -4,9 +4,11 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm, usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
 
 export default function SettlementForm({ className = '' }) {
     const user = usePage().props.auth.user;
+    const { t } = useTranslation();
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -23,16 +25,16 @@ export default function SettlementForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">Settlement Information</h2>
+                <h2 className="text-lg font-medium text-gray-900">{t('Settlement Information')}</h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Update your settlement information.
+                    {t('Update your settlement information.')}
                 </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="trc20_usdt_wallet" value="TRC20 USDT Wallet" />
+                    <InputLabel htmlFor="trc20_usdt_wallet" value={t('TRC20 USDT Wallet')} />
                     <TextInput
                         id="trc20_usdt_wallet"
                         className="mt-1 block w-full"
@@ -44,7 +46,7 @@ export default function SettlementForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="iban" value="IBAN" />
+                    <InputLabel htmlFor="iban" value={t('IBAN')} />
                     <TextInput
                         id="iban"
                         className="mt-1 block w-full"
@@ -56,7 +58,7 @@ export default function SettlementForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="swift_code" value="SWIFT Code" />
+                    <InputLabel htmlFor="swift_code" value={t('SWIFT Code')} />
                     <TextInput
                         id="swift_code"
                         className="mt-1 block w-full"
@@ -68,7 +70,7 @@ export default function SettlementForm({ className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -77,7 +79,7 @@ export default function SettlementForm({ className = '' }) {
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600">Saved.</p>
+                        <p className="text-sm text-gray-600">{t('Saved.')}</p>
                     </Transition>
                 </div>
             </form>

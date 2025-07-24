@@ -6,9 +6,11 @@ import FileDropzone from '@/Components/FileDropzone';
 import { Transition } from '@headlessui/react';
 import { useForm, usePage, router } from '@inertiajs/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function PublicInfoForm({ className = '' }) {
     const user = usePage().props.auth.user;
+    const { t } = useTranslation();
 
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
@@ -48,13 +50,13 @@ export default function PublicInfoForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">Public Information</h2>
-                <p className="mt-1 text-sm text-gray-600">Update your profile and social links.</p>
+                <h2 className="text-lg font-medium text-gray-900">{t('Public Information')}</h2>
+                <p className="mt-1 text-sm text-gray-600">{t('Update your profile and social links.')}</p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="about" value="About" />
+                    <InputLabel htmlFor="about" value={t('About')} />
                     <textarea
                         id="about"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
@@ -64,7 +66,7 @@ export default function PublicInfoForm({ className = '' }) {
                     <InputError message={errors.about} className="mt-2" />
                 </div>
                 <div>
-                    <InputLabel htmlFor="whatsapp_number" value="WhatsApp Number" />
+                    <InputLabel htmlFor="whatsapp_number" value={t('WhatsApp Number')} />
                     <TextInput
                         id="whatsapp_number"
                         className="mt-1 block w-full"
@@ -76,7 +78,7 @@ export default function PublicInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="telegram_username" value="Telegram Username" />
+                    <InputLabel htmlFor="telegram_username" value={t('Telegram Username')} />
                     <TextInput
                         id="telegram_username"
                         className="mt-1 block w-full"
@@ -88,7 +90,7 @@ export default function PublicInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="instagram_username" value="Instagram" />
+                    <InputLabel htmlFor="instagram_username" value={t('Instagram')} />
                     <TextInput
                         id="instagram_username"
                         className="mt-1 block w-full"
@@ -100,7 +102,7 @@ export default function PublicInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="facebook_username" value="Facebook" />
+                    <InputLabel htmlFor="facebook_username" value={t('Facebook')} />
                     <TextInput
                         id="facebook_username"
                         className="mt-1 block w-full"
@@ -112,7 +114,7 @@ export default function PublicInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="logo" value="Logo" />
+                    <InputLabel htmlFor="logo" value={t('Logo')} />
                     {logo && typeof logo === 'string' && (
                         <div className="mt-2 mb-2 relative w-24 h-24">
                             <img
@@ -139,7 +141,7 @@ export default function PublicInfoForm({ className = '' }) {
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="cover" value="Cover" />
+                    <InputLabel htmlFor="cover" value={t('Cover')} />
                     {cover && typeof cover === 'string' && (
                         <div className="mt-2 mb-2 relative">
                             <img
@@ -166,7 +168,7 @@ export default function PublicInfoForm({ className = '' }) {
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
@@ -175,7 +177,7 @@ export default function PublicInfoForm({ className = '' }) {
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600">Saved.</p>
+                        <p className="text-sm text-gray-600">{t('Saved.')}</p>
                     </Transition>
                 </div>
             </form>
