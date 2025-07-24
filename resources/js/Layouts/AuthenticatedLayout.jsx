@@ -114,6 +114,15 @@ const navigationItems = [
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 5a2 2 0 012-2h4a2 2 0 012 2v2H8V5z" />
                 </svg>
             )
+        },
+        {
+            name: t('Statistics'),
+            href: 'statistics.index',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19V6m4 13V10m4 9V2M7 19V14M3 19v-4" />
+                </svg>
+            )
         }
     ];
 
