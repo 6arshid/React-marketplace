@@ -2,18 +2,6 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 import { useEffect } from 'react';
-import { Bar } from 'react-chartjs-2';
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    BarElement,
-    Title,
-    Tooltip,
-    Legend,
-} from 'chart.js';
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export default function Statistics({ topProducts = [], profileViews = [], labels = [] }) {
     const { t } = useTranslation();
@@ -21,18 +9,10 @@ export default function Statistics({ topProducts = [], profileViews = [], labels
         window.scrollTo({ top: 0, behavior: 'auto' });
     }, []);
 
-    const profileData = {
-        labels,
-        datasets: [
-            {
-                label: t('Profile Views'),
-                data: profileViews,
-                borderColor: 'rgb(75, 192, 192)',
-                backgroundColor: 'rgba(75, 192, 192, 0.5)',
-                tension: 0.3,
-            },
-        ],
-    };
+    const profileRows = labels.map((label, idx) => ({
+        date: label,
+        views: profileViews[idx] || 0,
+    }));
 
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">{t('Statistics')}</h2>}>
@@ -41,7 +21,22 @@ export default function Statistics({ topProducts = [], profileViews = [], labels
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8 space-y-8">
                     <div className="bg-white p-6 shadow-sm sm:rounded-lg">
                         <h3 className="text-lg font-semibold mb-4">{t('Profile Views')}</h3>
-                        <Bar data={profileData} options={{ responsive: true, maintainAspectRatio: false }} className="h-64" />
+                        <table className="min-w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th className="px-4 py-2 text-left">{t('Date')}</th>
+                                    <th className="px-4 py-2 text-right">{t('Views')}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {profileRows.map((row) => (
+                                    <tr key={row.date} className="border-b">
+                                        <td className="px-4 py-2">{row.date}</td>
+                                        <td className="px-4 py-2 text-right">{row.views}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                     <div className="bg-white p-6 shadow-sm sm:rounded-lg">
                         <h3 className="text-lg font-semibold mb-4">{t('Top 10 Products')}</h3>
