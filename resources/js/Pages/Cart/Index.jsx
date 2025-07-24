@@ -385,7 +385,7 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                     )}
 
                                     {/* Contact Options */}
-                                    {seller?.pro_panel && (
+                                    {seller?.pro_panel && requires_shipping && (
                                         <div className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 border border-gray-100">
                                             <h4 className="font-semibold text-gray-800 mb-4 text-center">{t('Contact Seller')}</h4>
                                             <div className="flex flex-wrap justify-center gap-4">
