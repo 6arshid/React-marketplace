@@ -12,7 +12,7 @@ class StoreController extends Controller
 {
     public function profile(User $user): Response
     {
-        $pages = $user->pages()->get(['id', 'title', 'slug']);
+        $pages = $user->pages()->latest()->get(['id', 'title', 'slug']);
         $categories = $user->categories()->get(['id', 'name', 'slug', 'icon']);
         $products = $user->products()->latest()->get(['id', 'title', 'slug', 'price', 'images']);
 
