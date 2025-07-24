@@ -6,6 +6,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import FileDropzone from '@/Components/FileDropzone';
 import { Head, useForm, Link } from '@inertiajs/react';
 import Editor from 'react-simple-wysiwyg';
+import { Inertia } from '@inertiajs/inertia';
 
 export default function Edit({ page }) {
     const { data, setData, put, processing, errors } = useForm({
@@ -14,10 +15,33 @@ export default function Edit({ page }) {
         images: page.images || [],
     });
 
-    const submit = (e) => {
-        e.preventDefault();
-        put(route('admin.pages.update', page.slug), { forceFormData: true });
-    };
+const submit = (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append('title', data.title);
+    formData.append('description', data.description);
+
+    if (Array.isArray(data.images)) {
+        data.images.forEach((file, i) => {
+            if (file instanceof File) {
+                formData.append(`images[${i}]`, file);
+            }
+        });
+    }
+
+    formData.append('_method', 'PUT');
+
+    Inertia.post(route('admin.pages.update', page.slug), formData, {
+        preserveScroll: true,
+        onError: (errors) => console.log(errors),
+        onSuccess: () => {
+            console.log('Page updated successfully!');
+        }
+    });
+};
+
 
     return (
         <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Edit Page</h2>}>
