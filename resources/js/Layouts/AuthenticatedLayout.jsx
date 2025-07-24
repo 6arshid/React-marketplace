@@ -188,15 +188,6 @@ const navigationItems = [
 
     navigationItems.push(
         {
-            name: t('Statistics'),
-            href: 'statistics.index',
-            icon: (
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 19V6m4 13V10m4 9V2M7 19V14M3 19v-4" />
-                </svg>
-            )
-        },
-        {
             name: t('Cart'),
             href: 'cart.show',
             badge: cart.count,

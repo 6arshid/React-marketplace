@@ -6,7 +6,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\ViewStatistic;
 
 class User extends Authenticatable
 {
@@ -123,8 +122,4 @@ class User extends Authenticatable
         return $this->hasMany(Page::class);
     }
 
-    public function viewStatistics()
-    {
-        return $this->hasMany(ViewStatistic::class);
-    }
 }

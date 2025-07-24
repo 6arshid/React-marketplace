@@ -74,10 +74,5 @@ class ProductTest extends TestCase
             'views' => 1,
         ]);
 
-        $this->assertDatabaseHas('view_statistics', [
-            'user_id' => $user->id,
-            'date' => now()->toDateString().' 00:00:00',
-            'product_views' => 1,
-        ]);
     }
 }
