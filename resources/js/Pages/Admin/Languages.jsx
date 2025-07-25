@@ -2,7 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 export default function Languages({ languages }) {
@@ -64,8 +64,13 @@ export default function Languages({ languages }) {
                                         <td className="px-3 py-2 text-sm text-gray-900">{l.name}</td>
                                         <td className="px-3 py-2 text-sm text-gray-900">{l.code}</td>
                                         <td className="px-3 py-2 text-sm text-gray-900">{l.direction}</td>
-                                        <td className="px-3 py-2 text-right">
-                                            <button onClick={() => deleteLanguage(l.id)} className="text-red-600 hover:underline">{t('Delete')}</button>
+                                        <td className="px-3 py-2 space-x-2 text-right">
+                                            <Link href={route('admin.languages.edit', l.id)} className="text-indigo-600 hover:underline">
+                                                {t('Edit')}
+                                            </Link>
+                                            <button onClick={() => deleteLanguage(l.id)} className="text-red-600 hover:underline">
+                                                {t('Delete')}
+                                            </button>
                                         </td>
                                     </tr>
                                 ))}

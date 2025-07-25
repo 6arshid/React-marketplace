@@ -130,6 +130,8 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
     Route::get('/languages', [AdminLanguageController::class, 'index'])->name('admin.languages.index');
     Route::post('/languages', [AdminLanguageController::class, 'store'])->name('admin.languages.store');
+    Route::get('/languages/{language}/edit', [AdminLanguageController::class, 'edit'])->name('admin.languages.edit');
+    Route::put('/languages/{language}', [AdminLanguageController::class, 'update'])->name('admin.languages.update');
     Route::delete('/languages/{language}', [AdminLanguageController::class, 'destroy'])->name('admin.languages.destroy');
 
     Route::get('/appearance', [AdminAppearanceController::class, 'edit'])->name('admin.appearance.edit');

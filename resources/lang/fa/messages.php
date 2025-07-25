@@ -39,6 +39,7 @@ return [
     'reserved_username_deleted' => 'نام کاربری رزرو شده با موفقیت حذف شد',
     'language_added' => 'زبان با موفقیت افزوده شد',
     'language_deleted' => 'زبان با موفقیت حذف شد',
+    'language_updated' => 'زبان با موفقیت به‌روزرسانی شد',
     'review_suspended' => 'دیدگاه با موفقیت تعلیق شد',
     'review_unsuspended' => 'تعلیق دیدگاه با موفقیت برداشته شد',
     'review_deleted' => 'دیدگاه با موفقیت حذف شد',
