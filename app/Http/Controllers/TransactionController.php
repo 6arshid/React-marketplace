@@ -15,6 +15,8 @@ class TransactionController extends Controller
 {
     public function index(Request $request): Response
     {
+        session()->flash('success', __('messages.transactions_loaded'));
+
         return Inertia::render('Transactions/Index', [
             'transactions' => $request->user()
                 ->transactions()

@@ -25,6 +25,8 @@ class SalesController extends Controller
             });
         }
 
+        session()->flash('success', __('messages.sales_loaded'));
+
         return Inertia::render('Sales/Index', [
             'orders' => $orders,
             'commission_percent' => $commissionPercent,

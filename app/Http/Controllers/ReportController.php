@@ -29,6 +29,6 @@ class ReportController extends Controller
             'evidence' => $path,
         ]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.report_submitted'));
     }
 }
