@@ -1,5 +1,6 @@
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import { Link, usePage } from '@inertiajs/react';
+import LanguageDropdown from "@/Components/LanguageDropdown";
 import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -449,6 +450,9 @@ const navigationItems = [
                     </div>
                 )}
 
+                <div className="px-4 pb-6">
+                    <LanguageDropdown />
+                </div>
             </aside>
 
             {/* Main Content */}
