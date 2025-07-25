@@ -164,6 +164,13 @@ export default function Index() {
             color: 'from-red-500 to-red-600'
         },
         {
+            href: route('admin.languages.index'),
+            label: t('Languages'),
+            icon: FileText,
+            description: t('Manage languages'),
+            color: 'from-indigo-400 to-indigo-500'
+        },
+        {
             href: route('admin.domains.index'),
             label: t('Domains'),
             icon: Map,

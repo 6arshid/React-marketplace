@@ -37,6 +37,8 @@ return [
     'user_unsuspended' => 'User unsuspended successfully',
     'reserved_username_added' => 'Reserved username added successfully',
     'reserved_username_deleted' => 'Reserved username deleted successfully',
+    'language_added' => 'Language added successfully',
+    'language_deleted' => 'Language deleted successfully',
     'review_suspended' => 'Review suspended successfully',
     'review_unsuspended' => 'Review unsuspended successfully',
     'review_deleted' => 'Review deleted successfully',
