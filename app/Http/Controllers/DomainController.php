@@ -27,6 +27,6 @@ class DomainController extends Controller
             'ns2' => $ns2,
         ]);
 
-        return redirect()->back();
+        return redirect()->back()->with('success', __('messages.domain_created'));
     }
 }

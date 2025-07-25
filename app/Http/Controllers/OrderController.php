@@ -32,7 +32,7 @@ class OrderController extends Controller
 
         $order->buyer->notify(new OrderStatusUpdated($order));
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.order_updated'));
     }
 
     public function downloads(Request $request): Response

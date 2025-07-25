@@ -28,20 +28,20 @@ class AdminReviewReportController extends Controller
     {
         $review->update(['suspended_at' => now()]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.review_suspended'));
     }
 
     public function unsuspend(Review $review): RedirectResponse
     {
         $review->update(['suspended_at' => null]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.review_unsuspended'));
     }
 
     public function destroy(Review $review): RedirectResponse
     {
         $review->delete();
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.review_deleted'));
     }
 }
