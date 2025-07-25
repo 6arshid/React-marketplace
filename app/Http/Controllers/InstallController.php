@@ -14,6 +14,11 @@ class InstallController extends Controller
         return inertia('Install');
     }
 
+    public function complete()
+    {
+        return inertia('Installed');
+    }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -65,6 +70,6 @@ class InstallController extends Controller
 
         File::put(storage_path('installed'), now()->toDateTimeString());
 
-        return redirect()->route('login')->with('status', 'Login using admin@admin.com / admin@admin.com and change your password.');
+        return redirect()->route('install.complete');
     }
 }

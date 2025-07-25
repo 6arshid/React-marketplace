@@ -38,6 +38,7 @@ use Inertia\Inertia;
 
 Route::get('/install', [InstallController::class, 'show'])->name('install');
 Route::post('/install', [InstallController::class, 'store'])->name('install.store');
+Route::get('/installed', [InstallController::class, 'complete'])->name('install.complete');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
