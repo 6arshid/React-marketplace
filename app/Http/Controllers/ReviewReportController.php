@@ -29,6 +29,6 @@ class ReviewReportController extends Controller
             'evidence' => $path,
         ]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.review_report_submitted'));
     }
 }

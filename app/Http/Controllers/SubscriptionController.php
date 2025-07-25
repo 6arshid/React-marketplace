@@ -84,7 +84,8 @@ class SubscriptionController extends Controller
             ]);
         }
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit')
+            ->with('success', __('messages.subscription_active'));
     }
 
     public function cancel(Request $request): RedirectResponse
@@ -96,6 +97,6 @@ class SubscriptionController extends Controller
             'pro_panel_expires_at' => null,
         ]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.subscription_cancelled'));
     }
 }

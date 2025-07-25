@@ -45,7 +45,8 @@ class SellerPageController extends Controller
 
         $request->user()->pages()->create($data);
 
-        return Redirect::route('seller.pages.index');
+        return Redirect::route('seller.pages.index')
+            ->with('success', __('messages.page_created'));
     }
 
     public function edit(Page $page): Response
@@ -79,13 +80,15 @@ class SellerPageController extends Controller
 
         $page->update($data);
 
-        return Redirect::route('seller.pages.index');
+        return Redirect::route('seller.pages.index')
+            ->with('success', __('messages.page_updated'));
     }
 
     public function destroy(Page $page)
     {
         $page->delete();
-        return Redirect::route('seller.pages.index');
+        return Redirect::route('seller.pages.index')
+            ->with('success', __('messages.page_deleted'));
     }
 
 }

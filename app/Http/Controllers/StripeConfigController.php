@@ -30,6 +30,7 @@ class StripeConfigController extends Controller
 
         StripeConfig::updateOrCreate(['id' => 1], $data);
 
-        return Redirect::route('admin.stripe.edit');
+        return Redirect::route('admin.stripe.edit')
+            ->with('success', __('messages.stripe_config_updated'));
     }
 }
