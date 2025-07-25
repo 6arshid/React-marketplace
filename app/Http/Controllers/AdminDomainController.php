@@ -35,14 +35,16 @@ class AdminDomainController extends Controller
     {
         $domain->update(['status' => 'approved']);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.domain_approved'));
     }
 
     public function reject(Domain $domain): RedirectResponse
     {
         $domain->update(['status' => 'rejected']);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.domain_rejected'));
     }
 
     public function update(Domain $domain, Request $request): RedirectResponse
@@ -54,14 +56,16 @@ class AdminDomainController extends Controller
 
         $domain->update($validated);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.domain_updated'));
     }
 
     public function destroy(Domain $domain): RedirectResponse
     {
         $domain->delete();
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.domain_deleted'));
     }
 
     public function updateDefaults(Request $request): RedirectResponse
@@ -74,6 +78,7 @@ class AdminDomainController extends Controller
         Setting::updateOrCreate(['key' => 'default_ns1'], ['value' => $data['ns1']]);
         Setting::updateOrCreate(['key' => 'default_ns2'], ['value' => $data['ns2']]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.domain_defaults_updated'));
     }
 }

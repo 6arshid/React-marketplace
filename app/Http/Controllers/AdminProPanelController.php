@@ -34,7 +34,8 @@ class AdminProPanelController extends Controller
 
         StripeConfig::updateOrCreate(['id' => 1], $data);
 
-        return Redirect::route('admin.pro-panel.index');
+        return Redirect::route('admin.pro-panel.index')
+            ->with('success', __('messages.pro_config_updated'));
     }
 
     public function saveUser(Request $request): RedirectResponse
@@ -50,7 +51,8 @@ class AdminProPanelController extends Controller
             'pro_panel_expires_at' => $validated['expires_at'],
         ]);
 
-        return Redirect::route('admin.pro-panel.index');
+        return Redirect::route('admin.pro-panel.index')
+            ->with('success', __('messages.pro_user_saved'));
     }
 
     public function disable(User $user): RedirectResponse
@@ -60,6 +62,7 @@ class AdminProPanelController extends Controller
             'pro_panel_expires_at' => null,
         ]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.pro_user_disabled'));
     }
 }

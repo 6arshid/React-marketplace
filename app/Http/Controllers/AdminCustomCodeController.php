@@ -30,6 +30,7 @@ class AdminCustomCodeController extends Controller
         Setting::updateOrCreate(['key' => 'custom_css'], ['value' => $data['custom_css'] ?? '']);
         Setting::updateOrCreate(['key' => 'custom_js'], ['value' => $data['custom_js'] ?? '']);
 
-        return Redirect::route('admin.custom-code.edit');
+        return Redirect::route('admin.custom-code.edit')
+            ->with('success', __('messages.custom_code_updated'));
     }
 }

@@ -87,7 +87,8 @@ class AdminGeneralConfigController extends Controller
 
         $this->updateEnvFile($data);
 
-        return Redirect::route('admin.general-config.edit');
+        return Redirect::route('admin.general-config.edit')
+            ->with('success', __('messages.general_config_updated'));
     }
 
     private function updateEnvFile(array $data): void

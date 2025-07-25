@@ -26,13 +26,15 @@ class AdminReservedUsernameController extends Controller
 
         ReservedUsername::create(['username' => strtolower($validated['username'])]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.reserved_username_added'));
     }
 
     public function destroy(ReservedUsername $reservedUsername): RedirectResponse
     {
         $reservedUsername->delete();
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.reserved_username_deleted'));
     }
 }
