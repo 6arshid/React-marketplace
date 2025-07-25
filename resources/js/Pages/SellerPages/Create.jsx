@@ -8,6 +8,43 @@ import { Head, useForm, Link } from '@inertiajs/react';
 import Editor from 'react-simple-wysiwyg';
 import { useTranslation } from 'react-i18next';
 
+// Custom SVG Icons - Mobile Responsive
+const PageIcon = () => (
+    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+);
+
+const TitleIcon = () => (
+    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h7" />
+    </svg>
+);
+
+const DescriptionIcon = () => (
+    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    </svg>
+);
+
+const ImageIcon = () => (
+    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+    </svg>
+);
+
+const SaveIcon = () => (
+    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+    </svg>
+);
+
+const BackIcon = () => (
+    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+    </svg>
+);
+
 export default function Create() {
     const { t } = useTranslation();
     const { data, setData, post, processing, errors } = useForm({
@@ -22,31 +59,123 @@ export default function Create() {
     };
 
     return (
-        <AuthenticatedLayout header={<h2 className="text-xl font-semibold leading-tight text-gray-800">{t('New Page')}</h2>}>
+        <AuthenticatedLayout 
+            header={
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                    <div className="p-1.5 sm:p-2 bg-gradient-to-r from-green-500 to-emerald-600 rounded-lg text-white">
+                        <PageIcon />
+                    </div>
+                    <h2 className="text-lg sm:text-xl font-semibold leading-tight text-gray-800">
+                        {t('New Page')}
+                    </h2>
+                </div>
+            }
+        >
             <Head title={t('New Page')} />
-            <div className="py-8">
-                <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                    <form onSubmit={submit} className="space-y-6" encType="multipart/form-data">
-                        <div>
-                            <InputLabel htmlFor="title" value={t('Title')} />
-                            <TextInput id="title" value={data.title} className="mt-1 block w-full" onChange={e=>setData('title', e.target.value)} />
-                            <InputError message={errors.title} className="mt-2" />
+            
+            <div className="min-h-screen bg-gradient-to-br from-slate-50 via-green-50 to-emerald-100 py-4 sm:py-8">
+                <div className="mx-auto max-w-4xl px-3 sm:px-4 lg:px-8">
+                    <div className="bg-white/80 backdrop-blur-sm rounded-xl sm:rounded-2xl shadow-xl sm:shadow-2xl border border-white/20 overflow-hidden">
+                        <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-4 sm:px-8 py-4 sm:py-6">
+                            <h3 className="text-white text-base sm:text-lg font-semibold flex items-center space-x-2">
+                                <PageIcon />
+                                <span>{t('Page Information')}</span>
+                            </h3>
                         </div>
-                        <div>
-                            <InputLabel htmlFor="description" value={t('Description')} />
-                            <Editor id="description" value={data.description} onChange={e=>setData('description', e.target.value)} containerProps={{className:'min-h-[120px] border rounded'}} />
-                            <InputError message={errors.description} className="mt-2" />
-                        </div>
-                        <div>
-                            <InputLabel htmlFor="images" value={t('Images')} />
-                            <FileDropzone name="images" multiple value={data.images} onChange={f=>setData('images', f)} />
-                            <InputError message={errors.images} className="mt-2" />
-                        </div>
-                        <div className="flex justify-between">
-                            <Link href={route('seller.pages.index')} className="text-gray-600 hover:underline">{t('Cancel')}</Link>
-                            <PrimaryButton disabled={processing}>{t('Save')}</PrimaryButton>
-                        </div>
-                    </form>
+
+                        <form onSubmit={submit} className="p-4 sm:p-8 space-y-6 sm:space-y-8" encType="multipart/form-data">
+                            {/* Basic Information Section */}
+                            <div className="space-y-4 sm:space-y-6">
+                                <h4 className="text-base sm:text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
+                                    <TitleIcon />
+                                    <span>{t('Basic Information')}</span>
+                                </h4>
+                                
+                                <div>
+                                    <InputLabel 
+                                        htmlFor="title" 
+                                        value={t('Page Title')}
+                                        className="flex items-center space-x-2 text-gray-700 font-medium mb-2 text-sm sm:text-base"
+                                    />
+                                    <div className="relative">
+                                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                            <TitleIcon />
+                                        </div>
+                                        <TextInput 
+                                            id="title" 
+                                            value={data.title} 
+                                            className="pl-8 sm:pl-10 w-full rounded-lg sm:rounded-xl border-gray-200 focus:border-green-500 focus:ring-green-500 transition-all duration-200 bg-gray-50 focus:bg-white text-sm sm:text-base py-2.5 sm:py-3" 
+                                            onChange={(e) => setData('title', e.target.value)}
+                                            placeholder={t('Enter page title...')}
+                                        />
+                                    </div>
+                                    <InputError message={errors.title} className="mt-2 text-red-500 text-sm" />
+                                </div>
+
+                                <div>
+                                    <InputLabel 
+                                        htmlFor="description" 
+                                        value={t('Page Content')}
+                                        className="flex items-center space-x-2 text-gray-700 font-medium mb-2 text-sm sm:text-base"
+                                    />
+                                    <Editor
+                                        id="description"
+                                        value={data.description}
+                                        onChange={(e) => setData('description', e.target.value)}
+                                        placeholder={t('Write your page content...')}
+                                        containerProps={{
+                                            className:
+                                                'w-full rounded-lg sm:rounded-xl border-gray-200 focus:border-green-500 focus:ring-green-500 transition-all duration-200 bg-gray-50 focus:bg-white min-h-[120px] sm:min-h-[150px]'
+                                        }}
+                                    />
+                                    <InputError message={errors.description} className="mt-2 text-red-500 text-sm" />
+                                </div>
+                            </div>
+
+                            {/* Images Section */}
+                            <div className="space-y-4 sm:space-y-6">
+                                <h4 className="text-base sm:text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
+                                    <ImageIcon />
+                                    <span>{t('Page Images')}</span>
+                                </h4>
+                                
+                                <div>
+                                    <InputLabel 
+                                        htmlFor="images" 
+                                        value={t('Upload Images')}
+                                        className="flex items-center space-x-2 text-gray-700 font-medium mb-2 text-sm sm:text-base"
+                                    />
+                                    <FileDropzone
+                                        name="images"
+                                        multiple
+                                        value={data.images}
+                                        onChange={(files) => setData('images', files)}
+                                        className="rounded-lg sm:rounded-xl border-2 border-dashed border-gray-300 hover:border-green-400 transition-colors duration-200"
+                                    />
+                                    <InputError message={errors.images} className="mt-2 text-red-500 text-sm" />
+                                </div>
+                            </div>
+
+                            {/* Action Buttons - Mobile Responsive */}
+                            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between pt-6 sm:pt-8 border-t border-gray-200 space-y-3 sm:space-y-0 sm:space-x-4">
+                                <Link 
+                                    href={route('seller.pages.index')} 
+                                    className="flex items-center justify-center space-x-2 px-4 sm:px-6 py-3 bg-gray-100 text-gray-700 rounded-lg sm:rounded-xl hover:bg-gray-200 transition-all duration-200 border border-gray-200 text-sm sm:text-base order-2 sm:order-1"
+                                >
+                                    <BackIcon />
+                                    <span>{t('Cancel')}</span>
+                                </Link>
+                                
+                                <PrimaryButton 
+                                    disabled={processing} 
+                                    className="flex items-center justify-center space-x-2 px-6 sm:px-8 py-3 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white rounded-lg sm:rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base order-1 sm:order-2"
+                                >
+                                    <SaveIcon />
+                                    <span>{processing ? t('Saving...') : t('Save Page')}</span>
+                                </PrimaryButton>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </AuthenticatedLayout>

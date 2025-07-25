@@ -7,8 +7,22 @@ import AcceptRejectButtons from './Partials/AcceptRejectButtons';
 import SearchBar from '@/Components/SearchBar';
 import Pagination from '@/Components/Pagination';
 
+// Custom SVG Icons - Mobile Responsive
+const DashboardIcon = () => (
+    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+    </svg>
+);
+
+const ClockIcon = () => (
+    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
+        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+    </svg>
+);
+
 export default function Index({ orders, commission_percent }) {
     const { t } = useTranslation();
+    
     const formatAmount = (amount) => {
         return new Intl.NumberFormat('en-US', {
             style: 'currency',
@@ -47,79 +61,83 @@ export default function Index({ orders, commission_percent }) {
     return (
         <AuthenticatedLayout 
             header={
-                <div className="flex items-center justify-between">
-                    <h2 className="text-2xl font-bold text-gray-900 tracking-tight">{t('Sales Dashboard')}</h2>
-                    <div className="flex items-center space-x-2 text-sm text-gray-500">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                        </svg>
-                        <span>{t('Last updated: just now')}</span>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-2 sm:space-y-0">
+                    <div className="flex items-center space-x-2 sm:space-x-3">
+                        <div className="p-1.5 sm:p-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg">
+                            <DashboardIcon />
+                        </div>
+                        <h2 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 tracking-tight">{t('Sales Dashboard')}</h2>
+                    </div>
+                    <div className="flex items-center space-x-2 text-xs sm:text-sm text-gray-500">
+                        <ClockIcon />
+                        <span className="hidden sm:inline">{t('Last updated: just now')}</span>
+                        <span className="sm:hidden">{t('Updated now')}</span>
                     </div>
                 </div>
             }
         >
             <Head title={t('Sales Dashboard')} />
             
-            <div className="py-8">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    {/* Stats Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-600">{t('Total Orders')}</p>
-                                    <p className="text-3xl font-bold text-gray-900">{orders.length}</p>
+            <div className="py-4 sm:py-8">
+                <div className="mx-auto max-w-7xl px-3 sm:px-4 lg:px-8">
+                    {/* Stats Cards - Mobile Responsive */}
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
+                        <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-sm border border-gray-100 p-3 sm:p-6 hover:shadow-md transition-shadow duration-200">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{t('Total Orders')}</p>
+                                    <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900">{orders.length}</p>
                                 </div>
-                                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-50 rounded-lg sm:rounded-xl flex items-center justify-center mt-2 sm:mt-0 sm:ml-3 flex-shrink-0">
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                     </svg>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-600">{t('Total Revenue')}</p>
-                                    <p className="text-3xl font-bold text-gray-900">
+                        <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-sm border border-gray-100 p-3 sm:p-6 hover:shadow-md transition-shadow duration-200">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{t('Total Revenue')}</p>
+                                    <p className="text-sm sm:text-lg lg:text-2xl xl:text-3xl font-bold text-gray-900">
                                         {formatAmount(orders.reduce((sum, order) => sum + (order.net_amount || order.amount), 0))}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 bg-emerald-50 rounded-xl flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-emerald-50 rounded-lg sm:rounded-xl flex items-center justify-center mt-2 sm:mt-0 sm:ml-3 flex-shrink-0">
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
                                     </svg>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-600">{t('Pending Orders')}</p>
-                                    <p className="text-3xl font-bold text-gray-900">
+                        <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-sm border border-gray-100 p-3 sm:p-6 hover:shadow-md transition-shadow duration-200">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{t('Pending Orders')}</p>
+                                    <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900">
                                         {orders.filter(o => o.status?.toLowerCase() === 'pending').length}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 bg-amber-50 rounded-xl flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-amber-50 rounded-lg sm:rounded-xl flex items-center justify-center mt-2 sm:mt-0 sm:ml-3 flex-shrink-0">
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow duration-200">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-600">{t('Completed')}</p>
-                                    <p className="text-3xl font-bold text-gray-900">
+                        <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-sm border border-gray-100 p-3 sm:p-6 hover:shadow-md transition-shadow duration-200">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{t('Completed')}</p>
+                                    <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900">
                                         {orders.filter(o => o.status?.toLowerCase() === 'delivered').length}
                                     </p>
                                 </div>
-                                <div className="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center">
-                                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div className="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-purple-50 rounded-lg sm:rounded-xl flex items-center justify-center mt-2 sm:mt-0 sm:ml-3 flex-shrink-0">
+                                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </svg>
                                 </div>
@@ -127,20 +145,123 @@ export default function Index({ orders, commission_percent }) {
                         </div>
                     </div>
 
-                    {/* Main Table */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                        <div className="px-6 py-4 border-b border-gray-100">
-                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                                <h3 className="text-lg font-semibold text-gray-900">{t('Recent Orders')}</h3>
-                                <SearchBar value={search} onChange={setSearch} placeholder={t('Search orders')} />
+                    {/* Main Content - Mobile Responsive */}
+                    <div className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+                        <div className="px-4 sm:px-6 py-4 border-b border-gray-100">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+                                <h3 className="text-base sm:text-lg font-semibold text-gray-900">{t('Recent Orders')}</h3>
+                                <div className="w-full sm:w-auto">
+                                    <SearchBar 
+                                        value={search} 
+                                        onChange={setSearch} 
+                                        placeholder={t('Search orders')}
+                                        className="w-full"
+                                    />
+                                </div>
                             </div>
                         </div>
 
-                        <div className="overflow-x-auto">
+                        {/* Mobile Card View */}
+                        <div className="lg:hidden">
+                            {paginatedOrders.length > 0 ? (
+                                <div className="divide-y divide-gray-200">
+                                    {paginatedOrders.map((order, index) => (
+                                        <div key={order.id} className="p-4 hover:bg-gray-50 transition-colors duration-200">
+                                            <div className="flex items-start justify-between mb-3">
+                                                <div className="flex items-center space-x-3">
+                                                    <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold">
+                                                        #{(currentPage - 1) * 10 + index + 1}
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-sm font-semibold text-gray-900">
+                                                            {order.tracking_code}
+                                                        </div>
+                                                        <div className="text-xs text-gray-500">
+                                                            ID: {order.id}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div className="text-right">
+                                                    <div className="text-sm font-bold text-gray-900">
+                                                        {formatAmount(order.net_amount ?? order.amount)}
+                                                    </div>
+                                                    {order.net_amount && order.amount !== order.net_amount && (
+                                                        <div className="text-xs text-gray-500 line-through">
+                                                            {formatAmount(order.amount)}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            <div className="space-y-2">
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-gray-500">{t('Customer')}:</span>
+                                                    <div className="flex items-center space-x-2">
+                                                        <div className="w-6 h-6 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white text-xs font-semibold">
+                                                            {order.buyer.name.charAt(0).toUpperCase()}
+                                                        </div>
+                                                        <span className="text-sm font-medium text-gray-900">{order.buyer.name}</span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center justify-between">
+                                                    <span className="text-xs text-gray-500">{t('Payment')}:</span>
+                                                    {order.buyer_wallet ? (
+                                                        <div className="flex items-center space-x-1">
+                                                            <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                                                            <span className="text-xs font-mono text-gray-900">
+                                                                {order.buyer_wallet.slice(0, 6)}...{order.buyer_wallet.slice(-4)}
+                                                            </span>
+                                                        </div>
+                                                    ) : (
+                                                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                                            {t('No wallet')}
+                                                        </span>
+                                                    )}
+                                                </div>
+
+                                                {order.shipping_info && (
+                                                    <div className="flex items-start justify-between">
+                                                        <span className="text-xs text-gray-500">{t('Shipping')}:</span>
+                                                        <div className="text-right max-w-[200px]">
+                                                            <div className="text-xs font-medium text-gray-900">
+                                                                {order.shipping_info.first_name} {order.shipping_info.last_name}
+                                                            </div>
+                                                            <div className="text-xs text-gray-500 truncate">
+                                                                {order.shipping_info.address}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+
+                                            <div className="mt-3 pt-3 border-t border-gray-100">
+                                                {order.status === 'pending' && order.buyer_wallet ? (
+                                                    <AcceptRejectButtons order={order} />
+                                                ) : (
+                                                    <UpdateStatusForm order={order} />
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            ) : (
+                                <div className="text-center py-8">
+                                    <svg className="mx-auto h-8 w-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                    </svg>
+                                    <h3 className="mt-2 text-sm font-medium text-gray-900">{t('No orders found')}</h3>
+                                    <p className="mt-1 text-xs text-gray-500">{t('Try adjusting your search criteria.')}</p>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Desktop Table View */}
+                        <div className="hidden lg:block overflow-x-auto">
                             <table className="min-w-full divide-y divide-gray-200">
                                 <thead className="bg-gray-50/50">
                                     <tr>
-                                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             <div className="flex items-center space-x-1">
                                                 <span>{t('Order')}</span>
                                                 <svg className="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -148,19 +269,19 @@ export default function Index({ orders, commission_percent }) {
                                                 </svg>
                                             </div>
                                         </th>
-                                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             {t('Amount')}
                                         </th>
-                                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             {t('Status')}
                                         </th>
-                                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             {t('Customer')}
                                         </th>
-                                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             {t('Payment')}
                                         </th>
-                                        <th className="px-6 py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                        <th className="px-4 xl:px-6 py-3 xl:py-4 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
                                             {t('Shipping')}
                                         </th>
                                     </tr>
@@ -168,7 +289,7 @@ export default function Index({ orders, commission_percent }) {
                                 <tbody className="divide-y divide-gray-100">
                                     {paginatedOrders.map((order, index) => (
                                         <tr key={order.id} className="hover:bg-gray-50/50 transition-colors duration-150">
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-4 xl:px-6 py-3 xl:py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
                                                     <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white text-xs font-bold mr-3">
                                                         #{(currentPage - 1) * 10 + index + 1}
@@ -183,7 +304,7 @@ export default function Index({ orders, commission_percent }) {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-4 xl:px-6 py-3 xl:py-4 whitespace-nowrap">
                                                 <div className="text-sm font-bold text-gray-900">
                                                     {formatAmount(order.net_amount ?? order.amount)}
                                                 </div>
@@ -193,14 +314,14 @@ export default function Index({ orders, commission_percent }) {
                                                     </div>
                                                 )}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-4 xl:px-6 py-3 xl:py-4 whitespace-nowrap">
                                                 {order.status === 'pending' && order.buyer_wallet ? (
                                                     <AcceptRejectButtons order={order} />
                                                 ) : (
                                                     <UpdateStatusForm order={order} />
                                                 )}
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-4 xl:px-6 py-3 xl:py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
                                                     <div className="w-8 h-8 bg-gradient-to-r from-gray-400 to-gray-600 rounded-full flex items-center justify-center text-white text-xs font-semibold mr-3">
                                                         {order.buyer.name.charAt(0).toUpperCase()}
@@ -215,7 +336,7 @@ export default function Index({ orders, commission_percent }) {
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
+                                            <td className="px-4 xl:px-6 py-3 xl:py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
                                                     {order.buyer_wallet ? (
                                                         <div className="flex items-center">
@@ -231,7 +352,7 @@ export default function Index({ orders, commission_percent }) {
                                                     )}
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4">
+                                            <td className="px-4 xl:px-6 py-3 xl:py-4">
                                                 <div className="max-w-xs">
                                                     {order.shipping_info ? (
                                                         <div>
@@ -253,23 +374,25 @@ export default function Index({ orders, commission_percent }) {
                             </table>
                         </div>
 
-                        {/* Footer */}
-                        <div className="bg-gray-50/50 px-6 py-4 border-t border-gray-200">
-                            <div className="flex items-center justify-between">
-                                <div className="flex items-center text-sm text-gray-600 flex-wrap gap-2">
+                        {/* Footer - Mobile Responsive */}
+                        <div className="bg-gray-50/50 px-4 sm:px-6 py-4 border-t border-gray-200">
+                            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between space-y-3 lg:space-y-0">
+                                <div className="flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm text-gray-600 gap-2 sm:gap-4">
                                     <span>{t('Showing {{count}} orders', { count: filteredOrders.length })}</span>
                                     {commission_percent > 0 && (
-                                        <div className="ml-6 flex items-center">
-                                            <svg className="w-4 h-4 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                        <div className="flex items-center">
+                                            <svg className="w-3 h-3 sm:w-4 sm:h-4 text-blue-500 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                                 <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
                                             </svg>
                                             <span className="text-blue-700 font-medium">
-                                                {t('{{percent}}% commission deducted from displayed amounts', { percent: commission_percent })}
+                                                {t('{{percent}}% commission deducted', { percent: commission_percent })}
                                             </span>
                                         </div>
                                     )}
                                 </div>
-                                <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                                {totalPages > 1 && (
+                                    <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={setCurrentPage} />
+                                )}
                             </div>
                         </div>
                     </div>
