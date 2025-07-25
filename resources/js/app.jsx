@@ -5,6 +5,7 @@ import './i18n';
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
+import { registerSW } from 'virtual:pwa-register';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
@@ -24,3 +25,5 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+
+registerSW();
