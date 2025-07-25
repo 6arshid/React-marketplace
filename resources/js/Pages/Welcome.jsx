@@ -26,7 +26,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
     const features = [
         {
             title: t('Custom Profile URLs'),
-            description: t('Build your online store with your own profile at /username'),
+            description: t('Add a custom domain to your profile for professional branding'),
             icon: "🏪",
             gradient: "from-purple-500 to-pink-500"
         },
@@ -272,7 +272,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 {[
                                     {
                                         title: t('Custom Profile URLs'),
-                                        description: t('Get your unique /username profile for professional branding'),
+                                        description: t('Add a custom domain to your profile for professional branding'),
                                         icon: "🔗"
                                     },
                                     {
