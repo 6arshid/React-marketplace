@@ -27,7 +27,7 @@ export default function UpdateProfileInformation({
     useEffect(() => {
         if (data.username === user.username) {
             setUsernameStatus('self');
-        } else if (data.username && data.username.length >= 5) {
+        } else if (data.username && data.username.length >= 4) {
             setUsernameStatus('checking');
             fetch(route('username.check', { username: data.username }))
                 .then((res) => res.json())
