@@ -1,5 +1,7 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { usePage } from '@inertiajs/react';
+import { useTranslation } from 'react-i18next';
+import Modal from '@/Components/Modal';
 import i18n from '@/i18n';
 
 const flagIcons = {
@@ -20,34 +22,22 @@ const flagIcons = {
 };
 
 export default function LanguageDropdown({ className = '' }) {
+    const { t } = useTranslation();
     const languages = usePage().props.languages || [];
     const [open, setOpen] = useState(false);
-    const ref = useRef(null);
-
-    const toggle = () => setOpen((o) => !o);
 
     const changeLanguage = (code) => {
         i18n.changeLanguage(code);
         setOpen(false);
     };
 
-    useEffect(() => {
-        function handleClick(e) {
-            if (ref.current && !ref.current.contains(e.target)) {
-                setOpen(false);
-            }
-        }
-        document.addEventListener('mousedown', handleClick);
-        return () => document.removeEventListener('mousedown', handleClick);
-    }, []);
-
     const current = i18n.language;
 
     return (
-        <div className={`relative ${className}`} ref={ref}>
+        <div className={className}>
             <button
                 type="button"
-                onClick={toggle}
+                onClick={() => setOpen(true)}
                 className="p-2 rounded hover:bg-gray-100 text-gray-600 flex items-center"
             >
                 {flagIcons[current] || (
@@ -56,25 +46,37 @@ export default function LanguageDropdown({ className = '' }) {
                     </svg>
                 )}
             </button>
-            {open && (
-                <div className="absolute bottom-full mb-2 left-0 bg-white text-gray-700 rounded shadow-lg py-1 z-50">
-                    {languages.map((l) => (
+            <Modal show={open} onClose={() => setOpen(false)}>
+                <div className="p-6 space-y-4">
+                    <h3 className="text-lg font-semibold text-gray-900">{t('Languages')}</h3>
+                    <div className="space-y-2">
+                        {languages.map((l) => (
+                            <button
+                                key={l.code}
+                                type="button"
+                                onClick={() => changeLanguage(l.code)}
+                                className="flex items-center px-3 py-2 hover:bg-gray-100 w-full text-sm rounded"
+                            >
+                                {flagIcons[l.code] || (
+                                    <span className="w-5 h-5 flex items-center justify-center font-bold uppercase">
+                                        {l.code}
+                                    </span>
+                                )}
+                                <span className="ml-2">{l.name}</span>
+                            </button>
+                        ))}
+                    </div>
+                    <div className="flex justify-end">
                         <button
-                            key={l.code}
                             type="button"
-                            onClick={() => changeLanguage(l.code)}
-                            className="flex items-center px-3 py-2 hover:bg-gray-100 w-full text-sm"
+                            onClick={() => setOpen(false)}
+                            className="px-4 py-2 bg-gray-100 rounded"
                         >
-                            {flagIcons[l.code] || (
-                                <span className="w-5 h-5 flex items-center justify-center font-bold uppercase">
-                                    {l.code}
-                                </span>
-                            )}
-                            <span className="ml-2">{l.name}</span>
+                            {t('Cancel')}
                         </button>
-                    ))}
+                    </div>
                 </div>
-            )}
+            </Modal>
         </div>
     );
 }
