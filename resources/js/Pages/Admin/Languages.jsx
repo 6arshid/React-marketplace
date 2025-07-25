@@ -2,6 +2,8 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
+import FileDropzone from '@/Components/FileDropzone';
+import InputError from '@/Components/InputError';
 import { Head, useForm, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
@@ -11,13 +13,15 @@ export default function Languages({ languages }) {
         name: '',
         code: '',
         direction: 'ltr',
+        flag: null,
     });
 
     const submit = (e) => {
         e.preventDefault();
         post(route('admin.languages.store'), {
             preserveScroll: true,
-            onSuccess: () => reset('name', 'code', 'direction'),
+            forceFormData: true,
+            onSuccess: () => reset('name', 'code', 'direction', 'flag'),
         });
     };
 
@@ -30,7 +34,7 @@ export default function Languages({ languages }) {
             <Head title={t('Languages')} />
             <div className="py-12">
                 <div className="mx-auto max-w-7xl space-y-4 sm:px-6 lg:px-8">
-                    <form onSubmit={submit} className="bg-white p-4 shadow sm:rounded-lg space-y-2">
+                    <form onSubmit={submit} className="bg-white p-4 shadow sm:rounded-lg space-y-2" encType="multipart/form-data">
                         <div>
                             <InputLabel htmlFor="name" value={t('Language Name')} />
                             <TextInput id="name" value={data.name} className="mt-1 block w-full" onChange={(e) => setData('name', e.target.value)} required />
@@ -45,6 +49,11 @@ export default function Languages({ languages }) {
                                 <option value="ltr">{t('LTR')}</option>
                                 <option value="rtl">{t('RTL')}</option>
                             </select>
+                        </div>
+                        <div>
+                            <InputLabel htmlFor="flag" value={t('Flag')} />
+                            <FileDropzone name="flag" value={data.flag} onChange={f => setData('flag', f)} />
+                            <InputError message={errors.flag} className="mt-2" />
                         </div>
                         <PrimaryButton disabled={processing}>{t('Add')}</PrimaryButton>
                     </form>
