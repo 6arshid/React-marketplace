@@ -1,11 +1,11 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 
 class InstallController extends Controller
 {
@@ -49,11 +49,21 @@ class InstallController extends Controller
             DB::unprepared(File::get($sqlFile));
         }
 
-        // Create storage link if it doesn't exist
-        $publicStorage = public_path('storage');
-        if (!file_exists($publicStorage)) {
-            symlink(storage_path('app/public'), $publicStorage);
+        // create public/storage symlink if it doesn't exist
+        $storageLink = public_path('storage');
+        if (! File::exists($storageLink)) {
+            try {
+                @symlink(storage_path('app/public'), $storageLink);
+            } catch (\Throwable $e) {
+                if (function_exists('exec')) {
+                    Artisan::call('storage:link');
+                } else {
+                    File::copyDirectory(storage_path('app/public'), $storageLink);
+                }
+            }
         }
+
+        File::put(storage_path('installed'), now()->toDateTimeString());
 
         return redirect()->route('login')->with('status', 'Login using admin@admin.com / admin@admin.com and change your password.');
     }
