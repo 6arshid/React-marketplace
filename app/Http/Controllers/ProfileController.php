@@ -43,7 +43,8 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit');
+        return Redirect::route('profile.edit')
+            ->with('success', __('messages.profile_updated'));
     }
 
     /**
@@ -59,7 +60,8 @@ class ProfileController extends Controller
 
         $request->user()->update($validated);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.settlement_updated'));
     }
 
     /**
@@ -92,7 +94,8 @@ class ProfileController extends Controller
 
         $request->user()->update($validated);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.contact_updated'));
     }
 
     public function updateLogo(Request $request): RedirectResponse
@@ -109,7 +112,8 @@ class ProfileController extends Controller
 
         $request->user()->update(['logo' => $path]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.logo_updated'));
     }
 
     public function updateCover(Request $request): RedirectResponse
@@ -126,7 +130,8 @@ class ProfileController extends Controller
 
         $request->user()->update(['cover' => $path]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.cover_updated'));
     }
 
     public function deleteLogo(Request $request): RedirectResponse
@@ -136,7 +141,8 @@ class ProfileController extends Controller
             $request->user()->update(['logo' => null]);
         }
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.logo_deleted'));
     }
 
     public function deleteCover(Request $request): RedirectResponse
@@ -146,21 +152,24 @@ class ProfileController extends Controller
             $request->user()->update(['cover' => null]);
         }
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.cover_deleted'));
     }
 
     public function becomeSeller(Request $request): RedirectResponse
     {
         $request->user()->update(['is_seller' => true]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.become_seller'));
     }
 
     public function becomeBuyer(Request $request): RedirectResponse
     {
         $request->user()->update(['is_seller' => false]);
 
-        return Redirect::back();
+        return Redirect::back()
+            ->with('success', __('messages.become_buyer'));
     }
 
     /**
@@ -181,6 +190,7 @@ class ProfileController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return Redirect::to('/');
+        return Redirect::to('/')
+            ->with('success', __('messages.account_deleted'));
     }
 }
