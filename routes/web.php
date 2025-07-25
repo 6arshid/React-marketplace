@@ -29,11 +29,15 @@ use App\Http\Controllers\AdminGeneralConfigController;
 use App\Http\Controllers\AdminCustomCodeController;
 use App\Http\Controllers\AdminSitemapController;
 use App\Http\Controllers\AdminUserController;
+use App\Http\Controllers\InstallController;
 use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+
+Route::get('/install', [InstallController::class, 'show'])->name('install');
+Route::post('/install', [InstallController::class, 'store'])->name('install.store');
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
