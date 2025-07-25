@@ -22,7 +22,7 @@ export default function Register() {
     const [usernameStatus, setUsernameStatus] = useState(null);
 
     useEffect(() => {
-        if (data.username && data.username.length >= 5) {
+        if (data.username && data.username.length >= 4) {
             setUsernameStatus('checking');
             fetch(route('username.check', { username: data.username }))
                 .then((res) => res.json())

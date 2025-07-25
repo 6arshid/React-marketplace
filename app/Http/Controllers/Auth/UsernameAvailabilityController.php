@@ -15,7 +15,7 @@ class UsernameAvailabilityController extends Controller
     public function __invoke(Request $request)
     {
         $request->validate([
-            'username' => 'required|string|min:5',
+            'username' => 'required|string|min:4',
         ]);
 
         $reserved = ReservedUsername::where('username', $request->username)->exists();

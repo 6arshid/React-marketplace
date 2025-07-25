@@ -21,7 +21,7 @@ class ProfileUpdateRequest extends FormRequest
                 'sometimes',
                 'required',
                 'string',
-                'min:5',
+                'min:4',
                 Rule::unique(User::class, 'username')->ignore($this->user()->id),
                 Rule::notIn(ReservedUsername::pluck('username')),
             ],
