@@ -306,7 +306,7 @@ export default function AuthenticatedLayout({ header, children }) {
                             <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                                 <ApplicationLogo className="block h-6 w-auto fill-current text-white" />
                             </div>
-                            <span className="text-xl font-bold text-white">{t('Store')}</span>
+                            <span className="text-xl font-bold text-white">{import.meta.env.VITE_APP_NAME}</span>
                         </div>
                     </Link>
                     <button
