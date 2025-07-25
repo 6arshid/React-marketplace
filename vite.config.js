@@ -22,7 +22,7 @@ export default defineConfig({
                     ? [
                           {
                               src: `/storage/${process.env.VITE_PWA_ICON}`,
-                              sizes: '256x256',
+                              sizes: '512x512',
                               type: 'image/png',
                               purpose: 'any maskable',
                           },

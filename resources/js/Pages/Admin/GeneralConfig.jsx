@@ -258,7 +258,7 @@ export default function GeneralConfig({ env }) {
                             </div>
                         </div>
                         <div>
-                            <InputLabel value="PWA Icon (256x256 PNG)" />
+                            <InputLabel value="PWA Icon (512x512 PNG)" />
                             <ImageCropDropzone name="pwa_icon" value={data.pwa_icon} onChange={(f) => setData('pwa_icon', f)} />
                             <InputError message={errors.pwa_icon} className="mt-2" />
                             {env.VITE_PWA_ICON && !data.pwa_icon && (

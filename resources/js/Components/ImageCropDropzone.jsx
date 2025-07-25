@@ -3,7 +3,7 @@ import Cropper from 'react-easy-crop';
 import {useState} from 'react';
 import Modal from './Modal';
 
-export default function ImageCropDropzone({ value, onChange, name, aspect = 1, width = 256, height = 256 }) {
+export default function ImageCropDropzone({ value, onChange, name, aspect = 1, width = 512, height = 512 }) {
     const [cropSrc, setCropSrc] = useState(null);
     const [crop, setCrop] = useState({ x: 0, y: 0 });
     const [zoom, setZoom] = useState(1);
