@@ -24,7 +24,7 @@ class DownloadSeeder extends Seeder
             'category_id' => $category->id,
         ]);
 
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 1; $i++) {
             Order::create([
                 'buyer_id' => $user->id,
                 'seller_id' => $user->id,

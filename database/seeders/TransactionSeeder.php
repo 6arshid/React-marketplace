@@ -15,6 +15,6 @@ class TransactionSeeder extends Seeder
             return;
         }
 
-        Transaction::factory(50)->create(['user_id' => $user->id]);
+        Transaction::factory(1)->create(['user_id' => $user->id]);
     }
 }

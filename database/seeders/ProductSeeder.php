@@ -17,7 +17,7 @@ class ProductSeeder extends Seeder
         }
 
         $category = Category::where('user_id', $user->id)->first() ?? Category::factory()->create(['user_id' => $user->id]);
-        Product::factory(50)->create([
+        Product::factory(1)->create([
             'user_id' => $user->id,
             'category_id' => $category->id,
         ]);
