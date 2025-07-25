@@ -13,7 +13,13 @@ class SetLocale
     {
         $locale = $request->get('lang', session('lang', config('app.locale')));
         App::setLocale($locale);
-        $direction = Language::where('code', $locale)->value('direction') ?? 'ltr';
+
+        try {
+            $direction = Language::where('code', $locale)->value('direction') ?? 'ltr';
+        } catch (\Throwable $e) {
+            $direction = 'ltr';
+        }
+
         session(['lang' => $locale, 'dir' => $direction]);
 
         return $next($request);
