@@ -37,6 +37,12 @@ class AdminGeneralConfigController extends Controller
             'AWS_BUCKET',
             'AWS_USE_PATH_STYLE_ENDPOINT',
             'VITE_APP_NAME',
+            'VITE_PWA_NAME',
+            'VITE_PWA_SHORT_NAME',
+            'VITE_PWA_DESCRIPTION',
+            'VITE_PWA_THEME_COLOR',
+            'VITE_PWA_BACKGROUND_COLOR',
+            'VITE_PWA_ICON',
             'GOOGLE_CLIENT_ID',
             'GOOGLE_CLIENT_SECRET',
             'MAX_UPLOAD_SIZE_MB',
@@ -80,12 +86,25 @@ class AdminGeneralConfigController extends Controller
             'AWS_BUCKET' => 'nullable|string',
             'AWS_USE_PATH_STYLE_ENDPOINT' => 'required|in:true,false',
             'VITE_APP_NAME' => 'required|string',
+            'VITE_PWA_NAME' => 'nullable|string',
+            'VITE_PWA_SHORT_NAME' => 'nullable|string',
+            'VITE_PWA_DESCRIPTION' => 'nullable|string',
+            'VITE_PWA_THEME_COLOR' => 'nullable|string',
+            'VITE_PWA_BACKGROUND_COLOR' => 'nullable|string',
+            'pwa_icon' => ['nullable','file','image','max:'.$this->maxUploadSize()],
             'GOOGLE_CLIENT_ID' => 'nullable|string',
             'GOOGLE_CLIENT_SECRET' => 'nullable|string',
             'MAX_UPLOAD_SIZE_MB' => 'required|numeric',
         ]);
 
-        $this->updateEnvFile($data);
+        $envData = $data;
+        if ($request->hasFile('pwa_icon')) {
+            $path = $request->file('pwa_icon')->store('pwa', 'public');
+            $envData['VITE_PWA_ICON'] = $path;
+        }
+        unset($envData['pwa_icon']);
+
+        $this->updateEnvFile($envData);
 
         return Redirect::route('admin.general-config.edit')
             ->with('success', __('messages.general_config_updated'));

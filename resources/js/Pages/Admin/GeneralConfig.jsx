@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
+import ImageCropDropzone from '@/Components/ImageCropDropzone';
 import { Head, useForm } from '@inertiajs/react';
 
 export default function GeneralConfig({ env }) {
@@ -35,11 +36,19 @@ export default function GeneralConfig({ env }) {
         GOOGLE_CLIENT_ID: env.GOOGLE_CLIENT_ID || '',
         GOOGLE_CLIENT_SECRET: env.GOOGLE_CLIENT_SECRET || '',
         MAX_UPLOAD_SIZE_MB: env.MAX_UPLOAD_SIZE_MB || '',
+        VITE_PWA_NAME: env.VITE_PWA_NAME || '',
+        VITE_PWA_SHORT_NAME: env.VITE_PWA_SHORT_NAME || '',
+        VITE_PWA_DESCRIPTION: env.VITE_PWA_DESCRIPTION || '',
+        VITE_PWA_THEME_COLOR: env.VITE_PWA_THEME_COLOR || '#ffffff',
+        VITE_PWA_BACKGROUND_COLOR: env.VITE_PWA_BACKGROUND_COLOR || '#ffffff',
+        pwa_icon: null,
     });
 
     const submit = (e) => {
         e.preventDefault();
-        post(route('admin.general-config.update'));
+        post(route('admin.general-config.update'), {
+            forceFormData: true,
+        });
     };
 
     return (
@@ -48,7 +57,7 @@ export default function GeneralConfig({ env }) {
             <div className="py-12">
                 <div className="mx-auto max-w-4xl sm:px-6 lg:px-8">
                     <div className="bg-white p-4 shadow sm:rounded-lg">
-                        <form onSubmit={submit} className="space-y-4">
+                        <form onSubmit={submit} className="space-y-4" encType="multipart/form-data">
                             <div>
                                 <InputLabel htmlFor="APP_NAME" value="APP_NAME" />
                                 <TextInput id="APP_NAME" value={data.APP_NAME} className="mt-1 block w-full" onChange={e => setData('APP_NAME', e.target.value)} />
@@ -216,12 +225,49 @@ export default function GeneralConfig({ env }) {
                                 <div>
                                     <InputLabel htmlFor="MAX_UPLOAD_SIZE_MB" value="MAX_UPLOAD_SIZE_MB" />
                                     <TextInput id="MAX_UPLOAD_SIZE_MB" value={data.MAX_UPLOAD_SIZE_MB} className="mt-1 block w-full" onChange={e => setData('MAX_UPLOAD_SIZE_MB', e.target.value)} />
-                                    <InputError message={errors.MAX_UPLOAD_SIZE_MB} className="mt-2" />
-                                </div>
+                                <InputError message={errors.MAX_UPLOAD_SIZE_MB} className="mt-2" />
                             </div>
-                            <div className="flex justify-end">
-                                <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                        </div>
+                        <div>
+                            <InputLabel htmlFor="VITE_PWA_NAME" value="VITE_PWA_NAME" />
+                            <TextInput id="VITE_PWA_NAME" value={data.VITE_PWA_NAME} className="mt-1 block w-full" onChange={e => setData('VITE_PWA_NAME', e.target.value)} />
+                            <InputError message={errors.VITE_PWA_NAME} className="mt-2" />
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <InputLabel htmlFor="VITE_PWA_SHORT_NAME" value="VITE_PWA_SHORT_NAME" />
+                                <TextInput id="VITE_PWA_SHORT_NAME" value={data.VITE_PWA_SHORT_NAME} className="mt-1 block w-full" onChange={e => setData('VITE_PWA_SHORT_NAME', e.target.value)} />
+                                <InputError message={errors.VITE_PWA_SHORT_NAME} className="mt-2" />
                             </div>
+                            <div>
+                                <InputLabel htmlFor="VITE_PWA_DESCRIPTION" value="VITE_PWA_DESCRIPTION" />
+                                <TextInput id="VITE_PWA_DESCRIPTION" value={data.VITE_PWA_DESCRIPTION} className="mt-1 block w-full" onChange={e => setData('VITE_PWA_DESCRIPTION', e.target.value)} />
+                                <InputError message={errors.VITE_PWA_DESCRIPTION} className="mt-2" />
+                            </div>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <InputLabel htmlFor="VITE_PWA_THEME_COLOR" value="VITE_PWA_THEME_COLOR" />
+                                <TextInput id="VITE_PWA_THEME_COLOR" type="color" value={data.VITE_PWA_THEME_COLOR} className="mt-1 block w-full" onChange={e => setData('VITE_PWA_THEME_COLOR', e.target.value)} />
+                                <InputError message={errors.VITE_PWA_THEME_COLOR} className="mt-2" />
+                            </div>
+                            <div>
+                                <InputLabel htmlFor="VITE_PWA_BACKGROUND_COLOR" value="VITE_PWA_BACKGROUND_COLOR" />
+                                <TextInput id="VITE_PWA_BACKGROUND_COLOR" type="color" value={data.VITE_PWA_BACKGROUND_COLOR} className="mt-1 block w-full" onChange={e => setData('VITE_PWA_BACKGROUND_COLOR', e.target.value)} />
+                                <InputError message={errors.VITE_PWA_BACKGROUND_COLOR} className="mt-2" />
+                            </div>
+                        </div>
+                        <div>
+                            <InputLabel value="PWA Icon (256x256 PNG)" />
+                            <ImageCropDropzone name="pwa_icon" value={data.pwa_icon} onChange={(f) => setData('pwa_icon', f)} />
+                            <InputError message={errors.pwa_icon} className="mt-2" />
+                            {env.VITE_PWA_ICON && !data.pwa_icon && (
+                                <img src={`/storage/${env.VITE_PWA_ICON}`} alt="Current icon" className="h-16 mt-2" />
+                            )}
+                        </div>
+                        <div className="flex justify-end">
+                            <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                        </div>
                         </form>
                     </div>
                 </div>
