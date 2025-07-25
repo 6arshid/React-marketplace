@@ -4,19 +4,33 @@ import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { Head, useForm, Link } from '@inertiajs/react';
+import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function Edit({ language }) {
+export default function Edit({ language, baseTranslations }) {
     const { t } = useTranslation();
     const { data, setData, put, processing, errors } = useForm({
         name: language.name || '',
         code: language.code || '',
         direction: language.direction || 'ltr',
-        translations: JSON.stringify(language.translations || {}, null, 2),
+        translations: '',
     });
+
+    const [translationsObj, setTranslationsObj] = useState(language.translations || {});
+    const [page, setPage] = useState(1);
+    const perPage = 20;
+
+    const keys = useMemo(() => Object.keys(baseTranslations || {}), [baseTranslations]);
+    const totalPages = Math.max(1, Math.ceil(keys.length / perPage));
+    const pageKeys = keys.slice((page - 1) * perPage, page * perPage);
+
+    const updateTranslation = (key, value) => {
+        setTranslationsObj(prev => ({ ...prev, [key]: value }));
+    };
 
     const submit = (e) => {
         e.preventDefault();
+        setData('translations', JSON.stringify(translationsObj));
         put(route('admin.languages.update', language.id));
     };
 
@@ -44,10 +58,35 @@ export default function Edit({ language }) {
                             </select>
                             <InputError message={errors.direction} className="mt-2" />
                         </div>
-                        <div>
-                            <InputLabel htmlFor="translations" value={t('Translations (JSON)')} />
-                            <textarea id="translations" rows="10" className="mt-1 block w-full rounded border-gray-300" value={data.translations} onChange={e => setData('translations', e.target.value)} />
+                        <div className="overflow-x-auto">
+                            <table className="min-w-full divide-y divide-gray-200">
+                                <thead>
+                                    <tr>
+                                        <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">{t('English')}</th>
+                                        <th className="px-3 py-2 text-left text-sm font-semibold text-gray-700">{t('Translation')}</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-gray-200">
+                                    {pageKeys.map((k) => (
+                                        <tr key={k}>
+                                            <td className="px-3 py-2 text-sm text-gray-900">{k}</td>
+                                            <td className="px-3 py-2">
+                                                <TextInput value={translationsObj[k] || ''} className="mt-1 block w-full" onChange={e => updateTranslation(k, e.target.value)} />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                             <InputError message={errors.translations} className="mt-2" />
+                            <div className="flex justify-between items-center mt-4">
+                                <button type="button" onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="px-3 py-1 rounded border disabled:opacity-50">
+                                    {t('Prev')}
+                                </button>
+                                <span className="text-sm">{page} / {totalPages}</span>
+                                <button type="button" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="px-3 py-1 rounded border disabled:opacity-50">
+                                    {t('Next')}
+                                </button>
+                            </div>
                         </div>
                         <div className="flex justify-between">
                             <Link href={route('admin.languages.index')} className="text-gray-600 hover:underline">{t('Cancel')}</Link>
