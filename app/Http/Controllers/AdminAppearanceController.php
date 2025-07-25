@@ -55,6 +55,7 @@ class AdminAppearanceController extends Controller
             }
         }
 
-        return Redirect::route('admin.appearance.edit');
+        return Redirect::route('admin.appearance.edit')
+            ->with('success', __('messages.appearance_updated'));
     }
 }

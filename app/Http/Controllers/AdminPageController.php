@@ -43,7 +43,8 @@ class AdminPageController extends Controller
 
         Page::create($data);
 
-        return Redirect::route('admin.pages.index');
+        return Redirect::route('admin.pages.index')
+            ->with('success', __('messages.page_created'));
     }
 
     public function edit(Page $page): Response
@@ -72,13 +73,15 @@ class AdminPageController extends Controller
 
         $page->update($data);
 
-        return Redirect::route('admin.pages.index');
+        return Redirect::route('admin.pages.index')
+            ->with('success', __('messages.page_updated'));
     }
 
     public function destroy(Page $page)
     {
         $page->delete();
-        return Redirect::route('admin.pages.index');
+        return Redirect::route('admin.pages.index')
+            ->with('success', __('messages.page_deleted'));
     }
 
 }
