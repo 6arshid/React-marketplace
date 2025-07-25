@@ -45,8 +45,7 @@ class CartController extends Controller
 
         session(['cart' => $cart]);
 
-        // return Redirect::back()->with('success', 'Added to cart');
-          return Redirect::back();
+        return Redirect::back()->with('success', __('messages.cart_item_added'));
     }
 
     public function show()
@@ -238,6 +237,7 @@ class CartController extends Controller
 
         $order->buyer->notify(new OrderStatusUpdated($order));
 
-        return Redirect::route('orders.track', $order->tracking_code);
+        return Redirect::route('orders.track', $order->tracking_code)
+            ->with('success', __('messages.payment_successful'));
     }
 }

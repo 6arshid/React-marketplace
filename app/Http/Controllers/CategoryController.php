@@ -42,7 +42,8 @@ class CategoryController extends Controller
 
         $request->user()->categories()->create($data);
 
-        return Redirect::route('categories.index');
+        return Redirect::route('categories.index')
+            ->with('success', __('messages.category_created'));
     }
 
     public function edit(Category $category): Response
@@ -72,14 +73,16 @@ class CategoryController extends Controller
 
         $category->update($data);
 
-        return Redirect::route('categories.index');
+        return Redirect::route('categories.index')
+            ->with('success', __('messages.category_updated'));
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
 
-        return Redirect::route('categories.index');
+        return Redirect::route('categories.index')
+            ->with('success', __('messages.category_deleted'));
     }
 
     private function generateUniqueSlug(): string

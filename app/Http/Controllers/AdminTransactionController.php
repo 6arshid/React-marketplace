@@ -39,7 +39,7 @@ class AdminTransactionController extends Controller
     {
         $transaction->update(['status' => 'paid']);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.transaction_paid'));
     }
 
     public function payAll(): RedirectResponse
@@ -47,6 +47,6 @@ class AdminTransactionController extends Controller
         Transaction::whereIn('status', ['success', 'completed'])
             ->update(['status' => 'paid']);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.transactions_paid'));
     }
 }

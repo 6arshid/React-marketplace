@@ -101,7 +101,8 @@ class ProductController extends Controller
             }
         }
 
-        return Redirect::route('products.show', $product->slug);
+        return Redirect::route('products.show', $product->slug)
+            ->with('success', __('messages.product_created'));
     }
 
     public function edit(Product $product): Response
@@ -172,14 +173,16 @@ class ProductController extends Controller
             }
         }
 
-        return Redirect::route('products.index');
+        return Redirect::route('products.index')
+            ->with('success', __('messages.product_updated'));
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 
-        return Redirect::route('products.index');
+        return Redirect::route('products.index')
+            ->with('success', __('messages.product_deleted'));
     }
 
     private function generateUniqueSlug(): string

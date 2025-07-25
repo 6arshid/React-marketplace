@@ -43,34 +43,34 @@ class AdminUserController extends Controller
             Storage::disk('public')->delete($user->cover);
         }
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.user_suspended'));
     }
 
     public function unsuspend(User $user): RedirectResponse
     {
         $user->update(['suspended_at' => null]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.user_unsuspended'));
     }
 
     public function destroy(User $user): RedirectResponse
     {
         $user->delete();
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.user_deleted'));
     }
 
     public function makeAdmin(User $user): RedirectResponse
     {
         $user->update(['is_admin' => true]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.user_made_admin'));
     }
 
     public function removeAdmin(User $user): RedirectResponse
     {
         $user->update(['is_admin' => false]);
 
-        return Redirect::back();
+        return Redirect::back()->with('success', __('messages.user_admin_removed'));
     }
 }
