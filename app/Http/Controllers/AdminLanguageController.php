@@ -31,6 +31,32 @@ class AdminLanguageController extends Controller
         return Redirect::back()->with('success', __('messages.language_added'));
     }
 
+    public function edit(Language $language): Response
+    {
+        return Inertia::render('Admin/Languages/Edit', [
+            'language' => $language,
+        ]);
+    }
+
+    public function update(Request $request, Language $language): RedirectResponse
+    {
+        $data = $request->validate([
+            'name' => 'required|string',
+            'code' => 'required|string|unique:languages,code,' . $language->id,
+            'direction' => 'required|in:ltr,rtl',
+            'translations' => 'nullable|json',
+        ]);
+
+        if (isset($data['translations'])) {
+            $data['translations'] = json_decode($data['translations'], true);
+        }
+
+        $language->update($data);
+
+        return Redirect::route('admin.languages.index')
+            ->with('success', __('messages.language_updated'));
+    }
+
     public function destroy(Language $language): RedirectResponse
     {
         $language->delete();
