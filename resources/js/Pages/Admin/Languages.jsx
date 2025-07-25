@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Languages({ languages }) {
     const { t } = useTranslation();
-    const { data, setData, post, processing, reset, delete: destroy } = useForm({
+    const { data, setData, post, processing, errors, reset, delete: destroy } = useForm({
         name: '',
         code: '',
         direction: 'ltr',
