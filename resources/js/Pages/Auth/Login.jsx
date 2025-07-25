@@ -7,7 +7,6 @@ import GuestLayout from '@/Layouts/GuestLayout';
 import GoogleIcon from '@/Components/GoogleIcon';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
-import i18n from '@/i18n';
 
 export default function Login({ status, canResetPassword }) {
     const { t } = useTranslation();
@@ -17,9 +16,6 @@ export default function Login({ status, canResetPassword }) {
         remember: false,
     });
 
-    const changeLanguage = (lng) => {
-        i18n.changeLanguage(lng);
-    };
 
     const submit = (e) => {
         e.preventDefault();
@@ -32,14 +28,6 @@ export default function Login({ status, canResetPassword }) {
     return (
         <GuestLayout>
             <Head title={t('Log in')} />
-            <div className="flex justify-end space-x-2 mb-4">
-                <button type="button" onClick={() => changeLanguage('en')} className="text-sm underline">
-                    EN
-                </button>
-                <button type="button" onClick={() => changeLanguage('fa')} className="text-sm underline">
-                    فارسی
-                </button>
-            </div>
 
             {status && (
                 <div className="mb-4 text-sm font-medium text-green-600">
