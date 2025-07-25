@@ -6,6 +6,7 @@ use App\Models\Language;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -24,7 +25,12 @@ class AdminLanguageController extends Controller
             'name' => 'required|string',
             'code' => 'required|string|unique:languages,code',
             'direction' => 'required|in:ltr,rtl',
+            'flag' => 'nullable|file|max:' . $this->maxUploadSize(),
         ]);
+
+        if ($request->hasFile('flag')) {
+            $data['flag'] = $request->file('flag')->store('flags', 'public');
+        }
 
         Language::create($data);
 
@@ -49,7 +55,21 @@ class AdminLanguageController extends Controller
             'code' => 'required|string|unique:languages,code,' . $language->id,
             'direction' => 'required|in:ltr,rtl',
             'translations' => 'nullable|json',
+            'flag' => 'nullable',
         ]);
+
+        if ($request->hasFile('flag')) {
+            $request->validate(['flag' => 'file|max:' . $this->maxUploadSize()]);
+            if ($language->flag) {
+                Storage::disk('public')->delete($language->flag);
+            }
+            $data['flag'] = $request->file('flag')->store('flags', 'public');
+        } elseif ($request->input('flag') === null) {
+            if ($language->flag) {
+                Storage::disk('public')->delete($language->flag);
+            }
+            $data['flag'] = null;
+        }
 
         if (isset($data['translations'])) {
             $data['translations'] = json_decode($data['translations'], true);
