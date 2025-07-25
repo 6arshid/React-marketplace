@@ -33,8 +33,12 @@ class AdminLanguageController extends Controller
 
     public function edit(Language $language): Response
     {
+        $baseTranslations = Language::where('code', config('app.fallback_locale'))
+            ->value('translations') ?? [];
+
         return Inertia::render('Admin/Languages/Edit', [
             'language' => $language,
+            'baseTranslations' => $baseTranslations,
         ]);
     }
 
