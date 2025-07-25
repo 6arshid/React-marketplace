@@ -263,42 +263,7 @@ export default function Index() {
                         })}
                     </div>
 
-                    {/* Quick Stats */}
-                    <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-500">{t('System Status')}</p>
-                                    <p className="text-2xl font-bold text-green-600">{t('Online')}</p>
-                                </div>
-                                <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                            </div>
-                        </div>
-                        
-                        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-500">{t('Last Updated')}</p>
-                                    <p className="text-2xl font-bold text-blue-600">{t('Today')}</p>
-                                </div>
-                                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
-                                    <BarChart3 className="w-5 h-5 text-blue-600" />
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
-                            <div className="flex items-center justify-between">
-                                <div>
-                                    <p className="text-sm font-medium text-gray-500">{t('Quick Access')}</p>
-                                    <p className="text-2xl font-bold text-purple-600">{menuItems.length}</p>
-                                </div>
-                                <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
-                                    <Settings className="w-5 h-5 text-purple-600" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+           
                 </div>
             </div>
         </AuthenticatedLayout>
