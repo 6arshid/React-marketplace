@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminPageController;
 use App\Http\Controllers\AdminProPanelController;
 use App\Http\Controllers\AdminReservedUsernameController;
+use App\Http\Controllers\AdminLanguageController;
 use App\Http\Controllers\AdminTransactionController;
 use App\Http\Controllers\AdminReportController;
 use App\Http\Controllers\AdminReviewReportController;
@@ -127,6 +128,9 @@ Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/reserved-usernames', [AdminReservedUsernameController::class, 'index'])->name('admin.reserved-usernames.index');
     Route::post('/reserved-usernames', [AdminReservedUsernameController::class, 'store'])->name('admin.reserved-usernames.store');
     Route::delete('/reserved-usernames/{reservedUsername}', [AdminReservedUsernameController::class, 'destroy'])->name('admin.reserved-usernames.destroy');
+    Route::get('/languages', [AdminLanguageController::class, 'index'])->name('admin.languages.index');
+    Route::post('/languages', [AdminLanguageController::class, 'store'])->name('admin.languages.store');
+    Route::delete('/languages/{language}', [AdminLanguageController::class, 'destroy'])->name('admin.languages.destroy');
 
     Route::get('/appearance', [AdminAppearanceController::class, 'edit'])->name('admin.appearance.edit');
     Route::post('/appearance', [AdminAppearanceController::class, 'update'])->name('admin.appearance.update');

@@ -37,6 +37,8 @@ return [
     'user_unsuspended' => 'تعلیق کاربر با موفقیت برداشته شد',
     'reserved_username_added' => 'نام کاربری رزرو شده با موفقیت افزوده شد',
     'reserved_username_deleted' => 'نام کاربری رزرو شده با موفقیت حذف شد',
+    'language_added' => 'زبان با موفقیت افزوده شد',
+    'language_deleted' => 'زبان با موفقیت حذف شد',
     'review_suspended' => 'دیدگاه با موفقیت تعلیق شد',
     'review_unsuspended' => 'تعلیق دیدگاه با موفقیت برداشته شد',
     'review_deleted' => 'دیدگاه با موفقیت حذف شد',

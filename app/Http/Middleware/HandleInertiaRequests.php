@@ -91,6 +91,13 @@ class HandleInertiaRequests extends Middleware
                     return [];
                 }
             },
+            'languages' => function () {
+                try {
+                    return \App\Models\Language::all();
+                } catch (\Throwable $e) {
+                    return [];
+                }
+            },
         ];
     }
 }

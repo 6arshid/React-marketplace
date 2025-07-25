@@ -1,6 +1,6 @@
 import '../css/app.css';
 import './bootstrap';
-import './i18n';
+import i18n, { initI18n } from './i18n';
 
 import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -15,8 +15,12 @@ createInertiaApp({
             `./Pages/${name}.jsx`,
             import.meta.glob('./Pages/**/*.jsx'),
         ),
-    setup({ el, App, props }) {
+    async setup({ el, App, props }) {
         const root = createRoot(el);
+
+        const languages = props.initialPage.props.languages || [];
+        const locale = props.initialPage.props.locale || 'en';
+        await initI18n(languages, locale);
 
         root.render(<App {...props} />);
     },
