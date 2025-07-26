@@ -4,16 +4,6 @@ import { useTranslation } from 'react-i18next';
 import Modal from '@/Components/Modal';
 import i18n from '@/i18n';
 
-const flagIcons = {
-    fa: (
-        <svg className="w-5 h-5" viewBox="0 0 640 480">
-            <rect width="640" height="160" fill="#239f40" />
-            <rect y="160" width="640" height="160" fill="#fff" />
-            <rect y="320" width="640" height="160" fill="#da0000" />
-        </svg>
-    ),
-};
-
 const translateIcon = (
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-translate" viewBox="0 0 16 16">
   <path d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286zm1.634-.736L5.5 3.956h-.049l-.679 2.022z"/>
@@ -25,20 +15,6 @@ export default function LanguageDropdown({ className = '' }) {
     const { t } = useTranslation();
     const languages = usePage().props.languages || [];
     const [open, setOpen] = useState(false);
-
-    const getFlag = (code) => {
-        const lang = languages.find((l) => l.code === code);
-        if (lang && lang.flag) {
-            return (
-                <img
-                    src={`/storage/${lang.flag}`}
-                    alt={code}
-                    className="w-5 h-5 object-cover rounded"
-                />
-            );
-        }
-        return flagIcons[code];
-    };
 
     const changeLanguage = (code) => {
         i18n.changeLanguage(code);
@@ -54,7 +30,7 @@ export default function LanguageDropdown({ className = '' }) {
                 onClick={() => setOpen(true)}
                 className="p-2 rounded hover:bg-gray-100 text-gray-600 flex items-center"
             >
-                {getFlag(current) || translateIcon}
+                {translateIcon}
             </button>
             <Modal show={open} onClose={() => setOpen(false)}>
                 <div className="p-6 space-y-4">
@@ -67,11 +43,9 @@ export default function LanguageDropdown({ className = '' }) {
                                 onClick={() => changeLanguage(l.code)}
                                 className="flex items-center px-3 py-2 hover:bg-gray-100 w-full text-sm rounded"
                             >
-                                {getFlag(l.code) || (
-                                    <span className="w-5 h-5 flex items-center justify-center font-bold uppercase">
-                                        {l.code}
-                                    </span>
-                                )}
+                                <span className="w-5 h-5 flex items-center justify-center font-bold uppercase">
+                                    {l.code}
+                                </span>
                                 <span className="ml-2">{l.name}</span>
                             </button>
                         ))}

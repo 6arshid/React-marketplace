@@ -3,7 +3,6 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import InputError from '@/Components/InputError';
 import PrimaryButton from '@/Components/PrimaryButton';
-import FileDropzone from '@/Components/FileDropzone';
 import { Head, useForm, Link } from '@inertiajs/react';
 import { useState, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +14,6 @@ export default function Edit({ language, baseTranslations }) {
         code: language.code || '',
         direction: language.direction || 'ltr',
         translations: '',
-        flag: language.flag ?? '',
     });
 
     const [translationsObj, setTranslationsObj] = useState(language.translations || {});
@@ -35,7 +33,6 @@ export default function Edit({ language, baseTranslations }) {
         setData('translations', JSON.stringify(translationsObj));
         post(route('admin.languages.update', language.id), {
             _method: 'put',
-            forceFormData: true,
         });
     };
 
@@ -44,7 +41,7 @@ export default function Edit({ language, baseTranslations }) {
             <Head title={t('Edit Language')} />
             <div className="py-8">
                 <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                    <form onSubmit={submit} className="space-y-4 bg-white p-4 shadow sm:rounded-lg" encType="multipart/form-data">
+                    <form onSubmit={submit} className="space-y-4 bg-white p-4 shadow sm:rounded-lg">
                         <div>
                             <InputLabel htmlFor="name" value={t('Language Name')} />
                             <TextInput id="name" value={data.name} className="mt-1 block w-full" onChange={e => setData('name', e.target.value)} required />
@@ -62,14 +59,6 @@ export default function Edit({ language, baseTranslations }) {
                                 <option value="rtl">{t('RTL')}</option>
                             </select>
                             <InputError message={errors.direction} className="mt-2" />
-                        </div>
-                        <div>
-                            <InputLabel htmlFor="flag" value={t('Flag')} />
-                            {language.flag && (
-                                <img src={`/storage/${language.flag}`} alt="flag" className="w-10 h-6 mb-2 object-cover rounded" />
-                            )}
-                            <FileDropzone name="flag" value={data.flag} onChange={f => setData('flag', f)} />
-                            <InputError message={errors.flag} className="mt-2" />
                         </div>
                         <div className="overflow-x-auto">
                             <table className="min-w-full divide-y divide-gray-200">
