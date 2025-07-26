@@ -40,12 +40,7 @@ class LanguageSeeder extends Seeder
                 'direction' => 'ltr',
                 'translations' => json_decode(file_get_contents(resource_path('js/locales/fr/translation.json')), true),
             ],
-            [
-                'name' => 'فارسی',
-                'code' => 'fa',
-                'direction' => 'rtl',
-                'translations' => json_decode(file_get_contents(resource_path('js/locales/fa/translation.json')), true),
-            ],
+    
                         [
                 'name' => 'العربية',
                 'code' => 'ar',
