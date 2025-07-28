@@ -10,7 +10,10 @@ export default function AuthenticatedLayout({ header, children }) {
     const user = usePage().props.auth.user;
     const { t, i18n } = useTranslation();
     const homeUrl = user?.pro_panel ? `/${user.username}` : '/';
-    const pages = usePage().props.pages || [];
+    let pages = usePage().props.pages || [];
+    if (pages.length > 0) {
+        pages = pages.filter(p => p.user_id === user.id);
+    }
     const flash = usePage().props.flash;
     const cart = usePage().props.cart;
     const notifications = usePage().props.notifications || [];
