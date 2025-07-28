@@ -9,9 +9,10 @@ import { useTranslation } from 'react-i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import axios from 'axios';
 
-export default function Index({ items, total, seller, requires_shipping }) {
+export default function Index({ items, total, discount, coupon, seller, requires_shipping }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
+    const [couponCode, setCouponCode] = useState(coupon ? coupon.code : '');
     const user = usePage().props.auth.user;
     const { t } = useTranslation();
 
@@ -148,8 +149,31 @@ export default function Index({ items, total, seller, requires_shipping }) {
                                                     </div>
                                                 </div>
                                             ))}
+
+                                            <form
+                                                onSubmit={(e) => {
+                                                    e.preventDefault();
+                                                    axios.post(route('cart.coupon'), { code: couponCode })
+                                                        .then(() => window.location.reload());
+                                                }}
+                                                className="flex items-center space-x-2"
+                                            >
+                                                <TextInput
+                                                    value={couponCode}
+                                                    onChange={(e) => setCouponCode(e.target.value)}
+                                                    placeholder={t('Discount code')}
+                                                    className="flex-1"
+                                                />
+                                                <PrimaryButton type="submit">{t('Apply')}</PrimaryButton>
+                                            </form>
                                             
-                                            <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
+                                            <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white space-y-2">
+                                                {discount > 0 && (
+                                                    <div className="flex justify-between items-center text-sm">
+                                                        <span>{t('Discount')}</span>
+                                                        <span>- ${discount.toFixed(2)}</span>
+                                                    </div>
+                                                )}
                                                 <div className="flex justify-between items-center">
                                                     <span className="text-xl font-semibold">{t('Total Amount')}</span>
                                                     <span className="text-3xl font-bold">${total}</span>

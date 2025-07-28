@@ -196,6 +196,15 @@ export default function AuthenticatedLayout({ header, children }) {
                 )
             },
             {
+                name: t('Discount Codes'),
+                href: 'coupons.index',
+                icon: (
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 15l-6 6m0 0h6m-6 0v-6M15 9l6-6m-6 0h6m-6 0v6M21 15a6 6 0 11-12 0 6 6 0 0112 0z" />
+                    </svg>
+                )
+            },
+            {
                 name: t('Transactions'),
                 href: 'transactions.index',
                 icon: (

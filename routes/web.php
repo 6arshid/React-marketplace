@@ -13,6 +13,7 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SellerPageController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\SocialLinkController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\Auth\AccountTypeController;
@@ -79,8 +80,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/reviews/{review}/dislike', [\App\Http\Controllers\ReviewController::class, 'dislike'])->name('reviews.dislike');
     Route::post('/reviews/{review}/report', [\App\Http\Controllers\ReviewReportController::class, 'store'])->name('reviews.report');
     Route::resource('pages', SellerPageController::class)->names('seller.pages');
+    Route::resource('coupons', CouponController::class);
     Route::resource('social-links', SocialLinkController::class)->except(['create', 'edit', 'show']);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+    Route::post('/cart/apply-coupon', [\App\Http\Controllers\CartController::class, 'applyCoupon'])->name('cart.coupon');
     Route::get('/cart', [\App\Http\Controllers\CartController::class, 'show'])->name('cart.show');
     Route::post('/cart/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('cart.checkout');
     Route::get('/cart/success/{order}', [\App\Http\Controllers\CartController::class, 'success'])->name('cart.success');
