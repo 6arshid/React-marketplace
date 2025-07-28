@@ -98,7 +98,7 @@ class CartController extends Controller
         $discount = 0;
         $coupon = null;
         if (isset($cart['coupon_id'])) {
-            $c = \\App\Models\Coupon::find($cart['coupon_id']);
+            $c = \App\Models\Coupon::find($cart['coupon_id']);
             if ($c && $c->user_id == $cart['seller_id'] && (! $c->expires_at || $c->expires_at->isFuture())) {
                 $coupon = $c;
                 $discount = $total * ($coupon->percent / 100);
@@ -162,7 +162,7 @@ class CartController extends Controller
         });
         $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
         if (isset($cart["coupon_id"])) {
-            $c = \\App\Models\Coupon::find($cart["coupon_id"]);
+            $c = \App\Models\Coupon::find($cart["coupon_id"]);
             if ($c && $c->user_id == $cart["seller_id"] && (! $c->expires_at || $c->expires_at->isFuture())) {
                 $total -= $total * ($c->percent / 100);
             }
