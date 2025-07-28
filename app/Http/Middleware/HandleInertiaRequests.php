@@ -77,9 +77,15 @@ class HandleInertiaRequests extends Middleware
                     'price' => $config?->price,
                 ];
             },
-            'pages' => function () {
+            'pages' => function () use ($request) {
                 try {
-                    return \App\Models\Page::select('title','slug')->get();
+                    if (!$request->user()) {
+                        return [];
+                    }
+
+                    return \App\Models\Page::where('user_id', $request->user()->id)
+                        ->select('title', 'slug')
+                        ->get();
                 } catch (\Throwable $e) {
                     return [];
                 }
