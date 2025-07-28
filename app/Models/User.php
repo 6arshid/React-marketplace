@@ -128,4 +128,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Domain::class);
     }
+
+    public function coupons()
+    {
+        return $this->hasMany(Coupon::class);
+    }
 }

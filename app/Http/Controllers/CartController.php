@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\StripeConfig;
 use App\Models\Transaction;
 use App\Models\Order;
+use App\Models\Coupon;
 use App\Notifications\OrderPlaced;
 use App\Notifications\OrderStatusUpdated;
 use Illuminate\Support\Str;
@@ -48,6 +49,31 @@ class CartController extends Controller
         return Redirect::back()->with('success', __('messages.cart_item_added'));
     }
 
+    public function applyCoupon(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+        ]);
+
+        $cart = session('cart', ['seller_id' => null, 'items' => []]);
+        if (! $cart['seller_id']) {
+            return Redirect::back()->with('error', __('messages.cart_empty'));
+        }
+
+        $coupon = Coupon::where('code', $request->code)
+            ->where('user_id', $cart['seller_id'])
+            ->first();
+
+        if (! $coupon || ($coupon->expires_at && $coupon->expires_at->isPast())) {
+            return Redirect::back()->with('error', __('messages.invalid_coupon'));
+        }
+
+        $cart['coupon_id'] = $coupon->id;
+        session(['cart' => $cart]);
+
+        return Redirect::back()->with('success', __('messages.saved'));
+    }
+
     public function show()
     {
         $cart = session('cart', ['seller_id' => null, 'items' => []]);
@@ -69,6 +95,19 @@ class CartController extends Controller
         });
         $requiresShipping = $items->contains(fn ($i) => ! $i['is_digital']);
         $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
+        $discount = 0;
+        $coupon = null;
+        if (isset($cart['coupon_id'])) {
+            $c = \\App\Models\Coupon::find($cart['coupon_id']);
+            if ($c && $c->user_id == $cart['seller_id'] && (! $c->expires_at || $c->expires_at->isFuture())) {
+                $coupon = $c;
+                $discount = $total * ($coupon->percent / 100);
+                $total -= $discount;
+            } else {
+                unset($cart['coupon_id']);
+                session(['cart' => $cart]);
+            }
+        }
 
         $seller = null;
         if ($cart['seller_id']) {
@@ -92,6 +131,8 @@ class CartController extends Controller
         return \Inertia\Inertia::render('Cart/Index', [
             'items' => $items,
             'total' => $total,
+            'discount' => $discount,
+            'coupon' => $coupon ? $coupon->only(['id','code','percent','title']) : null,
             'seller' => $seller,
             'requires_shipping' => $requiresShipping,
         ]);
@@ -120,6 +161,12 @@ class CartController extends Controller
             ];
         });
         $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
+        if (isset($cart["coupon_id"])) {
+            $c = \\App\Models\Coupon::find($cart["coupon_id"]);
+            if ($c && $c->user_id == $cart["seller_id"] && (! $c->expires_at || $c->expires_at->isFuture())) {
+                $total -= $total * ($c->percent / 100);
+            }
+        }
 
         $requiresShipping = $items->contains(fn ($i) => ! $i['is_digital']);
 
