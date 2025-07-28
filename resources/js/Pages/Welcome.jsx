@@ -111,6 +111,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                         {/* Navigation */}
                         <nav className="flex items-center space-x-2 md:space-x-4">
+                             <LanguageDropdown className="mt-4 flex justify-center text-white" />
                             {auth.user ? (
                                 <Link
                                     href={route('dashboard')}
@@ -323,7 +324,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                                 <a href={settings.footer_support_url || '#'} className="hover:text-white transition-colors duration-300">{t('Support')}</a>
                             </div>
                         </div>
-                        <LanguageDropdown className="mt-4 flex justify-center" />
+                       
                     </div>
                 </footer>
             </div>

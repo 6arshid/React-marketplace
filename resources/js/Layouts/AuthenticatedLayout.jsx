@@ -377,9 +377,7 @@ export default function AuthenticatedLayout({ header, children }) {
                     </div>
                 )}
 
-                <div className="px-4 pb-6">
-                    <LanguageDropdown />
-                </div>
+              
             </aside>
 
             {/* Portal Dropdowns - Rendered at body level */}

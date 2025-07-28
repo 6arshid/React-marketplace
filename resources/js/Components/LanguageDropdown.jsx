@@ -28,7 +28,7 @@ export default function LanguageDropdown({ className = '' }) {
             <button
                 type="button"
                 onClick={() => setOpen(true)}
-                className="p-2 rounded hover:bg-gray-100 text-gray-600 flex items-center"
+                className="p-2 rounded hover:bg-dark-100 flex items-center text-white"
             >
                 {translateIcon}
             </button>
