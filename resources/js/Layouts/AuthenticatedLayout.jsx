@@ -275,6 +275,18 @@ export default function AuthenticatedLayout({ header, children }) {
         }
     );
 
+    if (usePage().props.purchased_vouchers_count > 0) {
+        navigationItems.push({
+            name: t('Vouchers'),
+            href: 'vouchers.purchased',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7H8v10h8V7zm0-2a2 2 0 012 2v10a2 2 0 01-2 2H8a2 2 0 01-2-2V7a2 2 0 012-2h8z" />
+                </svg>
+            )
+        });
+    }
+
     if (user.is_admin) {
         navigationItems.push({
             name: t('Admin'),

@@ -104,6 +104,33 @@ class HandleInertiaRequests extends Middleware
                     return [];
                 }
             },
+            'purchased_vouchers_count' => function () use ($request) {
+                if (! $request->user()) {
+                    return 0;
+                }
+
+                $count = 0;
+                try {
+                    $orders = $request->user()
+                        ->orders()
+                        ->where('is_digital', true)
+                        ->whereIn('status', ['accepted', 'paid'])
+                        ->get();
+
+                    foreach ($orders as $order) {
+                        foreach ($order->items as $item) {
+                            $product = \App\Models\Product::find($item['product_id']);
+                            if ($product && $product->is_voucher) {
+                                $count += $product->vouchers()->count();
+                            }
+                        }
+                    }
+                } catch (\Throwable $e) {
+                    return 0;
+                }
+
+                return $count;
+            },
         ];
     }
 }

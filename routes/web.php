@@ -83,6 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('pages', SellerPageController::class)->names('seller.pages');
     Route::resource('coupons', CouponController::class);
     Route::resource('vouchers', VoucherController::class);
+    Route::get('/my-vouchers', [VoucherController::class, 'purchased'])->name('vouchers.purchased');
     Route::resource('social-links', SocialLinkController::class)->except(['create', 'edit', 'show']);
     Route::post('/cart/add/{product}', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
     Route::post('/cart/apply-coupon', [\App\Http\Controllers\CartController::class, 'applyCoupon'])->name('cart.coupon');
