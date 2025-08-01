@@ -320,6 +320,9 @@ export default function Track({ order, files, vouchers }) {
                                     {vouchers.map((v, idx) => (
                                         <li key={idx} className="px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
                                             <span className="font-medium">{v.product}:</span> {v.code}
+                                            {v.pin && (
+                                                <span className="ml-2 text-gray-600 text-xs sm:text-sm">{t('PIN')}: {v.pin}</span>
+                                            )}
                                         </li>
                                     ))}
                                 </ul>

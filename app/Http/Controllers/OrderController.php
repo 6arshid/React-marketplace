@@ -116,6 +116,7 @@ class OrderController extends Controller
                 return $product->vouchers->map(fn ($v) => [
                     'product' => $product->title,
                     'code' => $v->public_code,
+                    'pin' => $v->secret_pin,
                 ]);
             }
             return [];
