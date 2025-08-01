@@ -59,7 +59,7 @@ class ProductController extends Controller
             foreach ($orders as $order) {
                 foreach ($order->items as $item) {
                     if (isset($item['product_id']) && $item['product_id'] == $product->id) {
-                        $vouchers = $product->vouchers()->get(['id', 'public_code']);
+                        $vouchers = $product->vouchers()->get(['vouchers.id', 'public_code']);
                         break 2;
                     }
                 }
