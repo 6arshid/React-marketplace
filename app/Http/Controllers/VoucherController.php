@@ -12,6 +12,34 @@ use Inertia\Response;
 
 class VoucherController extends Controller
 {
+    public function purchased(Request $request): Response
+    {
+        $orders = $request->user()
+            ->orders()
+            ->where('is_digital', true)
+            ->whereIn('status', ['accepted', 'paid'])
+            ->get();
+
+        $vouchers = [];
+        foreach ($orders as $order) {
+            foreach ($order->items as $item) {
+                $product = \App\Models\Product::find($item['product_id']);
+                if ($product && $product->is_voucher) {
+                    foreach ($product->vouchers as $v) {
+                        $vouchers[] = [
+                            'product' => $product->title,
+                            'code' => $v->public_code,
+                            'pin' => $v->secret_pin_hash ? '****' : null,
+                        ];
+                    }
+                }
+            }
+        }
+
+        return Inertia::render('Vouchers/Purchased', [
+            'vouchers' => $vouchers,
+        ]);
+    }
     public function index(): Response
     {
         $vouchers = Voucher::where('user_id', auth()->id())
