@@ -92,9 +92,11 @@ export default function Create({ categories }) {
         main_file: null,
         images: [],
         attributes: [],
+        vouchers: [],
     });
 
     const [attributeInputs, setAttributeInputs] = useState([]);
+    const [voucherInputs, setVoucherInputs] = useState([]);
 
     const addAttribute = () => {
         setAttributeInputs([...attributeInputs, { title: '', option: '', price: '' }]);
@@ -104,6 +106,18 @@ export default function Create({ categories }) {
         const copy = attributeInputs.filter((_, i) => i !== index);
         setAttributeInputs(copy);
         setData('attributes', copy);
+    };
+
+    const addVoucher = () => {
+        const copy = [...voucherInputs, { public_code: '', secret_pin: '', initial_amount: '' }];
+        setVoucherInputs(copy);
+        setData('vouchers', copy);
+    };
+
+    const removeVoucher = (index) => {
+        const copy = voucherInputs.filter((_, i) => i !== index);
+        setVoucherInputs(copy);
+        setData('vouchers', copy);
     };
 
     const submit = (e) => {
@@ -334,6 +348,78 @@ export default function Create({ categories }) {
                                             <InputError message={errors.main_file} className="mt-2 text-red-500 text-sm" />
                                         </div>
                                     </div>
+                                </div>
+                            )}
+
+                            {data.is_voucher && (
+                                <div className="space-y-4 sm:space-y-6">
+                                    <h4 className="text-base sm:text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
+                                        <Icons.Voucher />
+                                        <span>{t('Voucher Codes')}</span>
+                                    </h4>
+
+                                    <div className="flex justify-end">
+                                        <button
+                                            type="button"
+                                            onClick={addVoucher}
+                                            className="flex items-center space-x-2 px-3 sm:px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg hover:from-green-600 hover:to-emerald-700 transition-all duration-200 shadow-md hover:shadow-lg text-sm sm:text-base"
+                                        >
+                                            <Icons.Plus />
+                                            <span>{t('Add Voucher')}</span>
+                                        </button>
+                                    </div>
+
+                                    {voucherInputs.length > 0 && (
+                                        <div className="space-y-3 sm:space-y-4">
+                                            {voucherInputs.map((v, index) => (
+                                                <div key={index} className="p-3 sm:p-4 bg-gray-50 rounded-lg sm:rounded-xl border border-gray-200">
+                                                    <div className="grid grid-cols-1 lg:grid-cols-4 gap-3 sm:gap-4 items-end">
+                                                        <TextInput
+                                                            placeholder={t('Voucher Code')}
+                                                            value={v.public_code}
+                                                            className="rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base py-2.5 sm:py-3"
+                                                            onChange={(e) => {
+                                                                const copy = [...voucherInputs];
+                                                                copy[index].public_code = e.target.value;
+                                                                setVoucherInputs(copy);
+                                                                setData('vouchers', copy);
+                                                            }}
+                                                        />
+                                                        <TextInput
+                                                            placeholder={t('PIN')}
+                                                            value={v.secret_pin}
+                                                            className="rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base py-2.5 sm:py-3"
+                                                            onChange={(e) => {
+                                                                const copy = [...voucherInputs];
+                                                                copy[index].secret_pin = e.target.value;
+                                                                setVoucherInputs(copy);
+                                                                setData('vouchers', copy);
+                                                            }}
+                                                        />
+                                                        <TextInput
+                                                            placeholder={t('Amount')}
+                                                            type="number"
+                                                            value={v.initial_amount}
+                                                            className="rounded-lg border-gray-200 focus:border-blue-500 focus:ring-blue-500 text-sm sm:text-base py-2.5 sm:py-3"
+                                                            onChange={(e) => {
+                                                                const copy = [...voucherInputs];
+                                                                copy[index].initial_amount = e.target.value;
+                                                                setVoucherInputs(copy);
+                                                                setData('vouchers', copy);
+                                                            }}
+                                                        />
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => removeVoucher(index)}
+                                                            className="px-3 sm:px-4 py-2.5 sm:py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors duration-200 text-sm sm:text-base w-full sm:w-auto"
+                                                        >
+                                                            {t('Remove')}
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
