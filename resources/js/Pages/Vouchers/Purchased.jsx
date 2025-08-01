@@ -1,5 +1,5 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useTranslation } from 'react-i18next';
 
 export default function Purchased({ vouchers }) {
@@ -23,7 +23,7 @@ export default function Purchased({ vouchers }) {
                                 <tbody>
                                     {vouchers.map((v, i) => (
                                         <tr key={i} className="border-t">
-                                            <td className="px-4 py-2">{v.product}</td>
+                                            <td className="px-4 py-2"><Link href={route('products.show', v.product_slug)} className="text-blue-600 hover:underline">{v.product}</Link></td>
                                             <td className="px-4 py-2 font-mono">{v.code}</td>
                                             <td className="px-4 py-2 font-mono">{v.pin || '-'}</td>
                                         </tr>
