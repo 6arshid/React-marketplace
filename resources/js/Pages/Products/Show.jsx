@@ -105,6 +105,11 @@ export default function Show({ product }) {
                                             {t('Digital Product')}
                                         </span>
                                     )}
+                                    {product.is_voucher && (
+                                        <span className="px-3 py-1 bg-green-50 text-green-600 rounded-full font-medium">
+                                            {t('Voucher Product')}
+                                        </span>
+                                    )}
                                     <div className="flex items-center gap-1">
                                         <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />

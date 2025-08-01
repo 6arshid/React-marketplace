@@ -64,6 +64,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'is_digital' => 'boolean',
+            'is_voucher' => 'boolean',
             'shipping_cost' => 'nullable|numeric',
             'demo_file' => 'nullable|file|max:' . $this->maxUploadSize(),
             'main_file' => 'nullable|file|max:' . $this->maxUploadSize(),
@@ -76,6 +77,10 @@ class ProductController extends Controller
         ]);
 
         $data['slug'] = $this->generateUniqueSlug();
+
+        if (!empty($data['is_voucher'])) {
+            $data['is_digital'] = true;
+        }
 
         if ($request->hasFile('demo_file')) {
             $data['demo_file'] = $request->file('demo_file')->store('demos', 'public');
@@ -121,6 +126,7 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
             'is_digital' => 'boolean',
+            'is_voucher' => 'boolean',
             'shipping_cost' => 'nullable|numeric',
             'demo_file' => 'nullable',
             'main_file' => 'nullable',
@@ -163,6 +169,10 @@ class ProductController extends Controller
         }
 
         $data['slug'] = $product->slug;
+
+        if (!empty($data['is_voucher'])) {
+            $data['is_digital'] = true;
+        }
 
         $product->update($data);
 

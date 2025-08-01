@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 100),
             'images' => [$this->faker->imageUrl()],
             'is_digital' => true,
+            'is_voucher' => false,
             'shipping_cost' => null,
             'demo_file' => null,
             'main_file' => 'files/' . Str::random(10) . '.txt',
