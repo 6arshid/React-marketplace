@@ -54,10 +54,22 @@ class OrderController extends Controller
                     ] : null;
                 })->filter()->values();
 
+                $vouchers = collect($order->items)->flatMap(function ($item) {
+                    $product = Product::find($item['product_id']);
+                    if ($product && $product->is_voucher) {
+                        return $product->vouchers->map(fn ($v) => [
+                            'product' => $product->title,
+                            'code' => $v->public_code,
+                        ]);
+                    }
+                    return [];
+                })->values();
+
                 return [
                     'id' => $order->id,
                     'tracking_code' => $order->tracking_code,
                     'files' => $files,
+                    'vouchers' => $vouchers,
                 ];
             })
             ->withQueryString();
@@ -65,11 +77,15 @@ class OrderController extends Controller
         $totalOrders = $ordersQuery->count();
 
         $totalFiles = 0;
-        $ordersQuery->clone()->get()->each(function (Order $order) use (&$totalFiles) {
+        $totalVouchers = 0;
+        $ordersQuery->clone()->get()->each(function (Order $order) use (&$totalFiles, &$totalVouchers) {
             foreach ($order->items as $item) {
                 $product = Product::find($item['product_id']);
                 if ($product && $product->main_file) {
                     $totalFiles++;
+                }
+                if ($product && $product->is_voucher) {
+                    $totalVouchers += $product->vouchers()->count();
                 }
             }
         });
@@ -78,6 +94,7 @@ class OrderController extends Controller
             'orders' => $orders,
             'totalOrders' => $totalOrders,
             'totalFiles' => $totalFiles,
+            'totalVouchers' => $totalVouchers,
         ]);
     }
 
@@ -93,9 +110,21 @@ class OrderController extends Controller
             ] : null;
         })->filter()->values();
 
+        $vouchers = collect($order->items)->flatMap(function ($item) {
+            $product = Product::find($item['product_id']);
+            if ($product && $product->is_voucher) {
+                return $product->vouchers->map(fn ($v) => [
+                    'product' => $product->title,
+                    'code' => $v->public_code,
+                ]);
+            }
+            return [];
+        })->values();
+
         return Inertia::render('Orders/Track', [
             'order' => $order->only(['tracking_code', 'status', 'postal_tracking_code']),
             'files' => $files,
+            'vouchers' => $vouchers,
         ]);
     }
 }
