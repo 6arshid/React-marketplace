@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -74,6 +75,10 @@ class ProductController extends Controller
             'attributes.*.title' => 'required|string',
             'attributes.*.option' => 'required|string',
             'attributes.*.price' => 'numeric',
+            'vouchers' => 'array',
+            'vouchers.*.public_code' => 'required|string',
+            'vouchers.*.secret_pin' => 'nullable|string',
+            'vouchers.*.initial_amount' => 'required|numeric',
         ]);
 
         $data['slug'] = $this->generateUniqueSlug();
@@ -103,6 +108,22 @@ class ProductController extends Controller
         if (! empty($data['attributes'])) {
             foreach ($data['attributes'] as $attr) {
                 $product->attributes()->create($attr);
+            }
+        }
+
+        if ($data['is_voucher'] && ! empty($data['vouchers'])) {
+            foreach ($data['vouchers'] as $v) {
+                $voucher = $request->user()->vouchers()->create([
+                    'public_code' => $v['public_code'],
+                    'secret_pin_hash' => $v['secret_pin'] ? \Hash::make($v['secret_pin']) : null,
+                    'initial_amount' => $v['initial_amount'],
+                    'balance' => $v['initial_amount'],
+                    'type' => 'PRODUCT',
+                    'frequency' => 'SINGLE',
+                    'status' => 'ACTIVE',
+                    'constraints' => [],
+                ]);
+                $product->vouchers()->attach($voucher->id);
             }
         }
 
@@ -137,6 +158,10 @@ class ProductController extends Controller
             'attributes.*.title' => 'required|string',
             'attributes.*.option' => 'required|string',
             'attributes.*.price' => 'numeric',
+            'vouchers' => 'array',
+            'vouchers.*.public_code' => 'required|string',
+            'vouchers.*.secret_pin' => 'nullable|string',
+            'vouchers.*.initial_amount' => 'required|numeric',
         ]);
 
         if ($request->hasFile('demo_file')) {
@@ -180,6 +205,24 @@ class ProductController extends Controller
         if (! empty($data['attributes'])) {
             foreach ($data['attributes'] as $attr) {
                 $product->attributes()->create($attr);
+            }
+        }
+
+        $product->vouchers()->delete();
+        $product->vouchers()->detach();
+        if ($data['is_voucher'] && ! empty($data['vouchers'])) {
+            foreach ($data['vouchers'] as $v) {
+                $voucher = $request->user()->vouchers()->create([
+                    'public_code' => $v['public_code'],
+                    'secret_pin_hash' => $v['secret_pin'] ? Hash::make($v['secret_pin']) : null,
+                    'initial_amount' => $v['initial_amount'],
+                    'balance' => $v['initial_amount'],
+                    'type' => 'PRODUCT',
+                    'frequency' => 'SINGLE',
+                    'status' => 'ACTIVE',
+                    'constraints' => [],
+                ]);
+                $product->vouchers()->attach($voucher->id);
             }
         }
 
