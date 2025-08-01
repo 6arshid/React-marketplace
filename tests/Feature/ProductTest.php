@@ -26,6 +26,7 @@ class ProductTest extends TestCase
             'price' => 10,
             'category_id' => $category->id,
             'is_digital' => true,
+            'is_voucher' => false,
             'demo_file' => UploadedFile::fake()->create('demo.txt'),
             'main_file' => UploadedFile::fake()->create('main.txt'),
             'images' => [UploadedFile::fake()->image('img.jpg')],

@@ -70,6 +70,7 @@ export default function Edit({ product, categories }) {
         price: product.price,
         category_id: product.category_id,
         is_digital: product.is_digital,
+        is_voucher: product.is_voucher,
         shipping_cost: product.shipping_cost ?? '',
         demo_file: product.demo_file ?? '',
         main_file: product.main_file ?? '',
@@ -215,10 +216,10 @@ export default function Edit({ product, categories }) {
                                         </div>
 
                                         <div className="flex items-center p-3 sm:p-4 bg-gray-50 rounded-lg sm:rounded-xl">
-                                            <input 
-                                                type="checkbox" 
+                                            <input
+                                                type="checkbox"
                                                 id="is_digital"
-                                                checked={data.is_digital} 
+                                                checked={data.is_digital}
                                                 onChange={(e) => setData('is_digital', e.target.checked)}
                                                 className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                                             />
@@ -226,8 +227,20 @@ export default function Edit({ product, categories }) {
                                                 {t('This is a digital product')}
                                             </label>
                                         </div>
+                                        <div className="flex items-center p-3 sm:p-4 bg-gray-50 rounded-lg sm:rounded-xl">
+                                            <input
+                                                type="checkbox"
+                                                id="is_voucher"
+                                                checked={data.is_voucher}
+                                                onChange={(e) => setData('is_voucher', e.target.checked)}
+                                                className="h-4 w-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                            />
+                                            <label htmlFor="is_voucher" className="ml-3 text-sm font-medium text-gray-700">
+                                                {t('Voucher Product')}
+                                            </label>
+                                        </div>
 
-                                        {!data.is_digital && (
+                                        {!data.is_digital && !data.is_voucher && (
                                             <div className="animate-fadeIn">
                                                 <InputLabel htmlFor="shipping_cost" value={t('Shipping Cost')} className="text-sm font-medium text-gray-700" />
                                                 <div className="relative mt-2">
@@ -247,7 +260,7 @@ export default function Edit({ product, categories }) {
                                     </div>
 
                                     {/* Digital Files Section */}
-                                    {data.is_digital && (
+                                    {data.is_digital && !data.is_voucher && (
                                         <div className="space-y-4 sm:space-y-6 animate-fadeIn">
                                             <div className="border-b border-gray-100 pb-3 sm:pb-4">
                                                 <h2 className="text-base sm:text-lg font-semibold text-gray-900">{t('Digital Files')}</h2>

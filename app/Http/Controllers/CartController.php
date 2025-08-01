@@ -9,6 +9,8 @@ use App\Models\StripeConfig;
 use App\Models\Transaction;
 use App\Models\Order;
 use App\Models\Coupon;
+use App\Models\Voucher;
+use App\Models\Redemption;
 use App\Notifications\OrderPlaced;
 use App\Notifications\OrderStatusUpdated;
 use Illuminate\Support\Str;
@@ -40,8 +42,8 @@ class CartController extends Controller
             'product_id' => $product->id,
             'attribute_id' => $attribute?->id,
             'price' => $attribute?->price ?? $product->price,
-            'shipping_cost' => $product->is_digital ? 0 : ($product->shipping_cost ?? 0),
-            'is_digital' => $product->is_digital,
+            'shipping_cost' => ($product->is_digital || $product->is_voucher) ? 0 : ($product->shipping_cost ?? 0),
+            'is_digital' => $product->is_digital || $product->is_voucher,
         ];
 
         session(['cart' => $cart]);
@@ -74,6 +76,36 @@ class CartController extends Controller
         return Redirect::back()->with('success', __('messages.saved'));
     }
 
+    public function applyVoucher(Request $request)
+    {
+        $request->validate([
+            'code' => 'required|string',
+            'pin' => 'nullable|string',
+        ]);
+
+        $cart = session('cart', ['seller_id' => null, 'items' => []]);
+        if (! $cart['seller_id']) {
+            return Redirect::back()->with('error', __('messages.cart_empty'));
+        }
+
+        $voucher = Voucher::where('public_code', $request->code)
+            ->where('user_id', $cart['seller_id'])
+            ->first();
+
+        if (! $voucher || ! $voucher->isApplicable(collect($cart['items']))) {
+            return Redirect::back()->with('error', __('messages.invalid_coupon'));
+        }
+
+        if ($voucher->secret_pin_hash && (! $request->pin || ! \Hash::check($request->pin, $voucher->secret_pin_hash))) {
+            return Redirect::back()->with('error', __('messages.invalid_coupon'));
+        }
+
+        $cart['voucher_id'] = $voucher->id;
+        session(['cart' => $cart]);
+
+        return Redirect::back()->with('success', __('messages.saved'));
+    }
+
     public function show()
     {
         $cart = session('cart', ['seller_id' => null, 'items' => []]);
@@ -82,7 +114,7 @@ class CartController extends Controller
             $product = Product::find($item['product_id']);
             $attribute = $item['attribute_id'] ? Attribute::find($item['attribute_id']) : null;
 
-            $shippingCost = $item['shipping_cost'] ?? ($product && ! $product->is_digital ? ($product->shipping_cost ?? 0) : 0);
+            $shippingCost = $item['shipping_cost'] ?? ($product && ! ($product->is_digital || $product->is_voucher) ? ($product->shipping_cost ?? 0) : 0);
 
             return [
                 'product_title' => $product?->title,
@@ -90,13 +122,15 @@ class CartController extends Controller
                 'attribute' => $attribute ? $attribute->title . ' - ' . $attribute->option : null,
                 'price' => $item['price'],
                 'shipping_cost' => $shippingCost,
-                'is_digital' => $product?->is_digital,
+                'is_digital' => ($product?->is_digital || $product?->is_voucher),
             ];
         });
         $requiresShipping = $items->contains(fn ($i) => ! $i['is_digital']);
         $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
         $discount = 0;
         $coupon = null;
+        $voucherDiscount = 0;
+        $voucher = null;
         if (isset($cart['coupon_id'])) {
             $c = \App\Models\Coupon::find($cart['coupon_id']);
             if ($c && $c->user_id == $cart['seller_id'] && (! $c->expires_at || $c->expires_at->isFuture())) {
@@ -105,6 +139,18 @@ class CartController extends Controller
                 $total -= $discount;
             } else {
                 unset($cart['coupon_id']);
+                session(['cart' => $cart]);
+            }
+        }
+
+        if (isset($cart['voucher_id'])) {
+            $v = Voucher::find($cart['voucher_id']);
+            if ($v && $v->isApplicable(collect($cart['items']))) {
+                $voucher = $v;
+                $voucherDiscount = min($total, (float) $v->balance);
+                $total -= $voucherDiscount;
+            } else {
+                unset($cart['voucher_id']);
                 session(['cart' => $cart]);
             }
         }
@@ -132,7 +178,9 @@ class CartController extends Controller
             'items' => $items,
             'total' => $total,
             'discount' => $discount,
+            'voucher_discount' => $voucherDiscount,
             'coupon' => $coupon ? $coupon->only(['id','code','percent','title']) : null,
+            'voucher' => $voucher ? $voucher->only(['id','public_code','balance']) : null,
             'seller' => $seller,
             'requires_shipping' => $requiresShipping,
         ]);
@@ -150,14 +198,14 @@ class CartController extends Controller
 
         $items = collect($cart['items'])->map(function ($item) {
             $product = Product::find($item['product_id']);
-            $shippingCost = $item['shipping_cost'] ?? ($product && ! $product->is_digital ? ($product->shipping_cost ?? 0) : 0);
+            $shippingCost = $item['shipping_cost'] ?? ($product && ! ($product->is_digital || $product->is_voucher) ? ($product->shipping_cost ?? 0) : 0);
 
             return [
                 'product_id' => $item['product_id'],
                 'attribute_id' => $item['attribute_id'],
                 'price' => $item['price'],
                 'shipping_cost' => $shippingCost,
-                'is_digital' => $product?->is_digital,
+                'is_digital' => ($product?->is_digital || $product?->is_voucher),
             ];
         });
         $total = $items->sum(fn ($i) => $i['price'] + $i['shipping_cost']);
@@ -165,6 +213,28 @@ class CartController extends Controller
             $c = \App\Models\Coupon::find($cart["coupon_id"]);
             if ($c && $c->user_id == $cart["seller_id"] && (! $c->expires_at || $c->expires_at->isFuture())) {
                 $total -= $total * ($c->percent / 100);
+            }
+        }
+
+        $voucherDiscount = 0;
+        if (isset($cart['voucher_id'])) {
+            $voucher = Voucher::where('id', $cart['voucher_id'])->lockForUpdate()->first();
+            if ($voucher && $voucher->isApplicable(collect($cart['items']))) {
+                $voucherDiscount = min($total, (float) $voucher->balance);
+                $voucher->balance -= $voucherDiscount;
+                if ($voucher->balance <= 0) {
+                    $voucher->status = 'REDEEMED';
+                }
+                $voucher->save();
+
+                Redemption::create([
+                    'voucher_id' => $voucher->id,
+                    'user_id' => $request->user()->id,
+                    'amount' => $voucherDiscount,
+                    'idempotency_key' => Str::uuid(),
+                ]);
+
+                $total -= $voucherDiscount;
             }
         }
 

@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @property float $price
  * @property array|null $images
  * @property bool $is_digital
+ * @property bool $is_voucher
  * @property float|null $shipping_cost
  * @property string|null $demo_file
  * @property string|null $main_file
@@ -33,6 +34,7 @@ class Product extends Model
         'price',
         'images',
         'is_digital',
+        'is_voucher',
         'shipping_cost',
         'demo_file',
         'main_file',
@@ -46,6 +48,7 @@ class Product extends Model
         return [
             'images' => 'array',
             'is_digital' => 'boolean',
+            'is_voucher' => 'boolean',
             'price' => 'float',
             'shipping_cost' => 'float',
             'views' => 'integer',

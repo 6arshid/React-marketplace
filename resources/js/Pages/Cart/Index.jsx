@@ -9,10 +9,12 @@ import { useTranslation } from 'react-i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import axios from 'axios';
 
-export default function Index({ items, total, discount, coupon, seller, requires_shipping }) {
+export default function Index({ items, total, discount, voucher_discount, coupon, voucher, seller, requires_shipping }) {
     const [step, setStep] = useState(1);
     const [errors, setErrors] = useState({});
     const [couponCode, setCouponCode] = useState(coupon ? coupon.code : '');
+    const [voucherCode, setVoucherCode] = useState('');
+    const [voucherPin, setVoucherPin] = useState('');
     const user = usePage().props.auth.user;
     const { t } = useTranslation();
 
@@ -150,7 +152,7 @@ export default function Index({ items, total, discount, coupon, seller, requires
                                                 </div>
                                             ))}
 
-                                            <form
+                                           <form
                                                 onSubmit={(e) => {
                                                     e.preventDefault();
                                                     axios.post(route('cart.coupon'), { code: couponCode })
@@ -166,12 +168,41 @@ export default function Index({ items, total, discount, coupon, seller, requires
                                                 />
                                                 <PrimaryButton type="submit">{t('Apply')}</PrimaryButton>
                                             </form>
+
+                                            <form
+                                                onSubmit={(e) => {
+                                                    e.preventDefault();
+                                                    axios.post(route('cart.voucher'), { code: voucherCode, pin: voucherPin })
+                                                        .then(() => window.location.reload());
+                                                }}
+                                                className="flex items-center space-x-2 mt-2"
+                                            >
+                                                <TextInput
+                                                    value={voucherCode}
+                                                    onChange={(e) => setVoucherCode(e.target.value)}
+                                                    placeholder={t('Voucher code')}
+                                                    className="flex-1"
+                                                />
+                                                <TextInput
+                                                    value={voucherPin}
+                                                    onChange={(e) => setVoucherPin(e.target.value)}
+                                                    placeholder={t('PIN')}
+                                                    className="flex-1"
+                                                />
+                                                <PrimaryButton type="submit">{t('Apply')}</PrimaryButton>
+                                            </form>
                                             
                                             <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white space-y-2">
                                                 {discount > 0 && (
                                                     <div className="flex justify-between items-center text-sm">
                                                         <span>{t('Discount')}</span>
                                                         <span>- ${discount.toFixed(2)}</span>
+                                                    </div>
+                                                )}
+                                                {voucher_discount > 0 && (
+                                                    <div className="flex justify-between items-center text-sm">
+                                                        <span>{t('Voucher')}</span>
+                                                        <span>- ${voucher_discount.toFixed(2)}</span>
                                                     </div>
                                                 )}
                                                 <div className="flex justify-between items-center">

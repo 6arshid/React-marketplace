@@ -36,6 +36,11 @@ const Icons = {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
         </svg>
     ),
+    Voucher: () => (
+        <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 4v2a1 1 0 01-1 1H4v10h4a1 1 0 011 1v2h6v-2a1 1 0 011-1h4V7h-4a1 1 0 01-1-1V4H9z" />
+        </svg>
+    ),
     Shipping: () => (
         <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -81,6 +86,7 @@ export default function Create({ categories }) {
         price: '',
         category_id: categories.length ? categories[0].id : '',
         is_digital: false,
+        is_voucher: false,
         shipping_cost: '',
         demo_file: null,
         main_file: null,
@@ -236,9 +242,9 @@ export default function Create({ categories }) {
 
                                     <div className="flex items-center">
                                         <label className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 cursor-pointer hover:from-blue-100 hover:to-purple-100 transition-all duration-200 w-full">
-                                            <input 
-                                                type="checkbox" 
-                                                checked={data.is_digital} 
+                                            <input
+                                                type="checkbox"
+                                                checked={data.is_digital}
                                                 onChange={(e) => setData('is_digital', e.target.checked)}
                                                 className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
                                             />
@@ -248,9 +254,23 @@ export default function Create({ categories }) {
                                             </div>
                                         </label>
                                     </div>
+                                    <div className="flex items-center">
+                                        <label className="flex items-center space-x-2 sm:space-x-3 p-3 sm:p-4 rounded-lg sm:rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-200 cursor-pointer hover:from-blue-100 hover:to-purple-100 transition-all duration-200 w-full">
+                                            <input
+                                                type="checkbox"
+                                                checked={data.is_voucher}
+                                                onChange={(e) => setData('is_voucher', e.target.checked)}
+                                                className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
+                                            />
+                                            <div className="flex items-center space-x-2">
+                                                <Icons.Voucher />
+                                                <span className="font-medium text-gray-700 text-sm sm:text-base">{t('Voucher Product')}</span>
+                                            </div>
+                                        </label>
+                                    </div>
                                 </div>
 
-                                {!data.is_digital && (
+                                {!data.is_digital && !data.is_voucher && (
                                     <div>
                                         <InputLabel 
                                             htmlFor="shipping_cost" 
@@ -276,7 +296,7 @@ export default function Create({ categories }) {
                             </div>
 
                             {/* Digital Files Section */}
-                            {data.is_digital && (
+                            {data.is_digital && !data.is_voucher && (
                                 <div className="space-y-4 sm:space-y-6">
                                     <h4 className="text-base sm:text-lg font-semibold text-gray-800 flex items-center space-x-2 border-b border-gray-200 pb-2">
                                         <Icons.File />
