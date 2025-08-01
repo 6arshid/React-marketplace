@@ -16,6 +16,7 @@ class Voucher extends Model
     protected $fillable = [
         'user_id',
         'public_code',
+        'secret_pin',
         'secret_pin_hash',
         'initial_amount',
         'balance',

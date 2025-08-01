@@ -28,8 +28,9 @@ class VoucherController extends Controller
                     foreach ($product->vouchers as $v) {
                         $vouchers[] = [
                             'product' => $product->title,
+                            'product_slug' => $product->slug,
                             'code' => $v->public_code,
-                            'pin' => $v->secret_pin_hash ? '****' : null,
+                            'pin' => $v->secret_pin,
                         ];
                     }
                 }
@@ -70,7 +71,6 @@ class VoucherController extends Controller
 
         $data['balance'] = $data['initial_amount'];
         $data['secret_pin_hash'] = $data['secret_pin'] ? Hash::make($data['secret_pin']) : null;
-        unset($data['secret_pin']);
         $data['status'] = 'ACTIVE';
 
         $constraints = [];
@@ -106,7 +106,6 @@ class VoucherController extends Controller
         ]);
 
         $data['secret_pin_hash'] = $data['secret_pin'] ? Hash::make($data['secret_pin']) : $voucher->secret_pin_hash;
-        unset($data['secret_pin']);
         $constraints = [];
         if ($data['min_cart_amount']) {
             $constraints['min_cart_amount'] = (float) $data['min_cart_amount'];
