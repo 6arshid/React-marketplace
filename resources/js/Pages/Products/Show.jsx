@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReportModal from '@/Components/ReportModal';
 
-export default function Show({ product }) {
+export default function Show({ product, vouchers }) {
     const { t } = useTranslation();
     const [selected, setSelected] = useState(null);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -206,28 +206,41 @@ export default function Show({ product }) {
                                                 </a>
                                             </div>
                                         )}
-                                        {product.main_file && (
-                                            <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                                                <div>
-                                                    <p className="font-medium text-gray-900">{t('Main File')}</p>
-                                                    <p className="text-sm text-gray-500">{product.main_file}</p>
-                                                </div>
-                                                <a 
-                                                    href={`/storage/${product.main_file}`}
-                                                    className="text-blue-600 hover:text-blue-700 transition-colors"
-                                                    target="_blank"
-                                                    rel="noopener"
-                                                >
-                                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                                    </svg>
-                                                </a>
-                                            </div>
-                                        )}
+                            {product.main_file && (
+                                <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                    <div>
+                                        <p className="font-medium text-gray-900">{t('Main File')}</p>
+                                        <p className="text-sm text-gray-500">{product.main_file}</p>
                                     </div>
+                                    <a
+                                        href={`/storage/${product.main_file}`}
+                                        className="text-blue-600 hover:text-blue-700 transition-colors"
+                                        target="_blank"
+                                        rel="noopener"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                        </svg>
+                                    </a>
                                 </div>
                             )}
                         </div>
+                    </div>
+                )}
+
+                {vouchers && vouchers.length > 0 && (
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 mt-6">
+                        <h3 className="font-semibold text-gray-900 mb-4">{t('Voucher Codes')}</h3>
+                        <ul className="space-y-2">
+                            {vouchers.map((v) => (
+                                <li key={v.id} className="px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                                    {v.public_code}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                )}
+                </div>
 
                         {/* Product Details */}
                         <div className="space-y-8">

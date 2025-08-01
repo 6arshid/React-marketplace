@@ -82,9 +82,10 @@ const getFileTypeLabel = (filename) => {
     return ext.toUpperCase();
 };
 
-export default function Downloads({ orders, totalOrders, totalFiles }) {
+export default function Downloads({ orders, totalOrders, totalFiles, totalVouchers }) {
     const { t } = useTranslation();
     const filesCount = typeof totalFiles === 'number' ? totalFiles : orders.data.reduce((sum, order) => sum + order.files.length, 0);
+    const vouchersCount = typeof totalVouchers === 'number' ? totalVouchers : orders.data.reduce((sum, order) => sum + (order.vouchers ? order.vouchers.length : 0), 0);
     const ordersCount = typeof totalOrders === 'number' ? totalOrders : orders.total;
 
     const sortedData = [...orders.data].sort((a, b) => b.id - a.id);
@@ -133,6 +134,20 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                 <div className="ml-3 sm:ml-4 min-w-0 flex-1">
                                     <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{t('Available Files')}</p>
                                     <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">{filesCount}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="relative overflow-hidden rounded-lg sm:rounded-xl bg-white p-4 sm:p-6 shadow-sm ring-1 ring-gray-200">
+                            <div className="flex items-center">
+                                <div className="flex-shrink-0">
+                                    <div className="rounded-lg bg-emerald-100 p-2 sm:p-3">
+                                        <DownloadIcon className="w-4 h-4 sm:w-5 sm:h-5 text-emerald-600" />
+                                    </div>
+                                </div>
+                                <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                                    <p className="text-xs sm:text-sm font-medium text-gray-600 truncate">{t('Voucher Codes')}</p>
+                                    <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">{vouchersCount}</p>
                                 </div>
                             </div>
                         </div>
@@ -235,6 +250,19 @@ export default function Downloads({ orders, totalOrders, totalFiles }) {
                                         </div>
                                     )}
                                 </div>
+
+                                {order.vouchers && order.vouchers.length > 0 && (
+                                    <div className="p-4 sm:p-6 border-t border-gray-200 bg-gray-50">
+                                        <h4 className="font-semibold text-gray-900 mb-3">{t('Voucher Codes')}</h4>
+                                        <ul className="space-y-2">
+                                            {order.vouchers.map((v, i) => (
+                                                <li key={i} className="px-3 py-2 bg-white rounded-lg border border-gray-200">
+                                                    <span className="font-medium">{v.product}:</span> {v.code}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </div>

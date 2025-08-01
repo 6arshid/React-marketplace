@@ -144,7 +144,7 @@ const getFileTypeLabel = (filename) => {
     return ext.toUpperCase();
 };
 
-export default function Track({ order, files }) {
+export default function Track({ order, files, vouchers }) {
     const { t } = useTranslation();
     // Pass the translation function so messages inside helpers are localized
     const statusDetails = getStatusDetails(order.status, t);
@@ -306,6 +306,23 @@ export default function Track({ order, files }) {
                                         </button>
                                     </div>
                                 )}
+                            </div>
+                        </div>
+                    )}
+
+                    {vouchers.length > 0 && (
+                        <div className="overflow-hidden rounded-xl sm:rounded-2xl bg-white shadow-lg sm:shadow-xl ring-1 ring-gray-200 mt-6">
+                            <div className="bg-gradient-to-r from-emerald-50 to-green-50 px-4 sm:px-6 py-3 sm:py-4">
+                                <h3 className="text-base sm:text-lg font-semibold text-gray-900">{t('Voucher Codes')}</h3>
+                            </div>
+                            <div className="p-4 sm:p-6">
+                                <ul className="space-y-2">
+                                    {vouchers.map((v, idx) => (
+                                        <li key={idx} className="px-3 py-2 bg-gray-50 rounded-lg border border-gray-200">
+                                            <span className="font-medium">{v.product}:</span> {v.code}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     )}

@@ -50,10 +50,27 @@ class ProductController extends Controller
         $product = $product->fresh()->load('category', 'attributes', 'user');
         $owner = $product->user;
 
+        $vouchers = collect();
+        if (auth()->check()) {
+            $orders = auth()->user()->orders()
+                ->whereIn('status', ['accepted', 'paid', 'delivered', 'completed', 'success'])
+                ->get();
+
+            foreach ($orders as $order) {
+                foreach ($order->items as $item) {
+                    if (isset($item['product_id']) && $item['product_id'] == $product->id) {
+                        $vouchers = $product->vouchers()->get(['id', 'public_code']);
+                        break 2;
+                    }
+                }
+            }
+        }
+
         return Inertia::render('Products/Show', [
             'product' => $product,
             'user' => $owner ? $owner->only('id', 'name', 'username', 'logo', 'footer_text') : null,
             'isOwner' => auth()->check() && $owner && auth()->id() === $owner->id,
+            'vouchers' => $vouchers,
         ]);
     }
 
